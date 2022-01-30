@@ -1,0 +1,9 @@
+// recorded on 30-Jan-2022 15:21:34 by jakob
+Options.Country(0)
+Options.TransitionModel(1)
+Options.StallModel(0)
+Geometry.Open("/Users/jakob/Desktop/2D_optimizer/JavaFoil/Mesh.txt")
+Polar.Analyze(1000000:1000000:1000000:0:0:1:100:100:1:0)
+Polar.Save(/Users/jakob/Desktop/2D_optimizer/JavaFoil/output.txt)
+FlowField.Save(/Users/jakob/Desktop/2D_optimizer/JavaFoil/flowfield.txt)
+Exit()

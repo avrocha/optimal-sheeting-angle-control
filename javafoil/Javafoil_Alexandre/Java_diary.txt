@@ -1,0 +1,177 @@
+-------------------------------------------------------------
+Scale    = 169.000 
+-------------------------------------------------------------
+Ship AWA = 45.0 deg
+^C
+java -cp "/Users/jakob/Desktop/2D_optimizer/JavaFoil/mhclasses.jar" -jar "/Users/jakob/Desktop/2D_optimizer/JavaFoil/javafoil.jar" Script="/Users/jakob/Desktop/2D_optimizer/JavaFoil/script.jfscript": Interrupt
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos', '/Applications/MATLAB_R2020a.app/toolbox/matlab/general/dos.m', 67)" style="font-weight:bold">dos</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2020a.app/toolbox/matlab/general/dos.m',67,0)">line 67</a>)
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', '/Users/jakob/Desktop/2D_optimizer/JavaFoil/calc_objective.m', 16)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/JavaFoil/calc_objective.m',16,0)">line 16</a>)
+system(cmd);     % Excecute the JavaFoil calculations
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', '/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m', 61)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m',61,0)">line 61</a>)
+  calc_objective(X);
+} 
+runme_Alexandre
+-------------------------------------------------------------
+Scale    = 169.000 
+{Not enough input arguments.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', '/Users/jakob/Desktop/2D_optimizer/JavaFoil/calc_objective.m', 9)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/JavaFoil/calc_objective.m',9,0)">line 9</a>)
+Mesh2Java(X); % Generates Java-scale mesh-file
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', '/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m', 41)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m',41,0)">line 41</a>)
+calc_objective()
+} 
+opentoline('/Users/jakob/Desktop/2D_optimizer/JavaFoil/calc_objective.m',9,0)
+opentoline('/Users/jakob/Desktop/2D_optimizer/JavaFoil/calc_objective.m',9,0)
+opentoline('/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m',41,0)
+runme_Alexandre
+-------------------------------------------------------------
+Scale    = 169.000 
+cT  = -0.0185,  cl=0.6270, cd=0.0185, cm=-0.0860, cp=0.3870,  X=[10 10 10 10 ]
+
+ans =
+
+   -0.3931
+
+{Unrecognized function or variable 'xxxx'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', '/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m', 44)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m',44,0)">line 44</a>)
+xxxx
+} 
+runme_Alexandre
+-------------------------------------------------------------
+Scale    = 169.000 
+cT  = 0.4418,  cl=0.6450, cd=0.0202, cm=-0.1620, cp=0.5020,  X=[-35 -35 -35 -35 ]
+
+ans =
+
+   -0.4160
+
+{Unrecognized function or variable 'xxxx'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', '/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m', 43)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m',43,0)">line 43</a>)
+xxxx
+} 
+runme_Alexandre
+-------------------------------------------------------------
+Scale    = 169.000 
+cT  = 0.3119,  cl=0.6590, cd=0.0203, cm=-0.1140, cp=0.4220,  X=[-20 -20 -20 -20 ]
+
+obj =
+
+   -0.4343
+
+
+cl =
+
+    0.6590
+
+
+CT =
+
+    0.3119
+
+{Unrecognized function or variable 'xxxx'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', '/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m', 43)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m',43,0)">line 43</a>)
+xxxx
+} 
+runme_Alexandre
+-------------------------------------------------------------
+Scale    = 169.000 
+cT  = -0.0144,  cl=0.0120, cd=0.0236, cm=0.2100, cp=-17.7770,  X=[-50 -20 -20 -20 ]
+
+obj =
+
+  -1.4400e-04
+
+
+cl =
+
+    0.0120
+
+
+CT =
+
+   -0.0144
+
+{Unrecognized function or variable 'xxxx'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', '/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m', 43)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m',43,0)">line 43</a>)
+xxxx
+} 
+runme_Alexandre
+-------------------------------------------------------------
+Scale    = 169.000 
+cT  = -0.0144,  cl=0.0120, cd=0.0236, cm=0.2100, cp=-17.7770,  X=[-50 -20 -20 -20 ]
+runme_Alexandre
+-------------------------------------------------------------
+Scale    = 169.000 
+cT  = 0.2879,  cl=0.6070, cd=0.0180, cm=-0.1240, cp=0.4540,  X=[-20 -20 -20 -25 ]
+runme_Alexandre
+-------------------------------------------------------------
+Scale    = 169.000 
+cT  = 0.2983,  cl=0.6390, cd=0.0245, cm=-0.1040, cp=0.4120,  X=[-20 -20 -20 -15 ]
+runme_Alexandre
+-------------------------------------------------------------
+Scale    = 169.000 
+cT  = 0.2634,  cl=0.5840, cd=0.0330, cm=-0.0940, cp=0.4100,  X=[-20 -20 -20 -10 ]
+runme_Alexandre
+-------------------------------------------------------------
+Scale    = 169.000 
+cT  = 0.3702,  cl=0.8060, cd=0.0379, cm=-0.1550, cp=0.4420,  X=[-20 0 -20 -20 ]
+runme_plot_angles_rect
+Scale    = 175.000 
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('csvread', '/Applications/MATLAB_R2020a.app/toolbox/matlab/iofun/csvread.m', 35)" style="font-weight:bold">csvread</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2020a.app/toolbox/matlab/iofun/csvread.m',35,0)">line 35</a>)
+File not found.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_plot_angles_rect', '/Users/jakob/Desktop/2D_optimizer/runme_plot_angles_rect.m', 29)" style="font-weight:bold">runme_plot_angles_rect</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/runme_plot_angles_rect.m',29,0)">line 29</a>)
+anglesWings = csvread('trim_angles_4wings_cl_rectangle2_conf.txt');
+} 
+runme_plot_angles_rect
+Scale    = 175.000 
+Ship AWA = 45.0 deg
+{Index exceeds the number of array elements (0).
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Ship/doMesh', '/Users/jakob/Desktop/2D_optimizer/JavaFoil/Ship.m', 41)" style="font-weight:bold">Ship/doMesh</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/JavaFoil/Ship.m',41,0)">line 41</a>)
+              rig.trim = Xval(ir);%2*ir-1);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Mesh2Java', '/Users/jakob/Desktop/2D_optimizer/JavaFoil/Mesh2Java.m', 6)" style="font-weight:bold">Mesh2Java</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/JavaFoil/Mesh2Java.m',6,0)">line 6</a>)
+ship.doMesh(Xval,false);  % ship.doMesh(Xval,normalize,flip)
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_plot_angles_rect', '/Users/jakob/Desktop/2D_optimizer/runme_plot_angles_rect.m', 47)" style="font-weight:bold">runme_plot_angles_rect</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/runme_plot_angles_rect.m',47,0)">line 47</a>)
+    Mesh2Java(X);
+} 
+runme_plot_angles_rect
+Scale    = 175.000 
+Ship AWA = 30.0 deg
+cT  = 0.4381,  cl=0.9670, cd=0.0525, cm=-0.3260, cp=0.5870,  X=[-4 -4 -13 -12 ]
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('saveas', '/Applications/MATLAB_R2020a.app/toolbox/matlab/general/saveas.m', 138)" style="font-weight:bold">saveas</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2020a.app/toolbox/matlab/general/saveas.m',138,0)">line 138</a>)
+Invalid or missing path: pix/flow_rectangle_awa30
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_plot_angles_rect', '/Users/jakob/Desktop/2D_optimizer/runme_plot_angles_rect.m', 49)" style="font-weight:bold">runme_plot_angles_rect</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/runme_plot_angles_rect.m',49,0)">line 49</a>)
+    saveas(gca,sprintf('pix/flow_rectangle_awa%i',(anglesWings(ii,1))),'png');
+} 
+runme_plot_angles_rect
+Scale    = 175.000 
+Ship AWA = 30.0 deg
+cT  = 0.4381,  cl=0.9670, cd=0.0525, cm=-0.3260, cp=0.5870,  X=[-4 -4 -13 -12 ]
+Ship AWA = 35.0 deg
+cT  = 0.5108,  cl=0.9670, cd=0.0535, cm=-0.3300, cp=0.5920,  X=[-8 -9 -19 -16 ]
+Ship AWA = 40.0 deg
+cT  = 0.5820,  cl=0.9680, cd=0.0525, cm=-0.3260, cp=0.5860,  X=[-16 -13 -23 -21 ]
+Ship AWA = 45.0 deg
+^C
+java -cp "/Users/jakob/Desktop/2D_optimizer/JavaFoil/mhclasses.jar" -jar "/Users/jakob/Desktop/2D_optimizer/JavaFoil/javafoil.jar" Script="/Users/jakob/Desktop/2D_optimizer/JavaFoil/script.jfscript": Interrupt
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos', '/Applications/MATLAB_R2020a.app/toolbox/matlab/general/dos.m', 67)" style="font-weight:bold">dos</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2020a.app/toolbox/matlab/general/dos.m',67,0)">line 67</a>)
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', '/Users/jakob/Desktop/2D_optimizer/JavaFoil/calc_objective.m', 16)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/JavaFoil/calc_objective.m',16,0)">line 16</a>)
+system(cmd);     % Excecute the JavaFoil calculations
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_plot_angles_rect', '/Users/jakob/Desktop/2D_optimizer/runme_plot_angles_rect.m', 48)" style="font-weight:bold">runme_plot_angles_rect</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/runme_plot_angles_rect.m',48,0)">line 48</a>)
+    calc_objective(X);
+} 

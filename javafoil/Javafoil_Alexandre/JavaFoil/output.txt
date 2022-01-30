@@ -1,0 +1,8 @@
+Name = /Users/jakob/Desktop/2D_optimizer/JavaFoil/Mesh.txt
+Mach = 0; Re = 1000000; T.U. = 1.0; T.L. = 1.0
+Surface Finish = 1; Stall model = 0; Transition model = 1; Aspect Ratio = 0; ground effect = 0
+α	Cl	Cd	Cm 0.25	T.U.	T.L.	S.U.	S.L.	L/D	A.C.	C.P.
+[°]	[-]	[-]	[-]	[-]	[-]	[-]	[-]	[-]	[-]	[-]
+0.0	0.968	0.05251	-0.326	0.218	0.338	0.242	0.349	18.438	0.250	0.586
+
+
