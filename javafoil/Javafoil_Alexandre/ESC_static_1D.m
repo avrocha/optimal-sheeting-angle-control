@@ -25,27 +25,28 @@ J = @(sheeting_angle)(getfield(calc_objective_mod(sheeting_angle), 'cT'));
 % Simulation
 fs = 100; % sampling frequency (Hz)
 dt = 1/fs;
-T  = 2;
+T  = 5;
 N = length(0:dt:T);
 
 % Perturbation
-f = 25; % perturbation frequency (Hz)
-A = deg2rad(1); % perturbation amplitude (rad)
+f = 10; % perturbation frequency (Hz)
+A = deg2rad(2); % perturbation amplitude (rad)
 
 % HPF
-fc  = 0.02; % cutoff frequency (Hz)
+fc      = 5; % cutoff frequency (Hz) (has to be high enough)
 bworder = 2;
-[b,a] = butter(bworder, fc*dt, 'high');
+[b,a]   = butter(bworder, fc*dt, 'high');
 
 % Integrator
-K             = 10; % gain (>0 since extremum is maximum)
-sheet_angle_0 = deg2rad(-30);
-
+K             = 5; % gain (>0 since extremum is maximum)
+sheet_angle_0 = deg2rad(-15);
+ 
 % Data structures
-yaws = [45]; %, 90, 135];
-sheet_angle = [sheet_angle_0; zeros(N, 1)];
-y           = zeros(N, 1);
-grad_est    = zeros(N, 1);
+sheet_angle_hat = [sheet_angle_0; zeros(N, 1)];
+sheet_angle     = [sheet_angle_0; zeros(N, 1)];
+y               = zeros(N, 1);
+grad_est        = zeros(N, 1);
+filter_out      = zeros(N, 1);
 
 ship.yaw = deg2rad(45);
 tic
@@ -58,33 +59,42 @@ for i = 1:N
 
     if i >= bworder+1
         for j = 1:bworder+1
-            grad_est(i) = grad_est(i) + b(j)*y(i-j+1);
+            filter_out(i) = filter_out(i) + b(j)*y(i-j+1);
         end
 
         for j = 2:bworder+1
-            grad_est(i) = grad_est(i) - a(j)*grad_est(i-j+1);
+            filter_out(i) = filter_out(i) - a(j)*filter_out(i-j+1);
         end
         
-        grad_est(i) = 1/a(1) * grad_est(i);
+        filter_out(i) = 1/a(1) * filter_out(i);
     end
     
-    grad_est(i) = grad_est(i) * sin(2*pi*f*t);
+    grad_est(i) = filter_out(i) * sin(2*pi*f*t);
     
-    sheet_angle(i+1) = sheet_angle(i) + K*dt*grad_est(i); % single integrator
+    sheet_angle_hat(i+1) = sheet_angle_hat(i) + K*dt*grad_est(i); % single integrator
+        
+    sheet_angle(i+1) = sheet_angle_hat(i+1) + A*sin(2*pi*f*t);
     
-    sheet_angle(i+1) = sheet_angle(i+1) + A*sin(2*pi*f*t);
+    if sheet_angle(i+1) > pi || sheet_angle(i+1) < -pi 
+        break
+    end
 end
+toc
 
 %% Plots
 figure(1); clf(1); hold on;
 plot(0:dt:T, rad2deg(sheet_angle(1:N)), 'b-', 'Linewidth', 2)
 plot(0:dt:T, -25*ones(N,1), 'r--', 'Linewidth', 1)
 xlabel('t (s)'), ylabel('$\delta_s$', 'Interpreter', 'Latex')
-ylim([-90,90])
+
 figure(2); clf(2); hold on;
 plot(0:dt:T, y, 'b-', 'Linewidth', 2)
 xlabel('t (s)'), ylabel('$cT$', 'Interpreter', 'Latex')
 
 figure(3); clf(3); hold on;
 plot(0:dt:T, grad_est, 'b-', 'Linewidth', 2)
-xlabel('t (s)'), ylabel('$\hat{\epsilon}$', 'Interpreter', 'Latex')
+xlabel('t (s)'), ylabel('$\hat{\zeta}$', 'Interpreter', 'Latex')
+
+figure(4); clf(4); hold on;
+plot(0:dt:T, filter_out, 'b-', 'Linewidth', 2)
+xlabel('t (s)'), ylabel('Filter Output')
