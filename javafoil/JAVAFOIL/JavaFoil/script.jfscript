@@ -1,0 +1,9 @@
+// recorded on 15-Mar-2022 16:31:15 by 
+Options.Country(0)
+Options.TransitionModel(1)
+Options.StallModel(0)
+Geometry.Open("C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL/JavaFoil/Mesh.txt")
+Polar.Analyze(1000000;1000000;1000000;0;0;1;100;100;1;0)
+Polar.Save(C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL/JavaFoil/output.txt)
+FlowField.Save(C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL/JavaFoil/flowfield.txt)
+Exit()

@@ -40,42 +40,38 @@ ship.addRig(R1);  ship.addRig(R2);  ship.addRig(R3);  ship.addRig(R4);
 scale = calc_scale();
 
 irun=0;
-
-for yaw = deg2rad([45 60 90 135])% 35 40 45 50 55 60 70 80 90 100 120 140 160 170])
-  tic;
-  irun=irun+1;
-  figure(1);clf;figure(2);clf;figure(3);clf;
-  fprintf('-------------------------------------------------------------\n');
-  ship.yaw    = yaw;
-  fprintf('Ship AWA = %.1f deg\n',rad2deg(ship.yaw));
-  
-%   if irun==1;   
+for yaw = deg2rad([45 60 90 135])
+    tic;
+    irun=irun+1;
+    figure(1);clf;figure(2);clf;figure(3);clf;
+    fprintf('-------------------------------------------------------------\n');
+    ship.yaw    = yaw;
+    fprintf('Ship AWA = %.1f deg\n',rad2deg(ship.yaw));
+    
+%     if irun==1;   
       X = -ship.yaw*[1 1 1 1] + deg2rad(10);
-% end
-  Mesh2Java(X);
+%     end
 
-  % Solve equilibrium equations using FMINCON
-  ub = X+deg2rad(25);           % Upper sheet Boundary
-  lb = X-deg2rad(25);           % Lower sheet Boundary
-
-  calc_objective(X);
-
-  counter=0;
-  options  = optimoptions('fmincon','FiniteDifferenceStepSize',deg2rad(1),...
+    Mesh2Java(X);
+    
+    % Solve equilibrium equations using FMINCON
+    ub = X+deg2rad(25);           % Upper sheet Boundary
+    lb = X-deg2rad(25);           % Lower sheet Boundary
+    
+    calc_objective(X);
+    
+    counter=0;
+    options  = optimoptions('fmincon','FiniteDifferenceStepSize',deg2rad(1),...
           'display','iter-detailed','OptimalityTolerance',0.001,'MaxIterations',50); % 
-  [X,fval,exitflag,output] = fmincon(@(X)calc_objective(X),X,[],[],[],[],lb,ub,[],options);
-%   saveas(gca,sprintf('pix/final_geometry_awa%d',rad2deg(yaw)),'png');
-  fprintf('AWA=%0.1f  Xopt=[%.1f %.1f %.1f %.1f ]\n',rad2deg(yaw), -rad2deg(X(1)),-rad2deg(X(2)),-rad2deg(X(3)),-rad2deg(X(4)));%,-rad2deg(X(5)),-rad2deg(X(6)),rad2deg(-X(7)),rad2deg(-X(8)));
-
-  fid     = fopen([pwd,'/4_simple_wings_cl2.txt'], 'a');
-  fprintf(fid,'%0.1f %.1f %.1f %.1f %.1f \n',rad2deg(yaw), rad2deg(-X(1)),rad2deg(-X(2)),rad2deg(-X(3)),rad2deg(-X(4)));%,rad2deg(-X(5)),rad2deg(-X(6)),rad2deg(-X(7)),rad2deg(-X(8)));
-  fclose(fid);
-  disp(toc);
+    [X,fval,exitflag,output] = fmincon(@(X)calc_objective(X),X,[],[],[],[],lb,ub,[],options);
+    %   saveas(gca,sprintf('pix/final_geometry_awa%d',rad2deg(yaw)),'png');
+    fprintf('AWA=%0.1f  Xopt=[%.1f %.1f %.1f %.1f ]\n',rad2deg(yaw), -rad2deg(X(1)),-rad2deg(X(2)),-rad2deg(X(3)),-rad2deg(X(4)));
+    
+    fid     = fopen([pwd,'/4_simple_wings_cl2.txt'], 'a');
+    fprintf(fid,'%0.1f %.1f %.1f %.1f %.1f \n',rad2deg(yaw), rad2deg(-X(1)),rad2deg(-X(2)),rad2deg(-X(3)),rad2deg(-X(4)));
+    fclose(fid);
+    disp(toc);
 end
 
 diary off;
 disp('done :-)');
-
-    
-
-

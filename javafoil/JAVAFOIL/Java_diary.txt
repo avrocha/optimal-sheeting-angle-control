@@ -1,0 +1,2423 @@
+-------------------------------------------------------------
+Scale    = 169.000 
+-------------------------------------------------------------
+Ship AWA = 45.0 deg
+^C
+java -cp "/Users/jakob/Desktop/2D_optimizer/JavaFoil/mhclasses.jar" -jar "/Users/jakob/Desktop/2D_optimizer/JavaFoil/javafoil.jar" Script="/Users/jakob/Desktop/2D_optimizer/JavaFoil/script.jfscript": Interrupt
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos', '/Applications/MATLAB_R2020a.app/toolbox/matlab/general/dos.m', 67)" style="font-weight:bold">dos</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2020a.app/toolbox/matlab/general/dos.m',67,0)">line 67</a>)
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', '/Users/jakob/Desktop/2D_optimizer/JavaFoil/calc_objective.m', 16)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/JavaFoil/calc_objective.m',16,0)">line 16</a>)
+system(cmd);     % Excecute the JavaFoil calculations
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', '/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m', 61)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m',61,0)">line 61</a>)
+  calc_objective(X);
+} 
+runme_Alexandre
+-------------------------------------------------------------
+Scale    = 169.000 
+{Not enough input arguments.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', '/Users/jakob/Desktop/2D_optimizer/JavaFoil/calc_objective.m', 9)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/JavaFoil/calc_objective.m',9,0)">line 9</a>)
+Mesh2Java(X); % Generates Java-scale mesh-file
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', '/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m', 41)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m',41,0)">line 41</a>)
+calc_objective()
+} 
+opentoline('/Users/jakob/Desktop/2D_optimizer/JavaFoil/calc_objective.m',9,0)
+opentoline('/Users/jakob/Desktop/2D_optimizer/JavaFoil/calc_objective.m',9,0)
+opentoline('/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m',41,0)
+runme_Alexandre
+-------------------------------------------------------------
+Scale    = 169.000 
+cT  = -0.0185,  cl=0.6270, cd=0.0185, cm=-0.0860, cp=0.3870,  X=[10 10 10 10 ]
+
+ans =
+
+   -0.3931
+
+{Unrecognized function or variable 'xxxx'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', '/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m', 44)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m',44,0)">line 44</a>)
+xxxx
+} 
+runme_Alexandre
+-------------------------------------------------------------
+Scale    = 169.000 
+cT  = 0.4418,  cl=0.6450, cd=0.0202, cm=-0.1620, cp=0.5020,  X=[-35 -35 -35 -35 ]
+
+ans =
+
+   -0.4160
+
+{Unrecognized function or variable 'xxxx'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', '/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m', 43)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m',43,0)">line 43</a>)
+xxxx
+} 
+runme_Alexandre
+-------------------------------------------------------------
+Scale    = 169.000 
+cT  = 0.3119,  cl=0.6590, cd=0.0203, cm=-0.1140, cp=0.4220,  X=[-20 -20 -20 -20 ]
+
+obj =
+
+   -0.4343
+
+
+cl =
+
+    0.6590
+
+
+CT =
+
+    0.3119
+
+{Unrecognized function or variable 'xxxx'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', '/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m', 43)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m',43,0)">line 43</a>)
+xxxx
+} 
+runme_Alexandre
+-------------------------------------------------------------
+Scale    = 169.000 
+cT  = -0.0144,  cl=0.0120, cd=0.0236, cm=0.2100, cp=-17.7770,  X=[-50 -20 -20 -20 ]
+
+obj =
+
+  -1.4400e-04
+
+
+cl =
+
+    0.0120
+
+
+CT =
+
+   -0.0144
+
+{Unrecognized function or variable 'xxxx'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', '/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m', 43)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/runme_Alexandre.m',43,0)">line 43</a>)
+xxxx
+} 
+runme_Alexandre
+-------------------------------------------------------------
+Scale    = 169.000 
+cT  = -0.0144,  cl=0.0120, cd=0.0236, cm=0.2100, cp=-17.7770,  X=[-50 -20 -20 -20 ]
+runme_Alexandre
+-------------------------------------------------------------
+Scale    = 169.000 
+cT  = 0.2879,  cl=0.6070, cd=0.0180, cm=-0.1240, cp=0.4540,  X=[-20 -20 -20 -25 ]
+runme_Alexandre
+-------------------------------------------------------------
+Scale    = 169.000 
+cT  = 0.2983,  cl=0.6390, cd=0.0245, cm=-0.1040, cp=0.4120,  X=[-20 -20 -20 -15 ]
+runme_Alexandre
+-------------------------------------------------------------
+Scale    = 169.000 
+cT  = 0.2634,  cl=0.5840, cd=0.0330, cm=-0.0940, cp=0.4100,  X=[-20 -20 -20 -10 ]
+runme_Alexandre
+-------------------------------------------------------------
+Scale    = 169.000 
+cT  = 0.3702,  cl=0.8060, cd=0.0379, cm=-0.1550, cp=0.4420,  X=[-20 0 -20 -20 ]
+runme_plot_angles_rect
+Scale    = 175.000 
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('csvread', '/Applications/MATLAB_R2020a.app/toolbox/matlab/iofun/csvread.m', 35)" style="font-weight:bold">csvread</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2020a.app/toolbox/matlab/iofun/csvread.m',35,0)">line 35</a>)
+File not found.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_plot_angles_rect', '/Users/jakob/Desktop/2D_optimizer/runme_plot_angles_rect.m', 29)" style="font-weight:bold">runme_plot_angles_rect</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/runme_plot_angles_rect.m',29,0)">line 29</a>)
+anglesWings = csvread('trim_angles_4wings_cl_rectangle2_conf.txt');
+} 
+runme_plot_angles_rect
+Scale    = 175.000 
+Ship AWA = 45.0 deg
+{Index exceeds the number of array elements (0).
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Ship/doMesh', '/Users/jakob/Desktop/2D_optimizer/JavaFoil/Ship.m', 41)" style="font-weight:bold">Ship/doMesh</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/JavaFoil/Ship.m',41,0)">line 41</a>)
+              rig.trim = Xval(ir);%2*ir-1);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Mesh2Java', '/Users/jakob/Desktop/2D_optimizer/JavaFoil/Mesh2Java.m', 6)" style="font-weight:bold">Mesh2Java</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/JavaFoil/Mesh2Java.m',6,0)">line 6</a>)
+ship.doMesh(Xval,false);  % ship.doMesh(Xval,normalize,flip)
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_plot_angles_rect', '/Users/jakob/Desktop/2D_optimizer/runme_plot_angles_rect.m', 47)" style="font-weight:bold">runme_plot_angles_rect</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/runme_plot_angles_rect.m',47,0)">line 47</a>)
+    Mesh2Java(X);
+} 
+runme_plot_angles_rect
+Scale    = 175.000 
+Ship AWA = 30.0 deg
+cT  = 0.4381,  cl=0.9670, cd=0.0525, cm=-0.3260, cp=0.5870,  X=[-4 -4 -13 -12 ]
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('saveas', '/Applications/MATLAB_R2020a.app/toolbox/matlab/general/saveas.m', 138)" style="font-weight:bold">saveas</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2020a.app/toolbox/matlab/general/saveas.m',138,0)">line 138</a>)
+Invalid or missing path: pix/flow_rectangle_awa30
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_plot_angles_rect', '/Users/jakob/Desktop/2D_optimizer/runme_plot_angles_rect.m', 49)" style="font-weight:bold">runme_plot_angles_rect</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/runme_plot_angles_rect.m',49,0)">line 49</a>)
+    saveas(gca,sprintf('pix/flow_rectangle_awa%i',(anglesWings(ii,1))),'png');
+} 
+runme_plot_angles_rect
+Scale    = 175.000 
+Ship AWA = 30.0 deg
+cT  = 0.4381,  cl=0.9670, cd=0.0525, cm=-0.3260, cp=0.5870,  X=[-4 -4 -13 -12 ]
+Ship AWA = 35.0 deg
+cT  = 0.5108,  cl=0.9670, cd=0.0535, cm=-0.3300, cp=0.5920,  X=[-8 -9 -19 -16 ]
+Ship AWA = 40.0 deg
+cT  = 0.5820,  cl=0.9680, cd=0.0525, cm=-0.3260, cp=0.5860,  X=[-16 -13 -23 -21 ]
+Ship AWA = 45.0 deg
+^C
+java -cp "/Users/jakob/Desktop/2D_optimizer/JavaFoil/mhclasses.jar" -jar "/Users/jakob/Desktop/2D_optimizer/JavaFoil/javafoil.jar" Script="/Users/jakob/Desktop/2D_optimizer/JavaFoil/script.jfscript": Interrupt
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos', '/Applications/MATLAB_R2020a.app/toolbox/matlab/general/dos.m', 67)" style="font-weight:bold">dos</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2020a.app/toolbox/matlab/general/dos.m',67,0)">line 67</a>)
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', '/Users/jakob/Desktop/2D_optimizer/JavaFoil/calc_objective.m', 16)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/JavaFoil/calc_objective.m',16,0)">line 16</a>)
+system(cmd);     % Excecute the JavaFoil calculations
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_plot_angles_rect', '/Users/jakob/Desktop/2D_optimizer/runme_plot_angles_rect.m', 48)" style="font-weight:bold">runme_plot_angles_rect</a> (<a href="matlab: opentoline('/Users/jakob/Desktop/2D_optimizer/runme_plot_angles_rect.m',48,0)">line 48</a>)
+    calc_objective(X);
+} 
+-------------------------------------------------------------
+Scale    = 169.000 
+-------------------------------------------------------------
+Ship AWA = 45.0 deg
+cT  = 0.4418,  cl=0.6450, cd=0.0202, cm=-0.1620, cp=0.5020,  X=[-35 -35 -35 -35 ]
+cT  = 0.4418,  cl=0.6450, cd=0.0202, cm=-0.1620, cp=0.5020,  X=[-35 -35 -35 -35 ]
+cT  = 0.4259,  cl=0.6220, cd=0.0197, cm=-0.1510, cp=0.4920,  X=[-36 -35 -35 -35 ]
+cT  = 0.4299,  cl=0.6280, cd=0.0200, cm=-0.1580, cp=0.5020,  X=[-35 -36 -35 -35 ]
+cT  = 0.4320,  cl=0.6310, cd=0.0200, cm=-0.1620, cp=0.5060,  X=[-35 -35 -36 -35 ]
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 16)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',16,0)">line 16</a>)
+system(cmd);     % Excecute the JavaFoil calculations
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1871658825', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1871658825.m', 66)" style="font-weight:bold">LiveEditorEvaluationHelperE1871658825</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1871658825.m',66,0)">line 66</a>)
+  [X,fval,exitflag,output] = fmincon(@(X)calc_objective(X),X,[],[],[],[],lb,ub,[],options);
+
+In finDiffEvalAndChkErr
+
+In finitedifferences
+
+In computeFinDiffGradAndJac
+
+In barrier
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fmincon', 'C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m', 873)" style="font-weight:bold">fmincon</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m',873,0)">line 873</a>)
+    [X,FVAL,EXITFLAG,OUTPUT,LAMBDA,GRAD,HESSIAN] = barrier(funfcn,X,A,B,Aeq,Beq,l,u,confcn,options.HessFcn, ...
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1871658825', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1871658825.m', 66)" style="font-weight:bold">LiveEditorEvaluationHelperE1871658825</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1871658825.m',66,0)">line 66</a>)
+  [X,fval,exitflag,output] = fmincon(@(X)calc_objective(X),X,[],[],[],[],lb,ub,[],options);
+} 
+cloear
+{Unrecognized function or variable 'cloear'.
+} 
+clear
+clc
+-------------------------------------------------------------
+Scale    = 169.000 
+-------------------------------------------------------------
+Ship AWA = 45.0 deg
+Not enough input arguments.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Foil', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Foil.m', 15)" style="font-weight:bold">Foil</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Foil.m',15,0)">line 15</a>)
+            obj.foilFile = foilFile; % Filename : The name of the file, omittong '.txt'
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 4)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',4,0)">line 4</a>)
+ship.rigs(1).trim = X(1);        ship.rigs(1).foils(2).trim = -X(2);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_WPCC_2D', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_WPCC_2D.m', 61)" style="font-weight:bold">runme_WPCC_2D</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_WPCC_2D.m',61,0)">line 61</a>)
+  calc_objective(X);
+
+-------------------------------------------------------------
+Scale    = 169.000 
+-------------------------------------------------------------
+Ship AWA = 45.0 deg
+cT  = 0.4418,  cl=0.6450, cd=0.0202, cm=-0.1620, cp=0.5020,  X=[-35 -35 -35 -35 ]
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 16)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',16,0)">line 16</a>)
+system(cmd);     % Excecute the JavaFoil calculations
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1871658825', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1871658825.m', 66)" style="font-weight:bold">LiveEditorEvaluationHelperE1871658825</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1871658825.m',66,0)">line 66</a>)
+  [X,fval,exitflag,output] = fmincon(@(X)calc_objective(X),X,[],[],[],[],lb,ub,[],options);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fmincon', 'C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m', 568)" style="font-weight:bold">fmincon</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m',568,0)">line 568</a>)
+      initVals.f = feval(funfcn{3},X,varargin{:});
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1871658825', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1871658825.m', 66)" style="font-weight:bold">LiveEditorEvaluationHelperE1871658825</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1871658825.m',66,0)">line 66</a>)
+  [X,fval,exitflag,output] = fmincon(@(X)calc_objective(X),X,[],[],[],[],lb,ub,[],options);
+} 
+clear
+clc
+Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective')" style="font-weight:bold">calc_objective</a>
+Too many output arguments.
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m', 85)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m',85,0)">line 85</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective([sheeting_angle(j), 0, 0, 0]);
+
+-------------------------------------------------------------
+Scale    = 169.000 
+-------------------------------------------------------------
+Ship AWA = 45.0 deg
+cT=0.4418, cl=0.6450, cd=0.0202, cm=-0.1620, cp=0.5020,  X=[-35 -35 -35 -35 ]
+cT=0.4418, cl=0.6450, cd=0.0202, cm=-0.1620, cp=0.5020,  X=[-35 -35 -35 -35 ]
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 15)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',15,0)">line 15</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE2044312804', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE2044312804.m', 66)" style="font-weight:bold">LiveEditorEvaluationHelperE2044312804</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE2044312804.m',66,0)">line 66</a>)
+    [X,fval,exitflag,output] = fmincon(@(X)calc_objective(X),X,[],[],[],[],lb,ub,[],options);
+In finDiffEvalAndChkErr
+
+In finitedifferences
+
+In computeFinDiffGradAndJac
+
+In barrier
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fmincon', 'C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m', 873)" style="font-weight:bold">fmincon</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m',873,0)">line 873</a>)
+    [X,FVAL,EXITFLAG,OUTPUT,LAMBDA,GRAD,HESSIAN] = barrier(funfcn,X,A,B,Aeq,Beq,l,u,confcn,options.HessFcn, ...
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE2044312804', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE2044312804.m', 66)" style="font-weight:bold">LiveEditorEvaluationHelperE2044312804</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE2044312804.m',66,0)">line 66</a>)
+    [X,fval,exitflag,output] = fmincon(@(X)calc_objective(X),X,[],[],[],[],lb,ub,[],options);} 
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('matlab.graphics.internal.markFigure')" style="font-weight:bold">matlab.graphics.internal.markFigure</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('hold', 'C:\Program Files\MATLAB\R2022a\toolbox\matlab\graphics\axis\hold.m', 63)" style="font-weight:bold">hold</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2022a\toolbox\matlab\graphics\axis\hold.m',63,0)">line 63</a>)
+matlab.graphics.internal.markFigure(ax);
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plot_flowField', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\plot_flowField.m', 35)" style="font-weight:bold">plot_flowField</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\plot_flowField.m',35,0)">line 35</a>)
+hold on
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 23)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',23,0)">line 23</a>)
+    plot_flowField(ship.yaw,ship.scale,cl,cd,cp);
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1104820628', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m', 85)" style="font-weight:bold">LiveEditorEvaluationHelperE1104820628</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m',85,0)">line 85</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective([sheeting_angle(j), 0, 0, 0]);} 
+clear
+clc
+cT=-0.1152, cl=0.1850, cd=0.5508, cm=-0.3730, cp=2.2730,  X=[-180 0 0 0 ]
+cT=-0.0939, cl=0.1960, cd=0.5273, cm=-0.3360, cp=1.9640,  X=[-176 0 0 0 ]
+cT=-0.0770, cl=0.2070, cd=0.5126, cm=-0.3000, cp=1.7010,  X=[-173 0 0 0 ]
+cT=-0.0646, cl=0.2150, cd=0.5017, cm=-0.2650, cp=1.4780,  X=[-169 0 0 0 ]
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 15)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',15,0)">line 15</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1104820628', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m', 85)" style="font-weight:bold">LiveEditorEvaluationHelperE1104820628</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m',85,0)">line 85</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective([sheeting_angle(j), 0, 0, 0]);} 
+-------------------------------------------------------------
+Scale    = 25.000 
+cT=-0.7603, cl=-0.4640, cd=0.7169, cm=2.8400, cp=6.3650,  X=[-180 0 0 0 ]
+cT=-0.7648, cl=-0.4260, cd=0.7917, cm=3.0570, cp=7.4310,  X=[-176 0 0 0 ]
+cT=-0.7820, cl=-0.3950, cd=0.8798, cm=3.2670, cp=8.5170,  X=[-173 0 0 0 ]
+cT=-0.8054, cl=-0.3720, cd=0.9664, cm=3.4650, cp=9.5750,  X=[-169 0 0 0 ]
+cT=-0.8239, cl=-0.3510, cd=1.0398, cm=3.6480, cp=10.6300,  X=[-165 0 0 0 ]
+cT=-0.8229, cl=-0.3360, cd=1.0638, cm=3.8110, cp=11.5790,  X=[-162 0 0 0 ]
+cT=-0.8493, cl=-0.3260, cd=1.1339, cm=3.9460, cp=12.3570,  X=[-158 0 0 0 ]
+cT=-0.8383, cl=-0.3190, cd=1.1241, cm=4.0460, cp=12.9180,  X=[-155 0 0 0 ]
+cT=-0.8523, cl=-0.3170, cd=1.1556, cm=4.1010, cp=13.2040,  X=[-151 0 0 0 ]
+cT=-0.8465, cl=-0.3170, cd=1.1440, cm=4.1480, cp=13.3170,  X=[-147 0 0 0 ]
+cT=-0.8559, cl=-0.3220, cd=1.1540, cm=4.0350, cp=12.7770,  X=[-144 0 0 0 ]
+cT=-0.8469, cl=-0.3300, cd=1.1222, cm=3.7950, cp=11.7340,  X=[-140 0 0 0 ]
+cT=-0.8175, cl=-0.3430, cd=1.0409, cm=3.4200, cp=10.2090,  X=[-136 0 0 0 ]
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 15)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',15,0)">line 15</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1104820628', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m', 85)" style="font-weight:bold">LiveEditorEvaluationHelperE1104820628</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m',85,0)">line 85</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective([sheeting_angle(j), 0, 0, 0]);} 
+clc
+clear
+clc
+cT=-0.7603, cl=-0.4640, cd=0.7169, cm=2.8400, cp=6.3650,  X=[-180 0 0 0 ]
+cT=-0.7648, cl=-0.4260, cd=0.7917, cm=3.0570, cp=7.4310,  X=[-176 0 0 0 ]
+cT=-0.7820, cl=-0.3950, cd=0.8798, cm=3.2670, cp=8.5170,  X=[-173 0 0 0 ]
+cT=-0.8054, cl=-0.3720, cd=0.9664, cm=3.4650, cp=9.5750,  X=[-169 0 0 0 ]
+cT=-0.8239, cl=-0.3510, cd=1.0398, cm=3.6480, cp=10.6300,  X=[-165 0 0 0 ]
+cT=-0.8229, cl=-0.3360, cd=1.0638, cm=3.8110, cp=11.5790,  X=[-162 0 0 0 ]
+cT=-0.8493, cl=-0.3260, cd=1.1339, cm=3.9460, cp=12.3570,  X=[-158 0 0 0 ]
+cT=-0.8383, cl=-0.3190, cd=1.1241, cm=4.0460, cp=12.9180,  X=[-155 0 0 0 ]
+cT=-0.8523, cl=-0.3170, cd=1.1556, cm=4.1010, cp=13.2040,  X=[-151 0 0 0 ]
+cT=-0.8465, cl=-0.3170, cd=1.1440, cm=4.1480, cp=13.3170,  X=[-147 0 0 0 ]
+cT=-0.8559, cl=-0.3220, cd=1.1540, cm=4.0350, cp=12.7770,  X=[-144 0 0 0 ]
+cT=-0.8469, cl=-0.3300, cd=1.1222, cm=3.7950, cp=11.7340,  X=[-140 0 0 0 ]
+cT=-0.8175, cl=-0.3430, cd=1.0409, cm=3.4200, cp=10.2090,  X=[-136 0 0 0 ]
+cT=-0.8092, cl=-0.3610, cd=0.9931, cm=3.0330, cp=8.6560,  X=[-133 0 0 0 ]
+cT=-0.7976, cl=-0.3820, cd=0.9335, cm=2.6590, cp=7.2030,  X=[-129 0 0 0 ]
+cT=-0.7689, cl=-0.4100, cd=0.8277, cm=2.3080, cp=5.8810,  X=[-125 0 0 0 ]
+cT=-0.7581, cl=-0.4440, cd=0.7472, cm=1.9730, cp=4.6930,  X=[-122 0 0 0 ]
+cT=-0.7561, cl=-0.4870, cd=0.6688, cm=1.6730, cp=3.6830,  X=[-118 0 0 0 ]
+cT=-0.7631, cl=-0.5420, cd=0.5874, cm=1.3940, cp=2.8210,  X=[-115 0 0 0 ]
+cT=-0.7815, cl=-0.6110, cd=0.5048, cm=1.2370, cp=2.2740,  X=[-111 0 0 0 ]
+cT=-0.8154, cl=-0.6980, cd=0.4219, cm=1.0080, cp=1.6950,  X=[-107 0 0 0 ]
+cT=-0.8713, cl=-0.8060, cd=0.3466, cm=0.8070, cp=1.2510,  X=[-104 0 0 0 ]
+cT=-0.9520, cl=-0.9410, cd=0.2741, cm=0.6330, cp=0.9230,  X=[-100 0 0 0 ]
+cT=-1.0623, cl=-1.1010, cd=0.2177, cm=0.4870, cp=0.6920,  X=[-96 0 0 0 ]
+cT=-1.1927, cl=-1.2810, cd=0.1667, cm=0.3660, cp=0.5360,  X=[-93 0 0 0 ]
+cT=-1.3402, cl=-1.4760, cd=0.1239, cm=0.2700, cp=0.4330,  X=[-89 0 0 0 ]
+cT=-1.4807, cl=-1.6580, cd=0.0897, cm=0.1950, cp=0.3680,  X=[-85 0 0 0 ]
+cT=-1.5712, cl=-1.7770, cd=0.0644, cm=0.1390, cp=0.3280,  X=[-82 0 0 0 ]
+cT=-1.5523, cl=-1.7660, cd=0.0459, cm=0.0970, cp=0.3050,  X=[-78 0 0 0 ]
+cT=-1.4055, cl=-1.6040, cd=0.0329, cm=0.0650, cp=0.2900,  X=[-75 0 0 0 ]
+cT=-1.0669, cl=-1.2180, cd=0.0241, cm=0.0390, cp=0.2820,  X=[-71 0 0 0 ]
+cT=-0.7105, cl=-0.8100, cd=0.0181, cm=0.0210, cp=0.2760,  X=[-67 0 0 0 ]
+cT=-0.3551, cl=-0.4040, cd=0.0105, cm=0.0090, cp=0.2710,  X=[-64 0 0 0 ]
+cT=-0.0051, cl=-0.0000, cd=0.0101, cm=-0.0000, cp=0.2500,  X=[-60 0 0 0 ]
+cT=0.3448, cl=0.4040, cd=0.0101, cm=-0.0090, cp=0.2710,  X=[-56 0 0 0 ]
+cT=0.6924, cl=0.8100, cd=0.0181, cm=-0.0210, cp=0.2760,  X=[-53 0 0 0 ]
+cT=1.0428, cl=1.2180, cd=0.0241, cm=-0.0390, cp=0.2820,  X=[-49 0 0 0 ]
+cT=1.3727, cl=1.6040, cd=0.0329, cm=-0.0650, cp=0.2900,  X=[-45 0 0 0 ]
+cT=1.5065, cl=1.7660, cd=0.0459, cm=-0.0970, cp=0.3050,  X=[-42 0 0 0 ]
+cT=1.5067, cl=1.7770, cd=0.0645, cm=-0.1390, cp=0.3280,  X=[-38 0 0 0 ]
+cT=1.3909, cl=1.6580, cd=0.0900, cm=-0.1950, cp=0.3680,  X=[-35 0 0 0 ]
+cT=1.2165, cl=1.4760, cd=0.1236, cm=-0.2700, cp=0.4330,  X=[-31 0 0 0 ]
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 15)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',15,0)">line 15</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1104820628', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m', 86)" style="font-weight:bold">LiveEditorEvaluationHelperE1104820628</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m',86,0)">line 86</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective([sheeting_angle(j), 0, 0, 0]);} 
+cT=-0.7603, cl=-0.4640, cd=0.7169, cm=2.8400, cp=6.3650,  X=[-180 0 0 0 ]
+cT=-0.7648, cl=-0.4260, cd=0.7917, cm=3.0570, cp=7.4310,  X=[-176 0 0 0 ]
+cT=-0.7820, cl=-0.3950, cd=0.8798, cm=3.2670, cp=8.5170,  X=[-173 0 0 0 ]
+cT=-0.8054, cl=-0.3720, cd=0.9664, cm=3.4650, cp=9.5750,  X=[-169 0 0 0 ]
+cT=-0.8239, cl=-0.3510, cd=1.0398, cm=3.6480, cp=10.6300,  X=[-165 0 0 0 ]
+cT=-0.8229, cl=-0.3360, cd=1.0638, cm=3.8110, cp=11.5790,  X=[-162 0 0 0 ]
+cT=-0.8493, cl=-0.3260, cd=1.1339, cm=3.9460, cp=12.3570,  X=[-158 0 0 0 ]
+cT=-0.8383, cl=-0.3190, cd=1.1241, cm=4.0460, cp=12.9180,  X=[-155 0 0 0 ]
+cT=-0.8523, cl=-0.3170, cd=1.1556, cm=4.1010, cp=13.2040,  X=[-151 0 0 0 ]
+cT=-0.8465, cl=-0.3170, cd=1.1440, cm=4.1480, cp=13.3170,  X=[-147 0 0 0 ]
+cT=-0.8559, cl=-0.3220, cd=1.1540, cm=4.0350, cp=12.7770,  X=[-144 0 0 0 ]
+cT=-0.8469, cl=-0.3300, cd=1.1222, cm=3.7950, cp=11.7340,  X=[-140 0 0 0 ]
+cT=-0.8175, cl=-0.3430, cd=1.0409, cm=3.4200, cp=10.2090,  X=[-136 0 0 0 ]
+cT=-0.8092, cl=-0.3610, cd=0.9931, cm=3.0330, cp=8.6560,  X=[-133 0 0 0 ]
+cT=-0.7976, cl=-0.3820, cd=0.9335, cm=2.6590, cp=7.2030,  X=[-129 0 0 0 ]
+cT=-0.7689, cl=-0.4100, cd=0.8277, cm=2.3080, cp=5.8810,  X=[-125 0 0 0 ]
+cT=-0.7581, cl=-0.4440, cd=0.7472, cm=1.9730, cp=4.6930,  X=[-122 0 0 0 ]
+cT=-0.7561, cl=-0.4870, cd=0.6688, cm=1.6730, cp=3.6830,  X=[-118 0 0 0 ]
+cT=-0.7631, cl=-0.5420, cd=0.5874, cm=1.3940, cp=2.8210,  X=[-115 0 0 0 ]
+cT=-0.7815, cl=-0.6110, cd=0.5048, cm=1.2370, cp=2.2740,  X=[-111 0 0 0 ]
+cT=-0.8154, cl=-0.6980, cd=0.4219, cm=1.0080, cp=1.6950,  X=[-107 0 0 0 ]
+cT=-0.8713, cl=-0.8060, cd=0.3466, cm=0.8070, cp=1.2510,  X=[-104 0 0 0 ]
+cT=-0.9520, cl=-0.9410, cd=0.2741, cm=0.6330, cp=0.9230,  X=[-100 0 0 0 ]
+cT=-1.0623, cl=-1.1010, cd=0.2177, cm=0.4870, cp=0.6920,  X=[-96 0 0 0 ]
+cT=-1.1927, cl=-1.2810, cd=0.1667, cm=0.3660, cp=0.5360,  X=[-93 0 0 0 ]
+cT=-1.3402, cl=-1.4760, cd=0.1239, cm=0.2700, cp=0.4330,  X=[-89 0 0 0 ]
+cT=-1.4807, cl=-1.6580, cd=0.0897, cm=0.1950, cp=0.3680,  X=[-85 0 0 0 ]
+cT=-1.5712, cl=-1.7770, cd=0.0644, cm=0.1390, cp=0.3280,  X=[-82 0 0 0 ]
+cT=-1.5523, cl=-1.7660, cd=0.0459, cm=0.0970, cp=0.3050,  X=[-78 0 0 0 ]
+cT=-1.4055, cl=-1.6040, cd=0.0329, cm=0.0650, cp=0.2900,  X=[-75 0 0 0 ]
+cT=-1.0669, cl=-1.2180, cd=0.0241, cm=0.0390, cp=0.2820,  X=[-71 0 0 0 ]
+cT=-0.7105, cl=-0.8100, cd=0.0181, cm=0.0210, cp=0.2760,  X=[-67 0 0 0 ]
+cT=-0.3551, cl=-0.4040, cd=0.0105, cm=0.0090, cp=0.2710,  X=[-64 0 0 0 ]
+cT=-0.0051, cl=-0.0000, cd=0.0101, cm=-0.0000, cp=0.2500,  X=[-60 0 0 0 ]
+cT=0.3448, cl=0.4040, cd=0.0101, cm=-0.0090, cp=0.2710,  X=[-56 0 0 0 ]
+cT=0.6924, cl=0.8100, cd=0.0181, cm=-0.0210, cp=0.2760,  X=[-53 0 0 0 ]
+cT=1.0428, cl=1.2180, cd=0.0241, cm=-0.0390, cp=0.2820,  X=[-49 0 0 0 ]
+cT=1.3727, cl=1.6040, cd=0.0329, cm=-0.0650, cp=0.2900,  X=[-45 0 0 0 ]
+cT=1.5065, cl=1.7660, cd=0.0459, cm=-0.0970, cp=0.3050,  X=[-42 0 0 0 ]
+cT=1.5067, cl=1.7770, cd=0.0645, cm=-0.1390, cp=0.3280,  X=[-38 0 0 0 ]
+cT=1.3909, cl=1.6580, cd=0.0900, cm=-0.1950, cp=0.3680,  X=[-35 0 0 0 ]
+cT=1.2165, cl=1.4760, cd=0.1236, cm=-0.2700, cp=0.4330,  X=[-31 0 0 0 ]
+cT=1.0261, cl=1.2810, cd=0.1666, cm=-0.3660, cp=0.5360,  X=[-27 0 0 0 ]
+cT=0.8448, cl=1.1010, cd=0.2173, cm=-0.4870, cp=0.6920,  X=[-24 0 0 0 ]
+cT=0.6772, cl=0.9410, cd=0.2754, cm=-0.6330, cp=0.9230,  X=[-20 0 0 0 ]
+cT=0.5250, cl=0.8060, cd=0.3461, cm=-0.8070, cp=1.2510,  X=[-16 0 0 0 ]
+cT=0.3926, cl=0.6980, cd=0.4237, cm=-1.0080, cp=1.6950,  X=[-13 0 0 0 ]
+cT=0.2790, cl=0.6110, cd=0.5003, cm=-1.2370, cp=2.2740,  X=[-9 0 0 0 ]
+cT=0.1722, cl=0.5420, cd=0.5944, cm=-1.3940, cp=2.8210,  X=[-5 0 0 0 ]
+cT=0.0836, cl=0.4870, cd=0.6763, cm=-1.6730, cp=3.6830,  X=[-2 0 0 0 ]
+cT=0.0062, cl=0.4440, cd=0.7567, cm=-1.9730, cp=4.6930,  X=[2 0 0 0 ]
+cT=-0.0622, cl=0.4100, cd=0.8346, cm=-2.3080, cp=5.8810,  X=[5 0 0 0 ]
+cT=-0.1356, cl=0.3820, cd=0.9328, cm=-2.6600, cp=7.2030,  X=[9 0 0 0 ]
+cT=-0.1934, cl=0.3610, cd=1.0121, cm=-3.0330, cp=8.6570,  X=[13 0 0 0 ]
+cT=-0.2333, cl=0.3430, cd=1.0608, cm=-3.4200, cp=10.2090,  X=[16 0 0 0 ]
+cT=-0.2594, cl=0.3300, cd=1.0904, cm=-3.7950, cp=11.7340,  X=[20 0 0 0 ]
+cT=-0.2998, cl=0.3220, cd=1.1573, cm=-4.0350, cp=12.7780,  X=[24 0 0 0 ]
+cT=-0.3083, cl=0.3170, cd=1.1657, cm=-4.1480, cp=13.3180,  X=[27 0 0 0 ]
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+cT=0.1846, cl=0.3170, cd=0.1799, cm=0.0000, cp=0.2500,  X=[31 0 0 0 ]
+cT=-0.2915, cl=0.3190, cd=1.1356, cm=-4.0460, cp=12.9180,  X=[35 0 0 0 ]
+cT=-0.2687, cl=0.3260, cd=1.1020, cm=-3.9460, cp=12.3570,  X=[38 0 0 0 ]
+cT=-0.2466, cl=0.3360, cd=1.0752, cm=-3.8110, cp=11.5790,  X=[42 0 0 0 ]
+cT=-0.2151, cl=0.3510, cd=1.0381, cm=-3.6480, cp=10.6300,  X=[45 0 0 0 ]
+cT=-0.1544, cl=0.3720, cd=0.9531, cm=-3.4650, cp=9.5750,  X=[49 0 0 0 ]
+cT=-0.0961, cl=0.3950, cd=0.8764, cm=-3.2670, cp=8.5170,  X=[53 0 0 0 ]
+cT=-0.0315, cl=0.4260, cd=0.8009, cm=-3.0570, cp=7.4310,  X=[56 0 0 0 ]
+cT=0.0411, cl=0.4640, cd=0.7215, cm=-2.8400, cp=6.3650,  X=[60 0 0 0 ]
+cT=0.1275, cl=0.5130, cd=0.6335, cm=-2.6180, cp=5.3500,  X=[64 0 0 0 ]
+cT=0.2231, cl=0.5750, cd=0.5498, cm=-2.3950, cp=4.4180,  X=[67 0 0 0 ]
+if system_dependent('IsDebugMode')==1, dbcont; end
+cT=0.5631, cl=0.6520, cd=0.0031, cm=-2.0420, cp=3.3820,  X=[71 0 0 0 ]
+cT=0.6472, cl=0.7490, cd=0.0029, cm=-1.8290, cp=2.6920,  X=[75 0 0 0 ]
+cT=0.7519, cl=0.8700, cd=0.0031, cm=-1.6250, cp=2.1180,  X=[78 0 0 0 ]
+cT=0.8816, cl=1.0200, cd=0.0035, cm=-1.4340, cp=1.6560,  X=[82 0 0 0 ]
+cT=1.0269, cl=1.1880, cd=0.0040, cm=-1.2540, cp=1.3060,  X=[85 0 0 0 ]
+cT=1.1903, cl=1.3770, cd=0.0045, cm=-1.0790, cp=1.0340,  X=[89 0 0 0 ]
+cT=1.3579, cl=1.5710, cd=0.0052, cm=-0.9120, cp=0.8300,  X=[93 0 0 0 ]
+cT=1.4962, cl=1.7310, cd=0.0058, cm=-0.7520, cp=0.6840,  X=[96 0 0 0 ]
+cT=1.5462, cl=1.7890, cd=0.0062, cm=-0.6000, cp=0.5850,  X=[100 0 0 0 ]
+cT=1.4718, cl=1.7060, cd=0.0113, cm=-0.4540, cp=0.5160,  X=[104 0 0 0 ]
+cT=1.2241, cl=1.4200, cd=0.0112, cm=-0.3230, cp=0.4780,  X=[107 0 0 0 ]
+cT=0.8719, cl=1.0130, cd=0.0107, cm=-0.2040, cp=0.4510,  X=[111 0 0 0 ]
+cT=0.5216, cl=0.6080, cd=0.0099, cm=-0.1010, cp=0.4160,  X=[115 0 0 0 ]
+cT=0.1704, cl=0.2020, cd=0.0092, cm=-0.0220, cp=0.3600,  X=[118 0 0 0 ]
+cT=-0.1795, cl=-0.2020, cd=0.0092, cm=0.0220, cp=0.3600,  X=[122 0 0 0 ]
+cT=-0.5315, cl=-0.6080, cd=0.0100, cm=0.1010, cp=0.4160,  X=[125 0 0 0 ]
+cT=-0.8827, cl=-1.0130, cd=0.0108, cm=0.2040, cp=0.4510,  X=[129 0 0 0 ]
+cT=-1.2354, cl=-1.4200, cd=0.0112, cm=0.3230, cp=0.4780,  X=[133 0 0 0 ]
+cT=-1.4831, cl=-1.7060, cd=0.0113, cm=0.4540, cp=0.5160,  X=[136 0 0 0 ]
+cT=-1.5524, cl=-1.7890, cd=0.0063, cm=0.6000, cp=0.5850,  X=[140 0 0 0 ]
+cT=-1.5020, cl=-1.7310, cd=0.0058, cm=0.7520, cp=0.6840,  X=[144 0 0 0 ]
+cT=-1.3631, cl=-1.5710, cd=0.0052, cm=0.9120, cp=0.8300,  X=[147 0 0 0 ]
+cT=-1.1948, cl=-1.3770, cd=0.0045, cm=1.0790, cp=1.0340,  X=[151 0 0 0 ]
+cT=-1.0308, cl=-1.1880, cd=0.0040, cm=1.2540, cp=1.3060,  X=[155 0 0 0 ]
+cT=-0.8851, cl=-1.0200, cd=0.0035, cm=1.4340, cp=1.6560,  X=[158 0 0 0 ]
+cT=-0.7550, cl=-0.8700, cd=0.0031, cm=1.6250, cp=2.1180,  X=[162 0 0 0 ]
+cT=-0.6501, cl=-0.7490, cd=0.0029, cm=1.8290, cp=2.6920,  X=[165 0 0 0 ]
+cT=-0.5662, cl=-0.6520, cd=0.0031, cm=2.0420, cp=3.3820,  X=[169 0 0 0 ]
+cT=-0.7731, cl=-0.5750, cd=0.5504, cm=2.3950, cp=4.4180,  X=[173 0 0 0 ]
+cT=-0.7640, cl=-0.5130, cd=0.6395, cm=2.6180, cp=5.3500,  X=[176 0 0 0 ]
+cT=-0.7603, cl=-0.4640, cd=0.7169, cm=2.8400, cp=6.3650,  X=[180 0 0 0 ]
+Elapsed time is 157.440498 seconds.
+cT=-0.7603, cl=-0.4640, cd=0.7169, cm=2.8400, cp=6.3650,  X=[-180 0 0 0 ]
+cT=-0.7648, cl=-0.4260, cd=0.7917, cm=3.0570, cp=7.4310,  X=[-176 0 0 0 ]
+cT=-0.7820, cl=-0.3950, cd=0.8798, cm=3.2670, cp=8.5170,  X=[-173 0 0 0 ]
+cT=-0.8054, cl=-0.3720, cd=0.9664, cm=3.4650, cp=9.5750,  X=[-169 0 0 0 ]
+cT=-0.8239, cl=-0.3510, cd=1.0398, cm=3.6480, cp=10.6300,  X=[-165 0 0 0 ]
+cT=-0.8229, cl=-0.3360, cd=1.0638, cm=3.8110, cp=11.5790,  X=[-162 0 0 0 ]
+cT=-0.8493, cl=-0.3260, cd=1.1339, cm=3.9460, cp=12.3570,  X=[-158 0 0 0 ]
+cT=-0.8383, cl=-0.3190, cd=1.1241, cm=4.0460, cp=12.9180,  X=[-155 0 0 0 ]
+cT=-0.8523, cl=-0.3170, cd=1.1556, cm=4.1010, cp=13.2040,  X=[-151 0 0 0 ]
+cT=-0.8465, cl=-0.3170, cd=1.1440, cm=4.1480, cp=13.3170,  X=[-147 0 0 0 ]
+cT=-0.8559, cl=-0.3220, cd=1.1540, cm=4.0350, cp=12.7770,  X=[-144 0 0 0 ]
+cT=-0.8469, cl=-0.3300, cd=1.1222, cm=3.7950, cp=11.7340,  X=[-140 0 0 0 ]
+cT=-0.8175, cl=-0.3430, cd=1.0409, cm=3.4200, cp=10.2090,  X=[-136 0 0 0 ]
+cT=-0.8092, cl=-0.3610, cd=0.9931, cm=3.0330, cp=8.6560,  X=[-133 0 0 0 ]
+cT=-0.7976, cl=-0.3820, cd=0.9335, cm=2.6590, cp=7.2030,  X=[-129 0 0 0 ]
+cT=-0.7689, cl=-0.4100, cd=0.8277, cm=2.3080, cp=5.8810,  X=[-125 0 0 0 ]
+cT=-0.7581, cl=-0.4440, cd=0.7472, cm=1.9730, cp=4.6930,  X=[-122 0 0 0 ]
+cT=-0.7561, cl=-0.4870, cd=0.6688, cm=1.6730, cp=3.6830,  X=[-118 0 0 0 ]
+cT=-0.7631, cl=-0.5420, cd=0.5874, cm=1.3940, cp=2.8210,  X=[-115 0 0 0 ]
+cT=-0.7815, cl=-0.6110, cd=0.5048, cm=1.2370, cp=2.2740,  X=[-111 0 0 0 ]
+cT=-0.8154, cl=-0.6980, cd=0.4219, cm=1.0080, cp=1.6950,  X=[-107 0 0 0 ]
+cT=-0.8713, cl=-0.8060, cd=0.3466, cm=0.8070, cp=1.2510,  X=[-104 0 0 0 ]
+cT=-0.9520, cl=-0.9410, cd=0.2741, cm=0.6330, cp=0.9230,  X=[-100 0 0 0 ]
+cT=-1.0623, cl=-1.1010, cd=0.2177, cm=0.4870, cp=0.6920,  X=[-96 0 0 0 ]
+cT=-1.1927, cl=-1.2810, cd=0.1667, cm=0.3660, cp=0.5360,  X=[-93 0 0 0 ]
+cT=-1.3402, cl=-1.4760, cd=0.1239, cm=0.2700, cp=0.4330,  X=[-89 0 0 0 ]
+cT=-1.4807, cl=-1.6580, cd=0.0897, cm=0.1950, cp=0.3680,  X=[-85 0 0 0 ]
+cT=-1.5712, cl=-1.7770, cd=0.0644, cm=0.1390, cp=0.3280,  X=[-82 0 0 0 ]
+cT=-1.5523, cl=-1.7660, cd=0.0459, cm=0.0970, cp=0.3050,  X=[-78 0 0 0 ]
+cT=-1.4055, cl=-1.6040, cd=0.0329, cm=0.0650, cp=0.2900,  X=[-75 0 0 0 ]
+cT=-1.0669, cl=-1.2180, cd=0.0241, cm=0.0390, cp=0.2820,  X=[-71 0 0 0 ]
+cT=-0.7105, cl=-0.8100, cd=0.0181, cm=0.0210, cp=0.2760,  X=[-67 0 0 0 ]
+cT=-0.3551, cl=-0.4040, cd=0.0105, cm=0.0090, cp=0.2710,  X=[-64 0 0 0 ]
+cT=-0.0051, cl=-0.0000, cd=0.0101, cm=-0.0000, cp=0.2500,  X=[-60 0 0 0 ]
+cT=0.3448, cl=0.4040, cd=0.0101, cm=-0.0090, cp=0.2710,  X=[-56 0 0 0 ]
+cT=0.6924, cl=0.8100, cd=0.0181, cm=-0.0210, cp=0.2760,  X=[-53 0 0 0 ]
+cT=1.0428, cl=1.2180, cd=0.0241, cm=-0.0390, cp=0.2820,  X=[-49 0 0 0 ]
+cT=1.3727, cl=1.6040, cd=0.0329, cm=-0.0650, cp=0.2900,  X=[-45 0 0 0 ]
+cT=1.5065, cl=1.7660, cd=0.0459, cm=-0.0970, cp=0.3050,  X=[-42 0 0 0 ]
+cT=1.5067, cl=1.7770, cd=0.0645, cm=-0.1390, cp=0.3280,  X=[-38 0 0 0 ]
+cT=1.3909, cl=1.6580, cd=0.0900, cm=-0.1950, cp=0.3680,  X=[-35 0 0 0 ]
+cT=1.2165, cl=1.4760, cd=0.1236, cm=-0.2700, cp=0.4330,  X=[-31 0 0 0 ]
+cT=1.0261, cl=1.2810, cd=0.1666, cm=-0.3660, cp=0.5360,  X=[-27 0 0 0 ]
+cT=0.8448, cl=1.1010, cd=0.2173, cm=-0.4870, cp=0.6920,  X=[-24 0 0 0 ]
+cT=0.6772, cl=0.9410, cd=0.2754, cm=-0.6330, cp=0.9230,  X=[-20 0 0 0 ]
+cT=0.5250, cl=0.8060, cd=0.3461, cm=-0.8070, cp=1.2510,  X=[-16 0 0 0 ]
+cT=0.3926, cl=0.6980, cd=0.4237, cm=-1.0080, cp=1.6950,  X=[-13 0 0 0 ]
+cT=0.2790, cl=0.6110, cd=0.5003, cm=-1.2370, cp=2.2740,  X=[-9 0 0 0 ]
+cT=0.1722, cl=0.5420, cd=0.5944, cm=-1.3940, cp=2.8210,  X=[-5 0 0 0 ]
+cT=0.0836, cl=0.4870, cd=0.6763, cm=-1.6730, cp=3.6830,  X=[-2 0 0 0 ]
+cT=0.0062, cl=0.4440, cd=0.7567, cm=-1.9730, cp=4.6930,  X=[2 0 0 0 ]
+cT=-0.0622, cl=0.4100, cd=0.8346, cm=-2.3080, cp=5.8810,  X=[5 0 0 0 ]
+cT=-0.1356, cl=0.3820, cd=0.9328, cm=-2.6600, cp=7.2030,  X=[9 0 0 0 ]
+cT=-0.1934, cl=0.3610, cd=1.0121, cm=-3.0330, cp=8.6570,  X=[13 0 0 0 ]
+cT=-0.2333, cl=0.3430, cd=1.0608, cm=-3.4200, cp=10.2090,  X=[16 0 0 0 ]
+cT=-0.2594, cl=0.3300, cd=1.0904, cm=-3.7950, cp=11.7340,  X=[20 0 0 0 ]
+cT=-0.2998, cl=0.3220, cd=1.1573, cm=-4.0350, cp=12.7780,  X=[24 0 0 0 ]
+cT=-0.3083, cl=0.3170, cd=1.1657, cm=-4.1480, cp=13.3180,  X=[27 0 0 0 ]
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+cT=0.1846, cl=0.3170, cd=0.1799, cm=0.0000, cp=0.2500,  X=[31 0 0 0 ]
+cT=-0.2915, cl=0.3190, cd=1.1356, cm=-4.0460, cp=12.9180,  X=[35 0 0 0 ]
+cT=-0.2687, cl=0.3260, cd=1.1020, cm=-3.9460, cp=12.3570,  X=[38 0 0 0 ]
+cT=-0.2466, cl=0.3360, cd=1.0752, cm=-3.8110, cp=11.5790,  X=[42 0 0 0 ]
+cT=-0.2151, cl=0.3510, cd=1.0381, cm=-3.6480, cp=10.6300,  X=[45 0 0 0 ]
+cT=-0.1544, cl=0.3720, cd=0.9531, cm=-3.4650, cp=9.5750,  X=[49 0 0 0 ]
+cT=-0.0961, cl=0.3950, cd=0.8764, cm=-3.2670, cp=8.5170,  X=[53 0 0 0 ]
+cT=-0.0315, cl=0.4260, cd=0.8009, cm=-3.0570, cp=7.4310,  X=[56 0 0 0 ]
+cT=0.0411, cl=0.4640, cd=0.7215, cm=-2.8400, cp=6.3650,  X=[60 0 0 0 ]
+cT=0.1275, cl=0.5130, cd=0.6335, cm=-2.6180, cp=5.3500,  X=[64 0 0 0 ]
+cT=0.2231, cl=0.5750, cd=0.5498, cm=-2.3950, cp=4.4180,  X=[67 0 0 0 ]
+cT=0.5631, cl=0.6520, cd=0.0031, cm=-2.0420, cp=3.3820,  X=[71 0 0 0 ]
+cT=0.6472, cl=0.7490, cd=0.0029, cm=-1.8290, cp=2.6920,  X=[75 0 0 0 ]
+cT=0.7519, cl=0.8700, cd=0.0031, cm=-1.6250, cp=2.1180,  X=[78 0 0 0 ]
+cT=0.8816, cl=1.0200, cd=0.0035, cm=-1.4340, cp=1.6560,  X=[82 0 0 0 ]
+cT=1.0269, cl=1.1880, cd=0.0040, cm=-1.2540, cp=1.3060,  X=[85 0 0 0 ]
+cT=1.1903, cl=1.3770, cd=0.0045, cm=-1.0790, cp=1.0340,  X=[89 0 0 0 ]
+cT=1.3579, cl=1.5710, cd=0.0052, cm=-0.9120, cp=0.8300,  X=[93 0 0 0 ]
+cT=1.4962, cl=1.7310, cd=0.0058, cm=-0.7520, cp=0.6840,  X=[96 0 0 0 ]
+cT=1.5462, cl=1.7890, cd=0.0062, cm=-0.6000, cp=0.5850,  X=[100 0 0 0 ]
+cT=1.4718, cl=1.7060, cd=0.0113, cm=-0.4540, cp=0.5160,  X=[104 0 0 0 ]
+cT=1.2241, cl=1.4200, cd=0.0112, cm=-0.3230, cp=0.4780,  X=[107 0 0 0 ]
+cT=0.8719, cl=1.0130, cd=0.0107, cm=-0.2040, cp=0.4510,  X=[111 0 0 0 ]
+cT=0.5216, cl=0.6080, cd=0.0099, cm=-0.1010, cp=0.4160,  X=[115 0 0 0 ]
+cT=0.1704, cl=0.2020, cd=0.0092, cm=-0.0220, cp=0.3600,  X=[118 0 0 0 ]
+cT=-0.1795, cl=-0.2020, cd=0.0092, cm=0.0220, cp=0.3600,  X=[122 0 0 0 ]
+cT=-0.5315, cl=-0.6080, cd=0.0100, cm=0.1010, cp=0.4160,  X=[125 0 0 0 ]
+cT=-0.8827, cl=-1.0130, cd=0.0108, cm=0.2040, cp=0.4510,  X=[129 0 0 0 ]
+cT=-1.2354, cl=-1.4200, cd=0.0112, cm=0.3230, cp=0.4780,  X=[133 0 0 0 ]
+cT=-1.4831, cl=-1.7060, cd=0.0113, cm=0.4540, cp=0.5160,  X=[136 0 0 0 ]
+cT=-1.5524, cl=-1.7890, cd=0.0063, cm=0.6000, cp=0.5850,  X=[140 0 0 0 ]
+cT=-1.5020, cl=-1.7310, cd=0.0058, cm=0.7520, cp=0.6840,  X=[144 0 0 0 ]
+cT=-1.3631, cl=-1.5710, cd=0.0052, cm=0.9120, cp=0.8300,  X=[147 0 0 0 ]
+cT=-1.1948, cl=-1.3770, cd=0.0045, cm=1.0790, cp=1.0340,  X=[151 0 0 0 ]
+cT=-1.0308, cl=-1.1880, cd=0.0040, cm=1.2540, cp=1.3060,  X=[155 0 0 0 ]
+cT=-0.8851, cl=-1.0200, cd=0.0035, cm=1.4340, cp=1.6560,  X=[158 0 0 0 ]
+cT=-0.7550, cl=-0.8700, cd=0.0031, cm=1.6250, cp=2.1180,  X=[162 0 0 0 ]
+cT=-0.6501, cl=-0.7490, cd=0.0029, cm=1.8290, cp=2.6920,  X=[165 0 0 0 ]
+cT=-0.5662, cl=-0.6520, cd=0.0031, cm=2.0420, cp=3.3820,  X=[169 0 0 0 ]
+cT=-0.7731, cl=-0.5750, cd=0.5504, cm=2.3950, cp=4.4180,  X=[173 0 0 0 ]
+cT=-0.7640, cl=-0.5130, cd=0.6395, cm=2.6180, cp=5.3500,  X=[176 0 0 0 ]
+cT=-0.7603, cl=-0.4640, cd=0.7169, cm=2.8400, cp=6.3650,  X=[180 0 0 0 ]
+Elapsed time is 179.873162 seconds.
+cT=-0.7603, cl=-0.4640, cd=0.7169, cm=2.8400, cp=6.3650,  X=[-180 0 0 0 ]
+cT=-0.7648, cl=-0.4260, cd=0.7917, cm=3.0570, cp=7.4310,  X=[-176 0 0 0 ]
+cT=-0.7820, cl=-0.3950, cd=0.8798, cm=3.2670, cp=8.5170,  X=[-173 0 0 0 ]
+cT=-0.8054, cl=-0.3720, cd=0.9664, cm=3.4650, cp=9.5750,  X=[-169 0 0 0 ]
+cT=-0.8239, cl=-0.3510, cd=1.0398, cm=3.6480, cp=10.6300,  X=[-165 0 0 0 ]
+cT=-0.8229, cl=-0.3360, cd=1.0638, cm=3.8110, cp=11.5790,  X=[-162 0 0 0 ]
+cT=-0.8493, cl=-0.3260, cd=1.1339, cm=3.9460, cp=12.3570,  X=[-158 0 0 0 ]
+cT=-0.8383, cl=-0.3190, cd=1.1241, cm=4.0460, cp=12.9180,  X=[-155 0 0 0 ]
+cT=-0.8523, cl=-0.3170, cd=1.1556, cm=4.1010, cp=13.2040,  X=[-151 0 0 0 ]
+cT=-0.8465, cl=-0.3170, cd=1.1440, cm=4.1480, cp=13.3170,  X=[-147 0 0 0 ]
+cT=-0.8559, cl=-0.3220, cd=1.1540, cm=4.0350, cp=12.7770,  X=[-144 0 0 0 ]
+cT=-0.8469, cl=-0.3300, cd=1.1222, cm=3.7950, cp=11.7340,  X=[-140 0 0 0 ]
+cT=-0.8175, cl=-0.3430, cd=1.0409, cm=3.4200, cp=10.2090,  X=[-136 0 0 0 ]
+cT=-0.8092, cl=-0.3610, cd=0.9931, cm=3.0330, cp=8.6560,  X=[-133 0 0 0 ]
+cT=-0.7976, cl=-0.3820, cd=0.9335, cm=2.6590, cp=7.2030,  X=[-129 0 0 0 ]
+cT=-0.7689, cl=-0.4100, cd=0.8277, cm=2.3080, cp=5.8810,  X=[-125 0 0 0 ]
+cT=-0.7581, cl=-0.4440, cd=0.7472, cm=1.9730, cp=4.6930,  X=[-122 0 0 0 ]
+cT=-0.7561, cl=-0.4870, cd=0.6688, cm=1.6730, cp=3.6830,  X=[-118 0 0 0 ]
+cT=-0.7631, cl=-0.5420, cd=0.5874, cm=1.3940, cp=2.8210,  X=[-115 0 0 0 ]
+cT=-0.7815, cl=-0.6110, cd=0.5048, cm=1.2370, cp=2.2740,  X=[-111 0 0 0 ]
+cT=-0.8154, cl=-0.6980, cd=0.4219, cm=1.0080, cp=1.6950,  X=[-107 0 0 0 ]
+cT=-0.8713, cl=-0.8060, cd=0.3466, cm=0.8070, cp=1.2510,  X=[-104 0 0 0 ]
+cT=-0.9520, cl=-0.9410, cd=0.2741, cm=0.6330, cp=0.9230,  X=[-100 0 0 0 ]
+cT=-1.0623, cl=-1.1010, cd=0.2177, cm=0.4870, cp=0.6920,  X=[-96 0 0 0 ]
+cT=-1.1927, cl=-1.2810, cd=0.1667, cm=0.3660, cp=0.5360,  X=[-93 0 0 0 ]
+cT=-1.3402, cl=-1.4760, cd=0.1239, cm=0.2700, cp=0.4330,  X=[-89 0 0 0 ]
+cT=-1.4807, cl=-1.6580, cd=0.0897, cm=0.1950, cp=0.3680,  X=[-85 0 0 0 ]
+cT=-1.5712, cl=-1.7770, cd=0.0644, cm=0.1390, cp=0.3280,  X=[-82 0 0 0 ]
+cT=-1.5523, cl=-1.7660, cd=0.0459, cm=0.0970, cp=0.3050,  X=[-78 0 0 0 ]
+cT=-1.4055, cl=-1.6040, cd=0.0329, cm=0.0650, cp=0.2900,  X=[-75 0 0 0 ]
+cT=-1.0669, cl=-1.2180, cd=0.0241, cm=0.0390, cp=0.2820,  X=[-71 0 0 0 ]
+cT=-0.7105, cl=-0.8100, cd=0.0181, cm=0.0210, cp=0.2760,  X=[-67 0 0 0 ]
+cT=-0.3551, cl=-0.4040, cd=0.0105, cm=0.0090, cp=0.2710,  X=[-64 0 0 0 ]
+cT=-0.0051, cl=-0.0000, cd=0.0101, cm=-0.0000, cp=0.2500,  X=[-60 0 0 0 ]
+cT=0.3448, cl=0.4040, cd=0.0101, cm=-0.0090, cp=0.2710,  X=[-56 0 0 0 ]
+cT=0.6924, cl=0.8100, cd=0.0181, cm=-0.0210, cp=0.2760,  X=[-53 0 0 0 ]
+cT=1.0428, cl=1.2180, cd=0.0241, cm=-0.0390, cp=0.2820,  X=[-49 0 0 0 ]
+cT=1.3727, cl=1.6040, cd=0.0329, cm=-0.0650, cp=0.2900,  X=[-45 0 0 0 ]
+cT=1.5065, cl=1.7660, cd=0.0459, cm=-0.0970, cp=0.3050,  X=[-42 0 0 0 ]
+cT=1.5067, cl=1.7770, cd=0.0645, cm=-0.1390, cp=0.3280,  X=[-38 0 0 0 ]
+cT=1.3909, cl=1.6580, cd=0.0900, cm=-0.1950, cp=0.3680,  X=[-35 0 0 0 ]
+cT=1.2165, cl=1.4760, cd=0.1236, cm=-0.2700, cp=0.4330,  X=[-31 0 0 0 ]
+cT=1.0261, cl=1.2810, cd=0.1666, cm=-0.3660, cp=0.5360,  X=[-27 0 0 0 ]
+cT=0.8448, cl=1.1010, cd=0.2173, cm=-0.4870, cp=0.6920,  X=[-24 0 0 0 ]
+cT=0.6772, cl=0.9410, cd=0.2754, cm=-0.6330, cp=0.9230,  X=[-20 0 0 0 ]
+cT=0.5250, cl=0.8060, cd=0.3461, cm=-0.8070, cp=1.2510,  X=[-16 0 0 0 ]
+cT=0.3926, cl=0.6980, cd=0.4237, cm=-1.0080, cp=1.6950,  X=[-13 0 0 0 ]
+cT=0.2790, cl=0.6110, cd=0.5003, cm=-1.2370, cp=2.2740,  X=[-9 0 0 0 ]
+cT=0.1722, cl=0.5420, cd=0.5944, cm=-1.3940, cp=2.8210,  X=[-5 0 0 0 ]
+cT=0.0836, cl=0.4870, cd=0.6763, cm=-1.6730, cp=3.6830,  X=[-2 0 0 0 ]
+cT=0.0062, cl=0.4440, cd=0.7567, cm=-1.9730, cp=4.6930,  X=[2 0 0 0 ]
+cT=-0.0622, cl=0.4100, cd=0.8346, cm=-2.3080, cp=5.8810,  X=[5 0 0 0 ]
+cT=-0.1356, cl=0.3820, cd=0.9328, cm=-2.6600, cp=7.2030,  X=[9 0 0 0 ]
+cT=-0.1934, cl=0.3610, cd=1.0121, cm=-3.0330, cp=8.6570,  X=[13 0 0 0 ]
+cT=-0.2333, cl=0.3430, cd=1.0608, cm=-3.4200, cp=10.2090,  X=[16 0 0 0 ]
+cT=-0.2594, cl=0.3300, cd=1.0904, cm=-3.7950, cp=11.7340,  X=[20 0 0 0 ]
+cT=-0.2998, cl=0.3220, cd=1.1573, cm=-4.0350, cp=12.7780,  X=[24 0 0 0 ]
+cT=-0.3083, cl=0.3170, cd=1.1657, cm=-4.1480, cp=13.3180,  X=[27 0 0 0 ]
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+cT=0.1846, cl=0.3170, cd=0.1799, cm=0.0000, cp=0.2500,  X=[31 0 0 0 ]
+cT=-0.2915, cl=0.3190, cd=1.1356, cm=-4.0460, cp=12.9180,  X=[35 0 0 0 ]
+cT=-0.2687, cl=0.3260, cd=1.1020, cm=-3.9460, cp=12.3570,  X=[38 0 0 0 ]
+cT=-0.2466, cl=0.3360, cd=1.0752, cm=-3.8110, cp=11.5790,  X=[42 0 0 0 ]
+cT=-0.2151, cl=0.3510, cd=1.0381, cm=-3.6480, cp=10.6300,  X=[45 0 0 0 ]
+cT=-0.1544, cl=0.3720, cd=0.9531, cm=-3.4650, cp=9.5750,  X=[49 0 0 0 ]
+cT=-0.0961, cl=0.3950, cd=0.8764, cm=-3.2670, cp=8.5170,  X=[53 0 0 0 ]
+cT=-0.0315, cl=0.4260, cd=0.8009, cm=-3.0570, cp=7.4310,  X=[56 0 0 0 ]
+cT=0.0411, cl=0.4640, cd=0.7215, cm=-2.8400, cp=6.3650,  X=[60 0 0 0 ]
+cT=0.1275, cl=0.5130, cd=0.6335, cm=-2.6180, cp=5.3500,  X=[64 0 0 0 ]
+cT=0.2231, cl=0.5750, cd=0.5498, cm=-2.3950, cp=4.4180,  X=[67 0 0 0 ]
+cT=0.5631, cl=0.6520, cd=0.0031, cm=-2.0420, cp=3.3820,  X=[71 0 0 0 ]
+cT=0.6472, cl=0.7490, cd=0.0029, cm=-1.8290, cp=2.6920,  X=[75 0 0 0 ]
+cT=0.7519, cl=0.8700, cd=0.0031, cm=-1.6250, cp=2.1180,  X=[78 0 0 0 ]
+cT=0.8816, cl=1.0200, cd=0.0035, cm=-1.4340, cp=1.6560,  X=[82 0 0 0 ]
+cT=1.0269, cl=1.1880, cd=0.0040, cm=-1.2540, cp=1.3060,  X=[85 0 0 0 ]
+cT=1.1903, cl=1.3770, cd=0.0045, cm=-1.0790, cp=1.0340,  X=[89 0 0 0 ]
+cT=1.3579, cl=1.5710, cd=0.0052, cm=-0.9120, cp=0.8300,  X=[93 0 0 0 ]
+cT=1.4962, cl=1.7310, cd=0.0058, cm=-0.7520, cp=0.6840,  X=[96 0 0 0 ]
+cT=1.5462, cl=1.7890, cd=0.0062, cm=-0.6000, cp=0.5850,  X=[100 0 0 0 ]
+cT=1.4718, cl=1.7060, cd=0.0113, cm=-0.4540, cp=0.5160,  X=[104 0 0 0 ]
+cT=1.2241, cl=1.4200, cd=0.0112, cm=-0.3230, cp=0.4780,  X=[107 0 0 0 ]
+cT=0.8719, cl=1.0130, cd=0.0107, cm=-0.2040, cp=0.4510,  X=[111 0 0 0 ]
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Mesh2Java')" style="font-weight:bold">Mesh2Java</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 8)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',8,0)">line 8</a>)
+    Mesh2Java(X); % Generates Java-scale mesh-file
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1104820628', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m', 86)" style="font-weight:bold">LiveEditorEvaluationHelperE1104820628</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m',86,0)">line 86</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective([sheeting_angle(j), 0, 0, 0]);} 
+cT=0.0894, cl=0.4900, cd=0.6700, cm=-1.6530, cp=3.6250,  X=[-2 0 0 0 ]
+cT=0.0882, cl=0.4890, cd=0.6706, cm=-1.6560, cp=3.6350,  X=[-2 0 0 0 ]
+cT=0.0854, cl=0.4890, cd=0.6762, cm=-1.6590, cp=3.6440,  X=[-2 0 0 0 ]
+cT=0.0886, cl=0.4880, cd=0.6681, cm=-1.6620, cp=3.6540,  X=[-2 0 0 0 ]
+cT=0.0849, cl=0.4880, cd=0.6754, cm=-1.6720, cp=3.6780,  X=[-2 0 0 0 ]
+cT=0.0874, cl=0.4870, cd=0.6687, cm=-1.6750, cp=3.6890,  X=[-2 0 0 0 ]
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 15)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',15,0)">line 15</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1104820628', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m', 86)" style="font-weight:bold">LiveEditorEvaluationHelperE1104820628</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m',86,0)">line 86</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective([sheeting_angle(j), 0, 0, 0]);} 
+cT=0.0894, cl=0.4900, cd=0.6700, cm=-1.6530, cp=3.6250,  X=[-2 0 0 0 ]
+cT=0.0639, cl=0.4730, cd=0.6915, cm=-1.7650, cp=3.9850,  X=[-1 0 0 0 ]
+cT=0.0358, cl=0.4570, cd=0.7199, cm=-1.8750, cp=4.3550,  X=[1 0 0 0 ]
+cT=0.0019, cl=0.4420, cd=0.7619, cm=-1.9880, cp=4.7470,  X=[2 0 0 0 ]
+Elapsed time is 6.073097 seconds.
+cT=0.0894, cl=0.4900, cd=0.6700, cm=-1.6530, cp=3.6250,  X=[-2 0 0 0 ]
+cT=0.0639, cl=0.4730, cd=0.6915, cm=-1.7650, cp=3.9850,  X=[-1 0 0 0 ]
+cT=0.0358, cl=0.4570, cd=0.7199, cm=-1.8750, cp=4.3550,  X=[1 0 0 0 ]
+cT=0.0019, cl=0.4420, cd=0.7619, cm=-1.9880, cp=4.7470,  X=[2 0 0 0 ]
+Elapsed time is 6.988613 seconds.
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1104820628')" style="font-weight:bold">LiveEditorEvaluationHelperE1104820628</a>} 
+Error using checkArgsForHandleToPrint
+Handle input argument contains nonhandle values.
+Error in checkArgsForHandleToPrint
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('print>LocalCreatePrintJob', 'C:\Program Files\MATLAB\R2022a\toolbox\matlab\graphics\printing\print.m', 101)" style="font-weight:bold">print>LocalCreatePrintJob</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2022a\toolbox\matlab\graphics\printing\print.m',101,0)">line 101</a>)
+handles = checkArgsForHandleToPrint(0, varargin{:});
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('print', 'C:\Program Files\MATLAB\R2022a\toolbox\matlab\graphics\printing\print.m', 38)" style="font-weight:bold">print</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2022a\toolbox\matlab\graphics\printing\print.m',38,0)">line 38</a>)
+[pj, inputargs] = LocalCreatePrintJob(varargin{:});
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m', 84)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m',84,0)">line 84</a>)
+    print(yaw(i))
+
+    1.0472
+cT=0.0894, cl=0.4900, cd=0.6700, cm=-1.6530, cp=3.6250,  X=[-2 0 0 0 ]
+cT=0.0639, cl=0.4730, cd=0.6915, cm=-1.7650, cp=3.9850,  X=[-1 0 0 0 ]
+cT=0.0358, cl=0.4570, cd=0.7199, cm=-1.8750, cp=4.3550,  X=[1 0 0 0 ]
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 15)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',15,0)">line 15</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1104820628', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m', 87)" style="font-weight:bold">LiveEditorEvaluationHelperE1104820628</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m',87,0)">line 87</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective([sheeting_angle(j), 0, 0, 0]);} 
+   60.0000
+cT=0.0894, cl=0.4900, cd=0.6700, cm=-1.6530, cp=3.6250,  X=[-2 0 0 0 ]
+cT=0.0639, cl=0.4730, cd=0.6915, cm=-1.7650, cp=3.9850,  X=[-1 0 0 0 ]
+cT=0.0358, cl=0.4570, cd=0.7199, cm=-1.8750, cp=4.3550,  X=[1 0 0 0 ]
+cT=0.0019, cl=0.4420, cd=0.7619, cm=-1.9880, cp=4.7470,  X=[2 0 0 0 ]
+Elapsed time is 6.074822 seconds.
+  120.0000
+cT=0.0894, cl=0.4900, cd=0.6700, cm=-1.6530, cp=3.6250,  X=[-2 0 0 0 ]
+cT=0.0639, cl=0.4730, cd=0.6915, cm=-1.7650, cp=3.9850,  X=[-1 0 0 0 ]
+cT=0.0358, cl=0.4570, cd=0.7199, cm=-1.8750, cp=4.3550,  X=[1 0 0 0 ]
+cT=0.0019, cl=0.4420, cd=0.7619, cm=-1.9880, cp=4.7470,  X=[2 0 0 0 ]
+Elapsed time is 6.689918 seconds.
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1104820628')" style="font-weight:bold">LiveEditorEvaluationHelperE1104820628</a>} 
+-------------------------------------------------------------
+Scale    = 169.000 
+-------------------------------------------------------------
+Ship AWA = 45.0 deg
+    0.7854
+cT=0.4418, cl=0.6450, cd=0.0202, cm=-0.1620, cp=0.5020,  X=[-35 -35 -35 -35 ]
+    0.7854
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 16)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',16,0)">line 16</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE234128216', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE234128216.m', 66)" style="font-weight:bold">LiveEditorEvaluationHelperE234128216</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE234128216.m',66,0)">line 66</a>)
+    [X,fval,exitflag,output] = fmincon(@(X)calc_objective(X),X,[],[],[],[],lb,ub,[],options);
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fmincon', 'C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m', 568)" style="font-weight:bold">fmincon</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m',568,0)">line 568</a>)
+      initVals.f = feval(funfcn{3},X,varargin{:});
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE234128216', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE234128216.m', 66)" style="font-weight:bold">LiveEditorEvaluationHelperE234128216</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE234128216.m',66,0)">line 66</a>)
+    [X,fval,exitflag,output] = fmincon(@(X)calc_objective(X),X,[],[],[],[],lb,ub,[],options);} 
+-------------------------------------------------------------
+Scale    = 25.000 
+-------------------------------------------------------------
+Scale    = 25.000 
+   60.0000
+   60.0000
+cT=0.0894, cl=0.4900, cd=0.6700, cm=-1.6530, cp=3.6250,  X=[-2 0 0 0 ]
+   60.0000
+cT=0.0639, cl=0.4730, cd=0.6915, cm=-1.7650, cp=3.9850,  X=[-1 0 0 0 ]
+   60.0000
+cT=0.0358, cl=0.4570, cd=0.7199, cm=-1.8750, cp=4.3550,  X=[1 0 0 0 ]
+   60.0000
+cT=0.0019, cl=0.4420, cd=0.7619, cm=-1.9880, cp=4.7470,  X=[2 0 0 0 ]
+Elapsed time is 6.457970 seconds.
+  120.0000
+  120.0000
+cT=0.7627, cl=0.4420, cd=0.7598, cm=-2.9600, cp=6.9450,  X=[-2 0 0 0 ]
+  120.0000
+cT=0.7649, cl=0.4570, cd=0.7383, cm=-2.8800, cp=6.5570,  X=[-1 0 0 0 ]
+  120.0000
+cT=0.7567, cl=0.4730, cd=0.6941, cm=-2.8000, cp=6.1740,  X=[1 0 0 0 ]
+  120.0000
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 16)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',16,0)">line 16</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1104820628', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m', 87)" style="font-weight:bold">LiveEditorEvaluationHelperE1104820628</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m',87,0)">line 87</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective([sheeting_angle(j), 0, 0, 0]);} 
+cT=0.0894, cl=0.4900, cd=0.6700, cm=-1.6530, cp=3.6250,  X=[-2 0 0 0 ]
+cT=0.0639, cl=0.4730, cd=0.6915, cm=-1.7650, cp=3.9850,  X=[-1 0 0 0 ]
+cT=0.0358, cl=0.4570, cd=0.7199, cm=-1.8750, cp=4.3550,  X=[1 0 0 0 ]
+cT=0.0019, cl=0.4420, cd=0.7619, cm=-1.9880, cp=4.7470,  X=[2 0 0 0 ]
+Elapsed time is 6.859267 seconds.
+cT=0.7627, cl=0.4420, cd=0.7598, cm=-2.9600, cp=6.9450,  X=[-2 0 0 0 ]
+cT=0.7649, cl=0.4570, cd=0.7383, cm=-2.8800, cp=6.5570,  X=[-1 0 0 0 ]
+cT=0.7567, cl=0.4730, cd=0.6941, cm=-2.8000, cp=6.1740,  X=[1 0 0 0 ]
+cT=0.7593, cl=0.4900, cd=0.6700, cm=-2.7190, cp=5.8030,  X=[2 0 0 0 ]
+Elapsed time is 5.975424 seconds.
+cT=0.6633, cl=1.3190, cd=0.0043, cm=-1.1310, cp=1.1080,  X=[-2 0 0 0 ]
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 15)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',15,0)">line 15</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1104820628', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m', 86)" style="font-weight:bold">LiveEditorEvaluationHelperE1104820628</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m',86,0)">line 86</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective([sheeting_angle(j), 0, 0, 0]);} 
+clear
+clc
+cT=0.6633, cl=1.3190, cd=0.0043, cm=-1.1310, cp=1.1080,  X=[-2 0 0 0 ]
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 15)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',15,0)">line 15</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1104820628', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m', 86)" style="font-weight:bold">LiveEditorEvaluationHelperE1104820628</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m',86,0)">line 86</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective([sheeting_angle(j), 0, 0, 0]);} 
+cT=-0.5977, cl=-1.4270, cd=0.1338, cm=0.2920, cp=0.4540,  X=[-180 0 0 0 ]
+cT=-0.7237, cl=-1.6160, cd=0.0974, cm=0.2120, cp=0.3810,  X=[-176 0 0 0 ]
+cT=-0.8194, cl=-1.7600, cd=0.0700, cm=0.1520, cp=0.3360,  X=[-173 0 0 0 ]
+cT=-0.8478, cl=-1.7820, cd=0.0499, cm=0.1070, cp=0.3100,  X=[-169 0 0 0 ]
+cT=-0.7996, cl=-1.6610, cd=0.0357, cm=0.0720, cp=0.2930,  X=[-165 0 0 0 ]
+cT=-0.6370, cl=-1.3190, cd=0.0260, cm=0.0450, cp=0.2840,  X=[-162 0 0 0 ]
+cT=-0.4391, cl=-0.9120, cd=0.0195, cm=0.0250, cp=0.2770,  X=[-158 0 0 0 ]
+cT=-0.2398, cl=-0.5060, cd=0.0152, cm=0.0110, cp=0.2720,  X=[-155 0 0 0 ]
+cT=-0.0418, cl=-0.1010, cd=0.0101, cm=0.0020, cp=0.2700,  X=[-151 0 0 0 ]
+cT=0.1611, cl=0.3040, cd=0.0105, cm=-0.0060, cp=0.2710,  X=[-147 0 0 0 ]
+cT=0.3693, cl=0.7090, cd=0.0171, cm=-0.0170, cp=0.2740,  X=[-144 0 0 0 ]
+cT=0.5768, cl=1.1150, cd=0.0223, cm=-0.0340, cp=0.2800,  X=[-140 0 0 0 ]
+cT=0.7873, cl=1.5220, cd=0.0303, cm=-0.0570, cp=0.2880,  X=[-136 0 0 0 ]
+cT=0.9070, cl=1.7410, cd=0.0421, cm=-0.0880, cp=0.3010,  X=[-133 0 0 0 ]
+cT=0.9447, cl=1.7870, cd=0.0592, cm=-0.1270, cp=0.3210,  X=[-129 0 0 0 ]
+cT=0.9202, cl=1.6970, cd=0.0828, cm=-0.1790, cp=0.3560,  X=[-125 0 0 0 ]
+cT=0.8610, cl=1.5240, cd=0.1143, cm=-0.2490, cp=0.4140,  X=[-122 0 0 0 ]
+cT=0.7988, cl=1.3290, cd=0.1550, cm=-0.3400, cp=0.5060,  X=[-118 0 0 0 ]
+cT=0.7469, cl=1.1430, cd=0.2025, cm=-0.4540, cp=0.6480,  X=[-115 0 0 0 ]
+cT=0.7150, cl=0.9800, cd=0.2599, cm=-0.5940, cp=0.8560,  X=[-111 0 0 0 ]
+cT=0.7061, cl=0.8370, cd=0.3321, cm=-0.7610, cp=1.1590,  X=[-107 0 0 0 ]
+cT=0.7095, cl=0.7230, cd=0.4018, cm=-0.9550, cp=1.5720,  X=[-104 0 0 0 ]
+cT=0.7365, cl=0.6310, cd=0.4861, cm=-1.1770, cp=2.1160,  X=[-100 0 0 0 ]
+cT=0.7770, cl=0.5580, cd=0.5751, cm=-1.3300, cp=2.6350,  X=[-96 0 0 0 ]
+cT=0.8108, cl=0.5000, cd=0.6476, cm=-1.5970, cp=3.4450,  X=[-93 0 0 0 ]
+cT=0.8677, cl=0.4540, cd=0.7398, cm=-1.8950, cp=4.4270,  X=[-89 0 0 0 ]
+cT=0.9150, cl=0.4180, cd=0.8153, cm=-2.2190, cp=5.5640,  X=[-85 0 0 0 ]
+cT=0.9798, cl=0.3890, cd=0.9068, cm=-2.5690, cp=6.8610,  X=[-82 0 0 0 ]
+cT=1.0386, cl=0.3660, cd=0.9880, cm=-2.9390, cp=8.2810,  X=[-78 0 0 0 ]
+cT=1.0639, cl=0.3470, cd=1.0281, cm=-3.3230, cp=9.8240,  X=[-75 0 0 0 ]
+cT=1.1091, cl=0.3330, cd=1.0885, cm=-3.7110, cp=11.3850,  X=[-71 0 0 0 ]
+cT=1.1344, cl=0.3240, cd=1.1228, cm=-3.9890, cp=12.5720,  X=[-67 0 0 0 ]
+cT=1.1410, cl=0.3180, cd=1.1339, cm=-4.1280, cp=13.2150,  X=[-64 0 0 0 ]
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+cT=0.2999, cl=0.3170, cd=0.1633, cm=0.0000, cp=0.2500,  X=[-60 0 0 0 ]
+cT=1.1529, cl=0.3180, cd=1.1476, cm=-4.0650, cp=13.0170,  X=[-56 0 0 0 ]
+cT=1.1359, cl=0.3240, cd=1.1246, cm=-3.9750, cp=12.5270,  X=[-53 0 0 0 ]
+cT=1.1187, cl=0.3330, cd=1.0995, cm=-3.8470, cp=11.7940,  X=[-49 0 0 0 ]
+cT=1.0687, cl=0.3470, cd=1.0337, cm=-3.6910, cp=10.8860,  X=[-45 0 0 0 ]
+cT=1.0374, cl=0.3660, cd=0.9866, cm=-3.5130, cp=9.8480,  X=[-42 0 0 0 ]
+cT=0.9891, cl=0.3890, cd=0.9175, cm=-3.3170, cp=8.7870,  X=[-38 0 0 0 ]
+cT=0.9238, cl=0.4180, cd=0.8253, cm=-3.1100, cp=7.6990,  X=[-35 0 0 0 ]
+cT=0.8667, cl=0.4540, cd=0.7387, cm=-2.8950, cp=6.6280,  X=[-31 0 0 0 ]
+cT=0.8123, cl=0.5000, cd=0.6493, cm=-2.6740, cp=5.6010,  X=[-27 0 0 0 ]
+cT=0.7726, cl=0.5580, cd=0.5699, cm=-2.4520, cp=4.6450,  X=[-24 0 0 0 ]
+cT=0.3190, cl=0.6310, cd=0.0040, cm=-2.0980, cp=3.5740,  X=[-20 0 0 0 ]
+cT=0.3640, cl=0.7230, cd=0.0029, cm=-1.8840, cp=2.8570,  X=[-16 0 0 0 ]
+cT=0.4212, cl=0.8370, cd=0.0031, cm=-1.6750, cp=2.2510,  X=[-13 0 0 0 ]
+cT=0.4930, cl=0.9800, cd=0.0034, cm=-1.4810, cp=1.7610,  X=[-9 0 0 0 ]
+cT=0.5748, cl=1.1430, cd=0.0038, cm=-1.2990, cp=1.3860,  X=[-5 0 0 0 ]
+cT=0.6683, cl=1.3290, cd=0.0044, cm=-1.1220, cp=1.0950,  X=[-2 0 0 0 ]
+cT=0.7663, cl=1.5240, cd=0.0050, cm=-0.9530, cp=0.8760,  X=[2 0 0 0 ]
+cT=0.8534, cl=1.6970, cd=0.0056, cm=-0.7910, cp=0.7160,  X=[5 0 0 0 ]
+cT=0.8987, cl=1.7870, cd=0.0061, cm=-0.6370, cp=0.6070,  X=[9 0 0 0 ]
+cT=0.8802, cl=1.7410, cd=0.0112, cm=-0.4890, cp=0.5310,  X=[13 0 0 0 ]
+cT=0.7708, cl=1.5220, cd=0.0113, cm=-0.3550, cp=0.4830,  X=[16 0 0 0 ]
+cT=0.5670, cl=1.1150, cd=0.0110, cm=-0.2320, cp=0.4580,  X=[20 0 0 0 ]
+cT=0.3633, cl=0.7090, cd=0.0102, cm=-0.1250, cp=0.4260,  X=[24 0 0 0 ]
+cT=0.1600, cl=0.3040, cd=0.0092, cm=-0.0390, cp=0.3780,  X=[27 0 0 0 ]
+cT=-0.0424, cl=-0.1010, cd=0.0094, cm=0.0090, cp=0.3350,  X=[31 0 0 0 ]
+cT=-0.2446, cl=-0.5060, cd=0.0097, cm=0.0790, cp=0.4050,  X=[35 0 0 0 ]
+cT=-0.4468, cl=-0.9120, cd=0.0106, cm=0.1760, cp=0.4430,  X=[38 0 0 0 ]
+cT=-0.6498, cl=-1.3190, cd=0.0112, cm=0.2920, cp=0.4710,  X=[42 0 0 0 ]
+cT=-0.8207, cl=-1.6610, cd=0.0114, cm=0.4210, cp=0.5030,  X=[45 0 0 0 ]
+cT=-0.8855, cl=-1.7820, cd=0.0064, cm=0.5630, cp=0.5660,  X=[49 0 0 0 ]
+cT=-0.8750, cl=-1.7600, cd=0.0058, cm=0.7140, cp=0.6560,  X=[53 0 0 0 ]
+cT=-0.8034, cl=-1.6160, cd=0.0053, cm=0.8710, cp=0.7890,  X=[56 0 0 0 ]
+cT=-0.7095, cl=-1.4270, cd=0.0047, cm=1.0370, cp=0.9770,  X=[60 0 0 0 ]
+cT=-0.6135, cl=-1.2340, cd=0.0041, cm=1.2100, cp=1.2310,  X=[64 0 0 0 ]
+cT=-0.5263, cl=-1.0590, cd=0.0037, cm=1.3880, cp=1.5600,  X=[67 0 0 0 ]
+cT=-0.4497, cl=-0.9050, cd=0.0032, cm=1.5760, cp=1.9920,  X=[71 0 0 0 ]
+cT=-0.3855, cl=-0.7760, cd=0.0029, cm=1.7760, cp=2.5370,  X=[75 0 0 0 ]
+cT=-0.3341, cl=-0.6740, cd=0.0034, cm=1.9950, cp=3.2090,  X=[78 0 0 0 ]
+cT=15.7037, cl=-0.5920, cd=18.4749, cm=2.2110, cp=3.9850,  X=[82 0 0 0 ]
+cT=0.2702, cl=-0.5270, cd=0.6163, cm=2.5630, cp=5.1100,  X=[85 0 0 0 ]
+cT=0.3589, cl=-0.4760, cd=0.6893, cm=2.7850, cp=6.1060,  X=[89 0 0 0 ]
+cT=0.4497, cl=-0.4340, cd=0.7698, cm=3.0030, cp=7.1640,  X=[93 0 0 0 ]
+cT=0.5522, cl=-0.4020, cd=0.8697, cm=3.2150, cp=8.2440,  X=[96 0 0 0 ]
+cT=0.6404, cl=-0.3770, cd=0.9572, cm=3.4170, cp=9.3180,  X=[100 0 0 0 ]
+cT=0.7147, cl=-0.3560, cd=1.0308, cm=3.6040, cp=10.3780,  X=[104 0 0 0 ]
+cT=0.7635, cl=-0.3400, cd=1.0779, cm=3.7720, cp=11.3510,  X=[107 0 0 0 ]
+cT=0.7886, cl=-0.3280, cd=1.0999, cm=3.9150, cp=12.1770,  X=[111 0 0 0 ]
+cT=0.8459, cl=-0.3210, cd=1.1621, cm=4.0250, cp=12.8030,  X=[115 0 0 0 ]
+cT=0.8436, cl=-0.3170, cd=1.1571, cm=4.0920, cp=13.1590,  X=[118 0 0 0 ]
+cT=0.8433, cl=-0.3170, cd=1.1568, cm=4.1620, cp=13.3780,  X=[122 0 0 0 ]
+cT=0.8356, cl=-0.3210, cd=1.1502, cm=4.0740, cp=12.9550,  X=[125 0 0 0 ]
+cT=0.8126, cl=-0.3280, cd=1.1277, cm=3.8710, cp=12.0430,  X=[129 0 0 0 ]
+cT=0.7454, cl=-0.3400, cd=1.0570, cm=3.5170, cp=10.5990,  X=[133 0 0 0 ]
+cT=0.6992, cl=-0.3560, cd=1.0129, cm=3.1280, cp=9.0380,  X=[136 0 0 0 ]
+cT=0.6187, cl=-0.3770, cd=0.9320, cm=2.7500, cp=7.5490,  X=[140 0 0 0 ]
+cT=0.5514, cl=-0.4020, cd=0.8688, cm=2.3940, cp=6.2020,  X=[144 0 0 0 ]
+cT=0.4637, cl=-0.4340, cd=0.7860, cm=2.0530, cp=4.9760,  X=[147 0 0 0 ]
+cT=0.3715, cl=-0.4760, cd=0.7038, cm=1.7460, cp=3.9200,  X=[151 0 0 0 ]
+cT=0.2607, cl=-0.5270, cd=0.6052, cm=1.4600, cp=3.0190,  X=[155 0 0 0 ]
+cT=0.1587, cl=-0.5920, cd=0.5250, cm=1.2990, cp=2.4440,  X=[158 0 0 0 ]
+cT=0.0449, cl=-0.6740, cd=0.4410, cm=1.0630, cp=1.8270,  X=[162 0 0 0 ]
+cT=-0.0732, cl=-0.7760, cd=0.3635, cm=0.8540, cp=1.3500,  X=[165 0 0 0 ]
+cT=-0.1992, cl=-0.9050, cd=0.2925, cm=0.6740, cp=0.9950,  X=[169 0 0 0 ]
+cT=-0.3297, cl=-1.0600, cd=0.2312, cm=0.5210, cp=0.7420,  X=[173 0 0 0 ]
+cT=-0.4628, cl=-1.2340, cd=0.1780, cm=0.3940, cp=0.5700,  X=[176 0 0 0 ]
+cT=-0.5977, cl=-1.4270, cd=0.1338, cm=0.2920, cp=0.4540,  X=[180 0 0 0 ]
+Elapsed time is 150.752578 seconds.
+cT=-0.5977, cl=-1.4270, cd=0.1338, cm=0.2920, cp=0.4540,  X=[-180 0 0 0 ]
+cT=-0.7237, cl=-1.6160, cd=0.0974, cm=0.2120, cp=0.3810,  X=[-176 0 0 0 ]
+cT=-0.8194, cl=-1.7600, cd=0.0700, cm=0.1520, cp=0.3360,  X=[-173 0 0 0 ]
+cT=-0.8478, cl=-1.7820, cd=0.0499, cm=0.1070, cp=0.3100,  X=[-169 0 0 0 ]
+cT=-0.7996, cl=-1.6610, cd=0.0357, cm=0.0720, cp=0.2930,  X=[-165 0 0 0 ]
+cT=-0.6370, cl=-1.3190, cd=0.0260, cm=0.0450, cp=0.2840,  X=[-162 0 0 0 ]
+cT=-0.4391, cl=-0.9120, cd=0.0195, cm=0.0250, cp=0.2770,  X=[-158 0 0 0 ]
+cT=-0.2398, cl=-0.5060, cd=0.0152, cm=0.0110, cp=0.2720,  X=[-155 0 0 0 ]
+cT=-0.0418, cl=-0.1010, cd=0.0101, cm=0.0020, cp=0.2700,  X=[-151 0 0 0 ]
+cT=0.1611, cl=0.3040, cd=0.0105, cm=-0.0060, cp=0.2710,  X=[-147 0 0 0 ]
+cT=0.3693, cl=0.7090, cd=0.0171, cm=-0.0170, cp=0.2740,  X=[-144 0 0 0 ]
+cT=0.5768, cl=1.1150, cd=0.0223, cm=-0.0340, cp=0.2800,  X=[-140 0 0 0 ]
+cT=0.7873, cl=1.5220, cd=0.0303, cm=-0.0570, cp=0.2880,  X=[-136 0 0 0 ]
+cT=0.9070, cl=1.7410, cd=0.0421, cm=-0.0880, cp=0.3010,  X=[-133 0 0 0 ]
+cT=0.9447, cl=1.7870, cd=0.0592, cm=-0.1270, cp=0.3210,  X=[-129 0 0 0 ]
+cT=0.9202, cl=1.6970, cd=0.0828, cm=-0.1790, cp=0.3560,  X=[-125 0 0 0 ]
+cT=0.8610, cl=1.5240, cd=0.1143, cm=-0.2490, cp=0.4140,  X=[-122 0 0 0 ]
+cT=0.7988, cl=1.3290, cd=0.1550, cm=-0.3400, cp=0.5060,  X=[-118 0 0 0 ]
+cT=0.7469, cl=1.1430, cd=0.2025, cm=-0.4540, cp=0.6480,  X=[-115 0 0 0 ]
+cT=0.7150, cl=0.9800, cd=0.2599, cm=-0.5940, cp=0.8560,  X=[-111 0 0 0 ]
+cT=0.7061, cl=0.8370, cd=0.3321, cm=-0.7610, cp=1.1590,  X=[-107 0 0 0 ]
+cT=0.7095, cl=0.7230, cd=0.4018, cm=-0.9550, cp=1.5720,  X=[-104 0 0 0 ]
+cT=0.7365, cl=0.6310, cd=0.4861, cm=-1.1770, cp=2.1160,  X=[-100 0 0 0 ]
+cT=0.7770, cl=0.5580, cd=0.5751, cm=-1.3300, cp=2.6350,  X=[-96 0 0 0 ]
+cT=0.8108, cl=0.5000, cd=0.6476, cm=-1.5970, cp=3.4450,  X=[-93 0 0 0 ]
+cT=0.8677, cl=0.4540, cd=0.7398, cm=-1.8950, cp=4.4270,  X=[-89 0 0 0 ]
+cT=0.9150, cl=0.4180, cd=0.8153, cm=-2.2190, cp=5.5640,  X=[-85 0 0 0 ]
+cT=0.9798, cl=0.3890, cd=0.9068, cm=-2.5690, cp=6.8610,  X=[-82 0 0 0 ]
+cT=1.0386, cl=0.3660, cd=0.9880, cm=-2.9390, cp=8.2810,  X=[-78 0 0 0 ]
+cT=1.0639, cl=0.3470, cd=1.0281, cm=-3.3230, cp=9.8240,  X=[-75 0 0 0 ]
+cT=1.1091, cl=0.3330, cd=1.0885, cm=-3.7110, cp=11.3850,  X=[-71 0 0 0 ]
+cT=1.1344, cl=0.3240, cd=1.1228, cm=-3.9890, cp=12.5720,  X=[-67 0 0 0 ]
+cT=1.1410, cl=0.3180, cd=1.1339, cm=-4.1280, cp=13.2150,  X=[-64 0 0 0 ]
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+cT=0.2999, cl=0.3170, cd=0.1633, cm=0.0000, cp=0.2500,  X=[-60 0 0 0 ]
+cT=1.1529, cl=0.3180, cd=1.1476, cm=-4.0650, cp=13.0170,  X=[-56 0 0 0 ]
+cT=1.1359, cl=0.3240, cd=1.1246, cm=-3.9750, cp=12.5270,  X=[-53 0 0 0 ]
+cT=1.1187, cl=0.3330, cd=1.0995, cm=-3.8470, cp=11.7940,  X=[-49 0 0 0 ]
+cT=1.0687, cl=0.3470, cd=1.0337, cm=-3.6910, cp=10.8860,  X=[-45 0 0 0 ]
+cT=1.0374, cl=0.3660, cd=0.9866, cm=-3.5130, cp=9.8480,  X=[-42 0 0 0 ]
+cT=0.9891, cl=0.3890, cd=0.9175, cm=-3.3170, cp=8.7870,  X=[-38 0 0 0 ]
+cT=0.9238, cl=0.4180, cd=0.8253, cm=-3.1100, cp=7.6990,  X=[-35 0 0 0 ]
+cT=0.8667, cl=0.4540, cd=0.7387, cm=-2.8950, cp=6.6280,  X=[-31 0 0 0 ]
+cT=0.8123, cl=0.5000, cd=0.6493, cm=-2.6740, cp=5.6010,  X=[-27 0 0 0 ]
+cT=0.7726, cl=0.5580, cd=0.5699, cm=-2.4520, cp=4.6450,  X=[-24 0 0 0 ]
+cT=0.3190, cl=0.6310, cd=0.0040, cm=-2.0980, cp=3.5740,  X=[-20 0 0 0 ]
+cT=0.3640, cl=0.7230, cd=0.0029, cm=-1.8840, cp=2.8570,  X=[-16 0 0 0 ]
+cT=0.4212, cl=0.8370, cd=0.0031, cm=-1.6750, cp=2.2510,  X=[-13 0 0 0 ]
+cT=0.4930, cl=0.9800, cd=0.0034, cm=-1.4810, cp=1.7610,  X=[-9 0 0 0 ]
+cT=0.5748, cl=1.1430, cd=0.0038, cm=-1.2990, cp=1.3860,  X=[-5 0 0 0 ]
+cT=0.6683, cl=1.3290, cd=0.0044, cm=-1.1220, cp=1.0950,  X=[-2 0 0 0 ]
+cT=0.7663, cl=1.5240, cd=0.0050, cm=-0.9530, cp=0.8760,  X=[2 0 0 0 ]
+cT=0.8534, cl=1.6970, cd=0.0056, cm=-0.7910, cp=0.7160,  X=[5 0 0 0 ]
+cT=0.8987, cl=1.7870, cd=0.0061, cm=-0.6370, cp=0.6070,  X=[9 0 0 0 ]
+cT=0.8802, cl=1.7410, cd=0.0112, cm=-0.4890, cp=0.5310,  X=[13 0 0 0 ]
+cT=0.7708, cl=1.5220, cd=0.0113, cm=-0.3550, cp=0.4830,  X=[16 0 0 0 ]
+cT=0.5670, cl=1.1150, cd=0.0110, cm=-0.2320, cp=0.4580,  X=[20 0 0 0 ]
+cT=0.3633, cl=0.7090, cd=0.0102, cm=-0.1250, cp=0.4260,  X=[24 0 0 0 ]
+cT=0.1600, cl=0.3040, cd=0.0092, cm=-0.0390, cp=0.3780,  X=[27 0 0 0 ]
+cT=-0.0424, cl=-0.1010, cd=0.0094, cm=0.0090, cp=0.3350,  X=[31 0 0 0 ]
+cT=-0.2446, cl=-0.5060, cd=0.0097, cm=0.0790, cp=0.4050,  X=[35 0 0 0 ]
+cT=-0.4468, cl=-0.9120, cd=0.0106, cm=0.1760, cp=0.4430,  X=[38 0 0 0 ]
+cT=-0.6498, cl=-1.3190, cd=0.0112, cm=0.2920, cp=0.4710,  X=[42 0 0 0 ]
+cT=-0.8207, cl=-1.6610, cd=0.0114, cm=0.4210, cp=0.5030,  X=[45 0 0 0 ]
+cT=-0.8855, cl=-1.7820, cd=0.0064, cm=0.5630, cp=0.5660,  X=[49 0 0 0 ]
+cT=-0.8750, cl=-1.7600, cd=0.0058, cm=0.7140, cp=0.6560,  X=[53 0 0 0 ]
+cT=-0.8034, cl=-1.6160, cd=0.0053, cm=0.8710, cp=0.7890,  X=[56 0 0 0 ]
+cT=-0.7095, cl=-1.4270, cd=0.0047, cm=1.0370, cp=0.9770,  X=[60 0 0 0 ]
+cT=-0.6135, cl=-1.2340, cd=0.0041, cm=1.2100, cp=1.2310,  X=[64 0 0 0 ]
+cT=-0.5263, cl=-1.0590, cd=0.0037, cm=1.3880, cp=1.5600,  X=[67 0 0 0 ]
+cT=-0.4497, cl=-0.9050, cd=0.0032, cm=1.5760, cp=1.9920,  X=[71 0 0 0 ]
+cT=-0.3855, cl=-0.7760, cd=0.0029, cm=1.7760, cp=2.5370,  X=[75 0 0 0 ]
+cT=-0.3341, cl=-0.6740, cd=0.0034, cm=1.9950, cp=3.2090,  X=[78 0 0 0 ]
+cT=15.7037, cl=-0.5920, cd=18.4749, cm=2.2110, cp=3.9850,  X=[82 0 0 0 ]
+cT=0.2702, cl=-0.5270, cd=0.6163, cm=2.5630, cp=5.1100,  X=[85 0 0 0 ]
+cT=0.3589, cl=-0.4760, cd=0.6893, cm=2.7850, cp=6.1060,  X=[89 0 0 0 ]
+cT=0.4497, cl=-0.4340, cd=0.7698, cm=3.0030, cp=7.1640,  X=[93 0 0 0 ]
+cT=0.5522, cl=-0.4020, cd=0.8697, cm=3.2150, cp=8.2440,  X=[96 0 0 0 ]
+cT=0.6404, cl=-0.3770, cd=0.9572, cm=3.4170, cp=9.3180,  X=[100 0 0 0 ]
+cT=0.7147, cl=-0.3560, cd=1.0308, cm=3.6040, cp=10.3780,  X=[104 0 0 0 ]
+cT=0.7635, cl=-0.3400, cd=1.0779, cm=3.7720, cp=11.3510,  X=[107 0 0 0 ]
+cT=0.7886, cl=-0.3280, cd=1.0999, cm=3.9150, cp=12.1770,  X=[111 0 0 0 ]
+cT=0.8459, cl=-0.3210, cd=1.1621, cm=4.0250, cp=12.8030,  X=[115 0 0 0 ]
+cT=0.8436, cl=-0.3170, cd=1.1571, cm=4.0920, cp=13.1590,  X=[118 0 0 0 ]
+cT=0.8433, cl=-0.3170, cd=1.1568, cm=4.1620, cp=13.3780,  X=[122 0 0 0 ]
+cT=0.8356, cl=-0.3210, cd=1.1502, cm=4.0740, cp=12.9550,  X=[125 0 0 0 ]
+cT=0.8126, cl=-0.3280, cd=1.1277, cm=3.8710, cp=12.0430,  X=[129 0 0 0 ]
+cT=0.7454, cl=-0.3400, cd=1.0570, cm=3.5170, cp=10.5990,  X=[133 0 0 0 ]
+cT=0.6992, cl=-0.3560, cd=1.0129, cm=3.1280, cp=9.0380,  X=[136 0 0 0 ]
+cT=0.6187, cl=-0.3770, cd=0.9320, cm=2.7500, cp=7.5490,  X=[140 0 0 0 ]
+cT=0.5514, cl=-0.4020, cd=0.8688, cm=2.3940, cp=6.2020,  X=[144 0 0 0 ]
+cT=0.4637, cl=-0.4340, cd=0.7860, cm=2.0530, cp=4.9760,  X=[147 0 0 0 ]
+cT=0.3715, cl=-0.4760, cd=0.7038, cm=1.7460, cp=3.9200,  X=[151 0 0 0 ]
+cT=0.2607, cl=-0.5270, cd=0.6052, cm=1.4600, cp=3.0190,  X=[155 0 0 0 ]
+cT=0.1587, cl=-0.5920, cd=0.5250, cm=1.2990, cp=2.4440,  X=[158 0 0 0 ]
+cT=0.0449, cl=-0.6740, cd=0.4410, cm=1.0630, cp=1.8270,  X=[162 0 0 0 ]
+cT=-0.0732, cl=-0.7760, cd=0.3635, cm=0.8540, cp=1.3500,  X=[165 0 0 0 ]
+cT=-0.1992, cl=-0.9050, cd=0.2925, cm=0.6740, cp=0.9950,  X=[169 0 0 0 ]
+cT=-0.3297, cl=-1.0600, cd=0.2312, cm=0.5210, cp=0.7420,  X=[173 0 0 0 ]
+cT=-0.4628, cl=-1.2340, cd=0.1780, cm=0.3940, cp=0.5700,  X=[176 0 0 0 ]
+cT=-0.5977, cl=-1.4270, cd=0.1338, cm=0.2920, cp=0.4540,  X=[180 0 0 0 ]
+Elapsed time is 152.132192 seconds.
+   150
+cT=-0.5977, cl=-1.4270, cd=0.1338, cm=0.2920, cp=0.4540,  X=[-180 0 0 0 ]
+   150
+cT=-0.7237, cl=-1.6160, cd=0.0974, cm=0.2120, cp=0.3810,  X=[-176 0 0 0 ]
+   150
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('plot_flowField')" style="font-weight:bold">plot_flowField</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 24)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',24,0)">line 24</a>)
+    plot_flowField(ship.yaw,ship.scale,cl,cd,cp);
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1104820628', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m', 86)" style="font-weight:bold">LiveEditorEvaluationHelperE1104820628</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m',86,0)">line 86</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective([sheeting_angle(j), 0, 0, 0]);} 
+clc
+   150
+cT=-0.5977, cl=-1.4270, cd=0.1338, cm=0.2920, cp=0.4540,  X=[-180 0 0 0 ]
+   150
+cT=0.7175, cl=1.4270, cd=0.0047, cm=-1.0370, cp=0.9770,  X=[0 0 0 0 ]
+   150
+cT=-0.5977, cl=-1.4270, cd=0.1338, cm=0.2920, cp=0.4540,  X=[180 0 0 0 ]
+Elapsed time is 4.710651 seconds.
+   150
+cT=-0.5977, cl=-1.4270, cd=0.1338, cm=0.2920, cp=0.4540,  X=[-180 0 0 0 ]
+   150
+cT=0.7175, cl=1.4270, cd=0.0047, cm=-1.0370, cp=0.9770,  X=[0 0 0 0 ]
+   150
+cT=-0.5977, cl=-1.4270, cd=0.1338, cm=0.2920, cp=0.4540,  X=[180 0 0 0 ]
+Elapsed time is 4.900917 seconds.
+   150
+cT=-0.5977, cl=-1.4270, cd=0.1338, cm=0.2920, cp=0.4540,  X=[-180 0 0 0 ]
+   150
+cT=-0.7237, cl=-1.6160, cd=0.0974, cm=0.2120, cp=0.3810,  X=[-176 0 0 0 ]
+   150
+cT=-0.8194, cl=-1.7600, cd=0.0700, cm=0.1520, cp=0.3360,  X=[-173 0 0 0 ]
+   150
+cT=-0.8478, cl=-1.7820, cd=0.0499, cm=0.1070, cp=0.3100,  X=[-169 0 0 0 ]
+   150
+cT=-0.7996, cl=-1.6610, cd=0.0357, cm=0.0720, cp=0.2930,  X=[-165 0 0 0 ]
+   150
+cT=-0.6370, cl=-1.3190, cd=0.0260, cm=0.0450, cp=0.2840,  X=[-162 0 0 0 ]
+   150
+cT=-0.4391, cl=-0.9120, cd=0.0195, cm=0.0250, cp=0.2770,  X=[-158 0 0 0 ]
+   150
+cT=-0.2398, cl=-0.5060, cd=0.0152, cm=0.0110, cp=0.2720,  X=[-155 0 0 0 ]
+   150
+cT=-0.0418, cl=-0.1010, cd=0.0101, cm=0.0020, cp=0.2700,  X=[-151 0 0 0 ]
+   150
+cT=0.1611, cl=0.3040, cd=0.0105, cm=-0.0060, cp=0.2710,  X=[-147 0 0 0 ]
+   150
+cT=0.3693, cl=0.7090, cd=0.0171, cm=-0.0170, cp=0.2740,  X=[-144 0 0 0 ]
+   150
+cT=0.5768, cl=1.1150, cd=0.0223, cm=-0.0340, cp=0.2800,  X=[-140 0 0 0 ]
+   150
+cT=0.7873, cl=1.5220, cd=0.0303, cm=-0.0570, cp=0.2880,  X=[-136 0 0 0 ]
+   150
+cT=0.9070, cl=1.7410, cd=0.0421, cm=-0.0880, cp=0.3010,  X=[-133 0 0 0 ]
+   150
+cT=0.9447, cl=1.7870, cd=0.0592, cm=-0.1270, cp=0.3210,  X=[-129 0 0 0 ]
+   150
+cT=0.9202, cl=1.6970, cd=0.0828, cm=-0.1790, cp=0.3560,  X=[-125 0 0 0 ]
+   150
+cT=0.8610, cl=1.5240, cd=0.1143, cm=-0.2490, cp=0.4140,  X=[-122 0 0 0 ]
+   150
+cT=0.7988, cl=1.3290, cd=0.1550, cm=-0.3400, cp=0.5060,  X=[-118 0 0 0 ]
+   150
+cT=0.7469, cl=1.1430, cd=0.2025, cm=-0.4540, cp=0.6480,  X=[-115 0 0 0 ]
+   150
+cT=0.7150, cl=0.9800, cd=0.2599, cm=-0.5940, cp=0.8560,  X=[-111 0 0 0 ]
+   150
+cT=0.7061, cl=0.8370, cd=0.3321, cm=-0.7610, cp=1.1590,  X=[-107 0 0 0 ]
+   150
+cT=0.7095, cl=0.7230, cd=0.4018, cm=-0.9550, cp=1.5720,  X=[-104 0 0 0 ]
+   150
+cT=0.7365, cl=0.6310, cd=0.4861, cm=-1.1770, cp=2.1160,  X=[-100 0 0 0 ]
+   150
+cT=0.7770, cl=0.5580, cd=0.5751, cm=-1.3300, cp=2.6350,  X=[-96 0 0 0 ]
+   150
+cT=0.8108, cl=0.5000, cd=0.6476, cm=-1.5970, cp=3.4450,  X=[-93 0 0 0 ]
+   150
+cT=0.8677, cl=0.4540, cd=0.7398, cm=-1.8950, cp=4.4270,  X=[-89 0 0 0 ]
+   150
+cT=0.9150, cl=0.4180, cd=0.8153, cm=-2.2190, cp=5.5640,  X=[-85 0 0 0 ]
+   150
+cT=0.9798, cl=0.3890, cd=0.9068, cm=-2.5690, cp=6.8610,  X=[-82 0 0 0 ]
+   150
+cT=1.0386, cl=0.3660, cd=0.9880, cm=-2.9390, cp=8.2810,  X=[-78 0 0 0 ]
+   150
+cT=1.0639, cl=0.3470, cd=1.0281, cm=-3.3230, cp=9.8240,  X=[-75 0 0 0 ]
+   150
+cT=1.1091, cl=0.3330, cd=1.0885, cm=-3.7110, cp=11.3850,  X=[-71 0 0 0 ]
+   150
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 16)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',16,0)">line 16</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1104820628', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m', 86)" style="font-weight:bold">LiveEditorEvaluationHelperE1104820628</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m',86,0)">line 86</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective([sheeting_angle(j), 0, 0, 0]);} 
+-------------------------------------------------------------
+Scale    = 25.000 
+  120.0000
+cT=-0.0411, cl=-0.4640, cd=0.7215, cm=1.8200, cp=4.1680,  X=[-180 0 0 0 ]
+  120.0000
+cT=-0.1280, cl=-0.5130, cd=0.6325, cm=1.5270, cp=3.2250,  X=[-176 0 0 0 ]
+  120.0000
+cT=0.2786, cl=-0.5750, cd=1.5531, cm=1.2680, cp=2.4570,  X=[-173 0 0 0 ]
+  120.0000
+cT=-0.3324, cl=-0.6520, cd=0.4646, cm=1.1190, cp=1.9670,  X=[-169 0 0 0 ]
+  120.0000
+cT=-0.4573, cl=-0.7490, cd=0.3827, cm=0.9040, cp=1.4560,  X=[-165 0 0 0 ]
+  120.0000
+cT=-0.5986, cl=-0.8700, cd=0.3097, cm=0.7170, cp=1.0740,  X=[-162 0 0 0 ]
+  120.0000
+cT=-0.7612, cl=-1.0200, cd=0.2444, cm=0.5570, cp=0.7960,  X=[-158 0 0 0 ]
+  120.0000
+cT=-0.9337, cl=-1.1880, cd=0.1903, cm=0.4230, cp=0.6060,  X=[-155 0 0 0 ]
+  120.0000
+cT=-1.1215, cl=-1.3780, cd=0.1437, cm=0.3150, cp=0.4790,  X=[-151 0 0 0 ]
+  120.0000
+cT=-1.3078, cl=-1.5710, cd=0.1054, cm=0.2300, cp=0.3960,  X=[-147 0 0 0 ]
+  120.0000
+cT=-1.4611, cl=-1.7310, cd=0.0760, cm=0.1650, cp=0.3450,  X=[-144 0 0 0 ]
+  120.0000
+cT=-1.5222, cl=-1.7890, cd=0.0543, cm=0.1170, cp=0.3150,  X=[-140 0 0 0 ]
+  120.0000
+cT=-1.4581, cl=-1.7060, cd=0.0388, cm=0.0800, cp=0.2970,  X=[-136 0 0 0 ]
+  120.0000
+cT=-1.2157, cl=-1.4200, cd=0.0281, cm=0.0510, cp=0.2860,  X=[-133 0 0 0 ]
+  120.0000
+cT=-0.8669, cl=-1.0130, cd=0.0208, cm=0.0290, cp=0.2790,  X=[-129 0 0 0 ]
+  120.0000
+cT=-0.5186, cl=-0.6080, cd=0.0159, cm=0.0140, cp=0.2730,  X=[-125 0 0 0 ]
+  120.0000
+cT=-0.1700, cl=-0.2020, cd=0.0098, cm=0.0040, cp=0.2700,  X=[-122 0 0 0 ]
+  120.0000
+cT=0.1799, cl=0.2020, cd=0.0100, cm=-0.0040, cp=0.2700,  X=[-118 0 0 0 ]
+  120.0000
+cT=0.5345, cl=0.6080, cd=0.0159, cm=-0.0140, cp=0.2730,  X=[-115 0 0 0 ]
+  120.0000
+cT=0.8877, cl=1.0130, cd=0.0208, cm=-0.0290, cp=0.2790,  X=[-111 0 0 0 ]
+  120.0000
+cT=1.2438, cl=1.4200, cd=0.0281, cm=-0.0510, cp=0.2860,  X=[-107 0 0 0 ]
+  120.0000
+cT=1.4968, cl=1.7060, cd=0.0388, cm=-0.0800, cp=0.2970,  X=[-104 0 0 0 ]
+  120.0000
+cT=1.5765, cl=1.7890, cd=0.0543, cm=-0.1170, cp=0.3150,  X=[-100 0 0 0 ]
+  120.0000
+cT=1.5372, cl=1.7310, cd=0.0762, cm=-0.1650, cp=0.3450,  X=[-96 0 0 0 ]
+  120.0000
+cT=1.4133, cl=1.5710, cd=0.1056, cm=-0.2300, cp=0.3960,  X=[-93 0 0 0 ]
+  120.0000
+cT=1.2653, cl=1.3780, cd=0.1438, cm=-0.3150, cp=0.4790,  X=[-89 0 0 0 ]
+  120.0000
+cT=1.1239, cl=1.1880, cd=0.1900, cm=-0.4230, cp=0.6060,  X=[-85 0 0 0 ]
+  120.0000
+cT=1.0060, cl=1.0200, cd=0.2453, cm=-0.5570, cp=0.7960,  X=[-82 0 0 0 ]
+  120.0000
+cT=0.9078, cl=0.8700, cd=0.3087, cm=-0.7170, cp=1.0740,  X=[-78 0 0 0 ]
+  120.0000
+cT=0.8409, cl=0.7490, cd=0.3845, cm=-0.9040, cp=1.4560,  X=[-75 0 0 0 ]
+  120.0000
+cT=0.7958, cl=0.6520, cd=0.4624, cm=-1.1190, cp=1.9670,  X=[-71 0 0 0 ]
+  120.0000
+cT=1.2764, cl=0.5750, cd=1.5569, cm=-1.2680, cp=2.4570,  X=[-67 0 0 0 ]
+  120.0000
+cT=0.7586, cl=0.5130, cd=0.6287, cm=-1.5270, cp=3.2250,  X=[-64 0 0 0 ]
+  120.0000
+cT=0.7595, cl=0.4640, cd=0.7153, cm=-1.8200, cp=4.1690,  X=[-60 0 0 0 ]
+  120.0000
+cT=0.7683, cl=0.4260, cd=0.7988, cm=-2.1350, cp=5.2670,  X=[-56 0 0 0 ]
+  120.0000
+cT=0.7788, cl=0.3950, cd=0.8734, cm=-2.4810, cp=6.5280,  X=[-53 0 0 0 ]
+  120.0000
+cT=0.8053, cl=0.3720, cd=0.9662, cm=-2.8430, cp=7.9000,  X=[-49 0 0 0 ]
+  120.0000
+cT=0.8200, cl=0.3520, cd=1.0304, cm=-3.2240, cp=9.4200,  X=[-45 0 0 0 ]
+  120.0000
+cT=0.8238, cl=0.3360, cd=1.0656, cm=-3.6150, cp=10.9980,  X=[-42 0 0 0 ]
+  120.0000
+cT=0.8352, cl=0.3260, cd=1.1057, cm=-3.9340, cp=12.3200,  X=[-38 0 0 0 ]
+  120.0000
+cT=0.8527, cl=0.3190, cd=1.1528, cm=-4.1030, cp=13.0960,  X=[-35 0 0 0 ]
+  120.0000
+cT=0.8603, cl=0.3170, cd=1.1716, cm=-4.1730, cp=13.4290,  X=[-31 0 0 0 ]
+  120.0000
+cT=0.8574, cl=0.3170, cd=1.1658, cm=-4.0800, cp=13.1050,  X=[-27 0 0 0 ]
+  120.0000
+cT=0.8577, cl=0.3220, cd=1.1577, cm=-4.0010, cp=12.6730,  X=[-24 0 0 0 ]
+  120.0000
+cT=0.8278, cl=0.3300, cd=1.0841, cm=-3.8820, cp=11.9990,  X=[-20 0 0 0 ]
+  120.0000
+cT=0.8301, cl=0.3430, cd=1.0662, cm=-3.7320, cp=11.1190,  X=[-16 0 0 0 ]
+  120.0000
+cT=0.8065, cl=0.3610, cd=0.9876, cm=-3.5590, cp=10.1140,  X=[-13 0 0 0 ]
+  120.0000
+cT=0.7875, cl=0.3820, cd=0.9134, cm=-3.3680, cp=9.0540,  X=[-9 0 0 0 ]
+  120.0000
+cT=0.7719, cl=0.4100, cd=0.8336, cm=-3.1630, cp=7.9670,  X=[-5 0 0 0 ]
+  120.0000
+cT=0.7580, cl=0.4440, cd=0.7470, cm=-2.9490, cp=6.8930,  X=[-2 0 0 0 ]
+  120.0000
+cT=0.7546, cl=0.4870, cd=0.6658, cm=-2.7300, cp=5.8510,  X=[2 0 0 0 ]
+  120.0000
+cT=0.7619, cl=0.5420, cd=0.5850, cm=-2.5070, cp=4.8740,  X=[5 0 0 0 ]
+  120.0000
+cT=0.5378, cl=0.6110, cd=0.0173, cm=-2.1540, cp=3.7750,  X=[9 0 0 0 ]
+  120.0000
+cT=0.6051, cl=0.6970, cd=0.0031, cm=-1.9390, cp=3.0310,  X=[13 0 0 0 ]
+  120.0000
+cT=0.6995, cl=0.8060, cd=0.0030, cm=-1.7250, cp=2.3910,  X=[16 0 0 0 ]
+  120.0000
+cT=0.8166, cl=0.9410, cd=0.0033, cm=-1.5280, cp=1.8740,  X=[20 0 0 0 ]
+  120.0000
+cT=0.9553, cl=1.1010, cd=0.0037, cm=-1.3440, cp=1.4710,  X=[24 0 0 0 ]
+  120.0000
+cT=1.1115, cl=1.2810, cd=0.0042, cm=-1.1660, cp=1.1600,  X=[27 0 0 0 ]
+  120.0000
+cT=1.2807, cl=1.4760, cd=0.0048, cm=-0.9950, cp=0.9240,  X=[31 0 0 0 ]
+  120.0000
+cT=1.4386, cl=1.6580, cd=0.0055, cm=-0.8310, cp=0.7510,  X=[35 0 0 0 ]
+  120.0000
+cT=1.5428, cl=1.7780, cd=0.0060, cm=-0.6750, cp=0.6300,  X=[38 0 0 0 ]
+  120.0000
+cT=1.5350, cl=1.7660, cd=0.0112, cm=-0.5240, cp=0.5470,  X=[42 0 0 0 ]
+  120.0000
+cT=1.3948, cl=1.6040, cd=0.0113, cm=-0.3880, cp=0.4920,  X=[45 0 0 0 ]
+  120.0000
+cT=1.0603, cl=1.2180, cd=0.0110, cm=-0.2620, cp=0.4650,  X=[49 0 0 0 ]
+  120.0000
+cT=0.7067, cl=0.8100, cd=0.0104, cm=-0.1500, cp=0.4350,  X=[53 0 0 0 ]
+  120.0000
+cT=0.3555, cl=0.4050, cd=0.0095, cm=-0.0580, cp=0.3930,  X=[56 0 0 0 ]
+  120.0000
+cT=0.0048, cl=-0.0000, cd=0.0096, cm=0.0000, cp=0.2500,  X=[60 0 0 0 ]
+  120.0000
+cT=-0.3460, cl=-0.4050, cd=0.0095, cm=0.0580, cp=0.3930,  X=[64 0 0 0 ]
+  120.0000
+cT=-0.6963, cl=-0.8100, cd=0.0103, cm=0.1500, cp=0.4350,  X=[67 0 0 0 ]
+  120.0000
+cT=-1.0493, cl=-1.2180, cd=0.0110, cm=0.2620, cp=0.4650,  X=[71 0 0 0 ]
+  120.0000
+cT=-1.3834, cl=-1.6040, cd=0.0113, cm=0.3880, cp=0.4920,  X=[75 0 0 0 ]
+  120.0000
+cT=-1.5238, cl=-1.7660, cd=0.0112, cm=0.5240, cp=0.5470,  X=[78 0 0 0 ]
+  120.0000
+cT=-1.5368, cl=-1.7780, cd=0.0060, cm=0.6750, cp=0.6300,  X=[82 0 0 0 ]
+  120.0000
+cT=-1.4331, cl=-1.6580, cd=0.0055, cm=0.8310, cp=0.7510,  X=[85 0 0 0 ]
+  120.0000
+cT=-1.2758, cl=-1.4760, cd=0.0048, cm=0.9950, cp=0.9240,  X=[89 0 0 0 ]
+  120.0000
+cT=-1.1073, cl=-1.2810, cd=0.0042, cm=1.1660, cp=1.1600,  X=[93 0 0 0 ]
+  120.0000
+cT=-0.9516, cl=-1.1010, cd=0.0037, cm=1.3440, cp=1.4710,  X=[96 0 0 0 ]
+  120.0000
+cT=-0.8133, cl=-0.9410, cd=0.0033, cm=1.5280, cp=1.8740,  X=[100 0 0 0 ]
+  120.0000
+cT=-0.6965, cl=-0.8060, cd=0.0030, cm=1.7250, cp=2.3910,  X=[104 0 0 0 ]
+  120.0000
+cT=-0.6021, cl=-0.6970, cd=0.0031, cm=1.9390, cp=3.0310,  X=[107 0 0 0 ]
+  120.0000
+cT=-0.5205, cl=-0.6110, cd=0.0173, cm=2.1540, cp=3.7750,  X=[111 0 0 0 ]
+  120.0000
+cT=-0.1730, cl=-0.5420, cd=0.5927, cm=2.5070, cp=4.8740,  X=[115 0 0 0 ]
+  120.0000
+cT=-0.0833, cl=-0.4870, cd=0.6769, cm=2.7300, cp=5.8510,  X=[118 0 0 0 ]
+  120.0000
+cT=-0.0086, cl=-0.4440, cd=0.7517, cm=2.9500, cp=6.8940,  X=[122 0 0 0 ]
+  120.0000
+cT=0.0658, cl=-0.4100, cd=0.8418, cm=3.1630, cp=7.9670,  X=[125 0 0 0 ]
+  120.0000
+cT=0.1320, cl=-0.3820, cd=0.9257, cm=3.3670, cp=9.0540,  X=[129 0 0 0 ]
+  120.0000
+cT=0.1938, cl=-0.3610, cd=1.0128, cm=3.5590, cp=10.1140,  X=[133 0 0 0 ]
+  120.0000
+cT=0.2433, cl=-0.3430, cd=1.0808, cm=3.7320, cp=11.1190,  X=[136 0 0 0 ]
+  120.0000
+cT=0.2677, cl=-0.3300, cd=1.1071, cm=3.8820, cp=11.9990,  X=[140 0 0 0 ]
+  120.0000
+cT=0.2821, cl=-0.3220, cd=1.1220, cm=4.0010, cp=12.6730,  X=[144 0 0 0 ]
+  120.0000
+cT=0.2947, cl=-0.3170, cd=1.1384, cm=4.0800, cp=13.1050,  X=[147 0 0 0 ]
+  120.0000
+cT=0.2967, cl=-0.3170, cd=1.1424, cm=4.1730, cp=13.4280,  X=[151 0 0 0 ]
+  120.0000
+cT=0.2969, cl=-0.3190, cd=1.1463, cm=4.1030, cp=13.0960,  X=[155 0 0 0 ]
+  120.0000
+cT=0.2826, cl=-0.3260, cd=1.1299, cm=3.9340, cp=12.3200,  X=[158 0 0 0 ]
+  120.0000
+cT=0.2516, cl=-0.3360, cd=1.0851, cm=3.6150, cp=10.9980,  X=[162 0 0 0 ]
+  120.0000
+cT=0.2034, cl=-0.3520, cd=1.0165, cm=3.2240, cp=9.4200,  X=[165 0 0 0 ]
+  120.0000
+cT=0.1574, cl=-0.3720, cd=0.9591, cm=2.8420, cp=7.9000,  X=[169 0 0 0 ]
+  120.0000
+cT=0.0974, cl=-0.3950, cd=0.8789, cm=2.4810, cp=6.5280,  X=[173 0 0 0 ]
+  120.0000
+cT=0.0311, cl=-0.4260, cd=0.8001, cm=2.1350, cp=5.2660,  X=[176 0 0 0 ]
+  120.0000
+cT=-0.0411, cl=-0.4640, cd=0.7215, cm=1.8200, cp=4.1680,  X=[180 0 0 0 ]
+Elapsed time is 156.474960 seconds.
+   150
+cT=-0.5977, cl=-1.4270, cd=0.1338, cm=0.2920, cp=0.4540,  X=[-180 0 0 0 ]
+   150
+cT=-0.7237, cl=-1.6160, cd=0.0974, cm=0.2120, cp=0.3810,  X=[-176 0 0 0 ]
+   150
+cT=-0.8194, cl=-1.7600, cd=0.0700, cm=0.1520, cp=0.3360,  X=[-173 0 0 0 ]
+   150
+cT=-0.8478, cl=-1.7820, cd=0.0499, cm=0.1070, cp=0.3100,  X=[-169 0 0 0 ]
+   150
+cT=-0.7996, cl=-1.6610, cd=0.0357, cm=0.0720, cp=0.2930,  X=[-165 0 0 0 ]
+   150
+cT=-0.6370, cl=-1.3190, cd=0.0260, cm=0.0450, cp=0.2840,  X=[-162 0 0 0 ]
+   150
+cT=-0.4391, cl=-0.9120, cd=0.0195, cm=0.0250, cp=0.2770,  X=[-158 0 0 0 ]
+   150
+cT=-0.2398, cl=-0.5060, cd=0.0152, cm=0.0110, cp=0.2720,  X=[-155 0 0 0 ]
+   150
+cT=-0.0418, cl=-0.1010, cd=0.0101, cm=0.0020, cp=0.2700,  X=[-151 0 0 0 ]
+   150
+cT=0.1611, cl=0.3040, cd=0.0105, cm=-0.0060, cp=0.2710,  X=[-147 0 0 0 ]
+   150
+cT=0.3693, cl=0.7090, cd=0.0171, cm=-0.0170, cp=0.2740,  X=[-144 0 0 0 ]
+   150
+cT=0.5768, cl=1.1150, cd=0.0223, cm=-0.0340, cp=0.2800,  X=[-140 0 0 0 ]
+   150
+cT=0.7873, cl=1.5220, cd=0.0303, cm=-0.0570, cp=0.2880,  X=[-136 0 0 0 ]
+   150
+cT=0.9070, cl=1.7410, cd=0.0421, cm=-0.0880, cp=0.3010,  X=[-133 0 0 0 ]
+   150
+cT=0.9447, cl=1.7870, cd=0.0592, cm=-0.1270, cp=0.3210,  X=[-129 0 0 0 ]
+   150
+cT=0.9202, cl=1.6970, cd=0.0828, cm=-0.1790, cp=0.3560,  X=[-125 0 0 0 ]
+   150
+cT=0.8610, cl=1.5240, cd=0.1143, cm=-0.2490, cp=0.4140,  X=[-122 0 0 0 ]
+   150
+cT=0.7988, cl=1.3290, cd=0.1550, cm=-0.3400, cp=0.5060,  X=[-118 0 0 0 ]
+   150
+cT=0.7469, cl=1.1430, cd=0.2025, cm=-0.4540, cp=0.6480,  X=[-115 0 0 0 ]
+   150
+cT=0.7150, cl=0.9800, cd=0.2599, cm=-0.5940, cp=0.8560,  X=[-111 0 0 0 ]
+   150
+cT=0.7061, cl=0.8370, cd=0.3321, cm=-0.7610, cp=1.1590,  X=[-107 0 0 0 ]
+   150
+cT=0.7095, cl=0.7230, cd=0.4018, cm=-0.9550, cp=1.5720,  X=[-104 0 0 0 ]
+   150
+cT=0.7365, cl=0.6310, cd=0.4861, cm=-1.1770, cp=2.1160,  X=[-100 0 0 0 ]
+   150
+cT=0.7770, cl=0.5580, cd=0.5751, cm=-1.3300, cp=2.6350,  X=[-96 0 0 0 ]
+   150
+cT=0.8108, cl=0.5000, cd=0.6476, cm=-1.5970, cp=3.4450,  X=[-93 0 0 0 ]
+   150
+cT=0.8677, cl=0.4540, cd=0.7398, cm=-1.8950, cp=4.4270,  X=[-89 0 0 0 ]
+   150
+cT=0.9150, cl=0.4180, cd=0.8153, cm=-2.2190, cp=5.5640,  X=[-85 0 0 0 ]
+   150
+cT=0.9798, cl=0.3890, cd=0.9068, cm=-2.5690, cp=6.8610,  X=[-82 0 0 0 ]
+   150
+cT=1.0386, cl=0.3660, cd=0.9880, cm=-2.9390, cp=8.2810,  X=[-78 0 0 0 ]
+   150
+cT=1.0639, cl=0.3470, cd=1.0281, cm=-3.3230, cp=9.8240,  X=[-75 0 0 0 ]
+   150
+cT=1.1091, cl=0.3330, cd=1.0885, cm=-3.7110, cp=11.3850,  X=[-71 0 0 0 ]
+   150
+cT=1.1344, cl=0.3240, cd=1.1228, cm=-3.9890, cp=12.5720,  X=[-67 0 0 0 ]
+   150
+cT=1.1410, cl=0.3180, cd=1.1339, cm=-4.1280, cp=13.2150,  X=[-64 0 0 0 ]
+   150
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+cT=0.2999, cl=0.3170, cd=0.1633, cm=0.0000, cp=0.2500,  X=[-60 0 0 0 ]
+   150
+cT=1.1529, cl=0.3180, cd=1.1476, cm=-4.0650, cp=13.0170,  X=[-56 0 0 0 ]
+   150
+cT=1.1359, cl=0.3240, cd=1.1246, cm=-3.9750, cp=12.5270,  X=[-53 0 0 0 ]
+   150
+cT=1.1187, cl=0.3330, cd=1.0995, cm=-3.8470, cp=11.7940,  X=[-49 0 0 0 ]
+   150
+cT=1.0687, cl=0.3470, cd=1.0337, cm=-3.6910, cp=10.8860,  X=[-45 0 0 0 ]
+   150
+cT=1.0374, cl=0.3660, cd=0.9866, cm=-3.5130, cp=9.8480,  X=[-42 0 0 0 ]
+   150
+cT=0.9891, cl=0.3890, cd=0.9175, cm=-3.3170, cp=8.7870,  X=[-38 0 0 0 ]
+   150
+cT=0.9238, cl=0.4180, cd=0.8253, cm=-3.1100, cp=7.6990,  X=[-35 0 0 0 ]
+   150
+cT=0.8667, cl=0.4540, cd=0.7387, cm=-2.8950, cp=6.6280,  X=[-31 0 0 0 ]
+   150
+cT=0.8123, cl=0.5000, cd=0.6493, cm=-2.6740, cp=5.6010,  X=[-27 0 0 0 ]
+   150
+cT=0.7726, cl=0.5580, cd=0.5699, cm=-2.4520, cp=4.6450,  X=[-24 0 0 0 ]
+   150
+cT=0.3190, cl=0.6310, cd=0.0040, cm=-2.0980, cp=3.5740,  X=[-20 0 0 0 ]
+   150
+cT=0.3640, cl=0.7230, cd=0.0029, cm=-1.8840, cp=2.8570,  X=[-16 0 0 0 ]
+   150
+cT=0.4212, cl=0.8370, cd=0.0031, cm=-1.6750, cp=2.2510,  X=[-13 0 0 0 ]
+   150
+cT=0.4930, cl=0.9800, cd=0.0034, cm=-1.4810, cp=1.7610,  X=[-9 0 0 0 ]
+   150
+cT=0.5748, cl=1.1430, cd=0.0038, cm=-1.2990, cp=1.3860,  X=[-5 0 0 0 ]
+   150
+cT=0.6683, cl=1.3290, cd=0.0044, cm=-1.1220, cp=1.0950,  X=[-2 0 0 0 ]
+   150
+cT=0.7663, cl=1.5240, cd=0.0050, cm=-0.9530, cp=0.8760,  X=[2 0 0 0 ]
+   150
+cT=0.8534, cl=1.6970, cd=0.0056, cm=-0.7910, cp=0.7160,  X=[5 0 0 0 ]
+   150
+cT=0.8987, cl=1.7870, cd=0.0061, cm=-0.6370, cp=0.6070,  X=[9 0 0 0 ]
+   150
+cT=0.8802, cl=1.7410, cd=0.0112, cm=-0.4890, cp=0.5310,  X=[13 0 0 0 ]
+   150
+cT=0.7708, cl=1.5220, cd=0.0113, cm=-0.3550, cp=0.4830,  X=[16 0 0 0 ]
+   150
+cT=0.5670, cl=1.1150, cd=0.0110, cm=-0.2320, cp=0.4580,  X=[20 0 0 0 ]
+   150
+cT=0.3633, cl=0.7090, cd=0.0102, cm=-0.1250, cp=0.4260,  X=[24 0 0 0 ]
+   150
+cT=0.1600, cl=0.3040, cd=0.0092, cm=-0.0390, cp=0.3780,  X=[27 0 0 0 ]
+   150
+cT=-0.0424, cl=-0.1010, cd=0.0094, cm=0.0090, cp=0.3350,  X=[31 0 0 0 ]
+   150
+cT=-0.2446, cl=-0.5060, cd=0.0097, cm=0.0790, cp=0.4050,  X=[35 0 0 0 ]
+   150
+cT=-0.4468, cl=-0.9120, cd=0.0106, cm=0.1760, cp=0.4430,  X=[38 0 0 0 ]
+   150
+cT=-0.6498, cl=-1.3190, cd=0.0112, cm=0.2920, cp=0.4710,  X=[42 0 0 0 ]
+   150
+cT=-0.8207, cl=-1.6610, cd=0.0114, cm=0.4210, cp=0.5030,  X=[45 0 0 0 ]
+   150
+cT=-0.8855, cl=-1.7820, cd=0.0064, cm=0.5630, cp=0.5660,  X=[49 0 0 0 ]
+   150
+cT=-0.8750, cl=-1.7600, cd=0.0058, cm=0.7140, cp=0.6560,  X=[53 0 0 0 ]
+   150
+cT=-0.8034, cl=-1.6160, cd=0.0053, cm=0.8710, cp=0.7890,  X=[56 0 0 0 ]
+   150
+cT=-0.7095, cl=-1.4270, cd=0.0047, cm=1.0370, cp=0.9770,  X=[60 0 0 0 ]
+   150
+cT=-0.6135, cl=-1.2340, cd=0.0041, cm=1.2100, cp=1.2310,  X=[64 0 0 0 ]
+   150
+cT=-0.5263, cl=-1.0590, cd=0.0037, cm=1.3880, cp=1.5600,  X=[67 0 0 0 ]
+   150
+cT=-0.4497, cl=-0.9050, cd=0.0032, cm=1.5760, cp=1.9920,  X=[71 0 0 0 ]
+   150
+cT=-0.3855, cl=-0.7760, cd=0.0029, cm=1.7760, cp=2.5370,  X=[75 0 0 0 ]
+   150
+cT=-0.3341, cl=-0.6740, cd=0.0034, cm=1.9950, cp=3.2090,  X=[78 0 0 0 ]
+   150
+cT=15.7037, cl=-0.5920, cd=18.4749, cm=2.2110, cp=3.9850,  X=[82 0 0 0 ]
+   150
+cT=0.2702, cl=-0.5270, cd=0.6163, cm=2.5630, cp=5.1100,  X=[85 0 0 0 ]
+   150
+cT=0.3589, cl=-0.4760, cd=0.6893, cm=2.7850, cp=6.1060,  X=[89 0 0 0 ]
+   150
+cT=0.4497, cl=-0.4340, cd=0.7698, cm=3.0030, cp=7.1640,  X=[93 0 0 0 ]
+   150
+cT=0.5522, cl=-0.4020, cd=0.8697, cm=3.2150, cp=8.2440,  X=[96 0 0 0 ]
+   150
+cT=0.6404, cl=-0.3770, cd=0.9572, cm=3.4170, cp=9.3180,  X=[100 0 0 0 ]
+   150
+cT=0.7147, cl=-0.3560, cd=1.0308, cm=3.6040, cp=10.3780,  X=[104 0 0 0 ]
+   150
+cT=0.7635, cl=-0.3400, cd=1.0779, cm=3.7720, cp=11.3510,  X=[107 0 0 0 ]
+   150
+cT=0.7886, cl=-0.3280, cd=1.0999, cm=3.9150, cp=12.1770,  X=[111 0 0 0 ]
+   150
+cT=0.8459, cl=-0.3210, cd=1.1621, cm=4.0250, cp=12.8030,  X=[115 0 0 0 ]
+   150
+cT=0.8436, cl=-0.3170, cd=1.1571, cm=4.0920, cp=13.1590,  X=[118 0 0 0 ]
+   150
+cT=0.8433, cl=-0.3170, cd=1.1568, cm=4.1620, cp=13.3780,  X=[122 0 0 0 ]
+   150
+cT=0.8356, cl=-0.3210, cd=1.1502, cm=4.0740, cp=12.9550,  X=[125 0 0 0 ]
+   150
+cT=0.8126, cl=-0.3280, cd=1.1277, cm=3.8710, cp=12.0430,  X=[129 0 0 0 ]
+   150
+cT=0.7454, cl=-0.3400, cd=1.0570, cm=3.5170, cp=10.5990,  X=[133 0 0 0 ]
+   150
+cT=0.6992, cl=-0.3560, cd=1.0129, cm=3.1280, cp=9.0380,  X=[136 0 0 0 ]
+   150
+cT=0.6187, cl=-0.3770, cd=0.9320, cm=2.7500, cp=7.5490,  X=[140 0 0 0 ]
+   150
+cT=0.5514, cl=-0.4020, cd=0.8688, cm=2.3940, cp=6.2020,  X=[144 0 0 0 ]
+   150
+cT=0.4637, cl=-0.4340, cd=0.7860, cm=2.0530, cp=4.9760,  X=[147 0 0 0 ]
+   150
+cT=0.3715, cl=-0.4760, cd=0.7038, cm=1.7460, cp=3.9200,  X=[151 0 0 0 ]
+   150
+cT=0.2607, cl=-0.5270, cd=0.6052, cm=1.4600, cp=3.0190,  X=[155 0 0 0 ]
+   150
+cT=0.1587, cl=-0.5920, cd=0.5250, cm=1.2990, cp=2.4440,  X=[158 0 0 0 ]
+   150
+cT=0.0449, cl=-0.6740, cd=0.4410, cm=1.0630, cp=1.8270,  X=[162 0 0 0 ]
+   150
+cT=-0.0732, cl=-0.7760, cd=0.3635, cm=0.8540, cp=1.3500,  X=[165 0 0 0 ]
+   150
+cT=-0.1992, cl=-0.9050, cd=0.2925, cm=0.6740, cp=0.9950,  X=[169 0 0 0 ]
+   150
+cT=-0.3297, cl=-1.0600, cd=0.2312, cm=0.5210, cp=0.7420,  X=[173 0 0 0 ]
+   150
+cT=-0.4628, cl=-1.2340, cd=0.1780, cm=0.3940, cp=0.5700,  X=[176 0 0 0 ]
+   150
+cT=-0.5977, cl=-1.4270, cd=0.1338, cm=0.2920, cp=0.4540,  X=[180 0 0 0 ]
+Elapsed time is 192.513231 seconds.
+clear
+clc
+clear
+vlv
+{Unrecognized function or variable 'vlv'.} 
+clc
+<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m',86,69)">File: runme_Alexandre.m Line: 86 Column: 69</a>
+Invalid expression. When calling a function or indexing a variable, use parentheses. Otherwise, check for mismatched
+delimiters.
+
+Index exceeds the number of array elements. Index must not exceed 1.
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 27)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',27,0)">line 27</a>)
+    title(sprintf('AWA=%0.1f  X=[%.0f/%.0f %.0f/%.0f],  cT=%.4f\n',rad2deg(ship.yaw),
+    rad2deg(X(1)),rad2deg(X(2)),rad2deg(X(3)),rad2deg(X(4)),CT),'fontsize',16);
+    %,rad2deg(X(5)),rad2deg(X(6)),rad2deg(X(7)),rad2deg(X(8))
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m', 86)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m',86,0)">line 86</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective(sheeting_angle(j));
+
+opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m',86,0)
+matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 27)
+Index exceeds the number of array elements. Index must not exceed 1.
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 30)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',30,0)">line 30</a>)
+        title(sprintf('AWA=%0.1f  X=[%.0f/%.0f %.0f/%.0f],  cT=%.4f\n',rad2deg(ship.yaw),
+        rad2deg(X(1)),rad2deg(X(2)),rad2deg(X(3)),rad2deg(X(4)),CT),'fontsize',16);
+        %,rad2deg(X(5)),rad2deg(X(6)),rad2deg(X(7)),rad2deg(X(8))
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m', 86)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m',86,0)">line 86</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective(sheeting_angle(j));
+
+-------------------------------------------------------------
+Scale    = 25.000 
+Index exceeds the number of array elements. Index must not exceed 1.
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 30)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',30,0)">line 30</a>)
+        title(sprintf('AWA=%0.1f  X=[%.0f/%.0f %.0f/%.0f],  cT=%.4f\n',rad2deg(ship.yaw),
+        rad2deg(X(1)),rad2deg(X(2)),rad2deg(X(3)),rad2deg(X(4)),CT),'fontsize',16);
+        %,rad2deg(X(5)),rad2deg(X(6)),rad2deg(X(7)),rad2deg(X(8))
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m', 86)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m',86,0)">line 86</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective(sheeting_angle(j));
+
+opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',30,0)
+Unrecognized function or variable 'cT'.
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 49)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',49,0)">line 49</a>)
+                fprintf('cT=%.4f, X=%.0f\n',cT, rad2deg(X));
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m', 86)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m',86,0)">line 86</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective(sheeting_angle(j));
+
+opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',49,0)
+cT=-0.0411, X=-180
+cT=-0.1280, X=-176
+cT=0.2786, X=-173
+cT=-0.3324, X=-169
+cT=-0.4573, X=-165
+cT=-0.5986, X=-162
+cT=-0.7612, X=-158
+cT=-0.9337, X=-155
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 15)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',15,0)">line 15</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1104820628', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m', 86)" style="font-weight:bold">LiveEditorEvaluationHelperE1104820628</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m',86,0)">line 86</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective(sheeting_angle(j));} 
+clear
+clc
+cT=-0.0411, X=-180
+cT=-0.1280, X=-176
+cT=0.2786, X=-173
+cT=-0.3324, X=-169
+cT=-0.4573, X=-165
+cT=-0.5986, X=-162
+cT=-0.7612, X=-158
+cT=-0.9337, X=-155
+cT=-1.1215, X=-151
+cT=-1.3078, X=-147
+cT=-1.4611, X=-144
+cT=-1.5222, X=-140
+cT=-1.4581, X=-136
+cT=-1.2157, X=-133
+cT=-0.8669, X=-129
+cT=-0.5186, X=-125
+cT=-0.1700, X=-122
+cT=0.1799, X=-118
+cT=0.5345, X=-115
+cT=0.8877, X=-111
+cT=1.2438, X=-107
+cT=1.4968, X=-104
+cT=1.5765, X=-100
+cT=1.5372, X=-96
+cT=1.4133, X=-93
+cT=1.2653, X=-89
+cT=1.1239, X=-85
+cT=1.0060, X=-82
+cT=0.9078, X=-78
+cT=0.8409, X=-75
+cT=0.7958, X=-71
+cT=1.2764, X=-67
+cT=0.7586, X=-64
+cT=0.7595, X=-60
+cT=0.7683, X=-56
+cT=0.7788, X=-53
+cT=0.8053, X=-49
+cT=0.8200, X=-45
+cT=0.8238, X=-42
+cT=0.8352, X=-38
+cT=0.8527, X=-35
+cT=0.8603, X=-31
+cT=0.8574, X=-27
+cT=0.8577, X=-24
+cT=0.8278, X=-20
+cT=0.8301, X=-16
+cT=0.8065, X=-13
+cT=0.7875, X=-9
+cT=0.7719, X=-5
+cT=0.7580, X=-2
+cT=0.7546, X=2
+cT=0.7619, X=5
+cT=0.5378, X=9
+cT=0.6051, X=13
+cT=0.6995, X=16
+cT=0.8166, X=20
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 15)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',15,0)">line 15</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1104820628', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m', 86)" style="font-weight:bold">LiveEditorEvaluationHelperE1104820628</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m',86,0)">line 86</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective(sheeting_angle(j));} 
+cT=-0.0411, X=-180
+cT=-0.1280, X=-176
+cT=0.2786, X=-173
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 15)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',15,0)">line 15</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1104820628', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m', 86)" style="font-weight:bold">LiveEditorEvaluationHelperE1104820628</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m',86,0)">line 86</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective(sheeting_angle(j));} 
+  120.0000
+cT=-0.0411, X=-180
+  120.0000
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 16)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',16,0)">line 16</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1104820628', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m', 86)" style="font-weight:bold">LiveEditorEvaluationHelperE1104820628</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m',86,0)">line 86</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective(sheeting_angle(j));} 
+  120.0000
+cT=-0.0411, X=-180
+  120.0000
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 16)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',16,0)">line 16</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1104820628', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m', 86)" style="font-weight:bold">LiveEditorEvaluationHelperE1104820628</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m',86,0)">line 86</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective(sheeting_angle(j));} 
+-------------------------------------------------------------
+Scale    = 25.000 
+     0
+cT=-0.0543, cl=-1.7890, cd=0.0543, cm=0.1170, cp=0.3150,  X=[-20 0 0 0 ]
+     0
+cT=-0.0495, cl=-1.7810, cd=0.0495, cm=0.1060, cp=0.3090,  X=[-19 0 0 0 ]
+     0
+cT=-0.0451, cl=-1.7620, cd=0.0451, cm=0.0950, cp=0.3040,  X=[-18 0 0 0 ]
+     0
+cT=-0.0412, cl=-1.7320, cd=0.0412, cm=0.0860, cp=0.2990,  X=[-17 0 0 0 ]
+     0
+cT=-0.0375, cl=-1.6890, cd=0.0375, cm=0.0770, cp=0.2950,  X=[-16 0 0 0 ]
+     0
+cT=-0.0342, cl=-1.6340, cd=0.0342, cm=0.0680, cp=0.2920,  X=[-15 0 0 0 ]
+     0
+cT=-0.0313, cl=-1.5640, cd=0.0313, cm=0.0600, cp=0.2890,  X=[-14 0 0 0 ]
+     0
+cT=-0.0287, cl=-1.4510, cd=0.0287, cm=0.0530, cp=0.2860,  X=[-13 0 0 0 ]
+     0
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 16)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',16,0)">line 16</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1104820628', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m', 60)" style="font-weight:bold">LiveEditorEvaluationHelperE1104820628</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m',60,0)">line 60</a>)
+    [~,cL(i),~,cD(i)] = calc_objective([AoA(i), 0, 0, 0]);} 
+-------------------------------------------------------------
+Scale    = 25.000 
+   150
+cT=-0.5977, X=-180
+   150
+cT=-0.7237, X=-176
+   150
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 16)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',16,0)">line 16</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1104820628', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m', 86)" style="font-weight:bold">LiveEditorEvaluationHelperE1104820628</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1104820628.m',86,0)">line 86</a>)
+        [~,~, cT(i, j), cD(i, j)] = calc_objective(sheeting_angle(j));} 
+cT=-0.5977, X=-180
+cT=-0.7237, X=-176
+cT=-0.8194, X=-173
+cT=-0.8478, X=-169
+cT=-0.7996, X=-165
+cT=-0.6370, X=-162
+cT=-0.4391, X=-158
+cT=-0.2398, X=-155
+cT=-0.0418, X=-151
+cT=0.1611, X=-147
+cT=0.3693, X=-144
+cT=0.5768, X=-140
+cT=0.7873, X=-136
+cT=0.9070, X=-133
+cT=0.9447, X=-129
+cT=0.9202, X=-125
+cT=0.8610, X=-122
+cT=0.7988, X=-118
+cT=0.7469, X=-115
+cT=0.7150, X=-111
+cT=0.7061, X=-107
+cT=0.7095, X=-104
+cT=0.7365, X=-100
+cT=0.7770, X=-96
+cT=0.8108, X=-93
+cT=0.8677, X=-89
+cT=0.9150, X=-85
+cT=0.9798, X=-82
+cT=1.0386, X=-78
+cT=1.0639, X=-75
+cT=1.1091, X=-71
+cT=1.1344, X=-67
+cT=1.1410, X=-64
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+cT=0.2999, X=-60
+cT=1.1529, X=-56
+cT=1.1359, X=-53
+cT=1.1187, X=-49
+cT=1.0687, X=-45
+cT=1.0374, X=-42
+cT=0.9891, X=-38
+cT=0.9238, X=-35
+cT=0.8667, X=-31
+cT=0.8123, X=-27
+cT=0.7726, X=-24
+cT=0.3190, X=-20
+cT=0.3640, X=-16
+cT=0.4212, X=-13
+cT=0.4930, X=-9
+cT=0.5748, X=-5
+cT=0.6683, X=-2
+cT=0.7663, X=2
+cT=0.8534, X=5
+cT=0.8987, X=9
+cT=0.8802, X=13
+cT=0.7708, X=16
+cT=0.5670, X=20
+cT=0.3633, X=24
+cT=0.1600, X=27
+cT=-0.0424, X=31
+cT=-0.2446, X=35
+cT=-0.4468, X=38
+cT=-0.6498, X=42
+cT=-0.8207, X=45
+cT=-0.8855, X=49
+cT=-0.8750, X=53
+cT=-0.8034, X=56
+cT=-0.7095, X=60
+cT=-0.6135, X=64
+cT=-0.5263, X=67
+cT=-0.4497, X=71
+cT=-0.3855, X=75
+cT=-0.3341, X=78
+cT=15.7037, X=82
+cT=0.2702, X=85
+cT=0.3589, X=89
+cT=0.4497, X=93
+cT=0.5522, X=96
+cT=0.6404, X=100
+cT=0.7147, X=104
+cT=0.7635, X=107
+cT=0.7886, X=111
+cT=0.8459, X=115
+cT=0.8436, X=118
+cT=0.8433, X=122
+cT=0.8356, X=125
+cT=0.8126, X=129
+cT=0.7454, X=133
+cT=0.6992, X=136
+cT=0.6187, X=140
+cT=0.5514, X=144
+cT=0.4637, X=147
+cT=0.3715, X=151
+cT=0.2607, X=155
+cT=0.1587, X=158
+cT=0.0449, X=162
+cT=-0.0732, X=165
+cT=-0.1992, X=169
+cT=-0.3297, X=173
+cT=-0.4628, X=176
+cT=-0.5977, X=180
+Elapsed time is 136.157326 seconds.
+cT=-0.0411, X=-180
+cT=-0.1280, X=-176
+cT=0.2786, X=-173
+cT=-0.3324, X=-169
+cT=-0.4573, X=-165
+cT=-0.5986, X=-162
+cT=-0.7612, X=-158
+cT=-0.9337, X=-155
+cT=-1.1215, X=-151
+cT=-1.3078, X=-147
+cT=-1.4611, X=-144
+cT=-1.5222, X=-140
+cT=-1.4581, X=-136
+cT=-1.2157, X=-133
+cT=-0.8669, X=-129
+cT=-0.5186, X=-125
+cT=-0.1700, X=-122
+cT=0.1799, X=-118
+cT=0.5345, X=-115
+cT=0.8877, X=-111
+cT=1.2438, X=-107
+cT=1.4968, X=-104
+cT=1.5765, X=-100
+cT=1.5372, X=-96
+cT=1.4133, X=-93
+cT=1.2653, X=-89
+cT=1.1239, X=-85
+cT=1.0060, X=-82
+cT=0.9078, X=-78
+cT=0.8409, X=-75
+cT=0.7958, X=-71
+cT=1.2764, X=-67
+cT=0.7586, X=-64
+cT=0.7595, X=-60
+cT=0.7683, X=-56
+cT=0.7788, X=-53
+cT=0.8053, X=-49
+cT=0.8200, X=-45
+cT=0.8238, X=-42
+cT=0.8352, X=-38
+cT=0.8527, X=-35
+cT=0.8603, X=-31
+cT=0.8574, X=-27
+cT=0.8577, X=-24
+cT=0.8278, X=-20
+cT=0.8301, X=-16
+cT=0.8065, X=-13
+cT=0.7875, X=-9
+cT=0.7719, X=-5
+cT=0.7580, X=-2
+cT=0.7546, X=2
+cT=0.7619, X=5
+cT=0.5378, X=9
+cT=0.6051, X=13
+cT=0.6995, X=16
+cT=0.8166, X=20
+cT=0.9553, X=24
+cT=1.1115, X=27
+cT=1.2807, X=31
+cT=1.4386, X=35
+cT=1.5428, X=38
+cT=1.5350, X=42
+cT=1.3948, X=45
+cT=1.0603, X=49
+cT=0.7067, X=53
+cT=0.3555, X=56
+cT=0.0048, X=60
+cT=-0.3460, X=64
+cT=-0.6963, X=67
+cT=-1.0493, X=71
+cT=-1.3834, X=75
+cT=-1.5238, X=78
+cT=-1.5368, X=82
+cT=-1.4331, X=85
+cT=-1.2758, X=89
+cT=-1.1073, X=93
+cT=-0.9516, X=96
+cT=-0.8133, X=100
+cT=-0.6965, X=104
+cT=-0.6021, X=107
+cT=-0.5205, X=111
+cT=-0.1730, X=115
+cT=-0.0833, X=118
+cT=-0.0086, X=122
+cT=0.0658, X=125
+cT=0.1320, X=129
+cT=0.1938, X=133
+cT=0.2433, X=136
+cT=0.2677, X=140
+cT=0.2821, X=144
+cT=0.2947, X=147
+cT=0.2967, X=151
+cT=0.2969, X=155
+cT=0.2826, X=158
+cT=0.2516, X=162
+cT=0.2034, X=165
+cT=0.1574, X=169
+cT=0.0974, X=173
+cT=0.0311, X=176
+cT=-0.0411, X=180
+Elapsed time is 135.680963 seconds.
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+cT=-0.3170, X=-180
+cT=-0.3180, X=-176
+cT=-0.3240, X=-173
+cT=-0.3330, X=-169
+cT=-0.3470, X=-165
+cT=-0.3660, X=-162
+cT=-0.3890, X=-158
+cT=-0.4180, X=-155
+cT=-0.4540, X=-151
+cT=-0.5000, X=-147
+cT=-0.5580, X=-144
+cT=-0.6310, X=-140
+cT=-0.7230, X=-136
+cT=-0.8370, X=-133
+cT=-0.9800, X=-129
+cT=-1.1430, X=-125
+cT=-1.3290, X=-122
+cT=-1.5240, X=-118
+cT=-1.6970, X=-115
+cT=-1.7870, X=-111
+cT=-1.7410, X=-107
+cT=-1.5220, X=-104
+cT=-1.1150, X=-100
+cT=-0.7090, X=-96
+cT=-0.3040, X=-93
+cT=0.1010, X=-89
+cT=0.5060, X=-85
+cT=0.9120, X=-82
+cT=1.3190, X=-78
+cT=1.6610, X=-75
+cT=1.7820, X=-71
+cT=1.7600, X=-67
+cT=1.6160, X=-64
+cT=1.4270, X=-60
+cT=1.2340, X=-56
+cT=1.0600, X=-53
+cT=0.9050, X=-49
+cT=0.7760, X=-45
+cT=0.6740, X=-42
+cT=0.5920, X=-38
+cT=0.5270, X=-35
+cT=0.4760, X=-31
+cT=0.4340, X=-27
+cT=0.4020, X=-24
+cT=0.3770, X=-20
+cT=0.3560, X=-16
+cT=0.3400, X=-13
+cT=0.3280, X=-9
+cT=0.3210, X=-5
+cT=0.3170, X=-2
+cT=0.3170, X=2
+cT=0.3210, X=5
+cT=0.3280, X=9
+cT=0.3400, X=13
+cT=0.3560, X=16
+cT=0.3770, X=20
+cT=0.4020, X=24
+cT=0.4340, X=27
+cT=0.4760, X=31
+cT=0.5270, X=35
+cT=0.5920, X=38
+cT=0.6740, X=42
+cT=0.7760, X=45
+cT=0.9050, X=49
+cT=1.0590, X=53
+cT=1.2340, X=56
+cT=1.4270, X=60
+cT=1.6160, X=64
+cT=1.7600, X=67
+cT=1.7820, X=71
+cT=1.6610, X=75
+cT=1.3190, X=78
+cT=0.9120, X=82
+cT=0.5060, X=85
+cT=0.1010, X=89
+cT=-0.3040, X=93
+cT=-0.7090, X=96
+cT=-1.1150, X=100
+cT=-1.5220, X=104
+cT=-1.7410, X=107
+cT=-1.7870, X=111
+cT=-1.6970, X=115
+cT=-1.5240, X=118
+cT=-1.3290, X=122
+cT=-1.1430, X=125
+cT=-0.9800, X=129
+cT=-0.8370, X=133
+cT=-0.7230, X=136
+cT=-0.6310, X=140
+cT=-0.5580, X=144
+cT=-0.5000, X=147
+cT=-0.4540, X=151
+cT=-0.4180, X=155
+cT=-0.3890, X=158
+cT=-0.3660, X=162
+cT=-0.3470, X=165
+cT=-0.3330, X=169
+cT=-0.3240, X=173
+cT=-0.3180, X=176
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+cT=-0.3170, X=180
+Elapsed time is 135.946730 seconds.
+cT=-0.7603, X=-180
+cT=-0.7648, X=-176
+cT=-0.7820, X=-173
+cT=-0.8054, X=-169
+cT=-0.8239, X=-165
+cT=-0.8229, X=-162
+cT=-0.8493, X=-158
+cT=-0.8383, X=-155
+cT=-0.8523, X=-151
+cT=-0.8465, X=-147
+cT=-0.8559, X=-144
+cT=-0.8469, X=-140
+cT=-0.8175, X=-136
+cT=-0.8092, X=-133
+cT=-0.7976, X=-129
+cT=-0.7689, X=-125
+cT=-0.7581, X=-122
+cT=-0.7561, X=-118
+cT=-0.7631, X=-115
+cT=-0.7815, X=-111
+cT=-0.8154, X=-107
+cT=-0.8713, X=-104
+cT=-0.9520, X=-100
+cT=-1.0623, X=-96
+cT=-1.1927, X=-93
+cT=-1.3402, X=-89
+cT=-1.4807, X=-85
+cT=-1.5712, X=-82
+cT=-1.5523, X=-78
+cT=-1.4055, X=-75
+cT=-1.0669, X=-71
+cT=-0.7105, X=-67
+cT=-0.3551, X=-64
+cT=-0.0051, X=-60
+cT=0.3448, X=-56
+cT=0.6924, X=-53
+cT=1.0428, X=-49
+cT=1.3727, X=-45
+cT=1.5065, X=-42
+cT=1.5067, X=-38
+cT=1.3909, X=-35
+cT=1.2165, X=-31
+cT=1.0261, X=-27
+cT=0.8448, X=-24
+cT=0.6772, X=-20
+cT=0.5250, X=-16
+cT=0.3926, X=-13
+cT=0.2790, X=-9
+cT=0.1722, X=-5
+cT=0.0836, X=-2
+cT=0.0062, X=2
+cT=-0.0622, X=5
+cT=-0.1356, X=9
+cT=-0.1934, X=13
+cT=-0.2333, X=16
+cT=-0.2594, X=20
+cT=-0.2998, X=24
+cT=-0.3083, X=27
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+cT=0.1846, X=31
+cT=-0.2915, X=35
+cT=-0.2687, X=38
+cT=-0.2466, X=42
+cT=-0.2151, X=45
+cT=-0.1544, X=49
+cT=-0.0961, X=53
+cT=-0.0315, X=56
+cT=0.0411, X=60
+cT=0.1275, X=64
+cT=0.2231, X=67
+cT=0.5631, X=71
+cT=0.6472, X=75
+cT=0.7519, X=78
+cT=0.8816, X=82
+cT=1.0269, X=85
+cT=1.1903, X=89
+cT=1.3579, X=93
+cT=1.4962, X=96
+cT=1.5462, X=100
+cT=1.4718, X=104
+cT=1.2241, X=107
+cT=0.8719, X=111
+cT=0.5216, X=115
+cT=0.1704, X=118
+cT=-0.1795, X=122
+cT=-0.5315, X=125
+cT=-0.8827, X=129
+cT=-1.2354, X=133
+cT=-1.4831, X=136
+cT=-1.5524, X=140
+cT=-1.5020, X=144
+cT=-1.3631, X=147
+cT=-1.1948, X=151
+cT=-1.0308, X=155
+cT=-0.8851, X=158
+cT=-0.7550, X=162
+cT=-0.6501, X=165
+cT=-0.5662, X=169
+cT=-0.7731, X=173
+cT=-0.7640, X=176
+cT=-0.7603, X=180
+Elapsed time is 140.587642 seconds.
+clear
+clc
+100*100
+ans =
+       10000
+Unrecognized function or variable 'AoA'.
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m', 110)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m',110,0)">line 110</a>)
+cT = zeros(length(yaw), length(AoA));
+
+Unrecognized function or variable 'AoA'.
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m', 115)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m',115,0)">line 115</a>)
+    for j = 1:length(AoA)
+
+Unrecognized function or variable 'AoA'.
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m', 115)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m',115,0)">line 115</a>)
+    for j = 1:length(AoA)
+
+Unrecognized function or variable 'AWA'.
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('runme_Alexandre', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m', 115)" style="font-weight:bold">runme_Alexandre</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\runme_Alexandre.m',115,0)">line 115</a>)
+    for j = 1:length(AWA)
+
+cT=-0.7603, cl=-0.4640, cd=0.7169, cm=2.8400, cp=6.3650,  X=[-180 -176 -173 -169 ]
+cT=-0.7603, cl=-0.4640, cd=0.7169, cm=2.8400, cp=6.3650,  X=[-180 -176 -173 -169 ]
+cT=-0.7603, cl=-0.4640, cd=0.7169, cm=2.8400, cp=6.3650,  X=[-180 -176 -173 -169 ]
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 15)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',15,0)">line 15</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1085780198', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1085780198.m', 116)" style="font-weight:bold">LiveEditorEvaluationHelperE1085780198</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1085780198.m',116,0)">line 116</a>)
+        [~,~,cT(i, j),~] = calc_objective(sheeting_angle);} 
+-------------------------------------------------------------
+Scale    = 25.000 
+cT=-0.0096, X=-180
+cT=-0.0095, X=-176
+cT=-0.0103, X=-173
+cT=-0.0110, X=-169
+cT=-0.0113, X=-165
+cT=-0.0112, X=-162
+cT=-0.0060, X=-158
+cT=-0.0055, X=-155
+cT=-0.0048, X=-151
+cT=-0.0042, X=-147
+cT=-0.0037, X=-144
+cT=-0.0033, X=-140
+cT=-0.0030, X=-136
+cT=-0.0031, X=-133
+cT=-0.0173, X=-129
+cT=-0.5927, X=-125
+cT=-0.6769, X=-122
+cT=-0.7517, X=-118
+cT=-0.8418, X=-115
+cT=-0.9257, X=-111
+cT=-1.0128, X=-107
+cT=-1.0808, X=-104
+cT=-1.1071, X=-100
+cT=-1.1220, X=-96
+cT=-1.1384, X=-93
+cT=-1.1424, X=-89
+cT=-1.1463, X=-85
+cT=-1.1299, X=-82
+cT=-1.0851, X=-78
+cT=-1.0165, X=-75
+cT=-0.9591, X=-71
+cT=-0.8789, X=-67
+cT=-0.8001, X=-64
+cT=-0.7215, X=-60
+cT=-0.6325, X=-56
+cT=-1.5531, X=-53
+cT=-0.4646, X=-49
+cT=-0.3827, X=-45
+cT=-0.3097, X=-42
+cT=-0.2444, X=-38
+cT=-0.1903, X=-35
+cT=-0.1437, X=-31
+cT=-0.1054, X=-27
+cT=-0.0760, X=-24
+cT=-0.0543, X=-20
+cT=-0.0388, X=-16
+cT=-0.0281, X=-13
+cT=-0.0208, X=-9
+cT=-0.0159, X=-5
+cT=-0.0098, X=-2
+cT=-0.0100, X=2
+cT=-0.0159, X=5
+cT=-0.0208, X=9
+cT=-0.0281, X=13
+cT=-0.0388, X=16
+cT=-0.0543, X=20
+cT=-0.0762, X=24
+cT=-0.1056, X=27
+cT=-0.1438, X=31
+cT=-0.1900, X=35
+cT=-0.2453, X=38
+cT=-0.3087, X=42
+cT=-0.3845, X=45
+cT=-0.4624, X=49
+cT=-1.5569, X=53
+cT=-0.6287, X=56
+cT=-0.7153, X=60
+cT=-0.7988, X=64
+cT=-0.8734, X=67
+cT=-0.9662, X=71
+cT=-1.0304, X=75
+cT=-1.0656, X=78
+cT=-1.1057, X=82
+cT=-1.1528, X=85
+cT=-1.1716, X=89
+cT=-1.1658, X=93
+cT=-1.1577, X=96
+cT=-1.0841, X=100
+cT=-1.0662, X=104
+cT=-0.9876, X=107
+cT=-0.9134, X=111
+cT=-0.8336, X=115
+cT=-0.7470, X=118
+cT=-0.6658, X=122
+cT=-0.5850, X=125
+cT=-0.0173, X=129
+cT=-0.0031, X=133
+cT=-0.0030, X=136
+cT=-0.0033, X=140
+cT=-0.0037, X=144
+cT=-0.0042, X=147
+cT=-0.0048, X=151
+cT=-0.0055, X=155
+cT=-0.0060, X=158
+cT=-0.0112, X=162
+cT=-0.0113, X=165
+cT=-0.0110, X=169
+cT=-0.0104, X=173
+cT=-0.0095, X=176
+cT=-0.0096, X=180
+Elapsed time is 103.249059 seconds.
+cT=-0.0156, X=-180
+cT=-0.0293, X=-176
+cT=-0.0429, X=-173
+cT=-0.0563, X=-169
+cT=-0.0654, X=-165
+cT=-0.0630, X=-162
+cT=-0.0607, X=-158
+cT=-0.0550, X=-155
+cT=-0.0482, X=-151
+cT=-0.0417, X=-147
+cT=-0.0359, X=-144
+cT=-0.0307, X=-140
+cT=-0.0266, X=-136
+cT=-0.0238, X=-133
+cT=-0.5683, X=-129
+cT=-0.6555, X=-125
+cT=-0.7313, X=-122
+cT=-0.8048, X=-118
+cT=-0.8918, X=-115
+cT=-0.9777, X=-111
+cT=-1.0504, X=-107
+cT=-1.0740, X=-104
+cT=-1.1437, X=-100
+cT=-1.1337, X=-96
+cT=-1.1651, X=-93
+cT=-1.1535, X=-89
+cT=-1.1636, X=-85
+cT=-1.1321, X=-82
+cT=-1.0513, X=-78
+cT=-1.0040, X=-75
+cT=-0.9452, X=-71
+cT=-0.8403, X=-67
+cT=-0.7609, X=-64
+cT=-0.6839, X=-60
+cT=-0.6043, X=-56
+cT=-0.5239, X=-53
+cT=-0.4439, X=-49
+cT=-0.3720, X=-45
+cT=-0.3038, X=-42
+cT=-0.2525, X=-38
+cT=-0.2073, X=-35
+cT=-0.1706, X=-31
+cT=-0.1422, X=-27
+cT=-0.1208, X=-24
+cT=-0.1019, X=-20
+cT=-0.0837, X=-16
+cT=-0.0627, X=-13
+cT=-0.0438, X=-9
+cT=-0.0233, X=-5
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 15)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',15,0)">line 15</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1085780198', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1085780198.m', 116)" style="font-weight:bold">LiveEditorEvaluationHelperE1085780198</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1085780198.m',116,0)">line 116</a>)
+        [~,~,cT(i, j),~] = calc_objective(sheeting_angle(j));} 
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('internal.matlab.desktop.editor.clearAndSetBreakpointsForFile')" style="font-weight:bold">internal.matlab.desktop.editor.clearAndSetBreakpointsForFile</a>} 
+cT=-0.0096, X=-180
+Elapsed time is 1.046589 seconds.
+cT=-0.0095, X=-176
+Elapsed time is 1.060174 seconds.
+cT=-0.0103, X=-173
+Elapsed time is 1.033738 seconds.
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Mesh2Java')" style="font-weight:bold">Mesh2Java</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 8)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',8,0)">line 8</a>)
+    Mesh2Java(X); % Generates Java-scale mesh-file
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1085780198', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1085780198.m', 117)" style="font-weight:bold">LiveEditorEvaluationHelperE1085780198</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1085780198.m',117,0)">line 117</a>)
+        [~,~,cT(i, j),~] = calc_objective(sheeting_angle(j));} 
+50*20
+ans =
+        1000
+50*50
+ans =
+        2500
+100*100
+ans =
+       10000
+/3600
+ /3600
+ ↑
+{Invalid use of operator.
+} 
+100*100/3600
+ans =
+    2.7778
+80*80/3600
+ans =
+    1.7778
+cT=-0.0096, X=-180
+Elapsed time is 1.280568 seconds.
+cT=-0.0096, X=180
+Elapsed time is 1.050609 seconds.
+Elapsed time is 1.050818 seconds.
+cT=0.0101, X=-180
+Elapsed time is 1.064372 seconds.
+cT=0.0101, X=180
+Elapsed time is 1.030277 seconds.
+Elapsed time is 1.030430 seconds.
+cT=-0.0096, X=-180
+cT=-0.0101, X=0
+cT=-0.0096, X=180
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 15)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',15,0)">line 15</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1085780198', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1085780198.m', 116)" style="font-weight:bold">LiveEditorEvaluationHelperE1085780198</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1085780198.m',116,0)">line 116</a>)
+        [~,~,cT(i, j),~] = calc_objective(sheeting_angle(j));} 
+cT=-0.0096, X=-180
+cT=-0.0101, X=0
+cT=-0.0096, X=180
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+cT=-0.3170, X=-180
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+cT=0.3170, X=0
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+cT=-0.3170, X=180
+cT=0.0101, X=-180
+cT=0.0096, X=0
+cT=0.0101, X=180
+Elapsed time is 9.337326 seconds.
+[Warning: Error updating Text.
+
+ String scalar or character vector must have valid interpreter syntax:
+sheeting angle $\delta_s$ (º)
+] 
+load('cT_SA_AWA.mat')
+clear
+load('cT_SA_AWA.mat')
+load('cT_SA_AWA.mat')
+cT=0.0101, X=-180
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 15)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',15,0)">line 15</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE1085780198', 'C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1085780198.m', 116)" style="font-weight:bold">LiveEditorEvaluationHelperE1085780198</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_nxoyp\LiveEditorEvaluationHelperE1085780198.m',116,0)">line 116</a>)
+        [~,~,cT(i, j),~] = calc_objective(sheeting_angle(j));} 
+cT=0.0101, X=-180
+cT=0.0096, X=0
+cT=0.0101, X=180
+cT=0.0101, X=-180
+cT=0.0096, X=0
+cT=0.0101, X=180
+cT=0.0101, X=-180
+cT=0.0096, X=0
+cT=0.0101, X=180
+Elapsed time is 9.146721 seconds.
+[Warning: Error updating Text.
+
+ String scalar or character vector must have valid interpreter syntax:
+sheeting angle $\delta_s$ (º)
+] 
+cT=0.0101, X=-180
+cT=0.0096, X=0
+cT=0.0101, X=180
+cT=0.0101, X=-180
+cT=0.0096, X=0
+cT=0.0101, X=180
+cT=0.0101, X=-180
+cT=0.0096, X=0
+cT=0.0101, X=180
+Elapsed time is 9.197697 seconds.
+cT=0.0101, X=-180
+cT=0.0096, X=0
+cT=0.0101, X=180
+cT=0.0101, X=-180
+cT=0.0096, X=0
+cT=0.0101, X=180
+cT=0.0101, X=-180
+cT=0.0096, X=0
+cT=0.0101, X=180
+Elapsed time is 9.059740 seconds.
+cT=0.0101, X=-180
+cT=0.0096, X=0
+cT=0.0101, X=180
+cT=0.0101, X=-180
+cT=0.0096, X=0
+cT=0.0101, X=180
+cT=0.0101, X=-180
+cT=0.0096, X=0
+cT=0.0101, X=180
+Elapsed time is 9.569905 seconds.
+ESC_static_1D
+-------------------------------------------------------------
+Scale    = 25.000 
+Iteration 10
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective_mod', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective_mod.m', 11)" style="font-weight:bold">calc_objective_mod</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective_mod.m',11,0)">line 11</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('ESC_static_1D>@(sheeting_angle)(getfield(calc_objective_mod(sheeting_angle),''cT''))', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\ESC_static_1D.m', 22)" style="font-weight:bold">ESC_static_1D>@(sheeting_angle)(getfield(calc_objective_mod(sheeting_angle),'cT'))</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\ESC_static_1D.m',22,0)">line 22</a>)
+J = @(sheeting_angle)(getfield(calc_objective_mod(sheeting_angle), 'cT'));
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('ESC_static_1D', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\ESC_static_1D.m', 58)" style="font-weight:bold">ESC_static_1D</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\ESC_static_1D.m',58,0)">line 58</a>)
+    y(i) = J(sheet_angle(i));} 

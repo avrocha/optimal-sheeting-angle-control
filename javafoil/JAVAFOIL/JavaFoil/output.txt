@@ -1,0 +1,8 @@
+Name = C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL/JavaFoil/Mesh.txt
+Mach = 0; Re = 1000000; T.U. = 1.0; T.L. = 1.0
+Surface Finish = 1; Stall model = 0; Transition model = 1; Aspect Ratio = 0; ground effect = 0
+?	Cl	Cd	Cm 0.25	T.U.	T.L.	S.U.	S.L.	L/D	A.C.	C.P.
+[°]	[-]	[-]	[-]	[-]	[-]	[-]	[-]	[-]	[-]	[-]
+0.0	1.441	0.13064	-0.285	0.146	0.998	0.268	0.998	11.030	0.250	0.448
+
+
