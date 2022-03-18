@@ -39,13 +39,10 @@ ship.addRig(R1);
 % ship.addRig(R3);  
 % ship.addRig(R4);
 
-scale = calc_scale();
+calc_scale();
 ship.yaw = deg2rad(0);
 % X = -ship.yaw*[1 1 1 1] + deg2rad(10) + [0 1 0 0]*deg2rad(20); % The trim angles
 % [obj cl CT] = calc_objective(X);
-
-% You can now choose to focus on ship cL (upwards in the picture) or cT
-% which is the force in the ship direction.
 
 %% Test section
 ship.yaw = deg2rad(60);
@@ -104,9 +101,9 @@ ylabel('cT');
 legendCell = cellstr(num2str(rad2deg(yaw'), 'AWA=%.0dº'));
 legend(legendCell);
 
-%% cT surface - 1 sail [WIP]
-sheeting_angle = linspace(deg2rad(-180), deg2rad(180), 3);
-yaw = linspace(deg2rad(0), deg2rad(180), 3);
+%% cT surface - 1 sail
+sheeting_angle = linspace(deg2rad(-180), deg2rad(180));
+yaw = linspace(deg2rad(0), deg2rad(180));
 cT = zeros(length(yaw), length(sheeting_angle));
 
 tic
@@ -117,14 +114,88 @@ for i = 1: length(yaw)
     end
 end
 toc
-save('cT_SA_AWA.mat', 'cT')
 
 figure(10); clf(10); hold on;
 [X,Y] = meshgrid(rad2deg(yaw), rad2deg(sheeting_angle));
-surf(X, Y, cT)
+
+% Uncomment lines below to save struct
+% data.cT = cT;
+% data.x_grid = X';
+% data.y_grid = Y';
+% save('cT_SA_AWA.mat', 'data')
+
+surf(X', Y', cT)
 c = colorbar;
 c.Label.String = 'cT';
 
 title('cT(AWA, $\delta_s$)', 'Interpreter', 'Latex')
 xlabel('AWA [deg]', 'Interpreter', 'Latex');
 ylabel('sheeting angle $\delta_s$ [deg]', 'Interpreter', 'Latex');
+
+%% cT - Print surface
+load('cT_SA_AWA.mat')
+
+figure(10); clf(10); hold on;
+surf(data.x_grid, data.y_grid, data.cT)
+c = colorbar;
+c.Label.String = 'cT';
+
+for i = 1:size(data.y_grid, 1)
+%     [~, locs] = findpeaks(data.cT(i, :), 'MinPeakDistance', 3.6*2)
+    [~, locs] = max(data.cT(i, :));
+    plot3(data.x_grid(i,locs), data.y_grid(i,locs), data.cT(i, locs), 'r.', 'Markersize', 15)
+end
+
+title('cT(AWA, $\delta_s$)', 'Interpreter', 'Latex')
+xlabel('AWA [deg]', 'Interpreter', 'Latex');
+ylabel('sheeting angle $\delta_s$ [deg]', 'Interpreter', 'Latex');
+
+%% cT surface - 2 sail (fixed AWA)
+ship.yaw = deg2rad(45);
+ship.addRig(R2)
+scale = calc_scale();
+
+sheeting_angle_1 = linspace(deg2rad(-180), deg2rad(180));
+sheeting_angle_2 = linspace(deg2rad(-180), deg2rad(180));
+cT = zeros(length(sheeting_angle_1), length(sheeting_angle_2));
+
+tic
+for i = 1: length(sheeting_angle_1)
+    for j = 1:length(sheeting_angle_2)
+        [~,~,cT(i, j),~] = calc_objective([sheeting_angle_1(i), sheeting_angle_2(j)]);
+    end
+end
+toc
+
+figure(10); clf(10); hold on;
+[X,Y] = meshgrid(rad2deg(sheeting_angle_1), rad2deg(sheeting_angle_2));
+
+% Uncomment lines below to save struct
+% data.cT = cT;
+% data.x_grid = X';
+% data.y_grid = Y';
+% save('cT1_cT2_SA.mat', 'data')
+
+surf(X', Y', cT)
+c = colorbar;
+c.Label.String = 'cT';
+
+% Hardcode AWA for title
+title('cT($\delta_s^1, \delta_s^2$) | AWA = 45', 'Interpreter', 'Latex')
+xlabel('sheeting angle 1 $\delta_s^1$ [deg]', 'Interpreter', 'Latex');
+ylabel('sheeting angle 2 $\delta_s^2$ [deg]', 'Interpreter', 'Latex');
+
+%% cT 2D - Print surface
+load('cT1_cT2_SA.mat')
+
+cT = data.cT;
+cT(abs(cT) > 2.5) = nan;
+
+figure(10); clf(10); hold on;
+surf(data.x_grid, data.y_grid, cT)
+c = colorbar;
+c.Label.String = 'cT';
+
+title('cT($\delta_s^1, \delta_s^2$) | AWA = 45', 'Interpreter', 'Latex')
+xlabel('sheeting angle 1 $\delta_s^1$ [deg]', 'Interpreter', 'Latex');
+ylabel('sheeting angle 2 $\delta_s^2$ [deg]', 'Interpreter', 'Latex');
