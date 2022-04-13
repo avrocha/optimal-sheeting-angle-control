@@ -199,3 +199,19 @@ c.Label.String = 'cT';
 title('cT($\delta_s^1, \delta_s^2$) | AWA = 45', 'Interpreter', 'Latex')
 xlabel('sheeting angle 1 $\delta_s^1$ [deg]', 'Interpreter', 'Latex');
 ylabel('sheeting angle 2 $\delta_s^2$ [deg]', 'Interpreter', 'Latex');
+
+%% Hessian plot
+load('cT_SA_AWA.mat')
+
+AWA = 45;
+[~, i] = min(abs(data.x_grid(:, 1) - AWA));
+
+cT_1D = data.cT(26, :);
+
+figure;
+subplot(3,1,1)
+plot(linspace(-180, 180, length(cT_1D)), cT_1D, 'Linewidth', 2)
+subplot(3,1,2)
+plot(linspace(-180, 180, length(cT_1D)), gradient(cT_1D), 'Linewidth', 2)
+subplot(3,1,3)
+plot(linspace(-180, 180, length(cT_1D)), gradient(gradient(cT_1D)), 'Linewidth', 2)

@@ -1,0 +1,11 @@
+----13-Apr-2022 16:59:09----
+Params:
+HPF: fc = 0.050000
+Main dither: A = 0.034907, f = 1.000000e-01
+Ricatti Filter: wric = 0.031416
+Hessian estimate dither: Ahess =4.000000, whess = 0.100000
+Integrator gain: K = 0.002500
+Initial input value: 0.100000
+
+----13-Apr-2022 16:59:36----
+----13-Apr-2022 17:00:05----
