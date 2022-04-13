@@ -30,13 +30,15 @@ J = @(sheeting_angle)(getfield(calc_objective_mod(sheeting_angle), 'cT'));
 
 % Method
 % 'GB' for Gradient based or 'NB' for Newton based
-ES_method = 'NB';
+ES_method = 'GB';
 
 %% Simulation
 fs = 1; % sampling frequency (Hz)
 dt = 1/fs;
 T  = 300;
 N = length(0:dt:T);
+
+AWA = deg2rad(90) + deg2rad(30)*sin(2*pi/T * (0:dt:T));
 
 if strcmp(ES_method, 'GB')
     fprintf("Gradient-based ESC selected\n.")
@@ -47,10 +49,9 @@ if strcmp(ES_method, 'GB')
     fc            = 0.05; % HPF cutoff freq
     K             = 0.3750; % gain (>0 since extremum is maximum)
     
-    ship.yaw = deg2rad(45);
-    sheet_angle_0 = deg2rad(-15);
+    sheet_angle_0 = deg2rad(-45);
 
-    [sheet_angle, cT, cT_grad] = gbesc_1d(J, dt, N, f, A, fc, K, sheet_angle_0);
+    [sheet_angle, cT, cT_grad] = gbesc_1d(J, dt, N, f, A, fc, K, sheet_angle_0, AWA);
 
 elseif strcmp(ES_method, 'NB')
     fprintf("Newton-based ESC selected\n.")
@@ -65,10 +66,10 @@ elseif strcmp(ES_method, 'NB')
     wric          = 2 * pi * 0.05 * f; % ricatti filter parameter
     ric_0         = -100;
     
-    ship.yaw = deg2rad(45);
     sheet_angle_0 = deg2rad(-15);
 
-    [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv] = nbesc_1d(J, dt, N, f, A, fc, K, sheet_angle_0, Ahess, fhess, wric, ric_0);
+    [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv] = nbesc_1d(J, dt, N, f, A, fc, K, ...
+                                    sheet_angle_0, Ahess, fhess, wric, ric_0, AWA);
 
 else
     fprintf("Wrong method. Select either \'GB\' or \'NB\'.\n")
@@ -79,7 +80,6 @@ if strcmp(ES_method, 'GB')
     figure(1); clf(1); hold on;
     title('GB-ESC | Sheeting Angle')
     plot(0:dt:T, rad2deg(sheet_angle(1:end-1)), 'b-', 'Linewidth', 2)
-    plot(0:dt:T, -25*ones(N,1), 'r--', 'Linewidth', 1)
     xlabel('t (s)'), ylabel('$\delta_s$', 'Interpreter', 'Latex')
     
     figure(2); clf(2); hold on;
@@ -93,11 +93,15 @@ if strcmp(ES_method, 'GB')
     plot(0:dt:T, movmean(cT_grad, 10), 'r--', 'Linewidth', 1.3)
     xlabel('t (s)'), ylabel('$\hat{\zeta}$', 'Interpreter', 'Latex')
 
+    figure(4); clf(4); 
+    title('GB-ESC | AWA')
+    plot(0:dt:T, rad2deg(AWA), 'b-', 'Linewidth', 2)
+    xlabel('t (s)'), ylabel('deg (º)')
+
 elseif strcmp(ES_method, 'NB')
     figure(1); clf(1); hold on;
     title('NB-ESC | Sheeting Angle')
     plot(0:dt:T, rad2deg(sheet_angle(1:end-1)), 'b-', 'Linewidth', 2)
-    plot(0:dt:T, -25*ones(N,1), 'r--', 'Linewidth', 1)
     xlabel('t (s)'), ylabel('$\delta_s$', 'Interpreter', 'Latex')
     
     figure(2); clf(2); hold on;
@@ -123,25 +127,33 @@ elseif strcmp(ES_method, 'NB')
     plot(0:dt:T, movmean(cT_hessian_inv(2:end), 10), 'r--', 'Linewidth', 1.3)
     xlabel('t (s)'), ylabel('$\hat{H}^{-1}$', 'Interpreter', 'Latex')
 
+    figure(6); clf(6); 
+    title('NB-ESC | AWA')
+    plot(0:dt:T, rad2deg(AWA), 'b-', 'Linewidth', 2)
+    xlabel('t (s)'), ylabel('deg (º)')
+
 end
 
 %% Functions
-function [u, y, dy] = gbesc_1d(J, dt, N, f, A, fc, K, u0)
+function [u, y, dy] = gbesc_1d(J, dt, N, f, A, fc, K, u0, AWA)
     % Gradient-based extremum seeking controller for 1D static maps
     % Inputs:
-    % - J : optimization criterion [function handle]
-    % - dt: simulation step [s]
-    % - N : simulation lenght 
-    % - f : sinusoidal dither frequency [Hz]
-    % - A : sinusoidal dither amplitude [rad]
-    % - fc: HPF cut-off frequency [Hz]
-    % - K : integrator gain
-    % - u0: input initial value
+    % - J  : optimization criterion [function handle]
+    % - dt : simulation step [s]
+    % - N  : simulation lenght 
+    % - f  : sinusoidal dither frequency [Hz]
+    % - A  : sinusoidal dither amplitude [rad]
+    % - fc : HPF cut-off frequency [Hz]
+    % - K  : integrator gain
+    % - u0 : input initial value
+    % - AWA: time variant AWA
     % Outputs:
     % - u : control variable
     % - y : criterion output
     % - dy: criterion gradient estimate
-    
+   
+    global ship;
+
     % HPF
     bworder = 2;
     [b,a]   = butter(bworder, fc*dt, 'high');
@@ -159,8 +171,10 @@ function [u, y, dy] = gbesc_1d(J, dt, N, f, A, fc, K, u0)
             fprintf("Iteration %d\n", i);
         end
         t = i*dt;
+   
+        ship.yaw = AWA(i);
         y(i) = J(u(i));
-    
+        
         if i >= bworder+1
             for j = 1:bworder+1
                 hpf(i) = hpf(i) + b(j)*y(i-j+1);
@@ -202,6 +216,7 @@ function [u, y, dy, ddy, ddy_inv] = nbesc_1d(J, dt, N, f, A, fc, K, u0, Ahess, f
     % - fhess: hessian estimate dither frequency [HZ]
     % - wric : Ricatti filter parameter
     % - ddy0 : hessian inverse initial value
+    % - AWA  : time variant AWA
     % Outputs:
     % - u      : control variable
     % - y      : criterion output
@@ -209,6 +224,8 @@ function [u, y, dy, ddy, ddy_inv] = nbesc_1d(J, dt, N, f, A, fc, K, u0, Ahess, f
     % - ddy    : hessian estimate
     % - ddy_inv: hessian inverse estimate
     
+    global ship;
+
     % HPF
     bworder = 2;
     [b,a]   = butter(bworder, fc*dt, 'high');
@@ -228,6 +245,8 @@ function [u, y, dy, ddy, ddy_inv] = nbesc_1d(J, dt, N, f, A, fc, K, u0, Ahess, f
             fprintf("Iteration %d\n", i);
         end
         t = i*dt;
+
+        ship.yaw = AWA(i);
         y(i) = J(u(i));
         
         % HPF
