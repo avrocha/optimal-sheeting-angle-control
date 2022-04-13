@@ -24,8 +24,10 @@ function [obj,cl,CT,cd] = calc_objective(X)
     
     % hold on;zoom on
     % plot([cp cp],[-0.5 0.5],'k');%text(cp-0.02, .52,'cp','fontsize',16);
-    if length(X) > 1
+    if length(X) == 4
         title(sprintf('AWA=%0.1f  X=[%.0f/%.0f %.0f/%.0f],  cT=%.4f\n',rad2deg(ship.yaw), rad2deg(X(1)),rad2deg(X(2)),rad2deg(X(3)),rad2deg(X(4)),CT),'fontsize',16); %,rad2deg(X(5)),rad2deg(X(6)),rad2deg(X(7)),rad2deg(X(8))
+    elseif length(X) == 2
+        title(sprintf('AWA=%0.1f  X=[%.0f, %.0f], cT=%.4f\n',rad2deg(ship.yaw), rad2deg(X(1)), rad2deg(X(2)), CT),'fontsize',16);
     elseif length(X) == 1
         title(sprintf('AWA=%0.1f  X=%.0f,  cT=%.4f\n',rad2deg(ship.yaw), rad2deg(X), CT),'fontsize',16);
     else
@@ -37,16 +39,17 @@ function [obj,cl,CT,cd] = calc_objective(X)
     
     counter=counter+1;
     %saveas(gcf,['pix/bild',num2str(counter)],'png');
-    
-    if length(X) > 1
-        fprintf('cT=%.4f, ',CT);
-        fprintf('cl=%.4f, ',cl);
-        fprintf('cd=%.4f, ',cd);
-        fprintf('cm=%.4f, ',cm);
-        fprintf('cp=%.4f, ',cp);
-        fprintf(' X=[%.0f %.0f %.0f %.0f ]\n',rad2deg(X(1)),rad2deg(X(2)),rad2deg(X(3)),rad2deg(X(4)));
+    fprintf('cT=%.4f, ',CT);
+    fprintf('cl=%.4f, ',cl);
+    fprintf('cd=%.4f, ',cd);
+    fprintf('cm=%.4f, ',cm);
+    fprintf('cp=%.4f, ',cp);
+    if length(X) == 4
+        fprintf('X=[%.0f %.0f %.0f %.0f ]\n',rad2deg(X(1)),rad2deg(X(2)),rad2deg(X(3)),rad2deg(X(4)));
+    elseif length(X) == 2
+        fprintf('X=[%.0f %.0f]\n', rad2deg(X(1)), rad2deg(X(2)));
     elseif length(X) == 1
-         fprintf('cT=%.4f, X=%.0f\n',CT, rad2deg(X));
+        fprintf('X=%.0f\n', rad2deg(X));
     else
        disp('Error')
        quit    
