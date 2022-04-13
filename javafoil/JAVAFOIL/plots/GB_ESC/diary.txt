@@ -1,18 +1,18 @@
-----13-Apr-2022 17:20:06----
-Params:
-HPF: fc = 0.050000
-Main dither: A = 0.034907, f = 1.000000e-01
-Integrator gain: K = 0.375000
-Initial input value: -0.261799
-
-----13-Apr-2022 17:24:18----
-Params:
-HPF: fc = 0.050000
-Main dither: A = 0.034907, f = 1.000000e-01
-Integrator gain: K = 0.375000
-Initial input value: -0.261799
-
 ----13-Apr-2022 17:24:40----
+Params:
+HPF: fc = 0.050000
+Main dither: A = 0.034907, f = 1.000000e-01
+Integrator gain: K = 0.375000
+Initial input value: -0.261799
+
+----13-Apr-2022 18:17:18----
+Params:
+HPF: fc = 0.050000
+Main dither: A = 0.034907, f = 1.000000e-01
+Integrator gain: K = 0.002500
+Initial input value: -0.261799
+
+----13-Apr-2022 18:23:32----
 Params:
 HPF: fc = 0.050000
 Main dither: A = 0.034907, f = 1.000000e-01

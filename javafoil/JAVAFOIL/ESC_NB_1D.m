@@ -32,8 +32,8 @@ f = 0.1; % perturbation frequency (Hz)
 A = deg2rad(2); % perturbation amplitude (rad)
 
 % HPF
-fc      = 0.05; % cutoff frequency (Hz) (has to be high enough)
 bworder = 2;
+fc      = 0.05; % cutoff frequency (Hz) (has to be high enough)
 [b,a]   = butter(bworder, fc*dt, 'high');
 
 % Integrator
@@ -52,9 +52,8 @@ sheet_angle_hat = [sheet_angle_0; zeros(N, 1)];
 sheet_angle     = [sheet_angle_0; zeros(N, 1)];
 y               = zeros(N, 1);
 grad_est        = zeros(N, 1);
-filter_out      = zeros(N, 1);
+hpf_out         = zeros(N, 1);
 hessian_est     = zeros(N, 1);
-% [WIP] Test different inv(hess) init values
 hessian_inv_est = [-100; zeros(N, 1)]; % output of ricatti filter
 
 ship.yaw = deg2rad(45); % AWA
@@ -69,19 +68,19 @@ for i = 1:N
     % HPF
     if i >= bworder+1
         for j = 1:bworder+1
-            filter_out(i) = filter_out(i) + b(j)*y(i-j+1);
+            hpf_out(i) = hpf_out(i) + b(j)*y(i-j+1);
         end
 
         for j = 2:bworder+1
-            filter_out(i) = filter_out(i) - a(j)*filter_out(i-j+1);
+            hpf_out(i) = hpf_out(i) - a(j)*hpf_out(i-j+1);
         end
         
-        filter_out(i) = 1/a(1) * filter_out(i);
+        hpf_out(i) = 1/a(1) * hpf_out(i);
     end
     
-    grad_est(i)          = filter_out(i) * sin(2*pi*f*t); % M(t)y_hp
+    grad_est(i)          = hpf_out(i) * sin(2*pi*f*t); % M(t)y_hp
     
-    hessian_est(i)       = filter_out(i) * Ahess * (sin(2*pi*fhess*t)^2 - 0.5); % \hat{H} = N(t)y_hp
+    hessian_est(i)       = hpf_out(i) * Ahess * (sin(2*pi*fhess*t)^2 - 0.5); % \hat{H} = N(t)y_hp
     
     hessian_inv_est(i+1) = hessian_inv_est(i) + dt * (wric * hessian_inv_est(i) - ...
         wric * hessian_inv_est(i)^2 * hessian_est(i)); % Euler discretization of Ricatti equation
@@ -97,19 +96,19 @@ toc
 
 %% Plots
 % % Directory to save plots
-% filename = 'plots\NB_ESC\';
-% 
-% % Save last params in diary.txt
-% fileID = fopen(strcat(filename,'diary.txt'),'a');
-% fprintf(fileID, "----%s----\n", datetime('now','TimeZone','local','Format','d-MMM-y HH:mm:ss'));
-% fprintf(fileID,['Params:\n'...
-%                 'HPF: fc = %f\n'...
-%                 'Main dither: A = %f, f = %d\n'...
-%                 'Ricatti Filter: wric = %f\n'...
-%                 'Hessian estimate dither: Ahess =%f, whess = %f\n'...
-%                 'Integrator gain: K = %f\n'...
-%                 'Initial input value: %f\n\n'], [fc; A; f; wric; Ahess; fhess; K; sheet_angle_0]);
-% fclose(fileID);
+filename = 'plots\NB_ESC\';
+
+% Save last params in diary.txt
+fileID = fopen(strcat(filename,'diary.txt'),'a');
+fprintf(fileID, "----%s----\n", datetime('now','TimeZone','local','Format','d-MMM-y HH:mm:ss'));
+fprintf(fileID,['Params:\n'...
+                'HPF: fc = %f\n'...
+                'Main dither: A = %f, f = %d\n'...
+                'Ricatti Filter: wric = %f\n'...
+                'Hessian estimate dither: Ahess =%f, whess = %f\n'...
+                'Integrator gain: K = %f\n'...
+                'Initial input value: %f\n\n'], [fc; A; f; wric; Ahess; fhess; K; sheet_angle_0]);
+fclose(fileID);
 
 figure(1); clf(1); hold on;
 title('NB-ESC | Sheeting Angle')
