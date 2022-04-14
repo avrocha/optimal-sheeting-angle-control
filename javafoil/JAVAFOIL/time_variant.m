@@ -30,9 +30,9 @@ J = @(sheeting_angle)(getfield(calc_objective_mod(sheeting_angle), 'cT'));
 
 % Method
 % 'GB' for Gradient based or 'NB' for Newton based
-ES_method = 'GB';
+ES_method = 'NB';
 % 1 to save figures and diary or 0 to plot figures and print diary
-save = 1; 
+save = 0; 
 
 %% Simulation
 fs = 1; % sampling frequency (Hz)
@@ -40,7 +40,7 @@ dt = 1/fs;
 T  = 1000;
 N = length(0:dt:T);
 
-AWA = deg2rad(45) + deg2rad(30)*sin(2*pi/T * (0:dt:T));
+AWA = deg2rad(45) + deg2rad(30)*sin(2*pi/T * (0:dt:T)) + deg2rad(normrnd(0,1,1,N)); 
 sheet_angle_0 = deg2rad(0);
 
 if strcmp(ES_method, 'GB')
@@ -76,12 +76,23 @@ else
 end
 
 %% Plots
-dir = strcat('plots\',ES_method,'_ESC\time_variant\');
+dir = strcat('plots\',ES_method,'_ESC\time_variant\dist\');
 if save == 1
     fileID = fopen(strcat(dir,'diary.txt'),'a');
 elseif save == 0
     fileID = 1;
 end
+
+% Get reference from structure
+    load('cT_SA_AWA.mat')
+    sheet_angle_ref = zeros(length(AWA), 1);
+    cT_ref          = zeros(length(AWA), 1);
+    [~, iy_max] = min(abs(data.y_grid(1, :) - 20));
+    for i = 1:length(AWA)
+        [~, ix] = min(abs(data.x_grid(:, 1) - rad2deg(AWA(i))));
+        [cT_ref(i), iy] = max(data.cT(ix, 1:iy_max));
+        sheet_angle_ref(i) = data.y_grid(1,iy);
+    end
 
 if strcmp(ES_method, 'GB')
     % Print/Save params
@@ -95,11 +106,13 @@ if strcmp(ES_method, 'GB')
     if save == 1
         fclose(fileID);
     end
-
+    
     figure(1); clf(1); hold on;
     title('GB-ESC | Sheeting Angle')
     plot(0:dt:T, rad2deg(sheet_angle(1:end-1)), 'b-', 'Linewidth', 2)
-    xlabel('t (s)'), ylabel('$\delta_s$', 'Interpreter', 'Latex')
+    plot(0:dt:T, sheet_angle_ref, 'r--', 'Linewidth', 1.3)
+    xlabel('t [s]'), ylabel('deg [º]')
+    legend('$\delta_s$', '$\delta_s^*$', 'Interpreter', 'Latex')
     if save == 1
         filename = fullfile(strcat(dir,'delta.fig'));
         saveas(figure(1), filename);
@@ -108,17 +121,19 @@ if strcmp(ES_method, 'GB')
     figure(2); clf(2); hold on;
     title('GB-ESC | Thrust Coeff')
     plot(0:dt:T, cT, 'b-', 'Linewidth', 2)
-    xlabel('t (s)'), ylabel('$cT$', 'Interpreter', 'Latex')
+    plot(0:dt:T, cT_ref, 'r--', 'Linewidth', 1.3)
+    xlabel('t [s]')
+    legend('cT', 'cT opt')
     if save == 1
         filename = fullfile(strcat(dir,'cT.fig'));
         saveas(figure(2), filename);
     end
 
     figure(3); clf(3); hold on;
-    title('GB-ESC | Gradient Estimate')
+    title('GB-ESC | Gradient Estimate $\hat{\zeta}$', 'Interpreter', 'Latex')
     plot(0:dt:T, cT_grad, 'b-', 'Linewidth', 2)
     plot(0:dt:T, movmean(cT_grad, 10), 'r--', 'Linewidth', 1.3)
-    xlabel('t (s)'), ylabel('$\hat{\zeta}$', 'Interpreter', 'Latex')
+    xlabel('t [s]')
     if save == 1
         filename = fullfile(strcat(dir,'cT_grad.fig'));
         saveas(figure(3), filename);
@@ -144,51 +159,57 @@ elseif strcmp(ES_method, 'NB')
                     'Hessian estimate dither: Ahess =%f, whess = %f\n'...
                     'Integrator gain: K = %f\n'...
                     'Initial input value: %f\n\n'], [min(rad2deg(AWA)); max(rad2deg(AWA)); fc; A; f; wric; Ahess; fhess; K; sheet_angle_0]);
-    fclose(fileID);
+    if save == 1
+        fclose(fileID);
+    end
     
     figure(1); clf(1); hold on;
     title('NB-ESC | Sheeting Angle')
     plot(0:dt:T, rad2deg(sheet_angle(1:end-1)), 'b-', 'Linewidth', 2)
-    xlabel('t (s)'), ylabel('$\delta_s$', 'Interpreter', 'Latex')
+    plot(0:dt:T, sheet_angle_ref, 'r--', 'Linewidth', 1.3)
+    xlabel('t [s]'), ylabel('deg [º]')
+    legend('$\delta_s$', '$\delta_s^*$', 'Interpreter', 'Latex')
     if save == 1
         filename = fullfile(strcat(dir,'delta.fig'));
         saveas(figure(1), filename);
     end
-
+    
     figure(2); clf(2); hold on;
     title('NB-ESC | Thrust Coeff')
     plot(0:dt:T, cT, 'b-', 'Linewidth', 2)
-    xlabel('t (s)'), ylabel('$cT$', 'Interpreter', 'Latex')
+    plot(0:dt:T, cT_ref, 'r--', 'Linewidth', 1.3)
+    xlabel('t [s]')
+    legend('cT', 'cT opt')
     if save == 1
         filename = fullfile(strcat(dir,'cT.fig'));
         saveas(figure(2), filename);
     end
     
     figure(3); clf(3); hold on;
-    title('NB-ESC | Gradient Estimate')
+    title('NB-ESC | Gradient Estimate $\hat{\zeta}$', 'Interpreter', 'Latex')
     plot(0:dt:T, cT_grad, 'b-', 'Linewidth', 2)
     plot(0:dt:T, movmean(cT_grad, 10), 'r--', 'Linewidth', 1.3)
-    xlabel('t (s)'), ylabel('$\hat{\zeta}$', 'Interpreter', 'Latex')
+    xlabel('t [s]')
     if save == 1
         filename = fullfile(strcat(dir,'cT_grad.fig'));
         saveas(figure(3), filename);
     end
     
     figure(4); clf(4); hold on;
-    title('NB-ESC | Hessian Estimate')
+    title('NB-ESC | Hessian Estimate $\hat{H}$', 'Interpreter', 'Latex')
     plot(0:dt:T, cT_hessian, 'b-', 'Linewidth', 2)
     plot(0:dt:T, movmean(cT_hessian, 10), 'r--', 'Linewidth', 1.3)
-    xlabel('t (s)'), ylabel('$\hat{H}$', 'Interpreter', 'Latex')
+    xlabel('t [s]')
     if save == 1
         filename = fullfile(strcat(dir,'cT_hessian.fig'));
         saveas(figure(4), filename);
     end
 
     figure(5); clf(5); hold on;
-    title('NB-ESC | Hessian Inverse Estimate')
+    title('NB-ESC | Hessian Inverse Estimate $\hat{H}^{-1}$', 'Interpreter', 'Latex')
     plot(0:dt:T, cT_hessian_inv(2:end), 'b-', 'Linewidth', 2)
     plot(0:dt:T, movmean(cT_hessian_inv(2:end), 10), 'r--', 'Linewidth', 1.3)
-    xlabel('t (s)'), ylabel('$\hat{H}^{-1}$', 'Interpreter', 'Latex')
+    xlabel('t [s]')
     if save == 1
         filename = fullfile(strcat(dir,'cT_hessian_inv.fig'));
         saveas(figure(5), filename);
@@ -197,7 +218,7 @@ elseif strcmp(ES_method, 'NB')
     figure(6); clf(6); 
     title('NB-ESC | AWA')
     plot(0:dt:T, rad2deg(AWA), 'b-', 'Linewidth', 2)
-    xlabel('t (s)'), ylabel('deg (º)')
+    xlabel('t [s]'), ylabel('deg [º]')
     if save == 1
         filename = fullfile(strcat(dir,'AWA.fig'));
         saveas(figure(6), filename);
