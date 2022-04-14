@@ -6,3 +6,107 @@ Main dither: A = 0.034907, f = 1.000000e-01
 Integrator gain: K = 0.075000
 Initial input value: 0.000000
 
+----14-Apr-2022 11:41:42----
+Params:
+AWA limits: [15.000000, 75.000000]
+HPF: fc = 0.050000
+Main dither: A = 0.034907, f = 1.000000e-01
+Integrator gain: K = 0.075000
+Initial input value: 0.000000
+
+----14-Apr-2022 11:41:49----
+Params:
+AWA limits: [15.000000, 75.000000]
+HPF: fc = 0.050000
+Main dither: A = 0.034907, f = 1.000000e-01
+Integrator gain: K = 0.075000
+Initial input value: 0.000000
+
+----14-Apr-2022 11:42:11----
+Params:
+AWA limits: [15.000000, 75.000000]
+HPF: fc = 0.050000
+Main dither: A = 0.034907, f = 1.000000e-01
+Integrator gain: K = 0.075000
+Initial input value: 0.000000
+
+----14-Apr-2022 11:42:28----
+Params:
+AWA limits: [15.000000, 75.000000]
+HPF: fc = 0.050000
+Main dither: A = 0.034907, f = 1.000000e-01
+Integrator gain: K = 0.075000
+Initial input value: 0.000000
+
+----14-Apr-2022 11:42:50----
+Params:
+AWA limits: [15.000000, 75.000000]
+HPF: fc = 0.050000
+Main dither: A = 0.034907, f = 1.000000e-01
+Integrator gain: K = 0.075000
+Initial input value: 0.000000
+
+----14-Apr-2022 11:44:32----
+Params:
+AWA limits: [15.000000, 75.000000]
+HPF: fc = 0.050000
+Main dither: A = 0.034907, f = 1.000000e-01
+Integrator gain: K = 0.075000
+Initial input value: 0.000000
+
+----14-Apr-2022 11:45:03----
+Params:
+AWA limits: [15.000000, 75.000000]
+HPF: fc = 0.050000
+Main dither: A = 0.034907, f = 1.000000e-01
+Integrator gain: K = 0.075000
+Initial input value: 0.000000
+
+----14-Apr-2022 11:45:51----
+Params:
+AWA limits: [15.000000, 75.000000]
+HPF: fc = 0.050000
+Main dither: A = 0.034907, f = 1.000000e-01
+Integrator gain: K = 0.075000
+Initial input value: 0.000000
+
+----14-Apr-2022 11:46:07----
+Params:
+AWA limits: [15.000000, 75.000000]
+HPF: fc = 0.050000
+Main dither: A = 0.034907, f = 1.000000e-01
+Integrator gain: K = 0.075000
+Initial input value: 0.000000
+
+----14-Apr-2022 11:46:22----
+Params:
+AWA limits: [15.000000, 75.000000]
+HPF: fc = 0.050000
+Main dither: A = 0.034907, f = 1.000000e-01
+Integrator gain: K = 0.075000
+Initial input value: 0.000000
+
+----14-Apr-2022 11:48:12----
+Params:
+AWA limits: [15.000000, 75.000000]
+HPF: fc = 0.050000
+Main dither: A = 0.034907, f = 1.000000e-01
+Integrator gain: K = 0.075000
+Initial input value: 0.000000
+
+----14-Apr-2022 11:48:40----
+Params:
+AWA limits: [15.000000, 75.000000]
+HPF: fc = 0.050000
+Main dither: A = 0.034907, f = 1.000000e-01
+Integrator gain: K = 0.075000
+Initial input value: 0.000000
+
+----14-Apr-2022 12:07:14----
+Params:
+AWA limits: [15.000000, 75.000000]
+HPF: fc = 0.050000
+Main dither: A = 0.034907, f = 1.000000e-01
+Integrator gain: K = 0.075000
+Initial input value: 0.000000
+
