@@ -30,15 +30,16 @@ J = @(sheeting_angle)(getfield(calc_objective_mod(sheeting_angle), 'cT'));
 
 % Method
 % 'GB' for Gradient based or 'NB' for Newton based
-ES_method = 'GB';
+ES_method = 'NB';
 
 %% Simulation
 fs = 1; % sampling frequency (Hz)
 dt = 1/fs;
-T  = 300;
+T  = 1000;
 N = length(0:dt:T);
 
-AWA = deg2rad(90) + deg2rad(30)*sin(2*pi/T * (0:dt:T));
+AWA = deg2rad(45) + deg2rad(30)*sin(2*pi/T * (0:dt:T));
+sheet_angle_0 = deg2rad(-45);
 
 if strcmp(ES_method, 'GB')
     fprintf("Gradient-based ESC selected\n.")
@@ -48,8 +49,6 @@ if strcmp(ES_method, 'GB')
     A             = deg2rad(2); % dither amplitude
     fc            = 0.05; % HPF cutoff freq
     K             = 0.3750; % gain (>0 since extremum is maximum)
-    
-    sheet_angle_0 = deg2rad(-45);
 
     [sheet_angle, cT, cT_grad] = gbesc_1d(J, dt, N, f, A, fc, K, sheet_angle_0, AWA);
 
@@ -63,16 +62,15 @@ elseif strcmp(ES_method, 'NB')
     K             = 0.0025; % gain (>0 since extremum is maximum)
     Ahess         = 16 / (rad2deg(A)^2);  % hessian estimate amplitude
     fhess         = f; % hessian estimate frequency
-    wric          = 2 * pi * 0.05 * f; % ricatti filter parameter
+    wric          = 2 * pi * 0.005 * f; % ricatti filter parameter
     ric_0         = -100;
     
-    sheet_angle_0 = deg2rad(-15);
-
     [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv] = nbesc_1d(J, dt, N, f, A, fc, K, ...
                                     sheet_angle_0, Ahess, fhess, wric, ric_0, AWA);
 
 else
     fprintf("Wrong method. Select either \'GB\' or \'NB\'.\n")
+    
 end
 
 %% Plots
@@ -201,7 +199,7 @@ function [u, y, dy] = gbesc_1d(J, dt, N, f, A, fc, K, u0, AWA)
     toc
 end
 
-function [u, y, dy, ddy, ddy_inv] = nbesc_1d(J, dt, N, f, A, fc, K, u0, Ahess, fhess, wric, ddy0)
+function [u, y, dy, ddy, ddy_inv] = nbesc_1d(J, dt, N, f, A, fc, K, u0, Ahess, fhess, wric, ddy0, AWA)
     % Gradient-based extremum seeking controller for 1D static maps
     % Inputs:
     % - J    : optimization criterion [function handle]
