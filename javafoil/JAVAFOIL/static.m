@@ -31,12 +31,17 @@ J = @(sheeting_angle)(getfield(calc_objective_mod(sheeting_angle), 'cT'));
 % Method
 % 'GB' for Gradient based or 'NB' for Newton based
 ES_method = 'NB';
+% 1 to save figures and diary or 0 to plot figures and print diary
+save = 0; 
 
 %% Simulation
 fs = 1; % sampling frequency (Hz)
 dt = 1/fs;
 T  = 300;
 N = length(0:dt:T);
+    
+ship.yaw = deg2rad(45);
+sheet_angle_0 = deg2rad(-15);
 
 if strcmp(ES_method, 'GB')
     fprintf("Gradient-based ESC selected\n.")
@@ -45,10 +50,7 @@ if strcmp(ES_method, 'GB')
     f             = 0.1; % dither freq
     A             = deg2rad(2); % dither amplitude
     fc            = 0.05; % HPF cutoff freq
-    K             = 0.3750; % gain (>0 since extremum is maximum)
-    
-    ship.yaw = deg2rad(45);
-    sheet_angle_0 = deg2rad(-15);
+    K             = 0.0750; % gain (>0 since extremum is maximum)
 
     [sheet_angle, cT, cT_grad] = gbesc_1d(J, dt, N, f, A, fc, K, sheet_angle_0);
 
@@ -63,10 +65,7 @@ elseif strcmp(ES_method, 'NB')
     Ahess         = 16 / (rad2deg(A)^2);  % hessian estimate amplitude
     fhess         = f; % hessian estimate frequency
     wric          = 2 * pi * 0.05 * f; % ricatti filter parameter
-    ric_0         = -100;
-    
-    ship.yaw = deg2rad(45);
-    sheet_angle_0 = deg2rad(-15);
+    ric_0         = -30;
 
     [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv] = nbesc_1d(J, dt, N, f, A, fc, K, sheet_angle_0, Ahess, fhess, wric, ric_0);
 
@@ -75,53 +74,120 @@ else
 end
 
 %% Plots
+dir = strcat('plots\',ES_method,'_ESC\static\');
+if save == 1
+    fileID = fopen(strcat(dir,'diary.txt'),'a');
+elseif save == 0
+    fileID = 1;
+end
+
 if strcmp(ES_method, 'GB')
+    % Print/Save params
+    fprintf(fileID, "----%s----\n", datetime('now','TimeZone','local','Format','d-MMM-y HH:mm:ss'));
+    fprintf(fileID,['Params:\n'...
+                    'AWA: %f\n'...
+                    'HPF: fc = %f\n'...
+                    'Main dither: A = %f, f = %d\n'...  
+                    'Integrator gain: K = %f\n'...
+                    'Initial input value: %f\n\n'], [rad2deg(ship.yaw); fc; A; f; K; sheet_angle_0]);
+    if save == 1
+        fclose(fileID);
+    end
+    
+    % Plots
     figure(1); clf(1); hold on;
     title('GB-ESC | Sheeting Angle')
     plot(0:dt:T, rad2deg(sheet_angle(1:end-1)), 'b-', 'Linewidth', 2)
     plot(0:dt:T, -25*ones(N,1), 'r--', 'Linewidth', 1)
     xlabel('t (s)'), ylabel('$\delta_s$', 'Interpreter', 'Latex')
+    if save == 1
+        filename = fullfile(strcat(dir,'delta.fig'));
+        saveas(figure(1), filename);
+    end
     
     figure(2); clf(2); hold on;
     title('GB-ESC | Thrust Coeff')
     plot(0:dt:T, cT, 'b-', 'Linewidth', 2)
     xlabel('t (s)'), ylabel('$cT$', 'Interpreter', 'Latex')
-    
+    if save == 1
+        filename = fullfile(strcat(dir,'cT.fig'));
+        saveas(figure(2), filename);
+    end
+
     figure(3); clf(3); hold on;
     title('GB-ESC | Gradient Estimate')
     plot(0:dt:T, cT_grad, 'b-', 'Linewidth', 2)
     plot(0:dt:T, movmean(cT_grad, 10), 'r--', 'Linewidth', 1.3)
     xlabel('t (s)'), ylabel('$\hat{\zeta}$', 'Interpreter', 'Latex')
-
+    if save == 1
+        filename = fullfile(strcat(dir,'cT_grad.fig'));
+        saveas(figure(3), filename);
+    end
+    
 elseif strcmp(ES_method, 'NB')
+    % Print/Save params
+    fprintf(fileID, "----%s----\n", datetime('now','TimeZone','local','Format','d-MMM-y HH:mm:ss'));
+    fprintf(fileID,['Params:\n'...
+                    'AWA: %f'...
+                    'HPF: fc = %f\n'...
+                    'Main dither: A = %f, f = %d\n'...
+                    'Ricatti Filter: wric = %f\n'...
+                    'Hessian estimate dither: Ahess =%f, whess = %f\n'...
+                    'Integrator gain: K = %f\n'...
+                    'Initial input value: %f\n\n'], [rad2deg(ship.yaw); fc; A; f; wric; Ahess; fhess; K; sheet_angle_0]);
+    if save == 1
+        fclose(fileID);
+    end
+    
+    % Plots
     figure(1); clf(1); hold on;
     title('NB-ESC | Sheeting Angle')
     plot(0:dt:T, rad2deg(sheet_angle(1:end-1)), 'b-', 'Linewidth', 2)
     plot(0:dt:T, -25*ones(N,1), 'r--', 'Linewidth', 1)
     xlabel('t (s)'), ylabel('$\delta_s$', 'Interpreter', 'Latex')
+    if save == 1
+        filename = fullfile(strcat(dir,'delta.fig'));
+        saveas(figure(1), filename);
+    end
     
     figure(2); clf(2); hold on;
     title('NB-ESC | Thrust Coeff')
     plot(0:dt:T, cT, 'b-', 'Linewidth', 2)
     xlabel('t (s)'), ylabel('$cT$', 'Interpreter', 'Latex')
+    if save == 1
+        filename = fullfile(strcat(dir,'cT.fig'));
+        saveas(figure(2), filename);
+    end
     
     figure(3); clf(3); hold on;
     title('NB-ESC | Gradient Estimate')
     plot(0:dt:T, cT_grad, 'b-', 'Linewidth', 2)
     plot(0:dt:T, movmean(cT_grad, 10), 'r--', 'Linewidth', 1.3)
     xlabel('t (s)'), ylabel('$\hat{\zeta}$', 'Interpreter', 'Latex')
+    if save == 1
+        filename = fullfile(strcat(dir,'cT_grad.fig'));
+        saveas(figure(3), filename);
+    end
     
     figure(4); clf(4); hold on;
     title('NB-ESC | Hessian Estimate')
     plot(0:dt:T, cT_hessian, 'b-', 'Linewidth', 2)
     plot(0:dt:T, movmean(cT_hessian, 10), 'r--', 'Linewidth', 1.3)
     xlabel('t (s)'), ylabel('$\hat{H}$', 'Interpreter', 'Latex')
+    if save == 1
+        filename = fullfile(strcat(dir,'cT_hessian.fig'));
+        saveas(figure(4), filename);
+    end
     
     figure(5); clf(5); hold on;
     title('NB-ESC | Hessian Inverse Estimate')
     plot(0:dt:T, cT_hessian_inv(2:end), 'b-', 'Linewidth', 2)
     plot(0:dt:T, movmean(cT_hessian_inv(2:end), 10), 'r--', 'Linewidth', 1.3)
     xlabel('t (s)'), ylabel('$\hat{H}^{-1}$', 'Interpreter', 'Latex')
+    if save == 1
+        filename = fullfile(strcat(dir,'cT_hessian_inv.fig'));
+        saveas(figure(5), filename);
+    end
 
 end
 
