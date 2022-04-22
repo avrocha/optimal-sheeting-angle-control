@@ -40,8 +40,8 @@ dt = 1/fs;
 T  = 1000;
 N = length(0:dt:T);
 
-AWA = deg2rad(45) + deg2rad(30)*sin(2*pi/T * (0:dt:T)) + deg2rad(normrnd(0,1,1,N)); 
-sheet_angle_0 = deg2rad(0);
+AWA = deg2rad(130) + deg2rad(30)*sin(2*pi/T * (0:dt:T)); 
+sheet_angle_0 = deg2rad(-120);
 
 if strcmp(ES_method, 'GB')
     fprintf("Gradient-based ESC selected\n.")
@@ -64,7 +64,7 @@ elseif strcmp(ES_method, 'NB')
     K             = 0.0025; % gain (>0 since extremum is maximum)
     Ahess         = 16 / (rad2deg(A)^2);  % hessian estimate amplitude
     fhess         = f; % hessian estimate frequency
-    wric          = 2 * pi * 0.05 * f; % ricatti filter parameter
+    wric          = 2 * pi * 0.005 * f; % ricatti filter parameter
     ric_0         = -30;
     
     [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv] = nbesc_1d(J, dt, N, f, A, fc, K, ...
@@ -76,7 +76,7 @@ else
 end
 
 %% Plots
-dir = strcat('plots\',ES_method,'_ESC\time_variant\dist\');
+dir = strcat('plots\',ES_method,'_ESC\time_variant\critic_vals\');
 if save == 1
     fileID = fopen(strcat(dir,'diary.txt'),'a');
 elseif save == 0
@@ -265,6 +265,11 @@ function [u, y, dy] = gbesc_1d(J, dt, N, f, A, fc, K, u0, AWA)
    
         ship.yaw = AWA(i);
         y(i) = J(u(i));
+        % Avoid numerical singularities
+        if i > 1 && (abs(y(i)) > 1.2*abs(y(i-1)) || abs(y(i)) < 0.8*abs(y(i-1)))
+                y(i) = y(i-1);
+        end
+            
         
         if i >= bworder+1
             for j = 1:bworder+1
@@ -338,8 +343,13 @@ function [u, y, dy, ddy, ddy_inv] = nbesc_1d(J, dt, N, f, A, fc, K, u0, Ahess, f
         t = i*dt;
 
         ship.yaw = AWA(i);
-        y(i) = J(u(i));
         
+        y(i) = J(u(i));
+        % Avoid numerical singularities
+        if i > 1 && (abs(y(i)) > 1.2*abs(y(i-1)) || abs(y(i)) < 0.8*abs(y(i-1)))
+                y(i) = y(i-1);
+        end
+            
         % HPF
         if i >= bworder+1
             for j = 1:bworder+1
