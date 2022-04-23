@@ -1,0 +1,9 @@
+----23-Apr-2022 15:22:40----
+Params:
+AWA: 45.000000HPF: fc = 0.050000
+Dithers: A = 0.034907    0.034907, f = 0.15         0.1
+Ricatti Filter: wric = 0.031416
+Initial Hessian inverse value: -30 -30
+Integrator gain (diag): K = 0.0025      0.0025
+Initial input value (diag): --00..22661188
+
