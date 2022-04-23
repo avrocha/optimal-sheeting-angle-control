@@ -1,6 +1,5 @@
 %---
 % Gradient- and Newton-based extremum seeking controller for a 1D static map
-% Future work: adapt functions for {2,4}D static maps
 % J(\theta) = cT(sheeting_angle)
 %---
 % Copyright: Alexandre Vieira da Rocha
