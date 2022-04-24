@@ -20,11 +20,11 @@ Cf     = 12.5; % Flap chord
 
 R1     = Rig(26,0); % pivot x,y,  
 R1.addFoil(Foil('NACA0018',0,0,6.25,Cw)); % foilFile, x, y, dx, chord
-% R2     = Rig(75,0); % pivot x,y,  
-% R2.addFoil(Foil('NACA0018',0,0,6.25,Cw)); % foilFile, x, y, dx, chord
+R2     = Rig(75,0); % pivot x,y,  
+R2.addFoil(Foil('NACA0018',0,0,6.25,Cw)); % foilFile, x, y, dx, chord
 
 ship.addRig(R1);
-% ship.addRig(R2);
+ship.addRig(R2);
 
 ship.yaw = deg2rad(0);
 scale    = calc_scale();
@@ -45,20 +45,16 @@ T  = 30;
 N  = length(0:dt:T);
     
 ship.yaw = deg2rad(45);
-% sheet_angle_0 = [deg2rad(-15); deg2rad(-15)]; % delta(0) [nx1]
-sheet_angle_0 = deg2rad(-15);
+sheet_angle_0 = [deg2rad(-15); deg2rad(-15)]; % delta(0) [nx1]
+
 if strcmp(ES_method, 'GB')
     fprintf("Gradient-based ESC selected\n.")
 
     % Parameters
-%     f             = [0.15; 0.1]; % dither freq
-%     A             = [deg2rad(2); deg2rad(2)]; % dither amplitude
-%     fc            = 0.05; % HPF cutoff freq
-%     K             = diag([0.0750, 0.0750]); % gain (>0 since extremum is maximum)
-    f             = 0.1; % dither freq
-    A             = deg2rad(2); % dither amplitude
+    f             = [0.15; 0.1]; % dither freq
+    A             = [deg2rad(2); deg2rad(2)]; % dither amplitude
     fc            = 0.05; % HPF cutoff freq
-    K             = 0.0750; % gain (>0 since extremum is maximum)
+    K             = diag([0.0750, 0.0750]); % gain (>0 since extremum is maximum)
 
     [sheet_angle, cT, cT_grad] = gbesc(J, dt, N, f, A, fc, K, sheet_angle_0);
 
@@ -66,20 +62,12 @@ elseif strcmp(ES_method, 'NB') % [WIP]
     fprintf("Newton-based ESC selected\n.")
 
     % Parameters
-%     f             = [0.15; 0.1]; % dither freq
-%     A             = [deg2rad(2); deg2rad(2)]; % dither amplitude
-%     fc            = 0.05; % HPF cutoff freq
-%     K             = diag([0.0025, 0.0025]); % gain (>0 since extremum is maximum)
-%     wric          = 2 * pi * 0.05 * min(f); % ricatti filter parameter
-%     ric_0         = diag([-30, -30]);
-
-    % Parameters
-    f             = 0.1; % dither freq
-    A             = deg2rad(2); % dither amplitude
+    f             = [0.15; 0.1]; % dither freq
+    A             = [deg2rad(2); deg2rad(2)]; % dither amplitude
     fc            = 0.05; % HPF cutoff freq
-    K             = 0.0025; % gain (>0 since extremum is maximum)
-    wric          = 2 * pi * 0.05 * f; % ricatti filter parameter
-    ric_0         = -30;
+    K             = diag([0.0025, 0.0025]); % gain (>0 since extremum is maximum)
+    wric          = 2 * pi * 0.05 * min(f); % ricatti filter parameter
+    ric_0         = diag([-30, -30]);
 
     [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv] = nbesc(J, dt, N, f, A, fc, K, sheet_angle_0, wric, ric_0);
 
