@@ -84,15 +84,15 @@ elseif save == 0
 end
 
 % Get reference from structure
-    load('cT_SA_AWA.mat')
-    sheet_angle_ref = zeros(length(AWA), 1);
-    cT_ref          = zeros(length(AWA), 1);
-    [~, iy_max] = min(abs(data.y_grid(1, :) - 20));
-    for i = 1:length(AWA)
-        [~, ix] = min(abs(data.x_grid(:, 1) - rad2deg(AWA(i))));
-        [cT_ref(i), iy] = max(data.cT(ix, 1:iy_max));
-        sheet_angle_ref(i) = data.y_grid(1,iy);
-    end
+load('cT_SA_AWA.mat')
+sheet_angle_ref = zeros(length(AWA), 1);
+cT_ref          = zeros(length(AWA), 1);
+[~, iy_max] = min(abs(data.y_grid(1, :) - 20));
+for i = 1:length(AWA)
+    [~, ix] = min(abs(data.x_grid(:, 1) - rad2deg(AWA(i))));
+    [cT_ref(i), iy] = max(data.cT(ix, 1:iy_max));
+    sheet_angle_ref(i) = data.y_grid(1,iy);
+end
 
 if strcmp(ES_method, 'GB')
     % Print/Save params
