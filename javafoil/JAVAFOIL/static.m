@@ -1,5 +1,5 @@
 %---
-% Gradient- and Newton-based extremum seeking controller for a 1D static map
+% Gradient- and Newton-based extremum seeking controller for multivariate static maps
 % J(\theta) = cT(sheeting_angle)
 %---
 % Copyright: Alexandre Vieira da Rocha
@@ -20,7 +20,12 @@ Cf     = 12.5; % Flap chord
 
 R1     = Rig(26,0); % pivot x,y,  
 R1.addFoil(Foil('NACA0018',0,0,6.25,Cw)); % foilFile, x, y, dx, chord
+% R2     = Rig(75,0); % pivot x,y,  
+% R2.addFoil(Foil('NACA0018',0,0,6.25,Cw)); % foilFile, x, y, dx, chord
+
 ship.addRig(R1);
+% ship.addRig(R2);
+
 ship.yaw = deg2rad(0);
 scale    = calc_scale();
 
@@ -36,169 +41,159 @@ save = 0;
 %% Simulation
 fs = 1; % sampling frequency (Hz)
 dt = 1/fs;
-T  = 300;
-N = length(0:dt:T);
+T  = 30;
+N  = length(0:dt:T);
     
 ship.yaw = deg2rad(45);
+% sheet_angle_0 = [deg2rad(-15); deg2rad(-15)]; % delta(0) [nx1]
 sheet_angle_0 = deg2rad(-15);
-
 if strcmp(ES_method, 'GB')
     fprintf("Gradient-based ESC selected\n.")
 
     % Parameters
+%     f             = [0.15; 0.1]; % dither freq
+%     A             = [deg2rad(2); deg2rad(2)]; % dither amplitude
+%     fc            = 0.05; % HPF cutoff freq
+%     K             = diag([0.0750, 0.0750]); % gain (>0 since extremum is maximum)
     f             = 0.1; % dither freq
     A             = deg2rad(2); % dither amplitude
     fc            = 0.05; % HPF cutoff freq
     K             = 0.0750; % gain (>0 since extremum is maximum)
 
-    [sheet_angle, cT, cT_grad] = gbesc_1d(J, dt, N, f, A, fc, K, sheet_angle_0);
+    [sheet_angle, cT, cT_grad] = gbesc(J, dt, N, f, A, fc, K, sheet_angle_0);
 
-elseif strcmp(ES_method, 'NB')
+elseif strcmp(ES_method, 'NB') % [WIP]
     fprintf("Newton-based ESC selected\n.")
+
+    % Parameters
+%     f             = [0.15; 0.1]; % dither freq
+%     A             = [deg2rad(2); deg2rad(2)]; % dither amplitude
+%     fc            = 0.05; % HPF cutoff freq
+%     K             = diag([0.0025, 0.0025]); % gain (>0 since extremum is maximum)
+%     wric          = 2 * pi * 0.05 * min(f); % ricatti filter parameter
+%     ric_0         = diag([-30, -30]);
 
     % Parameters
     f             = 0.1; % dither freq
     A             = deg2rad(2); % dither amplitude
     fc            = 0.05; % HPF cutoff freq
     K             = 0.0025; % gain (>0 since extremum is maximum)
-    Ahess         = 16 / (rad2deg(A)^2);  % hessian estimate amplitude
-    fhess         = f; % hessian estimate frequency
     wric          = 2 * pi * 0.05 * f; % ricatti filter parameter
     ric_0         = -30;
 
-    [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv] = nbesc_1d(J, dt, N, f, A, fc, K, sheet_angle_0, Ahess, fhess, wric, ric_0);
+    [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv] = nbesc(J, dt, N, f, A, fc, K, sheet_angle_0, wric, ric_0);
 
 else
     fprintf("Wrong method. Select either \'GB\' or \'NB\'.\n")
 end
 
 %% Plots
-dir = strcat('plots\',ES_method,'_ESC\static\');
+fig_cnt = 1;
+n = length(sheet_angle_0);
+
+dir = strcat('plots\', ES_method,'_ESC\static_', num2str(n),'D\');
 if save == 1
     fileID = fopen(strcat(dir,'diary.txt'),'a');
 elseif save == 0
     fileID = 1;
 end
 
+% Data string
 if strcmp(ES_method, 'GB')
-    % Print/Save params
-    fprintf(fileID, "----%s----\n", datetime('now','TimeZone','local','Format','d-MMM-y HH:mm:ss'));
-    fprintf(fileID,['Params:\n'...
-                    'AWA: %f\n'...
-                    'HPF: fc = %f\n'...
-                    'Main dither: A = %f, f = %d\n'...  
-                    'Integrator gain: K = %f\n'...
-                    'Initial input value: %f\n\n'], [rad2deg(ship.yaw); fc; A; f; K; sheet_angle_0]);
-    if save == 1
-        fclose(fileID);
-    end
-    
-    % Plots
-    figure(1); clf(1); hold on;
-    title('GB-ESC | Sheeting Angle')
-    plot(0:dt:T, rad2deg(sheet_angle(1:end-1)), 'b-', 'Linewidth', 2)
-    plot(0:dt:T, -25*ones(N,1), 'r--', 'Linewidth', 1)
-    xlabel('t (s)'), ylabel('$\delta_s$', 'Interpreter', 'Latex')
-    if save == 1
-        filename = fullfile(strcat(dir,'delta.fig'));
-        saveas(figure(1), filename);
-    end
-    
-    figure(2); clf(2); hold on;
-    title('GB-ESC | Thrust Coeff')
-    plot(0:dt:T, cT, 'b-', 'Linewidth', 2)
-    xlabel('t (s)'), ylabel('$cT$', 'Interpreter', 'Latex')
-    if save == 1
-        filename = fullfile(strcat(dir,'cT.fig'));
-        saveas(figure(2), filename);
-    end
+    data_str = sprintf(['Params:\n'...
+                        'AWA: %f\n'...
+                        'HPF: fc = %f\n'...
+                        'Dithers: A = %s, f = %s\n'...  
+                        'Integrator gain (diag): K = %s\n'...
+                        'Initial input value (diag): %s\n\n'], rad2deg(ship.yaw), fc, num2str(A'), num2str(f'), num2str(diag(K)'), num2str(sheet_angle_0'));
 
-    figure(3); clf(3); hold on;
-    title('GB-ESC | Gradient Estimate')
-    plot(0:dt:T, cT_grad, 'b-', 'Linewidth', 2)
-    plot(0:dt:T, movmean(cT_grad, 10), 'r--', 'Linewidth', 1.3)
-    xlabel('t (s)'), ylabel('$\hat{\zeta}$', 'Interpreter', 'Latex')
-    if save == 1
-        filename = fullfile(strcat(dir,'cT_grad.fig'));
-        saveas(figure(3), filename);
-    end
-    
 elseif strcmp(ES_method, 'NB')
-    % Print/Save params
-    fprintf(fileID, "----%s----\n", datetime('now','TimeZone','local','Format','d-MMM-y HH:mm:ss'));
-    fprintf(fileID,['Params:\n'...
-                    'AWA: %f'...
-                    'HPF: fc = %f\n'...
-                    'Main dither: A = %f, f = %d\n'...
-                    'Ricatti Filter: wric = %f\n'...
-                    'Hessian estimate dither: Ahess =%f, whess = %f\n'...
-                    'Integrator gain: K = %f\n'...
-                    'Initial input value: %f\n\n'], [rad2deg(ship.yaw); fc; A; f; wric; Ahess; fhess; K; sheet_angle_0]);
-    if save == 1
-        fclose(fileID);
-    end
+   data_str = sprintf(['Params:\n'...
+                        'AWA: %f'...
+                        'HPF: fc = %f\n'...
+                        'Dithers: A = %s, f = %s\n'...
+                        'Ricatti Filter: wric = %f\n'...
+                        'Initial Hessian inverse value: %s\n'...
+                        'Integrator gain (diag): K = %s\n'...
+                        'Initial input value (diag): %s\n\n'], rad2deg(ship.yaw), fc, num2str(A'), num2str(f'), wric, num2str(diag(ric_0)'), num2str(diag(K)'), num2str(sheet_angle_0));
+end
+
+% Print / Save params
+fprintf(fileID, "----%s----\n", datetime('now','TimeZone','local','Format','d-MMM-y HH:mm:ss'));
+fprintf(fileID, data_str);
+if save == 1
+    fclose(fileID);
+end
     
-    % Plots
-    figure(1); clf(1); hold on;
-    title('NB-ESC | Sheeting Angle')
-    plot(0:dt:T, rad2deg(sheet_angle(1:end-1)), 'b-', 'Linewidth', 2)
-    plot(0:dt:T, -25*ones(N,1), 'r--', 'Linewidth', 1)
+% Plots
+for i = 1:n
+    figure(fig_cnt); clf(fig_cnt); hold on;
+    title(strcat(ES_method, '-ESC | Sheeting Angle-', num2str(i)))
+    plot(0:dt:T, rad2deg(sheet_angle(i, 1:end-1)), 'b-', 'Linewidth', 2)
+    % Uncomment lines below to include reference lines
+%     ref = [-20, -30];
+%     plot(0:dt:T, -ref(i)*ones(N,1), 'r--', 'Linewidth', 1)
     xlabel('t (s)'), ylabel('$\delta_s$', 'Interpreter', 'Latex')
     if save == 1
-        filename = fullfile(strcat(dir,'delta.fig'));
-        saveas(figure(1), filename);
+        filename = fullfile(strcat(dir,'delta_', num2str(i),'.fig'));
+        saveas(figure(fig_cnt), filename);
     end
-    
-    figure(2); clf(2); hold on;
-    title('NB-ESC | Thrust Coeff')
-    plot(0:dt:T, cT, 'b-', 'Linewidth', 2)
-    xlabel('t (s)'), ylabel('$cT$', 'Interpreter', 'Latex')
-    if save == 1
-        filename = fullfile(strcat(dir,'cT.fig'));
-        saveas(figure(2), filename);
-    end
-    
-    figure(3); clf(3); hold on;
-    title('NB-ESC | Gradient Estimate')
-    plot(0:dt:T, cT_grad, 'b-', 'Linewidth', 2)
-    plot(0:dt:T, movmean(cT_grad, 10), 'r--', 'Linewidth', 1.3)
+    fig_cnt = fig_cnt + 1;
+end
+
+figure(fig_cnt); clf(fig_cnt); hold on;
+title(strcat(ES_method, '-ESC | Thrust Coeff'))
+plot(0:dt:T, cT, 'b-', 'Linewidth', 2)
+xlabel('t (s)'), ylabel('$cT$', 'Interpreter', 'Latex')
+if save == 1
+    filename = fullfile(strcat(dir,'cT.fig'));
+    saveas(figure(fig_cnt), filename);
+end
+fig_cnt = fig_cnt + 1;
+
+for i = 1:n
+    figure(fig_cnt); clf(fig_cnt); hold on;
+    title(strcat(ES_method, '-ESC | Gradient Estimate-', num2str(i)))
+    plot(0:dt:T, cT_grad(i, :), 'b-', 'Linewidth', 2)
+    plot(0:dt:T, movmean(cT_grad(i, :), 10), 'r--', 'Linewidth', 1.3)
     xlabel('t (s)'), ylabel('$\hat{\zeta}$', 'Interpreter', 'Latex')
     if save == 1
-        filename = fullfile(strcat(dir,'cT_grad.fig'));
-        saveas(figure(3), filename);
+        filename = fullfile(strcat(dir,'cT_grad_', num2str(i),'.fig'));
+        saveas(figure(fig_cnt), filename);
     end
-    
-    figure(4); clf(4); hold on;
+    fig_cnt = fig_cnt + 1;
+end
+
+if strcmp(ES_method, 'NB')
+    figure(fig_cnt); clf(fig_cnt); hold on;
     title('NB-ESC | Hessian Estimate')
-    plot(0:dt:T, cT_hessian, 'b-', 'Linewidth', 2)
-    plot(0:dt:T, movmean(cT_hessian, 10), 'r--', 'Linewidth', 1.3)
+    plot(0:dt:T, reshape(cT_hessian, [n^2, N]), 'Linewidth', 1.5)
     xlabel('t (s)'), ylabel('$\hat{H}$', 'Interpreter', 'Latex')
     if save == 1
         filename = fullfile(strcat(dir,'cT_hessian.fig'));
-        saveas(figure(4), filename);
+        saveas(figure(fig_cnt), filename);
     end
+    fig_cnt = fig_cnt + 1;
     
-    figure(5); clf(5); hold on;
+    figure(fig_cnt); clf(fig_cnt); hold on;
     title('NB-ESC | Hessian Inverse Estimate')
-    plot(0:dt:T, cT_hessian_inv(2:end), 'b-', 'Linewidth', 2)
-    plot(0:dt:T, movmean(cT_hessian_inv(2:end), 10), 'r--', 'Linewidth', 1.3)
+    plot(0:dt:T, reshape(cT_hessian_inv(:, :, 2:end), [n^2, N]), 'Linewidth', 1.5)
     xlabel('t (s)'), ylabel('$\hat{H}^{-1}$', 'Interpreter', 'Latex')
     if save == 1
         filename = fullfile(strcat(dir,'cT_hessian_inv.fig'));
-        saveas(figure(5), filename);
+        saveas(figure(fig_cnt), filename);
     end
-
 end
 
 %% Functions
-function [u, y, dy] = gbesc_1d(J, dt, N, f, A, fc, K, u0)
+function [u, y, dy] = gbesc(J, dt, N, f, A, fc, K, u0)
     % Gradient-based extremum seeking controller for 1D static maps
     % Inputs:
     % - J : optimization criterion [function handle]
     % - dt: simulation step [s]
     % - N : simulation lenght 
-    % - f : sinusoidal dither frequency [Hz]
-    % - A : sinusoidal dither amplitude [rad]
+    % - f : sinusoidal dithers frequency [Hz]
+    % - A : sinusoidal dithers amplitude [rad]
     % - fc: HPF cut-off frequency [Hz]
     % - K : integrator gain
     % - u0: input initial value
@@ -212,19 +207,29 @@ function [u, y, dy] = gbesc_1d(J, dt, N, f, A, fc, K, u0)
     [b,a]   = butter(bworder, fc*dt, 'high');
 
     % Data structures
-    u_hat = [u0; zeros(N, 1)];
-    u     = [u0; zeros(N, 1)];
-    y     = zeros(N, 1);
-    dy    = zeros(N, 1);
-    hpf   = zeros(N, 1);
+    n     = length(u0);
+    u_hat = [u0, zeros(n, N)];
+    u     = [u0, zeros(n, N)];
+    y     = zeros(1, N);
+    dy    = zeros(n, N);
+    hpf   = zeros(1, N);
     
+    if (length(A) ~= length(f)) && (length(f) ~= n) && (n ~= length(ship.yaw()))
+        fprintf('Dimensions do not match\n.')
+        return       
+    end
+
     tic
     for i = 1:N
         if rem(i, 10) == 0
             fprintf("Iteration %d\n", i);
         end
         t = i*dt;
-        y(i) = J(u(i));
+        y(i) = J(u(:, i));
+        % Avoid numerical singularities
+        if i > 1 && (abs(y(i)) > 1.2*abs(y(i-1)) || abs(y(i)) < 0.8*abs(y(i-1)))
+                y(i) = y(i-1);
+        end
     
         if i >= bworder+1
             for j = 1:bworder+1
@@ -238,21 +243,21 @@ function [u, y, dy] = gbesc_1d(J, dt, N, f, A, fc, K, u0)
             hpf(i) = 1/a(1) * hpf(i);
         end
         
-        dy(i) = hpf(i) * sin(2*pi*f*t);
+        dy(:, i)      = hpf(i) * sin(2*pi*f*t);
+
+        u_hat(:, i+1) = u_hat(:, i) + dt * K * dy(:, i); % single integrator
         
-        u_hat(i+1) = u_hat(i) + K * dt * dy(i); % single integrator
-            
-        u(i+1) = u_hat(i+1) + A * sin(2*pi*f*t);
+        u(:, i+1)     = u_hat(:, i+1) + A .* sin(2*pi*f*t);
         
         % Error condition
-        if u(i+1) > pi || u(i+1) < -pi 
+        if any(u(i+1) > pi) || any(u(i+1) < -pi) 
             break
         end
     end
     toc
 end
 
-function [u, y, dy, ddy, ddy_inv] = nbesc_1d(J, dt, N, f, A, fc, K, u0, Ahess, fhess, wric, ddy0)
+function [u, y, dy, ddy, ddy_inv] = nbesc(J, dt, N, f, A, fc, K, u0, wric, ddy0)
     % Gradient-based extremum seeking controller for 1D static maps
     % Inputs:
     % - J    : optimization criterion [function handle]
@@ -263,8 +268,6 @@ function [u, y, dy, ddy, ddy_inv] = nbesc_1d(J, dt, N, f, A, fc, K, u0, Ahess, f
     % - fc   : HPF cut-off frequency [Hz]
     % - K    : integrator gain
     % - u0   : input initial value
-    % - Ahess: hessian estimate dither amplitude
-    % - fhess: hessian estimate dither frequency [HZ]
     % - wric : Ricatti filter parameter
     % - ddy0 : hessian inverse initial value
     % Outputs:
@@ -274,18 +277,38 @@ function [u, y, dy, ddy, ddy_inv] = nbesc_1d(J, dt, N, f, A, fc, K, u0, Ahess, f
     % - ddy    : hessian estimate
     % - ddy_inv: hessian inverse estimate
     
+    % Data structures
+    n              = length(u0);
+    u_hat          = [u0, zeros(n, N)];
+    u              = [u0, zeros(n, N)];
+    y              = zeros(1, N);
+    dy             = zeros(n, N);
+    hpf            = zeros(1, N);
+    ddy            = zeros(n, n, N);
+    ddy_inv        = zeros(n, n, N+1); % output of ricatti filter
+    ddy_inv(:,:,1) = ddy0;
+
+    if (length(A) ~= length(f)) && (length(f) ~= n) && (n ~= length(ship.yaw())) ...
+            && (length(ship.yaw()) ~= size(ddy0, 1))
+        fprintf('Dimensions do not match\n.')
+        return       
+    end
+
     % HPF
     bworder = 2;
     [b,a]   = butter(bworder, fc*dt, 'high');
 
-    % Data structures
-    u_hat   = [u0; zeros(N, 1)];
-    u       = [u0; zeros(N, 1)];
-    y       = zeros(N, 1);
-    dy      = zeros(N, 1);
-    hpf     = zeros(N, 1);
-    ddy     = zeros(N, 1);
-    ddy_inv = [ddy0; zeros(N, 1)]; % output of ricatti filter
+    % N(t) - Hessian estimate
+    Nhess = cell(n,n);
+    for i = 1:n
+        for j = 1:n
+            if i == j
+                Nhess{i,j} = @(t) 16 / (rad2deg(A(i))^2) * (sin(2*pi*f(i)*t)^2 - 0.5);
+            else
+                Nhess{i,j} = @(t) 4 / (rad2deg(A(i)) * rad2deg(A(j))) * sin(2*pi*f(i)*t) * sin(2*pi*f(j)*t);
+            end
+        end
+    end
 
     tic
     for i = 1:N
@@ -293,7 +316,11 @@ function [u, y, dy, ddy, ddy_inv] = nbesc_1d(J, dt, N, f, A, fc, K, u0, Ahess, f
             fprintf("Iteration %d\n", i);
         end
         t = i*dt;
-        y(i) = J(u(i));
+        y(i) = J(u(:, i));
+        % Avoid numerical singularities
+        if i > 1 && (abs(y(i)) > 1.2*abs(y(i-1)) || abs(y(i)) < 0.8*abs(y(i-1)))
+                y(i) = y(i-1);
+        end
         
         % HPF
         if i >= bworder+1
@@ -308,17 +335,22 @@ function [u, y, dy, ddy, ddy_inv] = nbesc_1d(J, dt, N, f, A, fc, K, u0, Ahess, f
             hpf(i) = 1/a(1) * hpf(i);
         end
         
-        dy(i)        = hpf(i) * sin(2*pi*f*t); % M(t)y_hp
+        for j = 1:n
+            for k = 1:n
+                ddy(j,k,i) = hpf(i) * Nhess{j,k}(t); % \hat{H} = N(t)y_hp
+            end
+        end
+
+        ddy_inv(:, :, i+1) = ddy_inv(:, :, i) + dt * (wric * ddy_inv(:, :, i) - ...
+            wric * ddy_inv(:, :, i) * ddy(:, :, i) * ddy_inv(:, :, i)); % Euler discretization of Ricatti equation
         
-        ddy(i)       = hpf(i) * Ahess * (sin(2*pi*fhess*t)^2 - 0.5); % \hat{H} = N(t)y_hp
+        dy(:, i) = hpf(i) * sin(2*pi*f*t); % M(t)y_hp        
+
+        u_hat(:, i+1) = u_hat(:, i) - dt * K * ddy_inv(:, :, i+1) * dy(:, i); % single integrator
         
-        ddy_inv(i+1) = ddy_inv(i) + dt * (wric * ddy_inv(i) - ...
-            wric * ddy_inv(i)^2 * ddy(i)); % Euler discretization of Ricatti equation
-    
-        u_hat(i+1) = u_hat(i) - ddy_inv(i+1) * K * dt * dy(i); % single integrator
-        u(i+1)     = u_hat(i+1) + A * sin(2*pi*f*t);
+        u(:, i+1) = u_hat(:, i+1) + A .* sin(2*pi*f*t);
         
-        if u(i+1) > pi || u(i+1) < -pi 
+        if any(u(i+1) > pi) || any(u(i+1) < -pi) 
             break
         end
     end
