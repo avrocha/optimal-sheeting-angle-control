@@ -97,17 +97,6 @@ elseif save == 0
 
 end
 
-% TEMP 
-load('cT_SA_AWA.mat')
-sheet_angle_ref = zeros(length(AWA), 1);
-cT_ref          = zeros(length(AWA), 1);
-[~, iy_max] = min(abs(data.y_grid(1, :) - 20));
-for i = 1:length(AWA)
-    [~, ix] = min(abs(data.x_grid(:, 1) - rad2deg(AWA(i))));
-    [cT_ref(i), iy] = max(data.cT(ix, 1:iy_max));
-    sheet_angle_ref(i) = data.y_grid(1,iy);
-end
-
 % Data string
 if strcmp(ES_method, 'GB')
     data_str = sprintf(['Params:\n'...
@@ -142,7 +131,7 @@ for i = 1:n
     plot(0:dt:T, rad2deg(sheet_angle(i, 1:end-1)), 'b-', 'Linewidth', 2)
     % Uncomment lines below to include reference lines
 %     ref = [-20, -30];
-    plot(0:dt:T, sheet_angle_ref, 'r--', 'Linewidth', 1)
+%     plot(0:dt:T, ref*ones(n, length(AWA)), 'r--', 'Linewidth', 1)
     xlabel('t (s)'), ylabel('$\delta_s$', 'Interpreter', 'Latex')
     if save == 1
         filename = fullfile(strcat(dir,'delta_', num2str(i),'.fig'));
@@ -154,7 +143,6 @@ end
 figure(fig_cnt); clf(fig_cnt); hold on;
 title(strcat(ES_method, '-ESC | Thrust Coeff'))
 plot(0:dt:T, cT, 'b-', 'Linewidth', 2)
-plot(0:dt:T, cT_ref, 'r--', 'Linewidth', 1)
 xlabel('t (s)'), ylabel('$cT$', 'Interpreter', 'Latex')
 if save == 1
     filename = fullfile(strcat(dir,'cT.fig'));
