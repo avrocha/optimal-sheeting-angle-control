@@ -20,11 +20,11 @@ Cf     = 12.5; % Flap chord
 
 R1     = Rig(26,0); % pivot x,y,  
 R1.addFoil(Foil('NACA0018',0,0,6.25,Cw)); % foilFile, x, y, dx, chord
-R2     = Rig(75,0); % pivot x,y,  
-R2.addFoil(Foil('NACA0018',0,0,6.25,Cw)); % foilFile, x, y, dx, chord
+% R2     = Rig(75,0); % pivot x,y,  
+% R2.addFoil(Foil('NACA0018',0,0,6.25,Cw)); % foilFile, x, y, dx, chord
 
 ship.addRig(R1);
-ship.addRig(R2);
+% ship.addRig(R2);
 
 ship.yaw = deg2rad(0);
 scale    = calc_scale();
@@ -36,22 +36,23 @@ J = @(sheeting_angle)(getfield(calc_objective_mod(sheeting_angle), 'cT'));
 % 'GB' for Gradient based or 'NB' for Newton based
 ES_method = 'NB';
 % 1 to save figures and diary or 0 to plot figures and print diary
-save = 1; 
+save = 0; 
 
 %% Simulation
 fs = 1; % sampling frequency (Hz)
 dt = 1/fs;
-T  = 300;
+T  = 1000;
 N  = length(0:dt:T);
     
-AWA = deg2rad(45) + deg2rad(30)*sin(2*pi/T * (0:dt:T)); 
-sheet_angle_0 = [deg2rad(-15); deg2rad(-15)]; % delta(0) [nx1]
+AWA = deg2rad(130) + deg2rad(30)*sin(2*pi/T * (0:dt:T)); 
+% sheet_angle_0 = [deg2rad(-15); deg2rad(-15)]; % delta(0) [nx1]
+sheet_angle_0 = deg2rad(-120); % delta(0) [nx1]
 
 if strcmp(ES_method, 'GB')
     fprintf("Gradient-based ESC selected\n.")
 
     % Parameters
-    f             = [0.15; 0.1]; % dither freq
+    f             = [0.1; 0.15]; % dither freq
     A             = [deg2rad(2); deg2rad(2)]; % dither amplitude
     fc            = 0.05; % HPF cutoff freq
     K             = diag([0.0750, 0.0750]); % gain (>0 since extremum is maximum)
@@ -62,12 +63,20 @@ elseif strcmp(ES_method, 'NB')
     fprintf("Newton-based ESC selected\n.")
 
     % Parameters
-    f             = [0.15; 0.1]; % dither freq
-    A             = [deg2rad(2); deg2rad(2)]; % dither amplitude
+%     f             = [0.15; 0.1]; % dither freq
+%     A             = [deg2rad(2); deg2rad(2)]; % dither amplitude
+%     fc            = 0.05; % HPF cutoff freq
+%     K             = diag([0.0025, 0.0025]); % gain (>0 since extremum is maximum)
+%     wric          = 2 * pi * 0.05 * min(f); % ricatti filter parameter
+%     ric_0         = diag([-30, -30]);
+    f             = 0.1; % dither freq
+    A             = deg2rad(2); % dither amplitude
     fc            = 0.05; % HPF cutoff freq
-    K             = diag([0.0025, 0.0025]); % gain (>0 since extremum is maximum)
-    wric          = 2 * pi * 0.05 * min(f); % ricatti filter parameter
-    ric_0         = diag([-30, -30]);
+    K             = 0.0025; % gain (>0 since extremum is maximum)
+    wric          = 2 * pi * 0.05 * f; % ricatti filter parameter
+    ric_0         = -30;
+%     FF            = deg2rad(20);
+%     sheet_angle_0 = FF - deg2rad(130);
 
     [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv] = nbesc(J, dt, N, f, A, fc, K, sheet_angle_0, wric, ric_0, AWA);
 
@@ -79,11 +88,24 @@ end
 fig_cnt = 1;
 n = length(sheet_angle_0);
 
-dir = strcat('plots\',ES_method,'_ESC\time_variant_', num2str(n),'D\');
+% dir = strcat('plots\',ES_method,'_ESC\time_variant_', num2str(n),'D\');
+dir = strcat('plots\',ES_method,'_ESC\time_variant\local_optima\FF\');
 if save == 1
     fileID = fopen(strcat(dir,'diary.txt'),'a');
 elseif save == 0
     fileID = 1;
+
+end
+
+% TEMP 
+load('cT_SA_AWA.mat')
+sheet_angle_ref = zeros(length(AWA), 1);
+cT_ref          = zeros(length(AWA), 1);
+[~, iy_max] = min(abs(data.y_grid(1, :) - 20));
+for i = 1:length(AWA)
+    [~, ix] = min(abs(data.x_grid(:, 1) - rad2deg(AWA(i))));
+    [cT_ref(i), iy] = max(data.cT(ix, 1:iy_max));
+    sheet_angle_ref(i) = data.y_grid(1,iy);
 end
 
 % Data string
@@ -120,7 +142,7 @@ for i = 1:n
     plot(0:dt:T, rad2deg(sheet_angle(i, 1:end-1)), 'b-', 'Linewidth', 2)
     % Uncomment lines below to include reference lines
 %     ref = [-20, -30];
-%     plot(0:dt:T, -ref(i)*ones(N,1), 'r--', 'Linewidth', 1)
+    plot(0:dt:T, sheet_angle_ref, 'r--', 'Linewidth', 1)
     xlabel('t (s)'), ylabel('$\delta_s$', 'Interpreter', 'Latex')
     if save == 1
         filename = fullfile(strcat(dir,'delta_', num2str(i),'.fig'));
@@ -132,6 +154,7 @@ end
 figure(fig_cnt); clf(fig_cnt); hold on;
 title(strcat(ES_method, '-ESC | Thrust Coeff'))
 plot(0:dt:T, cT, 'b-', 'Linewidth', 2)
+plot(0:dt:T, cT_ref, 'r--', 'Linewidth', 1)
 xlabel('t (s)'), ylabel('$cT$', 'Interpreter', 'Latex')
 if save == 1
     filename = fullfile(strcat(dir,'cT.fig'));
@@ -325,7 +348,7 @@ function [u, y, dy, ddy, ddy_inv] = nbesc(J, dt, N, f, A, fc, K, u0, wric, ddy0,
         t = i*dt;
    
         ship.yaw = AWA(i);
-
+        
         y(i) = J(u(:, i));
         % Avoid numerical singularities
         if i > 1 && (y(i) > 1.2*y(i-1) || y(i) < 0.8*y(i-1))
