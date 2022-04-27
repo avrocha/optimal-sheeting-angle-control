@@ -242,7 +242,7 @@ function [u, y, dy] = gbesc(J, dt, N, f, A, fc, K, u0, AWA)
 
         y(i) = J(u(:, i));
         % Avoid numerical singularities
-        if i > 1 && (abs(y(i)) > 1.2*abs(y(i-1)) || abs(y(i)) < 0.8*abs(y(i-1)))
+        if i > 1 && (y(i) > 1.2*y(i-1) || y(i) < 0.8*y(i-1))
                 y(i) = y(i-1);
         end
     
