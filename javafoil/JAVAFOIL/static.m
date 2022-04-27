@@ -41,12 +41,11 @@ save = 0;
 %% Simulation
 fs = 1; % sampling frequency (Hz)
 dt = 1/fs;
-T  = 30;
+T  = 400;
 N  = length(0:dt:T);
     
 ship.yaw = deg2rad(45);
-sheet_angle_0 = [deg2rad(-15); deg2rad(-15)]; % delta(0) [nx1]
-
+sheet_angle_0 = [deg2rad(-35); deg2rad(-35)]; % delta(0) [nx1]
 if strcmp(ES_method, 'GB')
     fprintf("Gradient-based ESC selected\n.")
 
@@ -215,7 +214,7 @@ function [u, y, dy] = gbesc(J, dt, N, f, A, fc, K, u0)
         t = i*dt;
         y(i) = J(u(:, i));
         % Avoid numerical singularities
-        if i > 1 && (abs(y(i)) > 1.2*abs(y(i-1)) || abs(y(i)) < 0.8*abs(y(i-1)))
+        if i > 1 && (y(i) > 1.2*y(i-1) || y(i) < 0.8*y(i-1))
                 y(i) = y(i-1);
         end
     
@@ -306,7 +305,7 @@ function [u, y, dy, ddy, ddy_inv] = nbesc(J, dt, N, f, A, fc, K, u0, wric, ddy0)
         t = i*dt;
         y(i) = J(u(:, i));
         % Avoid numerical singularities
-        if i > 1 && (abs(y(i)) > 1.2*abs(y(i-1)) || abs(y(i)) < 0.8*abs(y(i-1)))
+        if i > 1 && (y(i) > 1.2*y(i-1) || y(i) < 0.8*y(i-1))
                 y(i) = y(i-1);
         end
         
