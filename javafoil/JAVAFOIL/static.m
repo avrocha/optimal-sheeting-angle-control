@@ -20,11 +20,11 @@ Cf     = 12.5; % Flap chord
 
 R1     = Rig(26,0); % pivot x,y,  
 R1.addFoil(Foil('NACA0018',0,0,6.25,Cw)); % foilFile, x, y, dx, chord
-R2     = Rig(75,0); % pivot x,y,  
-R2.addFoil(Foil('NACA0018',0,0,6.25,Cw)); % foilFile, x, y, dx, chord
+% R2     = Rig(75,0); % pivot x,y,  
+% R2.addFoil(Foil('NACA0018',0,0,6.25,Cw)); % foilFile, x, y, dx, chord
 
 ship.addRig(R1);
-ship.addRig(R2);
+% ship.addRig(R2);
 
 ship.yaw = deg2rad(0);
 scale    = calc_scale();
@@ -34,39 +34,54 @@ J = @(sheeting_angle)(getfield(calc_objective_mod(sheeting_angle), 'cT'));
 
 % Method
 % 'GB' for Gradient based or 'NB' for Newton based
-ES_method = 'NB';
+ES_method = 'GB';
 % 1 to save figures and diary or 0 to plot figures and print diary
 save = 0; 
 
 %% Simulation
 fs = 1; % sampling frequency (Hz)
 dt = 1/fs;
-T  = 400;
+T  = 150;
 N  = length(0:dt:T);
     
 ship.yaw = deg2rad(45);
-sheet_angle_0 = [deg2rad(-35); deg2rad(-35)]; % delta(0) [nx1]
+% sheet_angle_0 = [deg2rad(-35); deg2rad(-35)]; % delta(0) [nx1]
+sheet_angle_0 = deg2rad(-35); % delta(0) [nx1]
+
 if strcmp(ES_method, 'GB')
     fprintf("Gradient-based ESC selected\n.")
 
-    % Parameters
-    f             = [0.15; 0.1]; % dither freq
-    A             = [deg2rad(2); deg2rad(2)]; % dither amplitude
-    fc            = 0.05; % HPF cutoff freq
-    K             = diag([0.0750, 0.0750]); % gain (>0 since extremum is maximum)
+    % Uncomment params below for 1D set of parameters
+    f             = 0.1; % dither freq
+    A             = deg2rad(2); % dither amplitude
+    fc_hp         = 0.09; % HPF cutoff freq
+    fc_lp         = 0.09; % LPF cutoff freq
+    K             = 0.0750; % gain (>0 since extremum is maximum)
+ 
+    % Uncomment params below for 2D set of parameters
+%     f             = [0.15; 0.1]; % dither freq
+%     A             = [deg2rad(2); deg2rad(2)]; % dither amplitude
+%     fc            = 0.05; % HPF cutoff freq
+%     K             = diag([0.0750, 0.0750]); % gain (>0 since extremum is maximum)
 
-    [sheet_angle, cT, cT_grad] = gbesc(J, dt, N, f, A, fc, K, sheet_angle_0);
+    [sheet_angle, cT, cT_grad, zeta] = gbesc(J, dt, N, f, A, fc_hp, fc_lp, K, sheet_angle_0);
 
 elseif strcmp(ES_method, 'NB') % [WIP]
     fprintf("Newton-based ESC selected\n.")
 
     % Parameters
-    f             = [0.15; 0.1]; % dither freq
-    A             = [deg2rad(2); deg2rad(2)]; % dither amplitude
+%     f             = [0.15; 0.1]; % dither freq
+%     A             = [deg2rad(2); deg2rad(2)]; % dither amplitude
+%     fc            = 0.05; % HPF cutoff freq
+%     K             = diag([0.0025, 0.0025]); % gain (>0 since extremum is maximum)
+%     wric          = 2 * pi * 0.05 * min(f); % ricatti filter parameter
+%     ric_0         = diag([-30, -30]);
+    f             = 0.1; % dither freq
+    A             = deg2rad(2); % dither amplitude
     fc            = 0.05; % HPF cutoff freq
-    K             = diag([0.0025, 0.0025]); % gain (>0 since extremum is maximum)
-    wric          = 2 * pi * 0.05 * min(f); % ricatti filter parameter
-    ric_0         = diag([-30, -30]);
+    K             = 0.0025; % gain (>0 since extremum is maximum)
+    wric          = 2 * pi * 0.05 * f; % ricatti filter parameter
+    ric_0         = -30;
 
     [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv] = nbesc(J, dt, N, f, A, fc, K, sheet_angle_0, wric, ric_0);
 
@@ -79,8 +94,9 @@ fig_cnt = 1;
 n = length(sheet_angle_0);
 
 dir = strcat('plots\', ES_method,'_ESC\static_', num2str(n),'D\');
+
 if save == 1
-    fileID = fopen(strcat(dir,'diary.txt'),'a');
+    fileID = fopen(strcat(dir,'diary.txt'),'w');
 elseif save == 0
     fileID = 1;
 end
@@ -90,9 +106,10 @@ if strcmp(ES_method, 'GB')
     data_str = sprintf(['Params:\n'...
                         'AWA: %f\n'...
                         'HPF: fc = %f\n'...
+                        'LPF: fc = %f\n'...
                         'Dithers: A = %s, f = %s\n'...  
                         'Integrator gain (diag): K = %s\n'...
-                        'Initial input value (diag): %s\n\n'], rad2deg(ship.yaw), fc, num2str(A'), num2str(f'), num2str(diag(K)'), num2str(sheet_angle_0'));
+                        'Initial input value (diag): %s\n\n'], rad2deg(ship.yaw), fc, fcl, num2str(A'), num2str(f'), num2str(diag(K)'), num2str(sheet_angle_0'));
 
 elseif strcmp(ES_method, 'NB')
    data_str = sprintf(['Params:\n'...
@@ -173,25 +190,28 @@ if strcmp(ES_method, 'NB')
 end
 
 %% Functions
-function [u, y, dy] = gbesc(J, dt, N, f, A, fc, K, u0)
+function [u, y, dy, zeta] = gbesc(J, dt, N, f, A, fc_hp, fc_lp, K, u0)
     % Gradient-based extremum seeking controller for 1D static maps
     % Inputs:
-    % - J : optimization criterion [function handle]
-    % - dt: simulation step [s]
-    % - N : simulation lenght 
-    % - f : sinusoidal dithers frequency [Hz]
-    % - A : sinusoidal dithers amplitude [rad]
-    % - fc: HPF cut-off frequency [Hz]
-    % - K : integrator gain
-    % - u0: input initial value
+    % - J    : optimization criterion [function handle]
+    % - dt   : simulation step [s]
+    % - N    : simulation lenght 
+    % - f    : sinusoidal dithers frequency [Hz]
+    % - A    : sinusoidal dithers amplitude [rad]
+    % - fc_hp: HPF cut-off frequency [Hz]
+    % - fc_lp: LPPF cut-off frequency [Hz]
+    % - K    : integrator gain
+    % - u0   : input initial value
     % Outputs:
     % - u : control variable
     % - y : criterion output
     % - dy: criterion gradient estimate
     
+    bworder = 5;
     % HPF
-    bworder = 2;
-    [b,a]   = butter(bworder, fc*dt, 'high');
+    [bh,ah]   = butter(bworder, fc_hp*dt, 'high');
+    % LPF
+    [bl,al]   = butter(bworder, fc_lp*dt, 'low');
 
     % Data structures
     n     = length(u0);
@@ -200,6 +220,8 @@ function [u, y, dy] = gbesc(J, dt, N, f, A, fc, K, u0)
     y     = zeros(1, N);
     dy    = zeros(n, N);
     hpf   = zeros(1, N);
+    zeta  = zeros(1, N);
+    lpf   = zeros(1, N);
     
     if (length(A) ~= length(f)) && (length(f) ~= n) && (n ~= length(ship.yaw()))
         fprintf('Dimensions do not match\n.')
@@ -217,23 +239,58 @@ function [u, y, dy] = gbesc(J, dt, N, f, A, fc, K, u0)
         if i > 1 && (y(i) > 1.2*y(i-1) || y(i) < 0.8*y(i-1))
                 y(i) = y(i-1);
         end
-    
+
         if i >= bworder+1
             for j = 1:bworder+1
-                hpf(i) = hpf(i) + b(j)*y(i-j+1);
+                hpf(i) = hpf(i) + bh(j)*y(i-j+1);
             end
     
             for j = 2:bworder+1
-                hpf(i) = hpf(i) - a(j)*hpf(i-j+1);
+                hpf(i) = hpf(i) - ah(j)*hpf(i-j+1);
             end
             
-            hpf(i) = 1/a(1) * hpf(i);
+            hpf(i) = 1/ah(1) * hpf(i);
+        else
+            for j = 1:i
+                hpf(i) = hpf(i) + bh(j)*y(i-j+1);
+            end
+    
+            for j = 2:i
+                hpf(i) = hpf(i) - ah(j)*hpf(i-j+1);
+            end
+            
+            hpf(i) = 1/ah(1) * hpf(i);
         end
-        
-        dy(:, i)      = hpf(i) * sin(2*pi*f*t);
+       
+%         dy(:, i)      = hpf(i) * sin(2*pi*f*t);
+        zeta(i) = hpf(i) * sin(2*pi*f*t);
+
+        if i >= bworder+1
+            for j = 1:bworder+1
+                lpf(i) = lpf(i) + bl(j)*zeta(i-j+1);
+            end
+    
+            for j = 2:bworder+1
+                lpf(i) = lpf(i) - al(j)*lpf(i-j+1);
+            end
+            
+            lpf(i) = 1/al(1) * lpf(i);
+        else
+            for j = 1:i
+                lpf(i) = lpf(i) + bl(j)*zeta(i-j+1);
+            end
+    
+            for j = 2:i
+                lpf(i) = lpf(i) - al(j)*lpf(i-j+1);
+            end
+            
+            lpf(i) = 1/al(1) * lpf(i);
+        end
+
+        dy(:, i)      = lpf(i);
 
         u_hat(:, i+1) = u_hat(:, i) + dt * K * dy(:, i); % single integrator
-        
+
         u(:, i+1)     = u_hat(:, i+1) + A .* sin(2*pi*f*t);
         
         % Error condition
