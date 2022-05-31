@@ -41,7 +41,7 @@ save = 0;
 %% Simulation
 fs = 1; % sampling frequency (Hz)
 dt = 1/fs;
-T  = 150;
+T  = 200;
 N  = length(0:dt:T);
     
 ship.yaw = deg2rad(45);
@@ -64,7 +64,7 @@ if strcmp(ES_method, 'GB')
 %     fc            = 0.05; % HPF cutoff freq
 %     K             = diag([0.0750, 0.0750]); % gain (>0 since extremum is maximum)
 
-    [sheet_angle, cT, cT_grad, zeta] = gbesc(J, dt, N, f, A, fc_hp, fc_lp, K, sheet_angle_0);
+    [sheet_angle, cT, cT_grad] = gbesc(J, dt, N, f, A, fc_hp, fc_lp, K, sheet_angle_0, false);
 
 elseif strcmp(ES_method, 'NB') % [WIP]
     fprintf("Newton-based ESC selected\n.")
@@ -78,12 +78,13 @@ elseif strcmp(ES_method, 'NB') % [WIP]
 %     ric_0         = diag([-30, -30]);
     f             = 0.1; % dither freq
     A             = deg2rad(2); % dither amplitude
-    fc            = 0.05; % HPF cutoff freq
+    fc_hp         = 0.09; % HPF cutoff freq
+    fc_lp         = 0.09; % LPF cutoff freq
     K             = 0.0025; % gain (>0 since extremum is maximum)
-    wric          = 2 * pi * 0.05 * f; % ricatti filter parameter
+    wric          = 2 * pi * 0.03 * f; % ricatti filter parameter
     ric_0         = -30;
 
-    [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv] = nbesc(J, dt, N, f, A, fc, K, sheet_angle_0, wric, ric_0);
+    [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv] = nbesc(J, dt, N, f, A, fc_hp, fc_lp, K, sheet_angle_0, wric, ric_0, false);
 
 else
     fprintf("Wrong method. Select either \'GB\' or \'NB\'.\n")
@@ -109,17 +110,18 @@ if strcmp(ES_method, 'GB')
                         'LPF: fc = %f\n'...
                         'Dithers: A = %s, f = %s\n'...  
                         'Integrator gain (diag): K = %s\n'...
-                        'Initial input value (diag): %s\n\n'], rad2deg(ship.yaw), fc, fcl, num2str(A'), num2str(f'), num2str(diag(K)'), num2str(sheet_angle_0'));
+                        'Initial input value (diag): %s\n\n'], rad2deg(ship.yaw), fc_hp, fc_lp, num2str(A'), num2str(f'), num2str(diag(K)'), num2str(sheet_angle_0'));
 
 elseif strcmp(ES_method, 'NB')
    data_str = sprintf(['Params:\n'...
                         'AWA: %f'...
                         'HPF: fc = %f\n'...
+                        'LPF: fc = %f\n'...
                         'Dithers: A = %s, f = %s\n'...
                         'Ricatti Filter: wric = %f\n'...
                         'Initial Hessian inverse value: %s\n'...
                         'Integrator gain (diag): K = %s\n'...
-                        'Initial input value (diag): %s\n\n'], rad2deg(ship.yaw), fc, num2str(A'), num2str(f'), wric, num2str(diag(ric_0)'), num2str(diag(K)'), num2str(sheet_angle_0));
+                        'Initial input value (diag): %s\n\n'], rad2deg(ship.yaw), fc_hp, fc_lp, num2str(A'), num2str(f'), wric, num2str(diag(ric_0)'), num2str(diag(K)'), num2str(sheet_angle_0));
 end
 
 % Print / Save params
@@ -190,18 +192,19 @@ if strcmp(ES_method, 'NB')
 end
 
 %% Functions
-function [u, y, dy, zeta] = gbesc(J, dt, N, f, A, fc_hp, fc_lp, K, u0)
+function [u, y, dy] = gbesc(J, dt, N, f, A, fc_hp, fc_lp, K, u0, lp_bool)
     % Gradient-based extremum seeking controller for 1D static maps
     % Inputs:
-    % - J    : optimization criterion [function handle]
-    % - dt   : simulation step [s]
-    % - N    : simulation lenght 
-    % - f    : sinusoidal dithers frequency [Hz]
-    % - A    : sinusoidal dithers amplitude [rad]
-    % - fc_hp: HPF cut-off frequency [Hz]
-    % - fc_lp: LPPF cut-off frequency [Hz]
-    % - K    : integrator gain
-    % - u0   : input initial value
+    % - J      : optimization criterion [function handle]
+    % - dt     : simulation step [s]
+    % - N      : simulation lenght 
+    % - f      : sinusoidal dithers frequency [Hz]
+    % - A      : sinusoidal dithers amplitude [rad]
+    % - fc_hp  : HPF cut-off frequency [Hz]
+    % - fc_lp  : LPPF cut-off frequency [Hz]
+    % - K      : integrator gain
+    % - u0     : input initial value
+    % - lp_bool: use LPF [boolean] 
     % Outputs:
     % - u : control variable
     % - y : criterion output
@@ -261,33 +264,39 @@ function [u, y, dy, zeta] = gbesc(J, dt, N, f, A, fc_hp, fc_lp, K, u0)
             
             hpf(i) = 1/ah(1) * hpf(i);
         end
-       
-%         dy(:, i)      = hpf(i) * sin(2*pi*f*t);
-        zeta(i) = hpf(i) * sin(2*pi*f*t);
-
-        if i >= bworder+1
-            for j = 1:bworder+1
-                lpf(i) = lpf(i) + bl(j)*zeta(i-j+1);
+        
+        if lp_bool
+            zeta(i) = hpf(i) * sin(2*pi*f*t);
+            
+            % LPF
+            if i >= bworder+1
+                for j = 1:bworder+1
+                    lpf(i) = lpf(i) + bl(j)*zeta(i-j+1);
+                end
+        
+                for j = 2:bworder+1
+                    lpf(i) = lpf(i) - al(j)*lpf(i-j+1);
+                end
+                
+                lpf(i) = 1/al(1) * lpf(i);
+            else
+                for j = 1:i
+                    lpf(i) = lpf(i) + bl(j)*zeta(i-j+1);
+                end
+        
+                for j = 2:i
+                    lpf(i) = lpf(i) - al(j)*lpf(i-j+1);
+                end
+                
+                lpf(i) = 1/al(1) * lpf(i);
             end
     
-            for j = 2:bworder+1
-                lpf(i) = lpf(i) - al(j)*lpf(i-j+1);
-            end
-            
-            lpf(i) = 1/al(1) * lpf(i);
+            dy(:, i)      = lpf(i);
+        
         else
-            for j = 1:i
-                lpf(i) = lpf(i) + bl(j)*zeta(i-j+1);
-            end
-    
-            for j = 2:i
-                lpf(i) = lpf(i) - al(j)*lpf(i-j+1);
-            end
-            
-            lpf(i) = 1/al(1) * lpf(i);
-        end
+            dy(:, i) = hpf(i) * sin(2*pi*f*t);
 
-        dy(:, i)      = lpf(i);
+        end
 
         u_hat(:, i+1) = u_hat(:, i) + dt * K * dy(:, i); % single integrator
 
@@ -301,19 +310,22 @@ function [u, y, dy, zeta] = gbesc(J, dt, N, f, A, fc_hp, fc_lp, K, u0)
     toc
 end
 
-function [u, y, dy, ddy, ddy_inv] = nbesc(J, dt, N, f, A, fc, K, u0, wric, ddy0)
+function [u, y, dy, ddy, ddy_inv] = nbesc(J, dt, N, f, A, fc_hp, fc_lp, K, u0, wric, ddy0, lp_bool)
     % Gradient-based extremum seeking controller for 1D static maps
     % Inputs:
-    % - J    : optimization criterion [function handle]
-    % - dt   : simulation step [s]
-    % - N    : simulation lenght 
-    % - f    : sinusoidal dither frequency [Hz]
-    % - A    : sinusoidal dither amplitude [rad]
-    % - fc   : HPF cut-off frequency [Hz]
-    % - K    : integrator gain
-    % - u0   : input initial value
-    % - wric : Ricatti filter parameter
-    % - ddy0 : hessian inverse initial value
+    % - J      : optimization criterion [function handle]
+    % - dt     : simulation step [s]
+    % - N      : simulation lenght 
+    % - f      : sinusoidal dither frequency [Hz]
+    % - A      : sinusoidal dither amplitude [rad]
+    % - fc_hp  : HPF cut-off frequency [Hz]
+    % - fc_lp  : LPF cut-off frequency [Hz]
+    % - K      : integrator gain
+    % - u0     : input initial value
+    % - wric   : Ricatti filter parameter
+    % - ddy0   : hessian inverse initial value
+    % - lp_bool: use LPF [boolean] 
+
     % Outputs:
     % - u      : control variable
     % - y      : criterion output
@@ -327,7 +339,9 @@ function [u, y, dy, ddy, ddy_inv] = nbesc(J, dt, N, f, A, fc, K, u0, wric, ddy0)
     u              = [u0, zeros(n, N)];
     y              = zeros(1, N);
     dy             = zeros(n, N);
-    hpf            = zeros(1, N);
+    hpf   = zeros(1, N);
+    zeta  = zeros(1, N);
+    lpf   = zeros(1, N);
     ddy            = zeros(n, n, N);
     ddy_inv        = zeros(n, n, N+1); % output of ricatti filter
     ddy_inv(:,:,1) = ddy0;
@@ -337,10 +351,12 @@ function [u, y, dy, ddy, ddy_inv] = nbesc(J, dt, N, f, A, fc, K, u0, wric, ddy0)
         fprintf('Dimensions do not match\n.')
         return       
     end
-
+    
+    bworder = 5;
     % HPF
-    bworder = 2;
-    [b,a]   = butter(bworder, fc*dt, 'high');
+    [bh,ah]   = butter(bworder, fc_hp*dt, 'high');
+    % LPF
+    [bl,al]   = butter(bworder, fc_lp*dt, 'low');
 
     % N(t) - Hessian estimate
     Nhess = cell(n,n);
@@ -369,16 +385,59 @@ function [u, y, dy, ddy, ddy_inv] = nbesc(J, dt, N, f, A, fc, K, u0, wric, ddy0)
         % HPF
         if i >= bworder+1
             for j = 1:bworder+1
-                hpf(i) = hpf(i) + b(j)*y(i-j+1);
+                hpf(i) = hpf(i) + bh(j)*y(i-j+1);
             end
     
             for j = 2:bworder+1
-                hpf(i) = hpf(i) - a(j)*hpf(i-j+1);
+                hpf(i) = hpf(i) - ah(j)*hpf(i-j+1);
             end
             
-            hpf(i) = 1/a(1) * hpf(i);
+            hpf(i) = 1/ah(1) * hpf(i);
+        else
+            for j = 1:i
+                hpf(i) = hpf(i) + bh(j)*y(i-j+1);
+            end
+    
+            for j = 2:i
+                hpf(i) = hpf(i) - ah(j)*hpf(i-j+1);
+            end
+            
+            hpf(i) = 1/ah(1) * hpf(i);
         end
         
+        if lp_bool
+            zeta(i) = hpf(i) * sin(2*pi*f*t);
+            
+            % LPF
+            if i >= bworder+1
+                for j = 1:bworder+1
+                    lpf(i) = lpf(i) + bl(j)*zeta(i-j+1);
+                end
+        
+                for j = 2:bworder+1
+                    lpf(i) = lpf(i) - al(j)*lpf(i-j+1);
+                end
+                
+                lpf(i) = 1/al(1) * lpf(i);
+            else
+                for j = 1:i
+                    lpf(i) = lpf(i) + bl(j)*zeta(i-j+1);
+                end
+        
+                for j = 2:i
+                    lpf(i) = lpf(i) - al(j)*lpf(i-j+1);
+                end
+                
+                lpf(i) = 1/al(1) * lpf(i);
+            end
+    
+            dy(:, i)      = lpf(i);
+        
+        else
+            dy(:, i) = hpf(i) * sin(2*pi*f*t);
+            
+        end
+
         for j = 1:n
             for k = 1:n
                 ddy(j,k,i) = hpf(i) * Nhess{j,k}(t); % \hat{H} = N(t)y_hp
@@ -386,9 +445,7 @@ function [u, y, dy, ddy, ddy_inv] = nbesc(J, dt, N, f, A, fc, K, u0, wric, ddy0)
         end
 
         ddy_inv(:, :, i+1) = ddy_inv(:, :, i) + dt * (wric * ddy_inv(:, :, i) - ...
-            wric * ddy_inv(:, :, i) * ddy(:, :, i) * ddy_inv(:, :, i)); % Euler discretization of Ricatti equation
-        
-        dy(:, i) = hpf(i) * sin(2*pi*f*t); % M(t)y_hp        
+            wric * ddy_inv(:, :, i) * ddy(:, :, i) * ddy_inv(:, :, i)); % Euler discretization of Ricatti equation    
 
         u_hat(:, i+1) = u_hat(:, i) - dt * K * ddy_inv(:, :, i+1) * dy(:, i); % single integrator
         
