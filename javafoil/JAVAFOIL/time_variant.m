@@ -41,7 +41,7 @@ save = 0;
 %% Simulation
 fs = 1; % sampling frequency (Hz)
 dt = 1/fs;
-T  = 250;
+T  = 150;
 N  = length(0:dt:T);
     
 AWA = deg2rad(45) + deg2rad(10)*sin(2*pi/T * (0:dt:T)); 
@@ -62,7 +62,7 @@ if strcmp(ES_method, 'GB')
     % Uncomment params below for 2D set of parameters
 %     f             = [0.15; 0.1]; % dither freq
 %     A             = [deg2rad(2); deg2rad(2)]; % dither amplitude
-%     fc_hp         = 0.09; % HPF cutoff freq
+%     fc_hp         = 0.09; % HPF cutoff freq 
 %     fc_lp         = 0.09; % LPF cutoff freq
 %     lp_bool       = false; % Use LPF
 %     K             = diag([0.0750, 0.0750]); % gain (>0 since extremum is maximum)
@@ -89,7 +89,7 @@ elseif strcmp(ES_method, 'NB')
 %     fc_lp         = 0.09; % LPF cutoff freq
 %     lp_bool       = false; % Use LPF
 %     K             = diag([0.0025, 0.0025]); % gain (>0 since extremum is maximum)
-%     wric          = 2 * pi * 0.05 * f; % ricatti filter parameter: 0.05f (0.01f) without (with) LPF
+%     wric          = 2 * pi * 0.05 * min(f); % ricatti filter parameter: 0.05f (0.01f) without (with) LPF
 %     ric_0         = diag([-30, -30]);
 
     [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv] = nbesc(J, dt, N, f, A, fc_hp, fc_lp, K, sheet_angle_0, wric, ric_0, AWA, lp_bool);
@@ -268,7 +268,7 @@ function [u, y, dy] = gbesc(J, dt, N, f, A, fc_hp, fc_lp, K, u0, AWA, lp_bool)
         
         y(i) = J(u(:, i));
         % Avoid numerical singularities
-        if i > 1 && (y(i) > 1.2*y(i-1) || y(i) < 0.8*y(i-1))
+        if i > 1 && (y(i) > 1.5*y(i-1) || y(i) < 0.5*y(i-1))
                 y(i) = y(i-1);
         end
     
@@ -414,7 +414,7 @@ function [u, y, dy, ddy, ddy_inv] = nbesc(J, dt, N, f, A, fc_hp, fc_lp, K, u0, w
         
         y(i) = J(u(:, i));
         % Avoid numerical singularities
-        if i > 1 && (y(i) > 1.2*y(i-1) || y(i) < 0.8*y(i-1))
+        if i > 1 && (y(i) > 1.5*y(i-1) || y(i) < 0.5*y(i-1))
                 y(i) = y(i-1);
         end
         
