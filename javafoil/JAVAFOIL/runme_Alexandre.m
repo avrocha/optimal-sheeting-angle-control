@@ -187,7 +187,7 @@ title('cT($\delta_s^1, \delta_s^2$) | AWA = 45', 'Interpreter', 'Latex')
 xlabel('sheeting angle 1 $\delta_s^1$ [deg]', 'Interpreter', 'Latex');
 ylabel('sheeting angle 2 $\delta_s^2$ [deg]', 'Interpreter', 'Latex');
 
-%% cT surface 2D - Print surface
+%% cT surface 2D - Fixed AWA - Print surface
 load('cT1_cT2_SA.mat')
 
 cT = data.cT;
@@ -202,7 +202,7 @@ title('cT($\delta_s^1, \delta_s^2$) | AWA = 45', 'Interpreter', 'Latex')
 xlabel('sheeting angle 1 $\delta_s^1$ [deg]', 'Interpreter', 'Latex');
 ylabel('sheeting angle 2 $\delta_s^2$ [deg]', 'Interpreter', 'Latex');
 
-%% %% cT data - 2 sail, time-variant AWA
+%% cT data - 2 sail, time-variant AWA
 sheeting_angle_1 = linspace(deg2rad(-180), deg2rad(180), 3);
 sheeting_angle_2 = linspace(deg2rad(-180), deg2rad(180), 3);
 AWA = linspace(deg2rad(-180), deg2rad(180), 2);
@@ -233,9 +233,10 @@ AWA = 45;
 cT_data = data.cT(i,  data.y_grid(1,:) < 20); % For AWA > 0 
 [~, i] = max(cT_data);
 data.y_grid(1, i);
-slope = (cT_data(i-1) - cT_data(i)) / (data.y_grid(1, i-1) - data.y_grid(1, i))
+slope = (cT_data(i-1) - cT_data(i)) / (data.y_grid(1, i-1) - data.y_grid(1, i));
 
 %% References for 7M data - 1D
+fig_cnt = 1;
 dir = 'plots\7m_data_';
 
 % TACKING AWA
@@ -252,7 +253,7 @@ for i = 1: length(yaw)
 end
 toc
 
-figure(10); clf(10); hold on;
+figure(fig_cnt); clf(fig_cnt); hold on;
 [X,Y] = meshgrid(rad2deg(yaw), rad2deg(sheeting_angle));
 
 % Uncomment lines below to save struct
@@ -275,6 +276,7 @@ xlabel('AWA [deg]', 'Interpreter', 'Latex');
 ylabel('sheeting angle $\delta_s$ [deg]', 'Interpreter', 'Latex');
 savefig(strcat(dir,'tacking\cT_SA_AWA.fig'))
 hold off;
+fig_cnt = fig_cnt + 1;
 
 % 100 AWA
 sheeting_angle = linspace(deg2rad(-110), deg2rad(-60), 50);
@@ -290,7 +292,7 @@ for i = 1: length(yaw)
 end
 toc
 
-figure(11); clf(11); hold on;
+figure(fig_cnt); clf(fig_cnt); hold on;
 [X,Y] = meshgrid(rad2deg(yaw), rad2deg(sheeting_angle));
 
 % Uncomment lines below to save struct
@@ -313,6 +315,29 @@ xlabel('AWA [deg]', 'Interpreter', 'Latex');
 ylabel('sheeting angle $\delta_s$ [deg]', 'Interpreter', 'Latex');
 savefig(strcat(dir,'AWA_100\cT_SA_AWA.fig'))
 hold off;
+fig_cnt = fig_cnt + 1;
+
+%% Smoothen reference surfance for 7M data - 1D
+% Requires Image Processing Toolbox - To be installed
+% AWA = +/- 45
+load('plots\7m_data_tacking\cT_SA_AWA.mat')
+
+surf(data.x_grid, data.y_grid, medfilt2(data.cT))
+c = colorbar;
+c.Label.String = 'cT';
+
+% data.cT = medfilt2(data.cT);
+% save('plots\7m_data_tacking\cT_SA_AWA.mat', 'data')
+
+% AWA 100
+load('plots\7m_data_AWA_100\cT_SA_AWA.mat')
+
+surf(data.x_grid, data.y_grid, medfilt2(data.cT))
+c = colorbar;
+c.Label.String = 'cT';
+
+% data.cT = medfilt2(data.cT);
+% save('plots\7m_data_AWA_100\cT_SA_AWA.mat', 'data')
 
 %% References for 7M data - 2D
 dir = 'plots\7m_data_';
@@ -366,3 +391,16 @@ data.AWA = AWA;
 data.sheeting_angle_1 = sheeting_angle_1;
 data.sheeting_angle_2 = sheeting_angle_2;
 save(strcat(dir,'AWA_100\cT_2D_SA_AWA.mat'), 'data');
+
+%% Smoothen reference surfance for 7M data - 2D
+% Requires Image Processing Toolbox - To be installed
+
+% AWA = +/- 45
+load('plots\7m_data_AWA_100\cT_2D_SA_AWA.mat')
+data.cT = medfilt2(data.cT);
+save('plots\7m_data_AWA_100\cT_2D_SA_AWA.mat', 'data')
+
+% AWA 100
+load('plots\7m_data_tacking\cT_2D_SA_AWA.mat')
+data.cT = medfilt2(data.cT);
+save('plots\7m_data_tacking\cT_2D_SA_AWA.mat', 'data')
