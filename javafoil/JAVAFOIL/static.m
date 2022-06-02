@@ -71,17 +71,8 @@ if strcmp(ES_method, 'GB')
 
 elseif strcmp(ES_method, 'NB') 
     fprintf("Newton-based ESC selected\n.")
-
-    % Parameters
-    f             = [0.15; 0.1]; % dither freq
-    A             = [deg2rad(2); deg2rad(2)]; % dither amplitude
-    fc_hp         = 0.09; % HPF cutoff freq
-    fc_lp         = 0.09; % LPF cutoff freq
-    lp_bool       = false; % Use LPF
-    K             = diag([0.0025, 0.0025]); % gain (>0 since extremum is maximum)
-    wric          = 2 * pi * 0.05 * min(f); % ricatti filter parameter
-    ric_0         = diag([-30, -30]);
-
+    
+%     Uncomment params below for 1D set of parameters
 %     f             = 0.1; % dither freq
 %     A             = deg2rad(2); % dither amplitude
 %     fc_hp         = 0.09; % HPF cutoff freq
@@ -90,6 +81,16 @@ elseif strcmp(ES_method, 'NB')
 %     K             = 0.0025; % gain (>0 since extremum is maximum)
 %     wric          = 2 * pi * 0.05 * f; % ricatti filter parameter: 0.05f (0.01f) without (with) LPF
 %     ric_0         = -30;
+
+    % Uncomment params below for 2D set of parameters
+    f             = [0.15; 0.1]; % dither freq
+    A             = [deg2rad(2); deg2rad(2)]; % dither amplitude
+    fc_hp         = 0.09; % HPF cutoff freq
+    fc_lp         = 0.09; % LPF cutoff freq
+    lp_bool       = false; % Use LPF
+    K             = diag([0.0025, 0.0025]); % gain (>0 since extremum is maximum)
+    wric          = 2 * pi * 0.05 * min(f); % ricatti filter parameter
+    ric_0         = diag([-30, -30]);
 
     [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv] = nbesc(J, dt, N, f, A, fc_hp, fc_lp, K, sheet_angle_0, wric, ric_0, lp_bool);
 
@@ -311,9 +312,11 @@ function [u, y, dy] = gbesc(J, dt, N, f, A, fc_hp, fc_lp, K, u0, lp_bool)
             dy(:, i) = hpf(i) * sin(2*pi*f*t);
 
         end
-
-        u_hat(:, i+1) = u_hat(:, i) + dt * K * dy(:, i); % single integrator
-
+        
+        % Parameter estimate - Single Integrator
+        u_hat(:, i+1) = u_hat(:, i) + dt * K * dy(:, i);
+                
+        % Add dither
         u(:, i+1)     = u_hat(:, i+1) + A .* sin(2*pi*f*t);
         
         % Error condition
@@ -325,7 +328,7 @@ function [u, y, dy] = gbesc(J, dt, N, f, A, fc_hp, fc_lp, K, u0, lp_bool)
 end
 
 function [u, y, dy, ddy, ddy_inv] = nbesc(J, dt, N, f, A, fc_hp, fc_lp, K, u0, wric, ddy0, lp_bool)
-    % Gradient-based extremum seeking controller for 1D static maps
+    % Newton-based extremum seeking controller for 1D static maps
     % Inputs:
     % - J      : optimization criterion [function handle]
     % - dt     : simulation step [s]
