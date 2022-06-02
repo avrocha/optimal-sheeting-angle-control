@@ -17,10 +17,9 @@ C(1,:) = (C(1,:)-xmin)/ship.scale;
 C(2,:) = (C(2,:)-ymid)/ship.scale;
 C(1,:) = -C(1,:)+1;
 
-% figure;%clf
-
+% Uncomment lines below to plot the foils
 figure(3);clf;
-plot(C(1,:),C(2,:),'.'); % Pllts the foils
+plot(C(1,:),C(2,:),'.');
 grid on;axis equal;hold on
 
 C(:,index)=ones(2,length(index))*99999999; % Put back the section dividers
