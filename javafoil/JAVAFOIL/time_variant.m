@@ -36,7 +36,7 @@ J = @(sheeting_angle)(getfield(calc_objective_mod(sheeting_angle), 'cT'));
 % 'GB' for Gradient based or 'NB' for Newton based
 ES_method = 'NB';
 % 1 to save figures and diary or 0 to plot figures and print diary
-save = 0; 
+save = 0;
 
 %% Simulation
 fs = 1; % sampling frequency (Hz)
@@ -45,9 +45,8 @@ T  = 250;
 N  = length(0:dt:T);
     
 AWA = deg2rad(45) + deg2rad(10)*sin(2*pi/T * (0:dt:T)); 
-ship.yaw = AWA(1);
-
-FF = deg2rad(20); % * ones(2,1);
+% sheet_angle_0 = [deg2rad(-35); deg2rad(-35)]; % delta(0) [nx1]
+sheet_angle_0 = deg2rad(-35); % delta(0) [nx1]
 
 if strcmp(ES_method, 'GB')
     fprintf("Gradient-based ESC selected\n.")
@@ -68,7 +67,7 @@ if strcmp(ES_method, 'GB')
 %     lp_bool       = false; % Use LPF
 %     K             = diag([0.0750, 0.0750]); % gain (>0 since extremum is maximum)
 
-    [sheet_angle, cT, cT_grad] = gbesc(J, dt, N, f, A, fc_hp, fc_lp, K, FF, AWA, lp_bool);
+    [sheet_angle, cT, cT_grad] = gbesc(J, dt, N, f, A, fc_hp, fc_lp, K, sheet_angle_0, AWA, lp_bool);
 
 elseif strcmp(ES_method, 'NB')
     fprintf("Newton-based ESC selected\n.")
@@ -93,7 +92,7 @@ elseif strcmp(ES_method, 'NB')
 %     wric          = 2 * pi * 0.05 * f; % ricatti filter parameter: 0.05f (0.01f) without (with) LPF
 %     ric_0         = diag([-30, -30]);
 
-    [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv] = nbesc(J, dt, N, f, A, fc_hp, fc_lp, K, FF, wric, ric_0, AWA, lp_bool);
+    [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv] = nbesc(J, dt, N, f, A, fc_hp, fc_lp, K, sheet_angle_0, wric, ric_0, AWA, lp_bool);
 
 else
     fprintf("Wrong method. Select either \'GB\' or \'NB\'.\n")
@@ -217,18 +216,18 @@ if save == 1
 end
 
 %% Functions
-function [u, y, dy] = gbesc(J, dt, N, f, A, fc_hp, fc_lp, K, FF, AWA, lp_bool)
+function [u, y, dy] = gbesc(J, dt, N, f, A, fc_hp, fc_lp, K, u0, AWA, lp_bool)
     % Inputs:
-    % - J : optimization criterion [function handle]
-    % - dt: simulation step [s]
-    % - N : simulation lenght 
-    % - f : sinusoidal dithers frequency [Hz]
-    % - A : sinusoidal dithers amplitude [rad]
+    % - J      : optimization criterion [function handle]
+    % - dt     : simulation step [s]
+    % - N      : simulation lenght 
+    % - f      : sinusoidal dithers frequency [Hz]
+    % - A      : sinusoidal dithers amplitude [rad]
     % - fc_hp  : HPF cut-off frequency [Hz]
     % - fc_lp  : LPPF cut-off frequency [Hz]
-    % - K : integrator gain
-    % - FF: feedforward (AoA)
-    % - AWA: time variant AWA
+    % - K      : integrator gain
+    % - u0     : initial sheeting angle [rad]
+    % - AWA    : time variant AWA
     % - lp_bool: use LPF [boolean] 
     % Outputs:
     % - u : control variable
@@ -245,8 +244,8 @@ function [u, y, dy] = gbesc(J, dt, N, f, A, fc_hp, fc_lp, K, FF, AWA, lp_bool)
 
     % Data structures
     n     = length(f);
-    u_hat = zeros(n, N+1);
-    u     = [FF - ship.yaw, zeros(n, N)];
+    u_hat = [u0, zeros(n, N)];
+    u     = [u0, zeros(n, N)];
     y     = zeros(1, N);
     dy    = zeros(n, N);
     hpf   = zeros(1, N);
@@ -332,7 +331,7 @@ function [u, y, dy] = gbesc(J, dt, N, f, A, fc_hp, fc_lp, K, FF, AWA, lp_bool)
         u_hat(:, i+1) = u_hat(:, i) + dt * K * dy(:, i); % single integrator
         
         % Add dither
-        u(:, i+1)     = FF - ship.yaw + u_hat(:, i+1) + A .* sin(2*pi*f*t);
+        u(:, i+1)     = u_hat(:, i+1) + A .* sin(2*pi*f*t);
         
         % Error condition
         if any(u(i+1) > pi) || any(u(i+1) < -pi) 
@@ -342,7 +341,7 @@ function [u, y, dy] = gbesc(J, dt, N, f, A, fc_hp, fc_lp, K, FF, AWA, lp_bool)
     toc
 end
 
-function [u, y, dy, ddy, ddy_inv] = nbesc(J, dt, N, f, A, fc_hp, fc_lp, K, FF, wric, ddy0, AWA, lp_bool)
+function [u, y, dy, ddy, ddy_inv] = nbesc(J, dt, N, f, A, fc_hp, fc_lp, K, u0, wric, ddy0, AWA, lp_bool)
     % Inputs:
     % - J    : optimization criterion [function handle]
     % - dt   : simulation step [s]
@@ -352,7 +351,7 @@ function [u, y, dy, ddy, ddy_inv] = nbesc(J, dt, N, f, A, fc_hp, fc_lp, K, FF, w
     % - fc_hp  : HPF cut-off frequency [Hz]
     % - fc_lp  : LPF cut-off frequency [Hz]
     % - K    : integrator gain
-    % - FF: feedforward (AoA)
+    % - u0     : initial sheeting angle [rad]
     % - wric : Ricatti filter parameter
     % - ddy0 : hessian inverse initial value
     % - AWA  : time variant AWA
@@ -367,8 +366,8 @@ function [u, y, dy, ddy, ddy_inv] = nbesc(J, dt, N, f, A, fc_hp, fc_lp, K, FF, w
 
     % Data structures
     n              = length(f);
-    u_hat          = zeros(n, N+1);
-    u              = [FF - ship.yaw, zeros(n, N)];
+    u_hat          = [u0, zeros(n, N)];
+    u              = [u0, zeros(n, N)];
     y              = zeros(1, N);
     dy             = zeros(n, N);
     hpf            = zeros(1, N);
@@ -523,7 +522,7 @@ function [u, y, dy, ddy, ddy_inv] = nbesc(J, dt, N, f, A, fc_hp, fc_lp, K, FF, w
         u_hat(:, i+1) = u_hat(:, i) - dt * K * ddy_inv(:, :, i+1) * dy(:, i); 
         
         % Add dither
-        u(:, i+1) = FF - ship.yaw + u_hat(:, i+1) + A .* sin(2*pi*f*t);
+        u(:, i+1) = u_hat(:, i+1) + A .* sin(2*pi*f*t);
         
         % Error condition
         if any(u(:, i+1) > pi) || any(u(:, i+1) < -pi) 
