@@ -20,10 +20,12 @@ function [obj,cl,CT,cd] = calc_objective(X)
     obj      = -CT^2*sign(CT); % Thrust
 %     obj      = -cl^2;
     %fprintf('Objective function %0.4f \n',obj);
+    
+    % Uncomment line below to plot the flow field
     plot_flowField(ship.yaw,ship.scale,cl,cd,cp); 
     
-    % hold on;zoom on
-    % plot([cp cp],[-0.5 0.5],'k');%text(cp-0.02, .52,'cp','fontsize',16);
+    hold on;zoom on
+%     plot([cp cp],[-0.5 0.5],'k');%text(cp-0.02, .52,'cp','fontsize',16);
     if length(X) == 4
         title(sprintf('AWA=%0.1f  X=[%.0f/%.0f %.0f/%.0f],  cT=%.4f\n',rad2deg(ship.yaw), rad2deg(X(1)),rad2deg(X(2)),rad2deg(X(3)),rad2deg(X(4)),CT),'fontsize',16); %,rad2deg(X(5)),rad2deg(X(6)),rad2deg(X(7)),rad2deg(X(8))
     elseif length(X) == 2
@@ -35,7 +37,7 @@ function [obj,cl,CT,cd] = calc_objective(X)
        quit    
     end
    
-    drawnow;
+%     drawnow;
     
     counter=counter+1;
     %saveas(gcf,['pix/bild',num2str(counter)],'png');
