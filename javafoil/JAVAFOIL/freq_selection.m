@@ -89,18 +89,20 @@ fprintf("Newton-based ESC selected\n.")
 % Fixed params
 A             = [deg2rad(2); deg2rad(2)]; % dither amplitude
 K             = diag([0.0025, 0.0025]); % gain (>0 since extremum is maximum)
-wric          = 2 * pi * 0.05 * min(f); % ricatti filter parameter: 0.05f (0.01f) without (with) LPF
 ric_0         = diag([-30, -30]);
 
 for k = 1:size(AWA, 1)
     for i = 1:size(f, 1)
-        fc_hp = 0.9 * min(f(i, :)); % HPF cutoff freq
+        wric             = 2 * pi * 0.05 * min(f(i, :)); % ricatti filter parameter: 0.05f (0.01f) without (with) LPF
+        fc_hp            = 0.9 * min(f(i, :)); % HPF cutoff freq
         [~, cT, ~, ~, ~] = nbesc(J, dt, N, f(i, :)', A, fc_hp, fc_hp, K, sheet_angle_0(k, :)', wric, ric_0, AWA(k, :), false);
-        cT_cum(k, i, 2) = sum(cT, 2);
+        cT_cum(k, i, 2)  = sum(cT, 2);
     end
 end
 
 %% Results
+load("cT_cum_freq_selec.mat");
+
 fprintf("GB Results - Frequency Selection\n")
 for k = 1:size(AWA, 1)
     for i = 1:size(f, 1)
@@ -117,6 +119,7 @@ for k = 1:size(AWA, 1)
     end
 end
 
+% save("cT_cum_freq_selec.mat", "cT_cum");
 
 %% Functions
 function [u, y, dy] = gbesc(J, dt, N, f, A, fc_hp, fc_lp, K, u0, AWA, lp_bool)
