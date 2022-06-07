@@ -46,7 +46,7 @@ ship.yaw = deg2rad(0);
 
 %% Test section
 ship.yaw = deg2rad(10);
-[~,~,~] = calc_objective([deg2rad(0), deg2rad(0)]);
+[~,~,~,~] = calc_objective([deg2rad(0), deg2rad(-30)]);
 
 %% cL, cD curve - 1D
 ship.yaw = deg2rad(0);
@@ -316,91 +316,3 @@ ylabel('sheeting angle $\delta_s$ [deg]', 'Interpreter', 'Latex');
 savefig(strcat(dir,'AWA_100\cT_SA_AWA.fig'))
 hold off;
 fig_cnt = fig_cnt + 1;
-
-%% Smoothen reference surfance for 7M data - 1D
-% Requires Image Processing Toolbox - To be installed
-% AWA = +/- 45
-load('plots\7m_data_tacking\cT_SA_AWA.mat')
-
-surf(data.x_grid, data.y_grid, medfilt2(data.cT))
-c = colorbar;
-c.Label.String = 'cT';
-
-% data.cT = medfilt2(data.cT);
-% save('plots\7m_data_tacking\cT_SA_AWA.mat', 'data')
-
-% AWA 100
-load('plots\7m_data_AWA_100\cT_SA_AWA.mat')
-
-surf(data.x_grid, data.y_grid, medfilt2(data.cT))
-c = colorbar;
-c.Label.String = 'cT';
-
-% data.cT = medfilt2(data.cT);
-% save('plots\7m_data_AWA_100\cT_SA_AWA.mat', 'data')
-
-%% References for 7M data - 2D
-dir = 'plots\7m_data_';
-
-% TACKING AWA
-sheeting_angle_1 = linspace(deg2rad(-90), deg2rad(90), 60); % res=3º
-sheeting_angle_2 = linspace(deg2rad(-90), deg2rad(90), 60); % res=3º
-yaw = linspace(deg2rad(-80), deg2rad(80), 40); % res=4º
-
-cT = zeros(length(AWA), length(sheeting_angle_1), length(sheeting_angle_2));
-
-tic
-for k = 1:length(AWA)
-    ship.yaw = AWA(k);
-    for i = 1: length(sheeting_angle_1)
-        for j = 1:length(sheeting_angle_2)
-            [~,~,cT(k, i, j),~] = calc_objective([sheeting_angle_1(i), sheeting_angle_2(j)]);
-        end
-    end
-end
-toc
-
-% Uncomment lines below to save struct
-data.cT = cT;
-data.AWA = AWA;
-data.sheeting_angle_1 = sheeting_angle_1;
-data.sheeting_angle_2 = sheeting_angle_2;
-save(strcat(dir,'tacking\cT_2D_SA_AWA.mat'), 'data');
-
-% 100 AWA.
-sheeting_angle_1 = linspace(deg2rad(-125), deg2rad(-20), 50); % res=2º
-sheeting_angle_2 = linspace(deg2rad(-125), deg2rad(-20), 50); % res=2º
-AWA = linspace(deg2rad(80), deg2rad(125), 20); % res=2º
-
-cT = zeros(length(AWA), length(sheeting_angle_1), length(sheeting_angle_2));
-
-tic
-for k = 1: length(AWA)
-    ship.yaw = AWA(k);
-    for i = 1: length(sheeting_angle_1)
-        for j = 1:length(sheeting_angle_2)
-            [~,~,cT(k, i, j),~] = calc_objective([sheeting_angle_1(i), sheeting_angle_2(j)]);
-        end
-    end
-end
-toc
-
-% Uncomment lines below to save struct
-data.cT = cT;
-data.AWA = AWA;
-data.sheeting_angle_1 = sheeting_angle_1;
-data.sheeting_angle_2 = sheeting_angle_2;
-save(strcat(dir,'AWA_100\cT_2D_SA_AWA.mat'), 'data');
-
-%% Smoothen reference surfance for 7M data - 2D
-% Requires Image Processing Toolbox - To be installed
-
-% AWA = +/- 45
-load('plots\7m_data_AWA_100\cT_2D_SA_AWA.mat')
-data.cT = medfilt2(data.cT);
-save('plots\7m_data_AWA_100\cT_2D_SA_AWA.mat', 'data')
-
-% AWA 100
-load('plots\7m_data_tacking\cT_2D_SA_AWA.mat')
-data.cT = medfilt2(data.cT);
-save('plots\7m_data_tacking\cT_2D_SA_AWA.mat', 'data')
