@@ -5,7 +5,8 @@ function [obj,cl,CT,cd] = calc_objective(X)
     %ship.rigs(3).trim = X(5);        ship.rigs(3).foils(2).trim = -X(6);
     %ship.rigs(4).trim = X(7);        ship.rigs(4).foils(2).trim = -X(8);
     
-    Mesh2Java(X); % Generates Java-scale mesh-file
+    shipLocal = ship;
+    Mesh2Java(X, shipLocal); % Generates Java-scale mesh-file
     
     awa = 0;  % For JavaFoil
     Re  = 10^6;

@@ -1,7 +1,5 @@
-function out = calc_objective_mod(X)
-    global ship counter;
-    
-    Mesh2Java(X); % Generates Java-scale mesh-file
+function out = calc_objective_mod(X, ship)    
+    Mesh2Java(X, ship); % Generates Java-scale mesh-file
     
     awa = 0;  % For JavaFoil
     Re  = 10^6;
@@ -10,7 +8,7 @@ function out = calc_objective_mod(X)
     cmd = ['java -cp "',javaPath,'/mhclasses.jar" -jar "', javaPath,'/javafoil.jar" Script="',javaPath,'/script.jfscript"'];
     system(cmd);     % Excecute the JavaFoil calculations
     
-    [~, cL, cD, ~, ~] = readJavaResults();
+    [~, cL, cD, ~, cP] = readJavaResults();
      
     % Calculate lift and drag coeffs
     cT       = cL * sin(ship.yaw) - cD * cos(ship.yaw); % Propulsive force
@@ -19,4 +17,7 @@ function out = calc_objective_mod(X)
     out.cT  = cT;
     out.cL  = cL;
     out.cD  = cD;
+
+    % Uncomment line below to plot the flow field
+%     plot_flowField(ship.yaw,ship.scale,cL,cD,cP); 
 end
