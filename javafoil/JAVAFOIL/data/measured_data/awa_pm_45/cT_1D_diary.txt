@@ -1,0 +1,342 @@
+Iteration k = 1 | AWA = -80º
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective_mod', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective_mod.m', 9)" style="font-weight:bold">calc_objective_mod</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective_mod.m',9,0)">line 9</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('get_1D_map', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\get_1D_map.m', 46)" style="font-weight:bold">get_1D_map</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\get_1D_map.m',46,0)">line 46</a>)
+        cT(k, i) = getfield(calc_objective_mod(sheeting_angle(i), localShip), 'cT');
+} 
+get_1D_map
+-------------------------------------------------------------
+Scale    = 25.000 
+Iteration k = 1 | AWA = -80º
+Iteration k = 2 | AWA = -7.899371e+01º
+Elapsed time is 8.192018 seconds.
+Iteration k = 1 | AWA = -80º
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective_mod', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective_mod.m', 9)" style="font-weight:bold">calc_objective_mod</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective_mod.m',9,0)">line 9</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('get_1D_map', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\get_1D_map.m', 46)" style="font-weight:bold">get_1D_map</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\get_1D_map.m',46,0)">line 46</a>)
+        cT(k, i) = getfield(calc_objective_mod(sheeting_angle(i), localShip), 'cT');
+} 
+get_1D_map
+-------------------------------------------------------------
+Scale    = 25.000 
+Iteration k = 1 | AWA = -80º
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective_mod', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective_mod.m', 9)" style="font-weight:bold">calc_objective_mod</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective_mod.m',9,0)">line 9</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('get_1D_map', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\get_1D_map.m', 45)" style="font-weight:bold">get_1D_map</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\get_1D_map.m',45,0)">line 45</a>)
+        cT(k, i) = getfield(calc_objective_mod(sheeting_angle(i), localShip), 'cT');
+} 
+get_1D_map
+-------------------------------------------------------------
+Scale    = 25.000 
+Iteration k = 1 | AWA = -80º
+Iteration k = 2 | AWA = -7.899371e+01º
+Iteration k = 3 | AWA = -7.798742e+01º
+Iteration k = 4 | AWA = -7.698113e+01º
+Iteration k = 5 | AWA = -7.597484e+01º
+Iteration k = 6 | AWA = -7.496855e+01º
+Iteration k = 7 | AWA = -7.396226e+01º
+Iteration k = 8 | AWA = -7.295597e+01º
+Iteration k = 9 | AWA = -7.194969e+01º
+Iteration k = 10 | AWA = -7.094340e+01º
+Iteration k = 11 | AWA = -6.993711e+01º
+Iteration k = 12 | AWA = -6.893082e+01º
+Iteration k = 13 | AWA = -6.792453e+01º
+Iteration k = 14 | AWA = -6.691824e+01º
+Iteration k = 15 | AWA = -6.591195e+01º
+Iteration k = 16 | AWA = -6.490566e+01º
+Iteration k = 17 | AWA = -6.389937e+01º
+Iteration k = 18 | AWA = -6.289308e+01º
+Iteration k = 19 | AWA = -6.188679e+01º
+Iteration k = 20 | AWA = -6.088050e+01º
+Iteration k = 21 | AWA = -5.987421e+01º
+Iteration k = 22 | AWA = -5.886792e+01º
+Iteration k = 23 | AWA = -5.786164e+01º
+Iteration k = 24 | AWA = -5.685535e+01º
+Iteration k = 25 | AWA = -5.584906e+01º
+Iteration k = 26 | AWA = -5.484277e+01º
+Iteration k = 27 | AWA = -5.383648e+01º
+Iteration k = 28 | AWA = -5.283019e+01º
+Iteration k = 29 | AWA = -5.182390e+01º
+Iteration k = 30 | AWA = -5.081761e+01º
+Iteration k = 31 | AWA = -4.981132e+01º
+Iteration k = 32 | AWA = -4.880503e+01º
+Iteration k = 33 | AWA = -4.779874e+01º
+Iteration k = 34 | AWA = -4.679245e+01º
+Iteration k = 35 | AWA = -4.578616e+01º
+Iteration k = 36 | AWA = -4.477987e+01º
+Iteration k = 37 | AWA = -4.377358e+01º
+Iteration k = 38 | AWA = -4.276730e+01º
+Iteration k = 39 | AWA = -4.176101e+01º
+Iteration k = 40 | AWA = -4.075472e+01º
+Iteration k = 41 | AWA = -3.974843e+01º
+Iteration k = 42 | AWA = -3.874214e+01º
+Iteration k = 43 | AWA = -3.773585e+01º
+Iteration k = 44 | AWA = -3.672956e+01º
+Iteration k = 45 | AWA = -3.572327e+01º
+Iteration k = 46 | AWA = -3.471698e+01º
+Iteration k = 47 | AWA = -3.371069e+01º
+Iteration k = 48 | AWA = -3.270440e+01º
+Iteration k = 49 | AWA = -3.169811e+01º
+Iteration k = 50 | AWA = -3.069182e+01º
+Iteration k = 51 | AWA = -2.968553e+01º
+Iteration k = 52 | AWA = -2.867925e+01º
+Iteration k = 53 | AWA = -2.767296e+01º
+Iteration k = 54 | AWA = -2.666667e+01º
+Iteration k = 55 | AWA = -2.566038e+01º
+Iteration k = 56 | AWA = -2.465409e+01º
+Iteration k = 57 | AWA = -2.364780e+01º
+Iteration k = 58 | AWA = -2.264151e+01º
+Iteration k = 59 | AWA = -2.163522e+01º
+Iteration k = 60 | AWA = -2.062893e+01º
+Iteration k = 61 | AWA = -1.962264e+01º
+Iteration k = 62 | AWA = -1.861635e+01º
+Iteration k = 63 | AWA = -1.761006e+01º
+Iteration k = 64 | AWA = -1.660377e+01º
+Iteration k = 65 | AWA = -1.559748e+01º
+Iteration k = 66 | AWA = -1.459119e+01º
+Iteration k = 67 | AWA = -1.358491e+01º
+Iteration k = 68 | AWA = -1.257862e+01º
+Iteration k = 69 | AWA = -1.157233e+01º
+Iteration k = 70 | AWA = -1.056604e+01º
+Iteration k = 71 | AWA = -9.559748e+00º
+Iteration k = 72 | AWA = -8.553459e+00º
+Iteration k = 73 | AWA = -7.547170e+00º
+Iteration k = 74 | AWA = -6.540881e+00º
+Iteration k = 75 | AWA = -5.534591e+00º
+Iteration k = 76 | AWA = -4.528302e+00º
+Iteration k = 77 | AWA = -3.522013e+00º
+Iteration k = 78 | AWA = -2.515723e+00º
+Iteration k = 79 | AWA = -1.509434e+00º
+Iteration k = 80 | AWA = -5.031447e-01º
+Iteration k = 81 | AWA = 5.031447e-01º
+Iteration k = 82 | AWA = 1.509434e+00º
+Iteration k = 83 | AWA = 2.515723e+00º
+Iteration k = 84 | AWA = 3.522013e+00º
+Iteration k = 85 | AWA = 4.528302e+00º
+Iteration k = 86 | AWA = 5.534591e+00º
+Iteration k = 87 | AWA = 6.540881e+00º
+Iteration k = 88 | AWA = 7.547170e+00º
+Iteration k = 89 | AWA = 8.553459e+00º
+Iteration k = 90 | AWA = 9.559748e+00º
+Iteration k = 91 | AWA = 1.056604e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 92 | AWA = 1.157233e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 93 | AWA = 1.257862e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 94 | AWA = 1.358491e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 95 | AWA = 1.459119e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 96 | AWA = 1.559748e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 97 | AWA = 1.660377e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 98 | AWA = 1.761006e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 99 | AWA = 1.861635e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 100 | AWA = 1.962264e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 101 | AWA = 2.062893e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 102 | AWA = 2.163522e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 103 | AWA = 2.264151e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 104 | AWA = 2.364780e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 105 | AWA = 2.465409e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 106 | AWA = 2.566038e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 107 | AWA = 2.666667e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 108 | AWA = 2.767296e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 109 | AWA = 2.867925e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 110 | AWA = 2.968553e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 111 | AWA = 3.069182e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 112 | AWA = 3.169811e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 113 | AWA = 3.270440e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 114 | AWA = 3.371069e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 115 | AWA = 3.471698e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 116 | AWA = 3.572327e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 117 | AWA = 3.672956e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 118 | AWA = 3.773585e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 119 | AWA = 3.874214e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 120 | AWA = 3.974843e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 121 | AWA = 4.075472e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 122 | AWA = 4.176101e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 123 | AWA = 4.276730e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 124 | AWA = 4.377358e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 125 | AWA = 4.477987e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 126 | AWA = 4.578616e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 127 | AWA = 4.679245e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 128 | AWA = 4.779874e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 129 | AWA = 4.880503e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 130 | AWA = 4.981132e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 131 | AWA = 5.081761e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 132 | AWA = 5.182390e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 133 | AWA = 5.283019e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 134 | AWA = 5.383648e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 135 | AWA = 5.484277e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 136 | AWA = 5.584906e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 137 | AWA = 5.685535e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 138 | AWA = 5.786164e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 139 | AWA = 5.886792e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 140 | AWA = 5.987421e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 141 | AWA = 6.088050e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 142 | AWA = 6.188679e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 143 | AWA = 6.289308e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 144 | AWA = 6.389937e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 145 | AWA = 6.490566e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 146 | AWA = 6.591195e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 147 | AWA = 6.691824e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 148 | AWA = 6.792453e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 149 | AWA = 6.893082e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 150 | AWA = 6.993711e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 151 | AWA = 7.094340e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 152 | AWA = 7.194969e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 153 | AWA = 7.295597e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 154 | AWA = 7.396226e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 155 | AWA = 7.496855e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 156 | AWA = 7.597484e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 157 | AWA = 7.698113e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 158 | AWA = 7.798742e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 159 | AWA = 7.899371e+01º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 160 | AWA = 80º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Elapsed time is 26076.905267 seconds.
