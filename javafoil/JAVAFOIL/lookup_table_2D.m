@@ -12,11 +12,9 @@ Cw     = 25; % Wing chord
 Cf     = 12.5; % Flap chord
 R1     = Rig(26,0); % pivot x,y,  
 R1.addFoil(Foil('NACA0018',0,0,6.25,Cw)); % foilFile,x,y,dx,chord
-% R1.addFoil(Foil('NACA0009',-5,0,0,Cf)); % foilFile,x,y,dx,chord
 
 R2     = Rig(75,0); % pivot x,y, 
 R2.addFoil(Foil('NACA0018',0,0,6.25,Cw)); % foilFile,x,y,dx,chord
-% R2.addFoil(Foil('NACA0009',-5,0,0,Cf)); % foilFile,x,y,dx,chord
 
 ship.addRig(R1);  
 ship.addRig(R2);
