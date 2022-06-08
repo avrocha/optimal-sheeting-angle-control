@@ -1,23 +1,31 @@
-function out = calc_objective_mod(X, ship)    
-    Mesh2Java(X, ship); % Generates Java-scale mesh-file
+function out = calc_objective_mod(X, ship, process_id)
+    % Inputs:
+    % X          : [1 x n] sheeting angle vector; X(n) corresponds to the foremost wingsail sheeting angle
+    % ship       : [1 x 1] Ship object.
+    % process_id : [1 x 1] (int) ID of current task (process) to avoid shared memory in multiprocessing
     
-    awa = 0;  % For JavaFoil
-    Re  = 10^6;
-    genJava(Re, awa); % Generates the JavaFoil run script script.jfscript 
-    javaPath = [pwd,'/JavaFoil'];
-    cmd = ['java -cp "',javaPath,'/mhclasses.jar" -jar "', javaPath,'/javafoil.jar" Script="',javaPath,'/script.jfscript"'];
-    system(cmd);     % Excecute the JavaFoil calculations
+    process_id = sprintf('%d', int8(process_id));
+
+    % Generates Java-scale mesh-file
+    Mesh2Java(X, ship, process_id); 
     
-    [~, cL, cD, ~, cP] = readJavaResults();
+    % Run JavaFoil
+    Re         = 10^6;
+    script_str = genJava(Re, process_id); % Generates the JavaFoil run script script.jfscript 
+    javaPath   = [pwd,'/JavaFoil'];
+    cmd        = ['java -cp "',javaPath,'/mhclasses.jar" -jar "', javaPath,'/javafoil.jar" Script="', script_str, '"'];
+    system(cmd); 
+    
+    [~, cL, cD, ~, ~] = readJavaResults(process_id);
      
     % Calculate lift and drag coeffs
-    cT       = cL * sin(ship.yaw) - cD * cos(ship.yaw); % Propulsive force
-    out.obj  = -cT^2 * sign(cT); % Thrust
-    % out.obj  = -cl^2;
+    cT       = cL * sin(ship.yaw) - cD * cos(ship.yaw); % Thrust coefficient
+    out.obj  = -cT^2 * sign(cT);
+    % out.obj  = -cL^2;
     out.cT  = cT;
     out.cL  = cL;
     out.cD  = cD;
 
     % Uncomment line below to plot the flow field
-%     plot_flowField(ship.yaw,ship.scale,cL,cD,cP); 
+    % plot_flowField(ship.yaw,ship.scale,cL,cD,cP,process_id); 
 end
