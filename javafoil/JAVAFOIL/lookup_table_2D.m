@@ -1,7 +1,7 @@
 % Get 2D references w/ search-space constrained to real-data
 % characteristics
 
-clearvars -except data_ser; 
+clearvars -except F*; 
 clc; close all;  
 addpath JavaFoil; addpath Foils; addpath lib
 global ship;
@@ -31,10 +31,11 @@ parpool('local', 4);
 % Function handle
 fun = @(delta_1, delta_2, localShip, task_id) getfield(calc_objective_mod([delta_1, delta_2], localShip, task_id), 'cT');
 
-%% TACKING AWA
-sheeting_angle_1 = linspace(deg2rad(-90), deg2rad(90), 2); % res=3º (60)
-sheeting_angle_2 = linspace(deg2rad(-90), deg2rad(90), 2); % res=3º (60)
-AWA = linspace(deg2rad(-80), deg2rad(80), 2); % res=4º (40)
+% TACKING AWA
+% ------------------------------------------------------------------------
+sheeting_angle_1 = linspace(deg2rad(-90), deg2rad(90), 60); % res=3º (60)
+sheeting_angle_2 = linspace(deg2rad(-90), deg2rad(90), 60); % res=3º (60)
+AWA = linspace(deg2rad(-80), deg2rad(80), 40); % res=4º (40)
 
 % Uncomment lines below to save data
 data.AWA = AWA;
@@ -70,10 +71,11 @@ toc
 
 diary off
 
-%% 100 AWA
-sheeting_angle_1 = linspace(deg2rad(-125), deg2rad(-20), 2); % res=2º (50)
-sheeting_angle_2 = linspace(deg2rad(-125), deg2rad(-20), 2); % res=2º (50)
-AWA = linspace(deg2rad(80), deg2rad(125), 2); % res=2º (20)
+% 100 AWA
+% ------------------------------------------------------------------------
+sheeting_angle_1 = linspace(deg2rad(-125), deg2rad(-20), 50); % res=2º (50)
+sheeting_angle_2 = linspace(deg2rad(-125), deg2rad(-20), 50); % res=2º (50)
+AWA = linspace(deg2rad(80), deg2rad(125), 20); % res=2º (20)
 
 % Uncomment lines below to save data
 data.AWA = AWA;
@@ -111,3 +113,5 @@ diary off
 
 poolobj = gcp('nocreate');
 delete(poolobj);
+
+%% Interpolation
