@@ -34,67 +34,79 @@ J = @(sheeting_angle, ship)(getfield(calc_objective_mod(sheeting_angle, ship), '
 
 % Method
 % 'GB' for Gradient based or 'NB' for Newton based
-ES_method = 'GB';
+ES_method = 'NB';
 % 1 to save figures and diary or 0 to plot figures and print diary
-save = 1;
+save = 0;
 
 %% Simulation
-fs = 1; % sampling frequency (Hz)
+fs = 2; % sampling frequency (Hz)
 dt = 1/fs;
-T  = 50;
+T  = 250;
 N  = length(0:dt:T);
     
 AWA = deg2rad(45) * ones(1, N);
 sheet_angle_0 = [deg2rad(-35); deg2rad(-35)]; % delta(0) [nx1]
-% sheet_angle_0 = deg2rad(-35); % delta(0) [nx1]
 
 if strcmp(ES_method, 'GB')
     fprintf("Gradient-based ESC selected\n.")
-
+    
     % Uncomment params below for 1D set of parameters
-%     f             = 0.1; % dither freq
+%     f             = 0.01; % tuning param: constant coeff
+%     delta         = 0.1;  % tuning param: constant coeff
+% 
+%     f_dither      = 10*f; % dither freq
 %     A             = deg2rad(2); % dither amplitude
-%     fc_hp         = 0.09; % HPF cutoff freq
-%     fc_lp         = 0.09; % LPF cutoff freq
+%     fc_hp         = 7*f; % HPF cutoff freq
+%     fc_lp         = 5*f; % LPF cutoff freq
 %     lp_bool       = false; % Use LPF
-%     K             = 0.0750; % gain (>0 since extremum is maximum)
+%     K             = -f * delta * 1 * (-30); % gain (>0 since extremum is maximum)
  
     % Uncomment params below for 2D set of parameters
-    f             = [0.2; 0.1]; % dither freq
+    f             = 0.01; % tuning param: constant coeff
+    delta         = 0.1;  % tuning param: constant coeff
+
+    f_dither      = [20*f; 10*f]; % dither freq
     A             = [deg2rad(2); deg2rad(2)]; % dither amplitude
-    fc_hp         = 0.09; % HPF cutoff freq 
-    fc_lp         = 0.09; % LPF cutoff freq
+    fc_hp         = 7*f; % HPF cutoff freq
+    fc_lp         = 5*f; % LPF cutoff freq
     lp_bool       = false; % Use LPF
-    K             = diag([0.0750, 0.0750]); % gain (>0 since extremum is maximum)
+    K             = -f * delta * 1 * (-30) * eye(2); % gain (>0 since extremum is maximum)
     
     localShip = ship;
-    [sheet_angle, cT, cT_grad] = gbesc(localShip, J, dt, N, f, A, fc_hp, fc_lp, K, sheet_angle_0, AWA, lp_bool);
+    [sheet_angle, cT, cT_grad] = gbesc(localShip, J, dt, N, f_dither, A, fc_hp, fc_lp, K, sheet_angle_0, AWA, lp_bool);
 
 elseif strcmp(ES_method, 'NB')
     fprintf("Newton-based ESC selected\n.")
 
-%     Uncomment params below for 1D set of parameters
-%     f             = 0.1; % dither freq
+    % Uncomment params below for 1D set of parameters
+%     f             = 0.01; % tuning param: constant coeff
+%     delta         = 0.1;  % tuning param: constant coeff
+% 
+%     f_dither      = 10*f; % dither freq
 %     A             = deg2rad(2); % dither amplitude
-%     fc_hp         = 0.09; % HPF cutoff freq
-%     fc_lp         = 0.09; % LPF cutoff freq
+%     fc_hp         = 7*f; % HPF cutoff freq
+%     fc_lp         = 5*f; % LPF cutoff freq
 %     lp_bool       = false; % Use LPF
-%     K             = 0.0025; % gain (>0 since extremum is maximum)
-%     wric          = 2 * pi * 0.05 * f; % ricatti filter parameter: 0.05f (0.01f) without (with) LPF
+%     K             = f * delta * 1; % gain (>0 since extremum is maximum)
+%     wric          = 2 * pi * (3 * f * delta); % ricatti filter parameter
 %     ric_0         = -30;
+    
 
     % Uncomment params below for 2D set of parameters
-    f             = [0.2; 0.1]; % dither freq
+    f             = 0.01; % tuning param: constant coeff
+    delta         = 0.1;  % tuning param: constant coeff
+
+    f_dither      = [20*f; 10*f]; % dither freq
     A             = [deg2rad(2); deg2rad(2)]; % dither amplitude
-    fc_hp         = 0.09; % HPF cutoff freq
-    fc_lp         = 0.09; % LPF cutoff freq
+    fc_hp         = 7*f; % HPF cutoff freq
+    fc_lp         = 5*f; % LPF cutoff freq
     lp_bool       = false; % Use LPF
-    K             = diag([0.0025, 0.0025]); % gain (>0 since extremum is maximum)
-    wric          = 2 * pi * 0.05 * min(f); % ricatti filter parameter: 0.05f (0.01f) without (with) LPF
-    ric_0         = diag([-30, -30]);
+    K             = f * delta * 1 * eye(2); % gain (>0 since extremum is maximum)
+    wric          = 2 * pi * (3 * f * delta); % ricatti filter parameter
+    ric_0         = -30*eye(2);
     
     localShip = ship;
-    [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv] = nbesc(localShip, J, dt, N, f, A, fc_hp, fc_lp, K, sheet_angle_0, wric, ric_0, AWA, lp_bool);
+    [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv] = nbesc(localShip, J, dt, N, f_dither, A, fc_hp, fc_lp, K, sheet_angle_0, wric, ric_0, AWA, lp_bool);
 
 else
     fprintf("Wrong method. Select either \'GB\' or \'NB\'.\n")
@@ -104,11 +116,8 @@ end
 fig_cnt = 1;
 n = length(f);
 
-if f(2) > f(1)
-    dir = strcat('plots\frequency_selection\',ES_method,'_ESC\fast_at_front\');
-else 
-    dir = strcat('plots\frequency_selection\',ES_method,'_ESC\slow_at_front\');
-end
+% Choose saving directory
+dir = '';
 
 if save == 1
     fileID = fopen(strcat(dir,'diary.txt'),'w');
@@ -220,8 +229,3 @@ if save == 1
     filename = fullfile(strcat(dir,'AWA.fig'));
     saveas(figure(fig_cnt), filename);
 end
-
-% Sail configuration
-figure(fig_cnt); clf(fig_cnt);
-Mesh2Java(sheet_angle(:, end), ship);
-fig_cnt = fig_cnt + 1;
