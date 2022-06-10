@@ -44,7 +44,8 @@ for ii = 1:1:length(yawVec)
 %     saveas(gca,sprintf('pix/rectangle_awa%i',rad2deg(yaw)),'png');
     
     figure(ii);
-    Mesh2Java(X);
+    localShip = ship;
+    Mesh2Java(X, localShip, '1');
     calc_objective(X);
     saveas(gca,sprintf('pix/flow_rectangle_awa%i',(anglesWings(ii,1))),'png');
 %     ship.doMesh(X,true);
