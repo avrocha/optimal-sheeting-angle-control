@@ -1,12 +1,25 @@
-function out = calc_objective_mod(X, ship)    
-    Mesh2Java(X, ship); % Generates Java-scale mesh-file
+
+function out = calc_objective_mod(X, ship, process_id)
+    % Inputs:
+    % X          : [1 x n] sheeting angle vector; X(n) corresponds to the foremost wingsail sheeting angle
+    % ship       : [1 x 1] Ship object.
+    % process_id : [1 x 1] (int) ID of current task (process) to avoid shared memory in multiprocessing
+
+    if nargin < 3
+        process_id = '1';
+    else    
+        process_id = sprintf('%d', int8(process_id));
+    end
+
+    % Generates Java-scale mesh-file
+    Mesh2Java(X, ship, process_id); 
     
-    awa = 0;  % For JavaFoil
-    Re  = 10^6;
-    genJava(Re, awa); % Generates the JavaFoil run script script.jfscript 
-    javaPath = [pwd,'/JavaFoil'];
-    cmd = ['java -cp "',javaPath,'/mhclasses.jar" -jar "', javaPath,'/javafoil.jar" Script="',javaPath,'/script.jfscript"'];
-    system(cmd);     % Excecute the JavaFoil calculations
+    % Run JavaFoil
+    Re         = 10^6;
+    script_str = genJava(Re, process_id); % Generates the JavaFoil run script script.jfscript 
+    javaPath   = [pwd,'/JavaFoil'];
+    cmd        = ['java -cp "',javaPath,'/mhclasses.jar" -jar "', javaPath,'/javafoil.jar" Script="', script_str, '"'];
+    system(cmd);
     
     [~, cL, cD, ~, cP] = readJavaResults();
      
