@@ -1,16 +1,109 @@
 %---
+% Real-data implementation of ESC controller.
 % [Interpolated criterion - Fast computations for 1D scenario]
 % Gradient- and Newton-based extremum seeking controller for time-variant AWA
 % J(\theta) = cT(sheeting_angle)
 %---
 % Copyright: Alexandre Vieira da Rocha
 
-%% Init
+%% Process data
 clearvars -except F*; 
 clc; close all;  
 set(groot, 'defaultAxesTickLabelInterpreter','latex'); 
 set(groot, 'defaultLegendInterpreter','latex');
 
+fig_cnt = 1;
+
+% Select data source
+data_source = 'awa_100';
+
+switch data_source
+    case 'tacking'
+        dir      = 'data\measured_data\awa_pm_45\';
+        filename = [dir, 'awa_data_45.txt'];
+    case 'awa_100'
+        dir      = 'data\measured_data\awa_100\';
+        filename = [dir, 'awa_data_100.txt'];
+    otherwise
+        disp('Error: Select valid data source.\n')
+end
+
+fid = fopen(filename, 'r');
+fgets(fid); % Skip title
+out = fscanf(fid, ['%f', ',', '%f', ',', '%f', ',', '%f'], [4, inf]);
+out = out';
+
+time    = out(:, 1);
+awa     = out(:, 2);
+awa_hat = out(:, 3);
+heading = out(:, 4);
+
+% Small deviation from 5Hz
+fs_data = 1/(time(2) - time(1));
+n       = size(out, 1);
+
+% Edit time to obtain constant sampling frequency from the sensor
+fs_data = 5; % Both datasets are approximately 5 Hz
+time    = (0:1/fs_data:(1/fs_data)*(n-1))';
+
+% Frequency analysis from data
+fx        = (0:n-1)*(fs_data/n);
+y         = fft(awa);
+y_hat     = fft(awa_hat);
+y_abs     = abs(y).^2/n;
+y_hat_abs = abs(y_hat).^2/n;
+
+figure(fig_cnt); clf(fig_cnt);
+subplot(2, 1, 1); hold on;
+plot(fx, y_abs);
+title('Frequency spectrum of AWA raw data')
+xlabel('f [Hz]')
+ylabel('|awa(jw)|')
+
+subplot(2, 1, 2); hold on;
+plot(fx, y_hat_abs);
+title('Frequency spectrum of AWA filtered data')
+xlabel('f [Hz]')
+ylabel('|awa(jw)|')
+fig_cnt = fig_cnt + 1;
+
+% LPF data - [WIP]
+% bworder  = 5;
+% fc       = 0.5;
+% dt       = 1 / 5;
+% [b, a]   = butter(bworder, fc*dt, 'low');
+% 
+% awa_hat = zeros(1, n);
+% for i = 1:n
+%     if i >= bworder+1
+%         for j = 1:bworder+1
+%             awa_hat(i) = awa_hat(i) + b(j) .* awa(i-j+1);
+%         end
+%     
+%         for j = 2:bworder+1
+%             awa_hat(i) = awa_hat(i) - a(j) .* awa_hat(i-j+1);
+%         end
+%         
+%         awa_hat(i) = 1/a(1) .* awa_hat(i);
+%     else
+%         for j = 1:i
+%             awa_hat(i) = awa_hat(i) + b(j) .* awa(i-j+1);
+%         end
+%     
+%         for j = 2:i
+%             awa_hat(i) = awa_hat(i) - a(j) .* awa_hat(i-j+1);
+%         end
+%         
+%         awa_hat(i) = 1/a(1) .* awa_hat(i);
+%     end
+% end
+
+figure;
+hold on;
+plot(1:n, awa)
+plot(1:n, awa_hat, 'r--')
+
+%% Init controller
 addpath JavaFoil;  addpath Foils; addpath lib;
 global ship;
 fprintf('-------------------------------------------------------------\n');
@@ -30,19 +123,36 @@ scale    = calc_scale();
 
 % Method
 % 'GB' for Gradient based | 'NB' for Newton based
-ES_method = 'GB';
+ES_method = 'NB';
 % 1 to save figures and diary or 0 to plot figures and print diary
-save = 0;
-dir = ['plots\7m_data_AWA_100\sim\', ES_method,'_ESC\tuned\'];
+save = 1;
+dir = ['plots\7m_data_AWA_100\real\', ES_method,'_ESC\filt_awa\f_0_20\'];
 
 % Simulation
-fs = 3; % sampling frequency (Hz)
+fs = 10; 
 dt = 1/fs;
-T  = 500;
+T  = ceil(time(end));
 N  = length(0:dt:T);
-    
-AWA = deg2rad(100) + deg2rad(10)*sin(2*pi/T * (0:dt:T));
-sheet_angle_0 = deg2rad(-90);
+
+%
+% Upsample AWA with consecutive equal samples - for loop to avoid non-int
+% upsampling factors
+AWA = zeros(1, N);
+t_sim = (0:dt:T)';
+j = 0;
+for i = 1:N
+    if t_sim(i) >= time(j+1); j = j + 1; end
+    AWA(i) = awa(j);
+    AWA(i) = awa_hat(j); % FILTERED
+end
+
+% Initial sheeting angle
+switch data_source
+    case 'tacking'
+        sheet_angle_0 = deg2rad(-30);
+    case 'awa_100'
+        sheet_angle_0 = deg2rad(-90);
+end
 
 % Prep Interpolation
 % Choose data source
@@ -64,7 +174,7 @@ if strcmp(ES_method, 'GB')
     fc_hp         = 2*f; % HPF cutoff freq
     fc_lp         = 15*f; % LPF cutoff freq
     lp_bool       = false; % Use LPF
-    K             = -f * delta * 2 * (-30); % gain (>0 since extremum is maximum)
+    K             = -f * delta * 1 * (-30); % gain (>0 since extremum is maximum)
  
     % Criterion
     Jgb = @(sheeting_angle, ship) (getfield(calc_objective_mod(sheeting_angle, ship), 'cT'));
@@ -88,13 +198,13 @@ if strcmp(ES_method, 'NB')
     fc_hp         = 2*f; % HPF cutoff freq
     fc_lp         = 15*f; % LPF cutoff freq
     lp_bool       = false; % Use LPF
-    K             = f * delta * 2; % gain (>0 since extremum is maximum)
-    wric          = 2 * pi * (5 * f * delta); % ricatti filter parameter
+    K             = f * delta * 1; % gain (>0 since extremum is maximum)
+    wric          = 2 * pi * (1 * f * delta); % ricatti filter parameter
     ric_0         = -30;
     
     % Criterion
     Jnb = @(sheeting_angle, ship)(getfield(calc_objective_mod(sheeting_angle, ship, 2), 'cT'));    
-    % Interpolated criterion
+    % Interpolated criterion - high resolution -> linear interpolation
     Jnb_interp = @(sheeting_angle, ship) interp_criterion(X, V, [ship.yaw, sheeting_angle'], 'linear', Jnb, ship);
 
     localShip = ship;
@@ -207,6 +317,7 @@ elseif save == 0
     fileID = 1;
 end
 
+
 % Data string
 if strcmp(ES_method, 'GB')
     data_str = sprintf(['Params:\n'...
@@ -227,13 +338,13 @@ elseif strcmp(ES_method, 'NB')
                         'HPF: fc = %f\n'...
                         'LPF: fc = %f\n'...
                         'Dithers: A = %s, f = %s\n'...
-                        'Ricatti Filter: wric = %f_dither\n'...
+                        'Ricatti Filter: wric = %f\n'...
                         'Initial Hessian inverse value: %s\n'...
                         'Integrator gain (diag): K = %s\n'...
                         'MSE SA: %f\n' ...
                         'MSE cT: %f\n'...
                         'Accumulated cT: %f\n'], rad2deg(ship.yaw), fc_hp, fc_lp, num2str(A'), ...
-                                         num2str(f'), wric, num2str(diag(ric_0)'), ...
+                                         num2str(f_dither'), wric, num2str(diag(ric_0)'), ...
                                          num2str(diag(K)'), MSE_sheet_angle, MSE_cT, cT_accum);
 end
 
