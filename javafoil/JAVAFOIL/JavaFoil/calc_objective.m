@@ -5,16 +5,20 @@ function [obj,cl,CT,cd] = calc_objective(X)
     %ship.rigs(3).trim = X(5);        ship.rigs(3).foils(2).trim = -X(6);
     %ship.rigs(4).trim = X(7);        ship.rigs(4).foils(2).trim = -X(8);
     
-    shipLocal = ship;
-    Mesh2Java(X, shipLocal); % Generates Java-scale mesh-file
+    % Adapt to library w/ parallel computations
+    process_id = '1';
+
+    localShip = ship;
+    Mesh2Java(X, localShip, process_id); 
     
-    awa = 0;  % For JavaFoil
-    Re  = 10^6;
-    genJava(Re, awa); % Generates the JavaFoil run script script.jfscript 
-    javaPath = [pwd,'/JavaFoil'];
-    cmd = ['java -cp "',javaPath,'/mhclasses.jar" -jar "', javaPath,'/javafoil.jar" Script="',javaPath,'/script.jfscript"'];
-    system(cmd);     % Excecute the JavaFoil calculations
-    [alfa,cl,cd,cm,cp] = readJavaResults();
+    % Run JavaFoil
+    Re         = 10^6;
+    script_str = genJava(Re, process_id); % Generates the JavaFoil run script script.jfscript 
+    javaPath   = [pwd,'/JavaFoil'];
+    cmd        = ['java -cp "',javaPath,'/mhclasses.jar" -jar "', javaPath,'/javafoil.jar" Script="', script_str, '"'];
+    system(cmd);
+
+    [alfa,cl,cd,cm,cp] = readJavaResults(process_id);
      
     % Calculate lift and drag coeffs
     CT       = cl*sin(ship.yaw)-cd*cos(ship.yaw); % Propulsive force
@@ -23,7 +27,7 @@ function [obj,cl,CT,cd] = calc_objective(X)
     %fprintf('Objective function %0.4f \n',obj);
     
     % Uncomment line below to plot the flow field
-    plot_flowField(ship.yaw,ship.scale,cl,cd,cp); 
+    plot_flowField(ship.yaw,ship.scale,cl,cd,cp, process_id); 
     
     hold on;zoom on
 %     plot([cp cp],[-0.5 0.5],'k');%text(cp-0.02, .52,'cp','fontsize',16);

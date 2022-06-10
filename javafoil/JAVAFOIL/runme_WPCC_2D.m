@@ -51,8 +51,9 @@ for yaw = deg2rad([45 60 90 135])
 %     if irun==1;   
       X = -ship.yaw*[1 1 1 1] + deg2rad(10);
 %     end
-
-    Mesh2Java(X);
+    
+    localShip = ship;
+    Mesh2Java(X, localShip, '1');
     
     % Solve equilibrium equations using FMINCON
     ub = X+deg2rad(25);           % Upper sheet Boundary

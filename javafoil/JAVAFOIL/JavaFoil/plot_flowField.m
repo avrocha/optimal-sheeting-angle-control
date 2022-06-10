@@ -15,7 +15,7 @@ function plot_flowField(awa, scale, cl, cd, cp, process_id)
     % Force AWA to 0 
     awa=0;
     
-    fid = fopen('JavaFoil/flowfield_', process_id,'.txt','r');
+    fid = fopen(['JavaFoil/flowfield_', process_id,'.txt'],'r');
     line1 = fgetl(fid);
     line2 = fgetl(fid);
     line3 = fgetl(fid);
