@@ -49,30 +49,22 @@ dt = 1/fs;
 T  = 250;
 N  = length(0:dt:T);
     
-AWA = deg2rad(100) + 10*sin(2*pi/T * (0:dt:T));
+AWA = deg2rad(100) + deg2rad(10)*sin(2*pi/T * (0:dt:T));
 sheet_angle_0 = deg2rad(-90);
 
 if strcmp(ES_method, 'GB') || strcmp(ES_method, 'both')
     fprintf("Gradient-based ESC selected.\n")
     
-    % Uncomment params below for 1D set of parameters
-    f_dither      = 0.1; % dither freq
-    A             = deg2rad(2); % dither amplitude
-    fc_hp         = 0.7*f_dither; % HPF cutoff freq
-    fc_lp         = 0.5*f_dither; % LPF cutoff freq
-    lp_bool       = false; % Use LPF
-    K             = 0.075; %f * delta * 1 * (-30); % gain (>0 since extremum is maximum)
-
 %     % Uncomment params below for 1D set of parameters
-%     f             = 0.01; % tuning param: constant coeff
-%     delta         = 0.1;  % tuning param: constant coeff
-% 
-%     f_dither      = 10*f; % dither freq
-%     A             = deg2rad(2); % dither amplitude
-%     fc_hp         = 7*f; % HPF cutoff freq
-%     fc_lp         = 5*f; % LPF cutoff freq
-%     lp_bool       = false; % Use LPF
-%     K             = f * delta * 1 * (-30); % gain (>0 since extremum is maximum)
+    f             = 0.01; % tuning param: constant coeff
+    delta         = 0.1;  % tuning param: constant coeff
+
+    f_dither      = 10*f; % dither freq
+    A             = deg2rad(2); % dither amplitude
+    fc_hp         = 7*f; % HPF cutoff freq
+    fc_lp         = 5*f; % LPF cutoff freq
+    lp_bool       = false; % Use LPF
+    K             = f * delta * 1 * (-30); % gain (>0 since extremum is maximum)
  
     % Uncomment params below for 2D set of parameters
 %     f             = 0.01; % constant coeff
@@ -89,7 +81,6 @@ if strcmp(ES_method, 'GB') || strcmp(ES_method, 'both')
     
     % Criterion
     Jgb = @(sheeting_angle, ship)(getfield(calc_objective_mod(sheeting_angle, ship, 1), 'cT'));
-   
     Fgb = parfeval(gb_func, 3, Jgb);
 end
 
@@ -126,7 +117,7 @@ if strcmp(ES_method, 'NB') || strcmp(ES_method, 'both')
     
     % Criterion
     Jnb = @(sheeting_angle, ship)(getfield(calc_objective_mod(sheeting_angle, ship, 2), 'cT'));
-    %     Fnb = parfeval(nb_func, 5, Jnb);
+    Fnb = parfeval(nb_func, 5, Jnb);
 end
 
 %% Plots
