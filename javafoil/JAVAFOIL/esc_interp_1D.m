@@ -30,9 +30,10 @@ scale    = calc_scale();
 
 % Method
 % 'GB' for Gradient based | 'NB' for Newton based
-ES_method = 'NB';
+ES_method = 'GB';
 % 1 to save figures and diary or 0 to plot figures and print diary
 save = 0;
+dir = ['plots\7m_data_AWA_100\sim\', ES_method,'_ESC\tuned\'];
 
 % Simulation
 fs = 3; % sampling frequency (Hz)
@@ -60,10 +61,10 @@ if strcmp(ES_method, 'GB')
 
     f_dither      = 10*f; % dither freq
     A             = deg2rad(2); % dither amplitude
-    fc_hp         = 7*f; % HPF cutoff freq
-    fc_lp         = 5*f; % LPF cutoff freq
+    fc_hp         = 2*f; % HPF cutoff freq
+    fc_lp         = 15*f; % LPF cutoff freq
     lp_bool       = false; % Use LPF
-    K             = -f * delta * 1 * (-30); % gain (>0 since extremum is maximum)
+    K             = -f * delta * 2 * (-30); % gain (>0 since extremum is maximum)
  
     % Criterion
     Jgb = @(sheeting_angle, ship) (getfield(calc_objective_mod(sheeting_angle, ship), 'cT'));
@@ -84,11 +85,11 @@ if strcmp(ES_method, 'NB')
 
     f_dither      = 10*f; % dither freq
     A             = deg2rad(2); % dither amplitude
-    fc_hp         = 7*f; % HPF cutoff freq
-    fc_lp         = 5*f; % LPF cutoff freq
+    fc_hp         = 2*f; % HPF cutoff freq
+    fc_lp         = 15*f; % LPF cutoff freq
     lp_bool       = false; % Use LPF
-    K             = f * delta * 1; % gain (>0 since extremum is maximum)
-    wric          = 2 * pi * (3 * f * delta); % ricatti filter parameter
+    K             = f * delta * 2; % gain (>0 since extremum is maximum)
+    wric          = 2 * pi * (5 * f * delta); % ricatti filter parameter
     ric_0         = -30;
     
     % Criterion
@@ -101,52 +102,16 @@ if strcmp(ES_method, 'NB')
     
 end
 
-%% Plots
-dir = 'plots\7m_data_AWA_100\sim';
+%% Plots 
+% Check directory
+if ~exist(dir, 'dir')
+       mkdir(dir)
+end
 
 fig_cnt = 1;
 n = length(f_dither);
 
-if save == 1
-    fileID = fopen(strcat(dir,'diary.txt'),'w');
-elseif save == 0
-    fileID = 1;
-end
-
-% Data string
-if strcmp(ES_method, 'GB')
-    data_str = sprintf(['Params:\n'...
-                        'AWA: %f\n'...
-                        'HPF: fc = %f\n'...
-                        'LPF: fc = %f\n'...
-                        'Dithers: A = %s, f = %s\n'...  
-                        'Integrator gain (diag): K = %s\n'], rad2deg(ship.yaw), fc_hp, fc_lp, num2str(A'), num2str(f'), num2str(diag(K)'));
-
-elseif strcmp(ES_method, 'NB')
-   data_str = sprintf(['Params:\n'...
-                        'AWA: %f\n'...
-                        'HPF: fc = %f\n'...
-                        'LPF: fc = %f\n'...
-                        'Dithers: A = %s, f = %s\n'...
-                        'Ricatti Filter: wric = %f\n'...
-                        'Initial Hessian inverse value: %s\n'...
-                        'Integrator gain (diag): K = %s\n'], rad2deg(ship.yaw), fc_hp, fc_lp, num2str(A'), num2str(f'), wric, num2str(diag(ric_0)'), num2str(diag(K)'));
-end
-
-% Print / Save params
-fprintf(fileID, "----%s----\n", datetime('now','TimeZone','local','Format','d-MMM-y HH:mm:ss'));
-fprintf(fileID, data_str);
-if save == 1
-    fclose(fileID);
-end
-
-% References [WIP]
-% - Use interpolation instead of nearest neighbours
-% - Get data for AWA = [-180, 180]
-% - Create 4D structure for 2D case
-% sheet_angle_ref = (...)
-% cT_ref          = (...)
-
+% References
 % Get reference in original grid
 sheet_angle_ref = zeros(1, length(data.AWA));
 cT_ref          = zeros(1, length(data.AWA ));
@@ -234,3 +199,45 @@ end
 %% Stats
 MSE_sheet_angle = mean((sheet_angle(2:end) - sheet_angle_ref).^2);
 MSE_cT = mean((cT - cT_ref).^2);
+
+if save == 1
+    fileID = fopen(strcat(dir,'diary.txt'),'w');
+elseif save == 0
+    fileID = 1;
+end
+
+% Data string
+if strcmp(ES_method, 'GB')
+    data_str = sprintf(['Params:\n'...
+                        'AWA: %f\n'...
+                        'HPF: fc = %f\n'...
+                        'LPF: fc = %f\n'...
+                        'Dithers: A = %s, f = %s\n'...  
+                        'Integrator gain (diag): K = %s\n'...
+                        'MSE SA: %f\n' ...
+                        'MSE cT: %f\n'], rad2deg(ship.yaw), fc_hp, fc_lp, num2str(A'), ...
+                                         num2str(f'), num2str(diag(K)'), MSE_sheet_angle, ...
+                                         MSE_cT);
+
+elseif strcmp(ES_method, 'NB')
+   data_str = sprintf(['Params:\n'...
+                        'AWA: %f\n'...
+                        'HPF: fc = %f\n'...
+                        'LPF: fc = %f\n'...
+                        'Dithers: A = %s, f = %s\n'...
+                        'Ricatti Filter: wric = %f\n'...
+                        'Initial Hessian inverse value: %s\n'...
+                        'Integrator gain (diag): K = %s\n'...
+                        'MSE SA: %f\n' ...
+                        'MSE cT: %f\n'], rad2deg(ship.yaw), fc_hp, fc_lp, num2str(A'), ...
+                                         num2str(f'), wric, num2str(diag(ric_0)'), ...
+                                         num2str(diag(K)'), MSE_sheet_angle, MSE_cT);
+end
+
+% Print / Save params
+fprintf(fileID, "----%s----\n", datetime('now','TimeZone','local','Format','d-MMM-y HH:mm:ss'));
+fprintf(fileID, data_str);
+fprintf(data_str)
+if save == 1
+    fclose(fileID);
+end
