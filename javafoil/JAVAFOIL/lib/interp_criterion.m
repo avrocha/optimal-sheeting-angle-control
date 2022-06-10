@@ -1,4 +1,4 @@
-function cT = interp_criterion(X, V, x, interp_type, f)
+function cT = interp_criterion(X, V, x, interp_type, f, ship)
     % Inputs:
     % X           : [n x 1] Cell array of data grids
     % V           : cT data
@@ -17,12 +17,12 @@ function cT = interp_criterion(X, V, x, interp_type, f)
     
     out_of_bounds = 0;
     for i = 2:n
-        x(i)
-        min(X{i}, [],'all')
-        max(X{i}, [],'all')
         out_of_bounds = out_of_bounds | (x(i) < min(X{i}, [],'all')) | (x(i) > max(X{i}, [],'all'));
         
-        if out_of_bounds; break; end
+        if out_of_bounds
+            disp('\tInterpolated criterion is out of bounds\n.')
+            break; 
+        end
     end
     
     if ~out_of_bounds
@@ -38,7 +38,7 @@ function cT = interp_criterion(X, V, x, interp_type, f)
                 return
         end
     else
-        cT = f(x(2:end));
+        cT = f(x(2:end), ship);
     end
 
 end
