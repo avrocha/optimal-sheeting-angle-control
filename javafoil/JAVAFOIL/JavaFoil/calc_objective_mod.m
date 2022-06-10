@@ -1,4 +1,3 @@
-
 function out = calc_objective_mod(X, ship, process_id)
     % Inputs:
     % X          : [1 x n] sheeting angle vector; X(n) corresponds to the foremost wingsail sheeting angle
@@ -20,17 +19,17 @@ function out = calc_objective_mod(X, ship, process_id)
     javaPath   = [pwd,'/JavaFoil'];
     cmd        = ['java -cp "',javaPath,'/mhclasses.jar" -jar "', javaPath,'/javafoil.jar" Script="', script_str, '"'];
     system(cmd);
-    
-    [~, cL, cD, ~, cP] = readJavaResults();
+
+    [~, cL, cD, ~, ~] = readJavaResults(process_id);
      
     % Calculate lift and drag coeffs
-    cT       = cL * sin(ship.yaw) - cD * cos(ship.yaw); % Propulsive force
-    out.obj  = -cT^2 * sign(cT); % Thrust
-    % out.obj  = -cl^2;
+    cT       = cL * sin(ship.yaw) - cD * cos(ship.yaw); % Thrust coefficient
+    out.obj  = -cT^2 * sign(cT);
+    % out.obj  = -cL^2;
     out.cT  = cT;
     out.cL  = cL;
     out.cD  = cD;
 
     % Uncomment line below to plot the flow field
-%     plot_flowField(ship.yaw,ship.scale,cL,cD,cP); 
+    % plot_flowField(ship.yaw,ship.scale,cL,cD,cP,process_id); 
 end

@@ -21,5 +21,5 @@ ymin  = min(C(2,:));
 ymid  = (ymin+ymax)/2;
 scale = (xmax-xmin);
 ship.scale=scale;
-fprintf('Scale    = %.3f \n',scale);
+fprintf('Scale = %.3f \n',scale);
 

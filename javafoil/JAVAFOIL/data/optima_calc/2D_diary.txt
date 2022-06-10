@@ -1,0 +1,247 @@
+2D | Ship AWA = 45.0 deg
+{Unable to perform assignment
+because the size of the left side
+is 1-by-1 and the size of the right
+side is 1-by-2.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('optima_WPCC', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m', 89)" style="font-weight:bold">optima_WPCC</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m',89,0)">line 89</a>)
+    X(i, :) = -ship.yaw*[1 1] + deg2rad(10);
+} 
+opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m',89,0)
+Scale    = 74.000 
+2D | Ship AWA = 45.0 deg
+Index exceeds the number of array elements. Index must not
+exceed 2.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Ship/doMesh', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Ship.m', 41)" style="font-weight:bold">Ship/doMesh</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Ship.m',41,0)">line 41</a>)
+              rig.trim = Xval(ir);%2*ir-1);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Mesh2Java', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Mesh2Java.m', 5)" style="font-weight:bold">Mesh2Java</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Mesh2Java.m',5,0)">line 5</a>)
+ship.doMesh(Xval,false);  %
+ship.doMesh(Xval,normalize,flip)
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 9)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',9,0)">line 9</a>)
+    Mesh2Java(X, shipLocal); % Generates Java-scale
+    mesh-file
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('optima_WPCC', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m', 99)" style="font-weight:bold">optima_WPCC</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m',99,0)">line 99</a>)
+    [X(i, :), fval, exitflag, output] =
+    fmincon(@(X)calc_objective(X), X(i, :), [], [], [], [],
+    lb, ub, [], options);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fmincon', 'C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m', 568)" style="font-weight:bold">fmincon</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m',568,0)">line 568</a>)
+      initVals.f = feval(funfcn{3},X,varargin{:});
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('optima_WPCC', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m', 99)" style="font-weight:bold">optima_WPCC</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m',99,0)">line 99</a>)
+    [X(i, :), fval, exitflag, output] =
+    fmincon(@(X)calc_objective(X), X(i, :), [], [], [], [],
+    lb, ub, [], options);
+
+Caused by:
+    Failure in initial objective function evaluation.
+    FMINCON cannot continue.
+
+opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m',99,0)
+Scale    = 74.000 
+2D | Ship AWA = 45.0 deg
+
+X =
+
+   -0.6109   -0.6109
+
+Index exceeds the number of array elements. Index must not exceed
+2.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Ship/doMesh', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Ship.m', 41)" style="font-weight:bold">Ship/doMesh</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Ship.m',41,0)">line 41</a>)
+              rig.trim = Xval(ir);%2*ir-1);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Mesh2Java', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Mesh2Java.m', 5)" style="font-weight:bold">Mesh2Java</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Mesh2Java.m',5,0)">line 5</a>)
+ship.doMesh(Xval,false);  % ship.doMesh(Xval,normalize,flip)
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 9)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',9,0)">line 9</a>)
+    Mesh2Java(X, shipLocal); % Generates Java-scale mesh-file
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('optima_WPCC', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m', 99)" style="font-weight:bold">optima_WPCC</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m',99,0)">line 99</a>)
+    [X(i, :), fval, exitflag, output] =
+    fmincon(@(X)calc_objective(X), X(i, :), [], [], [], [], lb,
+    ub, [], options);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fmincon', 'C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m', 568)" style="font-weight:bold">fmincon</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m',568,0)">line 568</a>)
+      initVals.f = feval(funfcn{3},X,varargin{:});
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('optima_WPCC', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m', 99)" style="font-weight:bold">optima_WPCC</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m',99,0)">line 99</a>)
+    [X(i, :), fval, exitflag, output] =
+    fmincon(@(X)calc_objective(X), X(i, :), [], [], [], [], lb,
+    ub, [], options);
+
+Caused by:
+    Failure in initial objective function evaluation. FMINCON
+    cannot continue.
+
+opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Ship.m',41,0)
+opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Ship.m',41,0)
+
+ans =
+
+     9
+
+
+ans =
+
+     9
+
+
+ans =
+
+     9
+
+
+ans =
+
+     9
+
+
+ans =
+
+     9
+
+
+ans =
+
+     9
+
+
+ans =
+
+     9
+
+
+ans =
+
+     9
+
+
+ans =
+
+     9
+
+Scale    = 74.000 
+2D | Ship AWA = 45.0 deg
+
+ans =
+
+     9
+
+
+ans =
+
+     9
+
+
+ans =
+
+     9
+
+Index exceeds the number of array elements. Index must not exceed
+2.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Ship/doMesh', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Ship.m', 42)" style="font-weight:bold">Ship/doMesh</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Ship.m',42,0)">line 42</a>)
+              rig.trim = Xval(ir);%2*ir-1);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Mesh2Java', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Mesh2Java.m', 5)" style="font-weight:bold">Mesh2Java</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Mesh2Java.m',5,0)">line 5</a>)
+ship.doMesh(Xval,false);  % ship.doMesh(Xval,normalize,flip)
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 9)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',9,0)">line 9</a>)
+    Mesh2Java(X, shipLocal); % Generates Java-scale mesh-file
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('optima_WPCC', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m', 99)" style="font-weight:bold">optima_WPCC</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m',99,0)">line 99</a>)
+    [X(i, :), fval, exitflag, output] =
+    fmincon(@(X)calc_objective(X), X(i, :), [], [], [], [], lb,
+    ub, [], options);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fmincon', 'C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m', 568)" style="font-weight:bold">fmincon</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m',568,0)">line 568</a>)
+      initVals.f = feval(funfcn{3},X,varargin{:});
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('optima_WPCC', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m', 99)" style="font-weight:bold">optima_WPCC</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m',99,0)">line 99</a>)
+    [X(i, :), fval, exitflag, output] =
+    fmincon(@(X)calc_objective(X), X(i, :), [], [], [], [], lb,
+    ub, [], options);
+
+Caused by:
+    Failure in initial objective function evaluation. FMINCON
+    cannot continue.
+
+Scale    = 74.000 
+2D | Ship AWA = 45.0 deg
+cT=0.5130, cl=0.7440, cd=0.0185, cm=-0.1610, cp=0.4660, X=[-35 -35]
+cT=0.4832, cl=0.7010, cd=0.0176, cm=-0.1430, cp=0.4540, X=[-36 -35]
+cT=0.4923, cl=0.7140, cd=0.0177, cm=-0.1640, cp=0.4800, X=[-35 -36]
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       3   -2.631824e-01    0.000e+00    9.237e-01
+cT=0.5174, cl=0.8940, cd=0.1623, cm=-0.5470, cp=0.8620, X=[-10 -15]
+cT=0.7693, cl=1.1440, cd=0.0561, cm=-0.3460, cp=0.5520, X=[-23 -25]
+cT=0.7623, cl=1.1320, cd=0.0539, cm=-0.3290, cp=0.5410, X=[-24 -25]
+cT=0.7872, cl=1.1660, cd=0.0528, cm=-0.3480, cp=0.5490, X=[-23 -26]
+    1       7   -5.918176e-01    0.000e+00    2.138e+00    2.799e-01
+cT=0.8171, cl=1.2110, cd=0.0555, cm=-0.4960, cp=0.6590, X=[-16 -34]
+cT=0.8237, cl=1.2170, cd=0.0522, cm=-0.4770, cp=0.6420, X=[-17 -34]
+cT=0.8012, cl=1.1880, cd=0.0550, cm=-0.4990, cp=0.6700, X=[-16 -35]
+    2      10   -6.676363e-01    0.000e+00    1.393e+00    1.946e-01
+cT=0.8405, cl=1.2360, cd=0.0474, cm=-0.4000, cp=0.5740, X=[-20 -30]
+cT=0.8379, cl=1.2300, cd=0.0450, cm=-0.3830, cp=0.5610, X=[-21 -30]
+cT=0.8439, cl=1.2390, cd=0.0456, cm=-0.4030, cp=0.5760, X=[-20 -31]
+    3      13   -7.064325e-01    0.000e+00    3.792e-01    1.018e-01
+cT=0.8016, cl=1.1660, cd=0.0323, cm=-0.3230, cp=0.5270, X=[-25 -33]
+cT=0.8329, cl=1.2170, cd=0.0391, cm=-0.3610, cp=0.5470, X=[-23 -32]
+cT=0.8244, cl=1.2030, cd=0.0371, cm=-0.3440, cp=0.5360, X=[-24 -32]
+cT=0.8304, cl=1.2120, cd=0.0377, cm=-0.3640, cp=0.5500, X=[-23 -33]
+    4      17   -6.936889e-01    0.000e+00    6.426e-01    5.111e-02
+cT=0.8426, cl=1.2360, cd=0.0443, cm=-0.3950, cp=0.5690, X=[-21 -31]
+cT=0.8386, cl=1.2280, cd=0.0420, cm=-0.3770, cp=0.5570, X=[-22 -31]
+cT=0.8416, cl=1.2330, cd=0.0427, cm=-0.3980, cp=0.5730, X=[-21 -32]
+    5      20   -7.100387e-01    0.000e+00    9.998e-02    3.632e-02
+cT=0.8445, cl=1.2420, cd=0.0477, cm=-0.4150, cp=0.5850, X=[-20 -31]
+cT=0.8426, cl=1.2370, cd=0.0453, cm=-0.3980, cp=0.5710, X=[-21 -31]
+cT=0.8435, cl=1.2390, cd=0.0461, cm=-0.4190, cp=0.5880, X=[-20 -32]
+    6      23   -7.131285e-01    0.000e+00    7.694e-02    2.156e-02
+cT=0.8423, cl=1.2410, cd=0.0498, cm=-0.4240, cp=0.5910, X=[-19 -31]
+cT=0.8431, cl=1.2410, cd=0.0487, cm=-0.4200, cp=0.5880, X=[-19 -31]
+cT=0.8434, cl=1.2410, cd=0.0482, cm=-0.4170, cp=0.5860, X=[-19 -31]
+cT=0.8436, cl=1.2410, cd=0.0480, cm=-0.4170, cp=0.5860, X=[-19 -31]
+cT=0.8423, cl=1.2410, cd=0.0498, cm=-0.4240, cp=0.5910, X=[-19 -31]
+cT=0.8430, cl=1.2410, cd=0.0489, cm=-0.4180, cp=0.5870, X=[-19 -31]
+cT=0.8427, cl=1.2400, cd=0.0483, cm=-0.4160, cp=0.5850, X=[-19 -31]
+cT=0.8436, cl=1.2410, cd=0.0480, cm=-0.4160, cp=0.5850, X=[-20 -31]
+cT=0.8437, cl=1.2410, cd=0.0479, cm=-0.4160, cp=0.5850, X=[-20 -31]
+cT=0.8437, cl=1.2410, cd=0.0478, cm=-0.4160, cp=0.5850, X=[-20 -31]
+cT=0.8437, cl=1.2410, cd=0.0478, cm=-0.4160, cp=0.5850, X=[-20 -31]
+cT=0.8437, cl=1.2410, cd=0.0478, cm=-0.4160, cp=0.5850, X=[-20 -31]
+cT=0.8437, cl=1.2410, cd=0.0478, cm=-0.4150, cp=0.5850, X=[-20 -31]
+cT=0.8437, cl=1.2410, cd=0.0478, cm=-0.4150, cp=0.5850, X=[-20 -31]
+cT=0.8438, cl=1.2410, cd=0.0477, cm=-0.4150, cp=0.5850, X=[-20 -31]
+cT=0.8437, cl=1.2410, cd=0.0478, cm=-0.4150, cp=0.5850, X=[-20 -31]
+cT=0.8437, cl=1.2410, cd=0.0478, cm=-0.4150, cp=0.5850, X=[-20 -31]
+cT=0.8437, cl=1.2410, cd=0.0478, cm=-0.4150, cp=0.5850, X=[-20 -31]
+cT=0.8437, cl=1.2410, cd=0.0478, cm=-0.4150, cp=0.5850, X=[-20 -31]
+cT=0.8438, cl=1.2410, cd=0.0477, cm=-0.4150, cp=0.5850, X=[-20 -31]
+cT=0.8437, cl=1.2410, cd=0.0478, cm=-0.4150, cp=0.5850, X=[-20 -31]
+cT=0.8437, cl=1.2410, cd=0.0478, cm=-0.4150, cp=0.5850, X=[-20 -31]
+cT=0.8438, cl=1.2410, cd=0.0478, cm=-0.4150, cp=0.5850, X=[-20 -31]
+cT=0.8438, cl=1.2410, cd=0.0478, cm=-0.4150, cp=0.5850, X=[-20 -31]
+cT=0.8445, cl=1.2420, cd=0.0477, cm=-0.4150, cp=0.5850, X=[-20 -31]
+cT=0.8445, cl=1.2420, cd=0.0477, cm=-0.4150, cp=0.5850, X=[-20 -31]
+cT=0.8445, cl=1.2420, cd=0.0477, cm=-0.4150, cp=0.5850, X=[-20 -31]
+cT=0.8445, cl=1.2420, cd=0.0477, cm=-0.4150, cp=0.5850, X=[-20 -31]
+cT=0.8445, cl=1.2420, cd=0.0477, cm=-0.4150, cp=0.5850, X=[-20 -31]
+cT=0.8445, cl=1.2420, cd=0.0477, cm=-0.4150, cp=0.5850, X=[-20 -31]
+cT=0.8445, cl=1.2420, cd=0.0477, cm=-0.4150, cp=0.5850, X=[-20 -31]
+cT=0.8445, cl=1.2420, cd=0.0477, cm=-0.4150, cp=0.5850, X=[-20 -31]
+cT=0.8445, cl=1.2420, cd=0.0477, cm=-0.4150, cp=0.5850, X=[-20 -31]
+
+Optimization stopped because the <a href = "matlab: helpview('optim','norm_curr_step_fminconip','CSHelpWindow');">relative changes in all elements of x</a> are
+less than <a href = "matlab: helpview('optim','tolx','CSHelpWindow');">options.StepTolerance</a> = 1.000000e-10, and the relative maximum constraint
+violation, 0.000000e+00, is less than <a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+AWA=45.0  Xopt=[-19.6, -30.8]
+Elapsed time is 93.265016 seconds.

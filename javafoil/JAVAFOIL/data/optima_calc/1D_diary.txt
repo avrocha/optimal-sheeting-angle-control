@@ -1,0 +1,207 @@
+1D | Ship AWA = 0.0 deg
+{Not enough
+input
+arguments.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Mesh2Java', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Mesh2Java.m', 7)" style="font-weight:bold">Mesh2Java</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Mesh2Java.m',7,0)">line 7</a>)
+    if ~ischar(process_id)
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 9)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',9,0)">line 9</a>)
+    Mesh2Java(X, shipLocal); % Generates Java-scale mesh-file
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('optima_WPCC_2D>@(X)calc_objective(X)', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC_2D.m', 60)" style="font-weight:bold">optima_WPCC_2D>@(X)calc_objective(X)</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC_2D.m',60,0)">line 60</a>)
+    [X(i), fval, exitflag, output] = fmincon(@(X)calc_objective(X), X(i), [], [], [], [], lb, ub, [], options);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fmincon', 'C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m', 568)" style="font-weight:bold">fmincon</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m',568,0)">line 568</a>)
+      initVals.f = feval(funfcn{3},X,varargin{:});
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('optima_WPCC_2D', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC_2D.m', 60)" style="font-weight:bold">optima_WPCC_2D</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC_2D.m',60,0)">line 60</a>)
+    [X(i), fval, exitflag, output] = fmincon(@(X)calc_objective(X), X(i), [], [], [], [], lb, ub, [], options);
+
+Caused by:
+    Failure
+    in
+    initial
+    objective
+    function
+    evaluation.
+    FMINCON
+    cannot
+    continue.
+} 
+opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Mesh2Java.m',7,0)
+optima_WPCC_2D
+Scale    = 25.000 
+1D | Ship AWA = 0.0 deg
+cT=-0.0223, cl=1.1150, cd=0.0223, cm=-0.0340, cp=0.2800, X=10
+cT=-0.0243, cl=1.2270, cd=0.0243, cm=-0.0400, cp=0.2820, X=11
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       2    4.986289e-04    0.000e+00    2.845e-03
+cT=-0.0220, cl=1.0990, cd=0.0220, cm=-0.0330, cp=0.2800, X=10
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 16)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',16,0)">line 16</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('optima_WPCC_2D>@(X)calc_objective(X)', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC_2D.m', 60)" style="font-weight:bold">optima_WPCC_2D>@(X)calc_objective(X)</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC_2D.m',60,0)">line 60</a>)
+    [X(i), fval, exitflag, output] = fmincon(@(X)calc_objective(X), X(i), [], [], [], [], lb, ub, [], options);
+
+In finDiffEvalAndChkErr
+
+In finitedifferences
+
+In computeFinDiffGradAndJac
+
+In barrier
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fmincon', 'C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m', 873)" style="font-weight:bold">fmincon</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m',873,0)">line 873</a>)
+    [X,FVAL,EXITFLAG,OUTPUT,LAMBDA,GRAD,HESSIAN] = barrier(funfcn,X,A,B,Aeq,Beq,l,u,confcn,options.HessFcn, ...
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('optima_WPCC_2D', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC_2D.m', 60)" style="font-weight:bold">optima_WPCC_2D</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC_2D.m',60,0)">line 60</a>)
+    [X(i), fval, exitflag, output] = fmincon(@(X)calc_objective(X), X(i), [], [], [], [], lb, ub, [], options);
+} 
+optima_WPCC_2D
+Scale    = 25.000 
+1D | Ship AWA = 0.0 deg
+cT=-0.0223, cl=1.1150, cd=0.0223, cm=-0.0340, cp=0.2800, X=10
+cT=-0.0243, cl=1.2270, cd=0.0243, cm=-0.0400, cp=0.2820, X=11
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       2    4.986289e-04    0.000e+00    2.845e-03
+cT=-0.0220, cl=1.0990, cd=0.0220, cm=-0.0330, cp=0.2800, X=10
+cT=-0.0239, cl=1.2100, cd=0.0239, cm=-0.0390, cp=0.2820, X=11
+    1       4    4.844401e-04    0.000e+00    2.370e-03    2.553e-03
+cT=-0.0199, cl=0.9460, cd=0.0199, cm=-0.0260, cp=0.2780, X=8
+cT=-0.0214, cl=1.0580, cd=0.0214, cm=-0.0310, cp=0.2790, X=9
+    2       6    3.980025e-04    0.000e+00    1.565e-03    2.378e-02
+cT=-0.0169, cl=0.6960, cd=0.0169, cm=-0.0170, cp=0.2740, X=6
+cT=-0.0180, cl=0.8080, cd=0.0180, cm=-0.0210, cp=0.2760, X=7
+    3       8    2.866249e-04    0.000e+00    1.415e-03    3.916e-02
+cT=-0.0152, cl=0.4900, cd=0.0152, cm=-0.0110, cp=0.2720, X=4
+cT=-0.0160, cl=0.6020, cd=0.0160, cm=-0.0140, cp=0.2730, X=5
+    4      10    2.307361e-04    0.000e+00    9.965e-04    3.213e-02
+
+Optimization completed: The relative <a href = "matlab: helpview('optim','first_order_opt_con','CSHelpWindow');">first-order optimality measure</a>, 9.965497e-04,
+is less than <a href = "matlab: helpview('optim','optimality_tolerance_msgcsh','CSHelpWindow');">options.OptimalityTolerance</a> = 1.000000e-03, and the relative maximum constraint
+violation, 0.000000e+00, is less than <a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+{Unrecognized function or variable 'yaw'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('optima_WPCC_2D', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC_2D.m', 62)" style="font-weight:bold">optima_WPCC_2D</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC_2D.m',62,0)">line 62</a>)
+    fprintf('AWA=%0.1f  Xopt=%.1f\n', rad2deg(yaw), rad2deg(X(i)));
+} 
+opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC_2D.m',62,0)
+    fprintf('AWA=%0.1f  Xopt=%.1f\n', rad2deg(AWA(i)), rad2deg(X(i)));
+AWA=0.0  Xopt=4.4
+Scale    = 25.000 
+1D | Ship AWA = 0.0 deg
+cT=-0.0101, cl=-0.0000, cd=0.0101, cm=-0.0000, cp=0.2500, X=-0
+cT=-0.0101, cl=0.1110, cd=0.0101, cm=-0.0020, cp=0.2700, X=1
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       2    1.028196e-04    0.000e+00    3.778e-05
+
+Optimization completed: The final point is the initial point.
+The <a href = "matlab: helpview('optim','first_order_opt_con','CSHelpWindow');">first-order optimality measure</a>, 3.777654e-05, is less than <a href = "matlab: helpview('optim','optimality_tolerance_msgcsh','CSHelpWindow');">options.OptimalityTolerance</a> =
+1.000000e-03, and the maximum constraint violation, 0.000000e+00, is less than
+<a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+AWA=0.0  Xopt=-0.0
+Elapsed time is 2.049250 seconds.
+1D | Ship AWA = 0.0 deg
+cT=-0.0101, cl=0.1110, cd=0.0101, cm=-0.0020, cp=0.2700, X=1
+cT=-0.0103, cl=0.2220, cd=0.0103, cm=-0.0050, cp=0.2700, X=2
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       2    1.016064e-04    0.000e+00    1.076e-04
+
+Optimization completed: The final point is the initial point.
+The <a href = "matlab: helpview('optim','first_order_opt_con','CSHelpWindow');">first-order optimality measure</a>, 1.076158e-04, is less than <a href = "matlab: helpview('optim','optimality_tolerance_msgcsh','CSHelpWindow');">options.OptimalityTolerance</a> =
+1.000000e-03, and the maximum constraint violation, 0.000000e+00, is less than
+<a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+AWA=0.0  Xopt=1.0
+Elapsed time is 2.013589 seconds.
+1D | Ship AWA = 0.0 deg
+cT=-0.0103, cl=0.2220, cd=0.0103, cm=-0.0050, cp=0.2700, X=2
+cT=-0.0101, cl=0.3340, cd=0.0101, cm=-0.0070, cp=0.2710, X=3
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       2    1.050625e-04    0.000e+00    1.202e-04
+
+Optimization completed: The final point is the initial point.
+The <a href = "matlab: helpview('optim','first_order_opt_con','CSHelpWindow');">first-order optimality measure</a>, 1.201582e-04, is less than <a href = "matlab: helpview('optim','optimality_tolerance_msgcsh','CSHelpWindow');">options.OptimalityTolerance</a> =
+1.000000e-03, and the maximum constraint violation, 0.000000e+00, is less than
+<a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+AWA=0.0  Xopt=2.0
+Elapsed time is 2.014015 seconds.
+1D | Ship AWA = 45.0 deg
+cT=0.7726, cl=1.1150, cd=0.0223, cm=-0.0340, cp=0.2800, X=-35
+cT=0.6946, cl=1.0030, cd=0.0207, cm=-0.0290, cp=0.2780, X=-36
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       2   -5.969639e-01    0.000e+00    3.566e+00
+cT=0.6902, cl=1.1720, cd=0.1960, cm=-0.4350, cp=0.6210, X=-10
+cT=1.2012, cl=1.7670, cd=0.0682, cm=-0.1470, cp=0.3330, X=-23
+cT=1.2168, cl=1.7830, cd=0.0621, cm=-0.1340, cp=0.3250, X=-24
+    1       5   -1.442978e+00    0.000e+00    5.155e+00    2.171e-01
+cT=1.2266, cl=1.7890, cd=0.0543, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2242, cl=1.7810, cd=0.0497, cm=-0.1060, cp=0.3090, X=-26
+    2       7   -1.504575e+00    0.000e+00    4.699e-01    4.222e-02
+cT=1.2262, cl=1.7890, cd=0.0549, cm=-0.1180, cp=0.3160, X=-25
+cT=1.2264, cl=1.7890, cd=0.0546, cm=-0.1180, cp=0.3160, X=-25
+cT=1.2265, cl=1.7890, cd=0.0544, cm=-0.1170, cp=0.3160, X=-25
+cT=1.2265, cl=1.7890, cd=0.0545, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2262, cl=1.7890, cd=0.0549, cm=-0.1180, cp=0.3160, X=-25
+cT=1.2264, cl=1.7890, cd=0.0546, cm=-0.1180, cp=0.3160, X=-25
+cT=1.2265, cl=1.7890, cd=0.0544, cm=-0.1170, cp=0.3160, X=-25
+cT=1.2265, cl=1.7890, cd=0.0545, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2265, cl=1.7890, cd=0.0544, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2266, cl=1.7890, cd=0.0544, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2266, cl=1.7890, cd=0.0543, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2267, cl=1.7890, cd=0.0542, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2243, cl=1.7810, cd=0.0496, cm=-0.1060, cp=0.3090, X=-26
+    3      20   -1.504713e+00    0.000e+00    7.013e-02    1.497e-05
+cT=1.2192, cl=1.7850, cd=0.0609, cm=-0.1310, cp=0.3240, X=-24
+cT=1.2237, cl=1.7880, cd=0.0575, cm=-0.1240, cp=0.3190, X=-24
+cT=1.2255, cl=1.7890, cd=0.0559, cm=-0.1200, cp=0.3170, X=-25
+cT=1.2261, cl=1.7890, cd=0.0551, cm=-0.1190, cp=0.3160, X=-25
+cT=1.2192, cl=1.7850, cd=0.0609, cm=-0.1310, cp=0.3240, X=-24
+cT=1.2237, cl=1.7880, cd=0.0575, cm=-0.1240, cp=0.3190, X=-24
+cT=1.2255, cl=1.7890, cd=0.0559, cm=-0.1200, cp=0.3170, X=-25
+cT=1.2261, cl=1.7890, cd=0.0551, cm=-0.1190, cp=0.3160, X=-25
+cT=1.2263, cl=1.7890, cd=0.0547, cm=-0.1180, cp=0.3160, X=-25
+cT=1.2264, cl=1.7890, cd=0.0545, cm=-0.1170, cp=0.3160, X=-25
+cT=1.2265, cl=1.7890, cd=0.0544, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2265, cl=1.7890, cd=0.0545, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2266, cl=1.7890, cd=0.0543, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2266, cl=1.7890, cd=0.0543, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2266, cl=1.7890, cd=0.0543, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2265, cl=1.7890, cd=0.0544, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2266, cl=1.7890, cd=0.0544, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2266, cl=1.7890, cd=0.0543, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2266, cl=1.7890, cd=0.0544, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2266, cl=1.7890, cd=0.0543, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2266, cl=1.7890, cd=0.0543, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2266, cl=1.7890, cd=0.0544, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2266, cl=1.7890, cd=0.0543, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2267, cl=1.7890, cd=0.0542, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2267, cl=1.7890, cd=0.0542, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2267, cl=1.7890, cd=0.0542, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2267, cl=1.7890, cd=0.0542, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2267, cl=1.7890, cd=0.0542, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2267, cl=1.7890, cd=0.0542, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2267, cl=1.7890, cd=0.0542, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2267, cl=1.7890, cd=0.0542, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2267, cl=1.7890, cd=0.0542, cm=-0.1170, cp=0.3150, X=-25
+cT=1.2267, cl=1.7890, cd=0.0542, cm=-0.1170, cp=0.3150, X=-25
+
+Optimization stopped because the <a href = "matlab: helpview('optim','norm_curr_step_fminconip','CSHelpWindow');">relative changes in all elements of x</a> are
+less than <a href = "matlab: helpview('optim','tolx','CSHelpWindow');">options.StepTolerance</a> = 1.000000e-10, and the relative maximum constraint
+violation, 0.000000e+00, is less than <a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+AWA=45.0  Xopt=-25.0
+Elapsed time is 57.707877 seconds.
