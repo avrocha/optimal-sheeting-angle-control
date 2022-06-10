@@ -1,0 +1,309 @@
+4D | Ship AWA = 45.0 deg
+Index exceeds the number of array elements. Index must not exceed 4.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Ship/doMesh', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Ship.m', 41)" style="font-weight:bold">Ship/doMesh</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Ship.m',41,0)">line 41</a>)
+              rig.trim = Xval(ir);%2*ir-1);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Mesh2Java', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Mesh2Java.m', 5)" style="font-weight:bold">Mesh2Java</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Mesh2Java.m',5,0)">line 5</a>)
+ship.doMesh(Xval,false);  % ship.doMesh(Xval,normalize,flip)
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 9)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',9,0)">line 9</a>)
+    Mesh2Java(X, shipLocal); % Generates Java-scale mesh-file
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('optima_WPCC', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m', 141)" style="font-weight:bold">optima_WPCC</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m',141,0)">line 141</a>)
+    [X(i, :), fval, exitflag, output] =
+    fmincon(@(X)calc_objective(X), X(i, :), [], [], [], [], lb, ub,
+    [], options);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fmincon', 'C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m', 568)" style="font-weight:bold">fmincon</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m',568,0)">line 568</a>)
+      initVals.f = feval(funfcn{3},X,varargin{:});
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('optima_WPCC', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m', 141)" style="font-weight:bold">optima_WPCC</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m',141,0)">line 141</a>)
+    [X(i, :), fval, exitflag, output] =
+    fmincon(@(X)calc_objective(X), X(i, :), [], [], [], [], lb, ub,
+    [], options);
+
+Caused by:
+    Failure in initial objective function evaluation. FMINCON cannot
+    continue.
+
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('parallel.internal.pool.maybeUpdateAttachedFiles')" style="font-weight:bold">parallel.internal.pool.maybeUpdateAttachedFiles</a>
+A parallel pool is not currently running. Use 'parpool' to start a
+pool.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('internal.matlab.desktop.editor.clearAndSetBreakpointsForFile', 'C:\Program Files\MATLAB\R2022a\toolbox\matlab\codetools\+internal\+matlab\+desktop\+editor\clearAndSetBreakpointsForFile.m', 45)" style="font-weight:bold">internal.matlab.desktop.editor.clearAndSetBreakpointsForFile</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2022a\toolbox\matlab\codetools\+internal\+matlab\+desktop\+editor\clearAndSetBreakpointsForFile.m',45,0)">line 45</a>)
+    drawnow;
+} 
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('parallel.internal.pool.maybeUpdateAttachedFiles')" style="font-weight:bold">parallel.internal.pool.maybeUpdateAttachedFiles</a>
+A parallel pool is not currently running. Use 'parpool' to start a
+pool.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('internal.matlab.desktop.editor.clearAndSetBreakpointsForFile', 'C:\Program Files\MATLAB\R2022a\toolbox\matlab\codetools\+internal\+matlab\+desktop\+editor\clearAndSetBreakpointsForFile.m', 45)" style="font-weight:bold">internal.matlab.desktop.editor.clearAndSetBreakpointsForFile</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2022a\toolbox\matlab\codetools\+internal\+matlab\+desktop\+editor\clearAndSetBreakpointsForFile.m',45,0)">line 45</a>)
+    drawnow;
+} 
+Parallel pool using the 'local' profile is shutting down.
+opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Ship.m',41,0)
+opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Ship.m',41,0)
+length(obj.rigs)
+{Unable to resolve the name 'obj.rigs'.
+} 
+
+ans =
+
+     6
+
+
+ans =
+
+     6
+
+
+ans =
+
+     6
+
+
+ans =
+
+     6
+
+
+ans =
+
+     6
+
+
+ans =
+
+     6
+
+Scale    = 169.000 
+4D | Ship AWA = 45.0 deg
+
+ans =
+
+     6
+
+
+ans =
+
+     6
+
+
+ans =
+
+     6
+
+
+ans =
+
+     6
+
+
+ans =
+
+     6
+
+Index exceeds the number of array elements. Index must not exceed
+4.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Ship/doMesh', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Ship.m', 42)" style="font-weight:bold">Ship/doMesh</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Ship.m',42,0)">line 42</a>)
+              rig.trim = Xval(ir);%2*ir-1);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('Mesh2Java', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Mesh2Java.m', 5)" style="font-weight:bold">Mesh2Java</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\Mesh2Java.m',5,0)">line 5</a>)
+ship.doMesh(Xval,false);  % ship.doMesh(Xval,normalize,flip)
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 9)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',9,0)">line 9</a>)
+    Mesh2Java(X, shipLocal); % Generates Java-scale mesh-file
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('optima_WPCC', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m', 138)" style="font-weight:bold">optima_WPCC</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m',138,0)">line 138</a>)
+    [X(i, :), fval, exitflag, output] =
+    fmincon(@(X)calc_objective(X), X(i, :), [], [], [], [], lb,
+    ub, [], options);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fmincon', 'C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m', 568)" style="font-weight:bold">fmincon</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m',568,0)">line 568</a>)
+      initVals.f = feval(funfcn{3},X,varargin{:});
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('optima_WPCC', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m', 138)" style="font-weight:bold">optima_WPCC</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\optima_WPCC.m',138,0)">line 138</a>)
+    [X(i, :), fval, exitflag, output] =
+    fmincon(@(X)calc_objective(X), X(i, :), [], [], [], [], lb,
+    ub, [], options);
+
+Caused by:
+    Failure in initial objective function evaluation. FMINCON
+    cannot continue.
+
+Scale    = 169.000 
+4D | Ship AWA = 45.0 deg
+cT=0.4418, cl=0.6450, cd=0.0202, cm=-0.1620, cp=0.5020, X=[-35 -35 -35 -35 ]
+cT=0.4259, cl=0.6220, cd=0.0197, cm=-0.1510, cp=0.4920, X=[-36 -35 -35 -35 ]
+cT=0.4299, cl=0.6280, cd=0.0200, cm=-0.1580, cp=0.5020, X=[-35 -36 -35 -35 ]
+cT=0.4320, cl=0.6310, cd=0.0200, cm=-0.1620, cp=0.5060, X=[-35 -35 -36 -35 ]
+cT=0.4321, cl=0.6310, cd=0.0200, cm=-0.1630, cp=0.5090, X=[-35 -35 -35 -36 ]
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       5   -1.952000e-01    0.000e+00    4.297e-01
+cT=0.6032, cl=0.9390, cd=0.0859, cm=-0.3690, cp=0.6430, X=[-19 -22 -23 -23 ]
+cT=0.5987, cl=0.9310, cd=0.0843, cm=-0.3580, cp=0.6350, X=[-20 -22 -23 -23 ]
+cT=0.6035, cl=0.9380, cd=0.0845, cm=-0.3660, cp=0.6400, X=[-19 -23 -23 -23 ]
+cT=0.6102, cl=0.9470, cd=0.0840, cm=-0.3690, cp=0.6390, X=[-19 -22 -24 -23 ]
+cT=0.6135, cl=0.9500, cd=0.0824, cm=-0.3710, cp=0.6400, X=[-19 -22 -23 -24 ]
+    1      10   -3.638983e-01    0.000e+00    9.887e-01    4.670e-01
+{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('dos')" style="font-weight:bold">dos</a>
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('calc_objective', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m', 16)" style="font-weight:bold">calc_objective</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\JavaFoil\calc_objective.m',16,0)">line 16</a>)
+    system(cmd);     % Excecute the JavaFoil calculations
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE701911061', 'C:\Users\ASUS\AppData\Local\Temp\Editor_cgjjz\LiveEditorEvaluationHelperE701911061.m', 140)" style="font-weight:bold">LiveEditorEvaluationHelperE701911061</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_cgjjz\LiveEditorEvaluationHelperE701911061.m',140,0)">line 140</a>)
+    [X(i, :), fval, exitflag, output] = fmincon(@(X)calc_objective(X), X(i, :), [], [], [], [], lb, ub, [], options);
+
+In barrier
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('fmincon', 'C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m', 873)" style="font-weight:bold">fmincon</a> (<a href="matlab: opentoline('C:\Program Files\MATLAB\R2022a\toolbox\shared\optimlib\fmincon.m',873,0)">line 873</a>)
+    [X,FVAL,EXITFLAG,OUTPUT,LAMBDA,GRAD,HESSIAN] = barrier(funfcn,X,A,B,Aeq,Beq,l,u,confcn,options.HessFcn, ...
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('LiveEditorEvaluationHelperE701911061', 'C:\Users\ASUS\AppData\Local\Temp\Editor_cgjjz\LiveEditorEvaluationHelperE701911061.m', 140)" style="font-weight:bold">LiveEditorEvaluationHelperE701911061</a> (<a href="matlab: opentoline('C:\Users\ASUS\AppData\Local\Temp\Editor_cgjjz\LiveEditorEvaluationHelperE701911061.m',140,0)">line 140</a>)
+    [X(i, :), fval, exitflag, output] = fmincon(@(X)calc_objective(X), X(i, :), [], [], [], [], lb, ub, [], options);
+} 
+Scale    = 169.000 
+4D | Ship AWA = 45.0 deg
+cT=0.4418, cl=0.6450, cd=0.0202, cm=-0.1620, cp=0.5020, X=[-35 -35 -35 -35 ]
+cT=0.4259, cl=0.6220, cd=0.0197, cm=-0.1510, cp=0.4920, X=[-36 -35 -35 -35 ]
+cT=0.4299, cl=0.6280, cd=0.0200, cm=-0.1580, cp=0.5020, X=[-35 -36 -35 -35 ]
+cT=0.4320, cl=0.6310, cd=0.0200, cm=-0.1620, cp=0.5060, X=[-35 -35 -36 -35 ]
+cT=0.4321, cl=0.6310, cd=0.0200, cm=-0.1630, cp=0.5090, X=[-35 -35 -35 -36 ]
+                                            First-order      Norm of
+ Iter F-count            f(x)  Feasibility   optimality         step
+    0       5   -1.952000e-01    0.000e+00    4.297e-01
+cT=0.6032, cl=0.9390, cd=0.0859, cm=-0.3690, cp=0.6430, X=[-19 -22 -23 -23 ]
+cT=0.5987, cl=0.9310, cd=0.0843, cm=-0.3580, cp=0.6350, X=[-20 -22 -23 -23 ]
+cT=0.6035, cl=0.9380, cd=0.0845, cm=-0.3660, cp=0.6400, X=[-19 -23 -23 -23 ]
+cT=0.6102, cl=0.9470, cd=0.0840, cm=-0.3690, cp=0.6390, X=[-19 -22 -24 -23 ]
+cT=0.6135, cl=0.9500, cd=0.0824, cm=-0.3710, cp=0.6400, X=[-19 -22 -23 -24 ]
+    1      10   -3.638983e-01    0.000e+00    9.887e-01    4.670e-01
+cT=0.7231, cl=1.0680, cd=0.0454, cm=-0.3670, cp=0.5930, X=[-20 -24 -30 -32 ]
+cT=0.7176, cl=1.0590, cd=0.0442, cm=-0.3560, cp=0.5860, X=[-21 -24 -30 -32 ]
+cT=0.7217, cl=1.0650, cd=0.0443, cm=-0.3630, cp=0.5910, X=[-20 -25 -30 -32 ]
+cT=0.7223, cl=1.0660, cd=0.0446, cm=-0.3660, cp=0.5940, X=[-20 -24 -31 -32 ]
+cT=0.7282, cl=1.0740, cd=0.0441, cm=-0.3680, cp=0.5930, X=[-20 -24 -30 -33 ]
+    2      15   -5.228554e-01    0.000e+00    3.532e-01    2.054e-01
+cT=0.5495, cl=0.8240, cd=0.0469, cm=-0.3970, cp=0.7320, X=[-19 -26 -26 -49 ]
+cT=0.6821, cl=1.0070, cd=0.0423, cm=-0.3820, cp=0.6300, X=[-19 -25 -28 -40 ]
+cT=0.7353, cl=1.0820, cd=0.0421, cm=-0.3740, cp=0.5960, X=[-19 -25 -29 -36 ]
+cT=0.7291, cl=1.0720, cd=0.0409, cm=-0.3630, cp=0.5890, X=[-20 -25 -29 -36 ]
+cT=0.7333, cl=1.0780, cd=0.0410, cm=-0.3700, cp=0.5940, X=[-19 -26 -29 -36 ]
+cT=0.7361, cl=1.0820, cd=0.0410, cm=-0.3740, cp=0.5950, X=[-19 -25 -30 -36 ]
+cT=0.7265, cl=1.0690, cd=0.0416, cm=-0.3760, cp=0.6020, X=[-19 -25 -29 -37 ]
+    3      22   -5.407272e-01    0.000e+00    8.176e-01    7.556e-02
+cT=0.7309, cl=1.0750, cd=0.0414, cm=-0.3670, cp=0.5920, X=[-19 -26 -30 -33 ]
+cT=0.7351, cl=1.0810, cd=0.0413, cm=-0.3700, cp=0.5930, X=[-19 -26 -30 -35 ]
+cT=0.7296, cl=1.0720, cd=0.0402, cm=-0.3600, cp=0.5850, X=[-20 -26 -30 -35 ]
+cT=0.7322, cl=1.0760, cd=0.0405, cm=-0.3670, cp=0.5910, X=[-19 -27 -30 -35 ]
+cT=0.7350, cl=1.0800, cd=0.0405, cm=-0.3700, cp=0.5930, X=[-19 -26 -31 -35 ]
+cT=0.7356, cl=1.0810, cd=0.0408, cm=-0.3720, cp=0.5940, X=[-19 -26 -30 -36 ]
+    4      28   -5.404361e-01    0.000e+00    9.991e-02    2.997e-02
+cT=0.7445, cl=1.1050, cd=0.0522, cm=-0.4360, cp=0.6440, X=[-15 -21 -31 -35 ]
+cT=0.7459, cl=1.1010, cd=0.0461, cm=-0.4030, cp=0.6160, X=[-17 -23 -30 -35 ]
+cT=0.7420, cl=1.0940, cd=0.0447, cm=-0.3920, cp=0.6080, X=[-18 -23 -30 -35 ]
+cT=0.7460, cl=1.1000, cd=0.0450, cm=-0.3990, cp=0.6130, X=[-17 -24 -30 -35 ]
+cT=0.7444, cl=1.0980, cd=0.0453, cm=-0.4030, cp=0.6170, X=[-17 -23 -31 -35 ]
+cT=0.7463, cl=1.1010, cd=0.0455, cm=-0.4050, cp=0.6180, X=[-17 -23 -30 -36 ]
+    5      34   -5.564176e-01    0.000e+00    1.857e-01    5.520e-02
+cT=0.7488, cl=1.1090, cd=0.0501, cm=-0.4270, cp=0.6350, X=[-15 -24 -29 -35 ]
+cT=0.7489, cl=1.1070, cd=0.0479, cm=-0.4150, cp=0.6250, X=[-16 -24 -30 -35 ]
+cT=0.7465, cl=1.1020, cd=0.0463, cm=-0.4040, cp=0.6170, X=[-17 -24 -30 -35 ]
+cT=0.7482, cl=1.1050, cd=0.0468, cm=-0.4110, cp=0.6220, X=[-16 -25 -30 -35 ]
+cT=0.7488, cl=1.1060, cd=0.0470, cm=-0.4150, cp=0.6250, X=[-16 -24 -31 -35 ]
+cT=0.7493, cl=1.1070, cd=0.0474, cm=-0.4170, cp=0.6270, X=[-16 -24 -30 -36 ]
+    6      40   -5.608252e-01    0.000e+00    1.685e-01    2.583e-02
+cT=0.7496, cl=1.1080, cd=0.0479, cm=-0.4190, cp=0.6280, X=[-16 -24 -30 -35 ]
+cT=0.7472, cl=1.1030, cd=0.0463, cm=-0.4080, cp=0.6190, X=[-17 -24 -30 -35 ]
+cT=0.7489, cl=1.1060, cd=0.0468, cm=-0.4150, cp=0.6250, X=[-16 -25 -30 -35 ]
+cT=0.7495, cl=1.1070, cd=0.0471, cm=-0.4180, cp=0.6280, X=[-16 -24 -31 -35 ]
+cT=0.7500, cl=1.1080, cd=0.0473, cm=-0.4200, cp=0.6290, X=[-16 -24 -30 -36 ]
+    7      45   -5.618742e-01    0.000e+00    3.575e-02    9.681e-03
+cT=0.7503, cl=1.1090, cd=0.0480, cm=-0.4260, cp=0.6340, X=[-15 -24 -31 -35 ]
+cT=0.7503, cl=1.1090, cd=0.0479, cm=-0.4220, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7486, cl=1.1050, cd=0.0464, cm=-0.4110, cp=0.6220, X=[-16 -24 -30 -35 ]
+cT=0.7497, cl=1.1070, cd=0.0468, cm=-0.4180, cp=0.6280, X=[-15 -25 -30 -35 ]
+cT=0.7487, cl=1.1060, cd=0.0472, cm=-0.4220, cp=0.6310, X=[-15 -24 -31 -35 ]
+cT=0.7500, cl=1.1080, cd=0.0474, cm=-0.4240, cp=0.6330, X=[-15 -24 -30 -36 ]
+    8      51   -5.629666e-01    0.000e+00    1.199e-01    9.393e-03
+cT=0.7493, cl=1.1080, cd=0.0483, cm=-0.4210, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7502, cl=1.1090, cd=0.0481, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7502, cl=1.1090, cd=0.0481, cm=-0.4220, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7496, cl=1.1080, cd=0.0479, cm=-0.4220, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7493, cl=1.1080, cd=0.0483, cm=-0.4210, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7500, cl=1.1090, cd=0.0483, cm=-0.4220, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7502, cl=1.1090, cd=0.0481, cm=-0.4220, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7510, cl=1.1100, cd=0.0479, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7485, cl=1.1050, cd=0.0464, cm=-0.4110, cp=0.6220, X=[-16 -24 -30 -35 ]
+cT=0.7496, cl=1.1070, cd=0.0469, cm=-0.4180, cp=0.6280, X=[-15 -25 -30 -35 ]
+cT=0.7493, cl=1.1070, cd=0.0473, cm=-0.4220, cp=0.6310, X=[-15 -24 -31 -35 ]
+cT=0.7506, cl=1.1090, cd=0.0475, cm=-0.4240, cp=0.6320, X=[-15 -24 -30 -36 ]
+    9      63   -5.639857e-01    0.000e+00    4.774e-02    1.491e-03
+cT=0.5808, cl=0.9220, cd=0.1006, cm=-0.4310, cp=0.7180, X=[-15 -22 -12 -30 ]
+cT=0.7498, cl=1.1090, cd=0.0486, cm=-0.4230, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7493, cl=1.1080, cd=0.0483, cm=-0.4220, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7501, cl=1.1090, cd=0.0481, cm=-0.4220, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7504, cl=1.1100, cd=0.0488, cm=-0.4230, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7499, cl=1.1090, cd=0.0485, cm=-0.4220, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7493, cl=1.1080, cd=0.0483, cm=-0.4220, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7502, cl=1.1090, cd=0.0481, cm=-0.4220, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7502, cl=1.1090, cd=0.0481, cm=-0.4220, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7502, cl=1.1090, cd=0.0481, cm=-0.4220, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7502, cl=1.1090, cd=0.0480, cm=-0.4220, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7502, cl=1.1090, cd=0.0480, cm=-0.4220, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7495, cl=1.1080, cd=0.0481, cm=-0.4220, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7502, cl=1.1090, cd=0.0481, cm=-0.4220, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7502, cl=1.1090, cd=0.0481, cm=-0.4220, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7502, cl=1.1090, cd=0.0480, cm=-0.4220, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7502, cl=1.1090, cd=0.0480, cm=-0.4220, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7503, cl=1.1090, cd=0.0480, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7510, cl=1.1100, cd=0.0480, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7510, cl=1.1100, cd=0.0479, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7485, cl=1.1050, cd=0.0464, cm=-0.4110, cp=0.6220, X=[-16 -24 -30 -35 ]
+cT=0.7496, cl=1.1070, cd=0.0469, cm=-0.4180, cp=0.6280, X=[-15 -25 -30 -35 ]
+cT=0.7493, cl=1.1070, cd=0.0473, cm=-0.4220, cp=0.6310, X=[-15 -24 -31 -35 ]
+cT=0.7499, cl=1.1080, cd=0.0475, cm=-0.4240, cp=0.6320, X=[-15 -24 -30 -36 ]
+   10      87   -5.639963e-01    0.000e+00    4.788e-02    3.106e-07
+cT=0.5351, cl=0.8790, cd=0.1222, cm=-0.4450, cp=0.7560, X=[-15 -18 -10 -29 ]
+cT=0.7502, cl=1.1090, cd=0.0480, cm=-0.4220, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7503, cl=1.1090, cd=0.0480, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7503, cl=1.1090, cd=0.0480, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7502, cl=1.1090, cd=0.0480, cm=-0.4220, cp=0.6310, X=[-15 -24 -30 -35 ]
+cT=0.7502, cl=1.1090, cd=0.0480, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7502, cl=1.1090, cd=0.0480, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7510, cl=1.1100, cd=0.0480, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7510, cl=1.1100, cd=0.0480, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7510, cl=1.1100, cd=0.0480, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7510, cl=1.1100, cd=0.0480, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7510, cl=1.1100, cd=0.0480, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7510, cl=1.1100, cd=0.0479, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7485, cl=1.1050, cd=0.0464, cm=-0.4110, cp=0.6220, X=[-16 -24 -30 -35 ]
+cT=0.7496, cl=1.1070, cd=0.0469, cm=-0.4180, cp=0.6280, X=[-15 -25 -30 -35 ]
+cT=0.7493, cl=1.1070, cd=0.0473, cm=-0.4220, cp=0.6310, X=[-15 -24 -31 -35 ]
+cT=0.7499, cl=1.1080, cd=0.0475, cm=-0.4240, cp=0.6320, X=[-15 -24 -30 -36 ]
+   11     104   -5.640070e-01    0.000e+00    4.788e-02    8.706e-09
+cT=0.4623, cl=0.8100, cd=0.1562, cm=-0.4360, cp=0.7890, X=[-15 -17 -10 -21 ]
+cT=0.7510, cl=1.1100, cd=0.0480, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7510, cl=1.1100, cd=0.0480, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7510, cl=1.1100, cd=0.0480, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7510, cl=1.1100, cd=0.0480, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7510, cl=1.1100, cd=0.0480, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7510, cl=1.1100, cd=0.0480, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7510, cl=1.1100, cd=0.0480, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7510, cl=1.1100, cd=0.0479, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7510, cl=1.1100, cd=0.0479, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7510, cl=1.1100, cd=0.0479, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7510, cl=1.1100, cd=0.0479, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7510, cl=1.1100, cd=0.0479, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+cT=0.7510, cl=1.1100, cd=0.0479, cm=-0.4220, cp=0.6300, X=[-15 -24 -30 -35 ]
+
+Optimization stopped because the <a href = "matlab: helpview('optim','norm_curr_step_fminconip','CSHelpWindow');">relative changes in all elements of x</a> are
+less than <a href = "matlab: helpview('optim','tolx','CSHelpWindow');">options.StepTolerance</a> = 1.000000e-10, and the relative maximum constraint
+violation, 0.000000e+00, is less than <a href = "matlab: helpview('optim','tol_con','CSHelpWindow');">options.ConstraintTolerance</a> = 1.000000e-06.
+
+AWA=45.0  Xopt=[-15.2, -24.1, -30.2, -35.2]
+Elapsed time is 373.073499 seconds.

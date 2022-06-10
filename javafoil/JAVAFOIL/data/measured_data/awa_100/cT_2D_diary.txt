@@ -1,0 +1,14 @@
+Iteration k = 1 | AWA = 80º
+Iteration k = 2 | AWA = 1.250000e+02º
+Elapsed time is 7.320724 seconds.
+
+ans =
+
+     5
+
+Iteration k = 1 | AWA = 80º
+Iteration k = 2 | AWA = 1.250000e+02º
+Elapsed time is 6.442173 seconds.
+Iteration k = 1 | AWA = 80º
+Iteration k = 2 | AWA = 1.250000e+02º
+Elapsed time is 6.963947 seconds.
