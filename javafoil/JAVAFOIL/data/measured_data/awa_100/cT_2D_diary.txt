@@ -12,3 +12,276 @@ Elapsed time is 6.442173 seconds.
 Iteration k = 1 | AWA = 80º
 Iteration k = 2 | AWA = 1.250000e+02º
 Elapsed time is 6.963947 seconds.
+Iteration k = 1 | AWA = 80º
+Iteration k = 2 | AWA = 8.236842e+01º
+Iteration k = 3 | AWA = 8.473684e+01º
+Iteration k = 4 | AWA = 8.710526e+01º
+Iteration k = 5 | AWA = 8.947368e+01º
+Iteration k = 6 | AWA = 9.184211e+01º
+Iteration k = 7 | AWA = 9.421053e+01º
+Iteration k = 8 | AWA = 9.657895e+01º
+Iteration k = 9 | AWA = 9.894737e+01º
+Iteration k = 10 | AWA = 1.013158e+02º
+Iteration k = 11 | AWA = 1.036842e+02º
+Iteration k = 12 | AWA = 1.060526e+02º
+Iteration k = 13 | AWA = 1.084211e+02º
+Iteration k = 14 | AWA = 1.107895e+02º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 15 | AWA = 1.131579e+02º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 16 | AWA = 1.155263e+02º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 17 | AWA = 1.178947e+02º
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 18 | AWA = 1.202632e+02º
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 19 | AWA = 1.226316e+02º
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Iteration k = 20 | AWA = 1.250000e+02º
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): no stagnation point found. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): lower surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+*** ERROR: BoundaryLayer.Analysis(): upper surface has less than 2 points. 
+Elapsed time is 31125.383916 seconds.
