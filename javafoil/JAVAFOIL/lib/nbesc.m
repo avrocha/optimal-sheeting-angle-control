@@ -43,8 +43,15 @@ function [u, y, dy, ddy, ddy_inv] = nbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K,
     bworder = 5;
     % HPF
     [bh,ah]   = butter(bworder, fc_hp*dt, 'high');
+    bh = fliplr(bh);
+    ah = fliplr(ah);
+
     % LPF
     [bl,al]   = butter(bworder, fc_lp*dt, 'low');
+    bl = fliplr(bl);
+    al = fliplr(al);
+
+    M = bworder + 1; % filter length
 
     % N(t) - Hessian estimate
     Nhess = cell(n,n);
@@ -75,25 +82,17 @@ function [u, y, dy, ddy, ddy_inv] = nbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K,
         
          % HPF
         if i >= bworder+1
-            for j = 1:bworder+1
-                hpf(i) = hpf(i) + bh(j)*y(i-j+1);
-            end
-    
-            for j = 2:bworder+1
-                hpf(i) = hpf(i) - ah(j)*hpf(i-j+1);
-            end
-            
-            hpf(i) = 1/ah(1) * hpf(i);
+            hpf(i) = 1/ah(end) * (-ah(1:end-1) * hpf(i-M+1:i-1)' + bh * y(i-M+1:i)');
         else
             for j = 1:i
-                hpf(i) = hpf(i) + bh(j)*y(i-j+1);
+                hpf(i) = hpf(i) + bh(end-j+1)*y(i-j+1);
             end
     
             for j = 2:i
-                hpf(i) = hpf(i) - ah(j)*hpf(i-j+1);
+                hpf(i) = hpf(i) - ah(end-j+1)*hpf(i-j+1);
             end
             
-            hpf(i) = 1/ah(1) * hpf(i);
+            hpf(i) = 1/ah(end) * hpf(i);
         end
         
         if lp_bool
@@ -101,26 +100,18 @@ function [u, y, dy, ddy, ddy_inv] = nbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K,
             zeta(:, i) = hpf(i) .* sin(2*pi*f*t);
             
             % LPF - Gradient
-            if i >= bworder+1
-                for j = 1:bworder+1
-                    lpf_grad(:, i) = lpf_grad(:, i) + bl(j) .* zeta(:, i-j+1);
-                end
-        
-                for j = 2:bworder+1
-                    lpf_grad(:, i) = lpf_grad(:, i) - al(j) .* lpf_grad(:, i-j+1);
-                end
-                
-                lpf_grad(:, i) = 1/al(1) .* lpf_grad(:, i);
+            if i >= M
+                lpf_grad(:, i) = 1/al(end) * (-al(1:end-1) * lpf_grad(:, i-M+1:i-1)' + bl * zeta(:, i-M+1:i)');           
             else
                 for j = 1:i
-                    lpf_grad(:, i) = lpf_grad(:, i) + bl(j) .* zeta(:, i-j+1);
+                    lpf_grad(:, i) = lpf_grad(:, i) + bl(end-j+1) .* zeta(:, i-j+1);
                 end
         
                 for j = 2:i
-                    lpf_grad(:, i) = lpf_grad(:, i) - al(j) .* lpf_grad(:, i-j+1);
+                    lpf_grad(:, i) = lpf_grad(:, i) - al(end-j+1) .* lpf_grad(:, i-j+1);
                 end
                 
-                lpf_grad(:, i) = 1/al(1) .* lpf_grad(:, i);
+                lpf_grad(:, i) = 1/al(end) .* lpf_grad(:, i);
             end
             
             dy(:, i) = lpf_grad(:, i);
@@ -133,12 +124,12 @@ function [u, y, dy, ddy, ddy_inv] = nbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K,
             end
 
             % LPF - Hessian
-            if i >= bworder+1
-                for j = 1:bworder+1
+            if i >= M
+                for j = 1:M
                     lpf_hessian(:, :, i) = lpf_hessian(:, :, i) + bl(j).*sigma(:, :, i-j+1);
                 end
         
-                for j = 2:bworder+1
+                for j = 2:M
                     lpf_hessian(:, :, i) = lpf_hessian(:, :, i) - al(j).*lpf_hessian(:, :, i-j+1);
                 end
                 

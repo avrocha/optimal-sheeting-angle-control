@@ -19,8 +19,15 @@ function [u, y, dy] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, AWA, lp_b
     bworder = 5;
     % HPF
     [bh,ah]   = butter(bworder, fc_hp*dt, 'high');
+    bh = fliplr(bh);
+    ah = fliplr(ah);
+
     % LPF
     [bl,al]   = butter(bworder, fc_lp*dt, 'low');
+    bl = fliplr(bl);
+    al = fliplr(al);
+
+    M = bworder + 1; % filter length
 
     % Data structures
     n     = length(f);
@@ -51,53 +58,38 @@ function [u, y, dy] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, AWA, lp_b
         if i > 1 && (y(i) > 1.5*y(i-1) || y(i) < 0.5*y(i-1))
                 y(i) = y(i-1);
         end
-    
-        if i >= bworder+1
-            for j = 1:bworder+1
-                hpf(i) = hpf(i) + bh(j)*y(i-j+1);
-            end
-    
-            for j = 2:bworder+1
-                hpf(i) = hpf(i) - ah(j)*hpf(i-j+1);
-            end
-            
-            hpf(i) = 1/ah(1) * hpf(i);
+        
+        %HPF
+        if i >= M
+            hpf(i) = 1/ah(end) * (-ah(1:end-1) * hpf(i-M+1:i-1)' + bh * y(i-M+1:i)');
         else
             for j = 1:i
-                hpf(i) = hpf(i) + bh(j)*y(i-j+1);
+                hpf(i) = hpf(i) + bh(end-j+1)*y(i-j+1);
             end
     
             for j = 2:i
-                hpf(i) = hpf(i) - ah(j)*hpf(i-j+1);
+                hpf(i) = hpf(i) - ah(end-j+1)*hpf(i-j+1);
             end
             
-            hpf(i) = 1/ah(1) * hpf(i);
+            hpf(i) = 1/ah(end) * hpf(i);
         end
         
         if lp_bool
             zeta(:, i) = hpf(i) * sin(2*pi*f*t);
             
             % LPF
-            if i >= bworder+1
-                for j = 1:bworder+1
-                    lpf(:, i) = lpf(:, i) + bl(j) .* zeta(:, i-j+1);
-                end
-        
-                for j = 2:bworder+1
-                    lpf(:, i) = lpf(:, i) - al(j) .* lpf(:, i-j+1);
-                end
-                
-                lpf(:, i) = 1/al(1) .* lpf(:, i);
+            if i >= M              
+                lpf(:, i) = 1/al(end) * (-al(1:end-1) * lpf(:, i-M+1:i-1)' + bl * zeta(:, i-M+1:i)');
             else
                 for j = 1:i
-                    lpf(:, i) = lpf(:, i) + bl(j) .* zeta(:, i-j+1);
+                    lpf(:, i) = lpf(:, i) + bl(end-j+1) .* zeta(:, i-j+1);
                 end
         
                 for j = 2:i
-                    lpf(:, i) = lpf(:, i) - al(j) .* lpf(:, i-j+1);
+                    lpf(:, i) = lpf(:, i) - al(end-j+1) .* lpf(:, i-j+1);
                 end
                 
-                lpf(:, i) = 1/al(1) .* lpf(:, i);
+                lpf(:, i) = 1/al(end) .* lpf(:, i);
             end
     
             dy(:, i) = lpf(:, i);
