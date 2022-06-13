@@ -126,24 +126,24 @@ function [u, y, dy, ddy, ddy_inv] = nbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K,
             % LPF - Hessian
             if i >= M
                 for j = 1:M
-                    lpf_hessian(:, :, i) = lpf_hessian(:, :, i) + bl(j).*sigma(:, :, i-j+1);
+                    lpf_hessian(:, :, i) = lpf_hessian(:, :, i) + bl(end-j+1).*sigma(:, :, i-j+1);
                 end
         
                 for j = 2:M
-                    lpf_hessian(:, :, i) = lpf_hessian(:, :, i) - al(j).*lpf_hessian(:, :, i-j+1);
+                    lpf_hessian(:, :, i) = lpf_hessian(:, :, i) - al(end-j+1).*lpf_hessian(:, :, i-j+1);
                 end
                 
-                lpf_hessian(:, :, i) = 1/al(1) * lpf_hessian(:, :, i);
+                lpf_hessian(:, :, i) = 1/al(end) * lpf_hessian(:, :, i);
             else
                 for j = 1:i
-                    lpf_hessian(:, :, i) = lpf_hessian(:, :, i) + bl(j).*sigma(:, :, i-j+1);
+                    lpf_hessian(:, :, i) = lpf_hessian(:, :, i) + bl(end-j+1).*sigma(:, :, i-j+1);
                 end
         
                 for j = 2:i
-                    lpf_hessian(:, :, i) = lpf_hessian(:, :, i) - al(j)*lpf_hessian(:, :, i-j+1);
+                    lpf_hessian(:, :, i) = lpf_hessian(:, :, i) - al(end-j+1)*lpf_hessian(:, :, i-j+1);
                 end
                 
-                lpf_hessian(:, :, i) = 1/al(1) .* lpf_hessian(:, :, i);
+                lpf_hessian(:, :, i) = 1/al(end) .* lpf_hessian(:, :, i);
             end
     
             ddy(:, :, i) = lpf_hessian(:, :, i);
