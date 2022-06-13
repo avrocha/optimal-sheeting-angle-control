@@ -68,77 +68,6 @@ xlabel('f [Hz]')
 ylabel('|awa(jw)|')
 fig_cnt = fig_cnt + 1;
 
-% Filter data - LPF, EMA, ORIG
-filter_type = 'LPF';
-
-switch filter_type 
-    case 'LPF'
-        disp('AWA: Butterworth LPF filter.')
-        % IIR design
-        bworder  = 5;
-        fc       = 0.05;
-        dt       = 1 / fs_data;
-        [b, a]   = butter(bworder, fc*dt, 'low');
-        M = bworder + 1; % filter length
-        
-        % Flip coeffs for vector-wise multiplication
-        a = fliplr(a);
-        b = fliplr(b);
-        
-        % Add prefix
-        x = [awa(1)*ones(1, bworder+1), awa'];
-        y = [awa(1)*ones(1, bworder+1), zeros(1, n)];
-        
-        for i = M:n+M
-            y(i) = 1/a(end) * (-a(1:end-1) * y(i-M+1:i-1)' + b * x(i-M+1:i)');
-        end
-        
-        % Delete initial prefix
-        y = y(M+1:end);
-
-    case 'EMA'
-        disp('AWA: Exponential moving average (EMA) filter.')
-        % Exponential moving average
-        y      = [awa(1), zeros(1, n-1)];
-        alpha  = 0.005; 
-        
-        for i = 2:n
-            y(i) = (1-alpha)*y(i-1) + alpha*awa(i);
-        end
-
-    case 'ORIG'
-        disp('AWA: Original filter.')
-        y = awa_hat;
-
-    case 'RAW'
-        disp('AWA: Raw data.')
-
-    otherwise
-        disp('Wrong AWA filter selection.')
-
-end
-
-if ~strcmp(filter_type, 'RAW')
-    figure(fig_cnt); clf(fig_cnt);
-    hold on;
-    plot(1:n, rad2deg(awa'));
-    plot(1:n, rad2deg(y));
-    ylabel('AWA [rad]')
-    xlabel('t [s]')
-    legend('RAW', filter_type);
-    fig_cnt = fig_cnt + 1;
-    
-    % Output final AWA to next section
-    awa = y;
-else
-    figure(fig_cnt); clf(fig_cnt);
-    hold on;
-    plot(1:n, rad2deg(awa'));
-    ylabel('AWA [rad]')
-    xlabel('t [s]')
-    fig_cnt = fig_cnt + 1;
-end
-
 %% Init controller
 addpath JavaFoil;  addpath Foils; addpath lib;
 global ship;
@@ -189,11 +118,21 @@ end
 
 % Prep Interpolation
 % Choose data source
-load('data\measured_data\awa_100\cT_1D.mat')
-%     load('data\measured_data\awa_pm_45\cT_1D.mat')
+load(['data\measured_data\',data_source,'\cT_1D.mat'])
 X            = cell(2, 1);
 [X{1}, X{2}] = ndgrid(data.AWA, data.sheeting_angle);
 V            = data.cT;
+
+% Filtering cT - {'RAW', 'EMA', 'LPF'}
+cT_filter = 'LPF';
+switch cT_filter
+    case 'EMA'
+        cT_filter_param = 0.1; % Param = 'alpha' for EMA
+    case 'LPF'
+        cT_filter_param = 0.5; % Param = cut-off frequency for LPF
+end
+
+% Feedforward - [WIP]
 
 if strcmp(ES_method, 'GB')
     fprintf("Gradient-based ESC selected.\n")
@@ -202,7 +141,7 @@ if strcmp(ES_method, 'GB')
     f             = 0.01; % tuning param: constant coeff
     delta         = 0.1;  % tuning param: constant coeff
 
-    f_dither      = 20*f; % dither freq
+    f_dither      = 10*f; % dither freq
     A             = deg2rad(2); % dither amplitude
     fc_hp         = 2*f; % HPF cutoff freq
     fc_lp         = 15*f; % LPF cutoff freq
@@ -215,7 +154,7 @@ if strcmp(ES_method, 'GB')
     Jgb_interp = @(sheeting_angle, ship) interp_criterion(X, V, [ship.yaw, sheeting_angle'], 'linear', Jgb, ship);
     
     localShip = ship;
-    [sheet_angle, cT, cT_grad] = gbesc(localShip, Jgb_interp, dt, N, f_dither, A, fc_hp, fc_lp, K, sheet_angle_0, AWA, lp_bool);   
+    [sheet_angle, cT, cT_grad, cT_hat] = gbesc(localShip, Jgb_interp, dt, N, f_dither, A, fc_hp, fc_lp, K, sheet_angle_0, AWA, lp_bool, cT_filter, cT_filter_param);   
 
 end
 
@@ -241,12 +180,12 @@ if strcmp(ES_method, 'NB')
     Jnb_interp = @(sheeting_angle, ship) interp_criterion(X, V, [ship.yaw, sheeting_angle'], 'linear', Jnb, ship);
 
     localShip = ship;
-    [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv] = nbesc(localShip, Jnb_interp, dt, N, f_dither, A, fc_hp, fc_lp, K, sheet_angle_0, wric, ric_0, AWA, lp_bool);    
+    [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv, cT_hat] = nbesc(localShip, Jnb_interp, dt, N, f_dither, A, fc_hp, fc_lp, K, sheet_angle_0, wric, ric_0, AWA, lp_bool, cT_filter, cT_filter_param);    
     
 end
 
 %% Plots 
-dir = ['plots\7m_data_AWA_100\real\', ES_method,'_ESC\', filter_type,'_awa\f_0_20\'];
+dir = ['plots\7m_data_AWA_100\real\', ES_method,'_ESC\', cT_filter,'_cT\f_0_20\'];
 
 % Check directory
 if ~exist(dir, 'dir')
@@ -286,9 +225,10 @@ end
 
 figure(fig_cnt); clf(fig_cnt); hold on;
 title(strcat(ES_method, '-ESC | Thrust Coeff'))
-plot(0:dt:T, cT, 'b-', 'Linewidth', 2)
+plot(0:dt:T, cT, 'b-', 'Linewidth', 1.5)
+plot(0:dt:T, cT_hat, '--', 'Color', [0.2 0.4 0.2], 'Linewidth', 1.5)
 % Uncomment line below to include reference lines
-plot(0:dt:T,  cT_ref, 'r--', 'Linewidth', 1)
+plot(0:dt:T, cT_ref, 'r--', 'Linewidth', 1)
 xlabel('t (s)'), ylabel('$cT$', 'Interpreter', 'Latex')
 if save == 1
     filename = fullfile(strcat(dir,'cT.fig'));
@@ -356,21 +296,21 @@ end
 if strcmp(ES_method, 'GB')
     data_str = sprintf(['Params:\n'...
                         'AWA: %f\n'...
-                        'AWA Filtering: %s\n'...
+                        'cT Filtering: %s\n'...
                         'HPF: fc = %f\n'...
                         'LPF: fc = %f\n'...
                         'Dithers: A = %s, f = %s\n'...  
                         'Integrator gain (diag): K = %s\n'...
                         'MSE SA: %f\n' ...
                         'MSE cT: %f\n'...
-                        'Accumulated cT: %f\n'], rad2deg(ship.yaw), filter_type, fc_hp, fc_lp, num2str(A'), ...
-                                         num2str(f_dither'), num2str(diag(K)'), MSE_sheet_angle, ...
-                                         MSE_cT, cT_accum);
+                        'Accumulated cT: %f\n'], rad2deg(ship.yaw), cT_filter, fc_hp, fc_lp, ...
+                                        num2str(A'), num2str(f_dither'), num2str(diag(K)'), MSE_sheet_angle, ...
+                                        MSE_cT, cT_accum);
 
 elseif strcmp(ES_method, 'NB')
    data_str = sprintf(['Params:\n'...
                         'AWA: %f\n'...
-                        'AWA Filtering: %s\n'...
+                        'cT Filtering: %s\n'...
                         'HPF: fc = %f\n'...
                         'LPF: fc = %f\n'...
                         'Dithers: A = %s, f = %s\n'...
@@ -379,15 +319,17 @@ elseif strcmp(ES_method, 'NB')
                         'Integrator gain (diag): K = %s\n'...
                         'MSE SA: %f\n' ...
                         'MSE cT: %f\n'...
-                        'Accumulated cT: %f\n'], rad2deg(ship.yaw), filter_type, fc_hp, fc_lp, num2str(A'), ...
-                                         num2str(f_dither'), wric, num2str(diag(ric_0)'), ...
+                        'Accumulated cT: %f\n'], rad2deg(ship.yaw), cT_filter, fc_hp, fc_lp, ...
+                                         num2str(A'), num2str(f_dither'), wric, num2str(diag(ric_0)'), ...
                                          num2str(diag(K)'), MSE_sheet_angle, MSE_cT, cT_accum);
 end
 
 % Print / Save params
 fprintf(fileID, "----%s----\n", datetime('now','TimeZone','local','Format','d-MMM-y HH:mm:ss'));
 fprintf(fileID, data_str);
-fprintf(data_str)
+if fileID ~= 0
+    fprintf(data_str)
+end
 if save == 1
     fclose(fileID);
 end
