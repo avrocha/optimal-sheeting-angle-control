@@ -1,21 +1,62 @@
-function [u, y, dy] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, AWA, lp_bool)
+function [u, y, dy, y_hat] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, AWA, lp_bool, cT_filter, cT_filter_param)
     % Inputs:
-    % - J      : optimization criterion [function handle]
-    % - dt     : simulation step [s]
-    % - N      : simulation lenght 
-    % - f      : sinusoidal dithers frequency [Hz]
-    % - A      : sinusoidal dithers amplitude [rad]
-    % - fc_hp  : HPF cut-off frequency [Hz]
-    % - fc_lp  : LPPF cut-off frequency [Hz]
-    % - K      : integrator gain
-    % - u0     : initial sheeting angle [rad]
-    % - AWA    : time variant AWA
-    % - lp_bool: use LPF [boolean] 
+    % - J        : optimization criterion [function handle]
+    % - dt       : simulation step [s]
+    % - N        : simulation lenght 
+    % - f        : sinusoidal dithers frequency [Hz]
+    % - A        : sinusoidal dithers amplitude [rad]
+    % - fc_hp    : HPF cut-off frequency [Hz]
+    % - fc_lp    : LPPF cut-off frequency [Hz]
+    % - K        : integrator gain
+    % - u0       : initial sheeting angle [rad]
+    % - AWA      : time variant AWA
+    % - lp_bool  : use LPF [boolean]
+    % - cT_filter: cT filter type {'RAW', 'EMA', 'LPF'}
+    % - cT_filter_param : Parameter for cT filter (0, alpha, cut-off frequency, respectively)
+
     % Outputs:
     % - u : control variable
     % - y : criterion output
     % - dy: criterion gradient estimate
     
+    if (length(A) ~= length(f))
+        fprintf('Dimensions do not match\n.')
+        return       
+    end    
+    
+    % Data structures
+    n     = length(f);
+    u_hat = [u0, zeros(n, N)];
+    u     = [u0, zeros(n, N)];
+    y     = zeros(1, N);
+    y_hat = zeros(1, N);
+    dy    = zeros(n, N);
+    hpf   = zeros(1, N);
+    zeta  = zeros(n, N);
+    lpf   = zeros(n, N);
+
+    % cT filtering
+    switch cT_filter
+        case 'RAW'
+            disp('cT filtering: No cT filter selected.')
+
+        case 'EMA'
+            disp('cT filtering: EMA cT filter selected (select rate parameter frequency manualy).')
+            alpha = cT_filter_param;
+
+        case 'LPF'
+            disp('cT filtering: LPF cT filter selected (select cut-off frequency manualy).')
+            bworder        = 5;
+            [bl_y ,al_y]   = butter(bworder, cT_filter_param*dt, 'low');
+            bl_y = fliplr(bl_y);
+            al_y = fliplr(al_y);
+            M_y  = bworder + 1;
+
+        otherwise
+            disp('cT filtering: Invalid filter selection.')
+    end
+    
+    % Filters
     bworder = 5;
     % HPF
     [bh,ah]   = butter(bworder, fc_hp*dt, 'high');
@@ -29,15 +70,6 @@ function [u, y, dy] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, AWA, lp_b
 
     M = bworder + 1; % filter length
 
-    % Data structures
-    n     = length(f);
-    u_hat = [u0, zeros(n, N)];
-    u     = [u0, zeros(n, N)];
-    y     = zeros(1, N);
-    dy    = zeros(n, N);
-    hpf   = zeros(1, N);
-    zeta  = zeros(n, N);
-    lpf   = zeros(n, N);
     
     if (length(A) ~= length(f)) && (length(f) ~= n) && (n ~= length(ship.yaw()))
         fprintf('Dimensions do not match\n.')
@@ -59,12 +91,33 @@ function [u, y, dy] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, AWA, lp_b
                 y(i) = y(i-1);
         end
         
+        % cT smoothing
+        switch cT_filter
+            case 'RAW'
+                y_hat(i) = y(i);
+
+            case 'LPF'
+                if i > M_y
+                    y_hat(i) = 1/al_y(end) * (-al_y(1:end-1) * y_hat(i-M_y+1:i-1)' + bl_y * y(i-M_y+1:i)');
+                else
+                    y_hat(i) = y(1); % Start by filling filter
+                end
+
+            case 'EMA'
+                if i == 1
+                    y_hat(i) = y(i);
+                else
+                    y_hat(i) = (1-alpha)*y_hat(i-1) + alpha*y(i);
+                end
+
+        end 
+
         %HPF
         if i >= M
-            hpf(i) = 1/ah(end) * (-ah(1:end-1) * hpf(i-M+1:i-1)' + bh * y(i-M+1:i)');
+            hpf(i) = 1/ah(end) * (-ah(1:end-1) * hpf(i-M+1:i-1)' + bh * y_hat(i-M+1:i)');
         else
             for j = 1:i
-                hpf(i) = hpf(i) + bh(end-j+1)*y(i-j+1);
+                hpf(i) = hpf(i) + bh(end-j+1)*y_hat(i-j+1);
             end
     
             for j = 2:i
