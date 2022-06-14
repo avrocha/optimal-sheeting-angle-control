@@ -16,7 +16,7 @@ fig_cnt = 1;
 
 % Menus
 % Select data source
-data_source = 'awa_100';
+data_source = 'tacking';
 
 switch data_source
     case 'tacking'
@@ -54,6 +54,7 @@ y_hat     = fft(awa_hat);
 y_abs     = abs(y).^2/n;
 y_hat_abs = abs(y_hat).^2/n;
 
+% Uncomment lines below to plot frequency content of AWA data
 figure(fig_cnt); clf(fig_cnt);
 subplot(2, 1, 1); hold on;
 plot(fx, y_abs);
@@ -88,7 +89,7 @@ scale    = calc_scale();
 
 % Method
 % 'GB' for Gradient based | 'NB' for Newton based
-ES_method = 'NB';
+ES_method = 'GB';
 % 1 to save figures and diary or 0 to plot figures and print diary
 save = 1;
 
@@ -108,31 +109,55 @@ for i = 1:N
     AWA(i) = awa(j);
 end
 
-% Initial sheeting angle
+% Feedforward (Piecewise constant)
 switch data_source
     case 'tacking'
-        sheet_angle_0 = deg2rad(-30);
+        FF = zeros(1, N);
+        [~, idx_1] = min(abs(310 - t_sim));
+        [~, idx_2] = min(abs(1150 - t_sim));
+        [~, idx_3] = min(abs(1560 - t_sim));
+        
+        FF(1:idx_1)     = deg2rad(-25);
+        FF(idx_1:idx_2) = deg2rad(25);
+        FF(idx_2:idx_3) = deg2rad(-25);
+        FF(idx_3:end)   = deg2rad(25);
+
     case 'awa_100'
-        sheet_angle_0 = deg2rad(-85);
+        FF = deg2rad(-85) * ones(1, N);
 end
+
+sheet_angle_0 = FF(1);
 
 % Prep Interpolation
 % Choose data source
-load(['data\measured_data\',data_source,'\cT_1D.mat'])
+switch data_source
+    case 'tacking'
+        load('data\measured_data\awa_pm_45\cT_1D.mat')
+    case 'awa_100'
+        load('data\measured_data\awa_100\cT_1D.mat')
+    otherwise
+        disp('Error: Select valid data source.\n')
+end
+
 X            = cell(2, 1);
 [X{1}, X{2}] = ndgrid(data.AWA, data.sheeting_angle);
 V            = data.cT;
 
 % Filtering cT - {'RAW', 'EMA', 'LPF'}
-cT_filter = 'LPF';
+cT_filter = 'EMA';
 switch cT_filter
-    case 'EMA'
-        cT_filter_param = 0.1; % Param = 'alpha' for EMA
-    case 'LPF'
-        cT_filter_param = 0.5; % Param = cut-off frequency for LPF
+    case 'EMA' % Param = EMA 'speed'
+        switch data_source
+            case 'tacking'
+                cT_filter_param = 0.2;   
+            case 'awa_100'
+                cT_filter_param = 0.1;
+        end
+
+    case 'LPF' % Param = cut-off frequency for LPF
+        cT_filter_param = 0.5; 
 end
 
-% Feedforward - [WIP]
 
 if strcmp(ES_method, 'GB')
     fprintf("Gradient-based ESC selected.\n")
@@ -141,20 +166,28 @@ if strcmp(ES_method, 'GB')
     f             = 0.01; % tuning param: constant coeff
     delta         = 0.1;  % tuning param: constant coeff
 
-    f_dither      = 10*f; % dither freq
+    f_dither      = 20*f; % dither freq
     A             = deg2rad(2); % dither amplitude
     fc_hp         = 2*f; % HPF cutoff freq
-    fc_lp         = 15*f; % LPF cutoff freq
+    fc_lp         = 5*f; % LPF cutoff freq
     lp_bool       = false; % Use LPF
-    K             = -f * delta * 0.7 * (-45); % gain (>0 since extremum is maximum)
- 
+    
+    % Data-specific tuning
+    switch data_source
+        case 'tacking'
+            K = -f * delta * 0.7 * (-72); % gain (>0 since extremum is maximum)
+        case 'awa_100'
+            K = -f * delta * 0.7 * (-45); % gain (>0 since extremum is maximum)
+    end
+
     % Criterion
     Jgb = @(sheeting_angle, ship) (getfield(calc_objective_mod(sheeting_angle, ship), 'cT'));
     % Interpolated criterion
     Jgb_interp = @(sheeting_angle, ship) interp_criterion(X, V, [ship.yaw, sheeting_angle'], 'linear', Jgb, ship);
     
     localShip = ship;
-    [sheet_angle, cT, cT_grad, cT_hat] = gbesc(localShip, Jgb_interp, dt, N, f_dither, A, fc_hp, fc_lp, K, sheet_angle_0, AWA, lp_bool, cT_filter, cT_filter_param);   
+    [sheet_angle, cT, cT_grad, cT_hat] = gbesc(localShip, Jgb_interp, dt, N, f_dither, A, fc_hp, ...
+                            fc_lp, K, sheet_angle_0, AWA, lp_bool, cT_filter, cT_filter_param, FF);   
 
 end
 
@@ -171,21 +204,30 @@ if strcmp(ES_method, 'NB')
     fc_lp         = 15*f; % LPF cutoff freq
     lp_bool       = false; % Use LPF
     K             = f * delta * 0.7; % gain (>0 since extremum is maximum)
-    wric          = 2 * pi * (1 * f * delta); % ricatti filter parameter
-    ric_0         = -45;
     
+    % Data-specific tuning
+    switch data_source
+        case 'tacking'
+            wric  = 2 * pi * (0.5 * f * delta); % ricatti filter parameter
+            ric_0 = -72;    
+        case 'awa_100'
+            wric  = 2 * pi * (0.1 * f * delta); % ricatti filter parameter 
+            ric_0 = -45;
+    end
+
     % Criterion
     Jnb = @(sheeting_angle, ship)(getfield(calc_objective_mod(sheeting_angle, ship, 2), 'cT'));    
     % Interpolated criterion - high resolution -> linear interpolation
     Jnb_interp = @(sheeting_angle, ship) interp_criterion(X, V, [ship.yaw, sheeting_angle'], 'linear', Jnb, ship);
 
     localShip = ship;
-    [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv, cT_hat] = nbesc(localShip, Jnb_interp, dt, N, f_dither, A, fc_hp, fc_lp, K, sheet_angle_0, wric, ric_0, AWA, lp_bool, cT_filter, cT_filter_param);    
+    [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv, cT_hat] = nbesc(localShip, Jnb_interp, dt, N, f_dither, A, ...
+        fc_hp, fc_lp, K, sheet_angle_0, wric, ric_0, AWA, lp_bool, cT_filter, cT_filter_param, FF);    
     
 end
 
 %% Plots 
-dir = ['plots\7m_data_AWA_100\real\', ES_method,'_ESC\', cT_filter,'_cT\f_0_20\'];
+dir = ['plots\7m_data_tacking\real\', ES_method,'_ESC\', cT_filter,'_cT\f_0_20\'];
 
 % Check directory
 if ~exist(dir, 'dir')
@@ -215,6 +257,8 @@ for i = 1:n
     plot(0:dt:T, rad2deg(sheet_angle(i, 1:end-1)), 'b-', 'Linewidth', 2)
     % Uncomment line below to include reference lines
     plot(0:dt:T, rad2deg(sheet_angle_ref), 'r--', 'Linewidth', 1)
+    % Uncomment line below to plot FF
+    plot(0:dt:T, rad2deg(FF), 'c.', 'Linewidth', 0.5)
     xlabel('t (s)'), ylabel('$\delta_s$', 'Interpreter', 'Latex')
     if save == 1
         filename = fullfile(strcat(dir,'delta_', num2str(i),'.fig'));
@@ -225,10 +269,10 @@ end
 
 figure(fig_cnt); clf(fig_cnt); hold on;
 title(strcat(ES_method, '-ESC | Thrust Coeff'))
-plot(0:dt:T, cT, 'b-', 'Linewidth', 1.5)
-plot(0:dt:T, cT_hat, '--', 'Color', [0.2 0.4 0.2], 'Linewidth', 1.5)
+plot(0:dt:T, cT, '-', 'Color', [0 0.3 0.9], 'Linewidth', 1.5)
+plot(0:dt:T, cT_hat, '--', 'Color', [0.1 0.8 0.8], 'Linewidth', 1.5)
 % Uncomment line below to include reference lines
-plot(0:dt:T, cT_ref, 'r--', 'Linewidth', 1)
+plot(0:dt:T, cT_ref, '--', 'Color', [0.9 0.1 0], 'Linewidth', 1)
 xlabel('t (s)'), ylabel('$cT$', 'Interpreter', 'Latex')
 if save == 1
     filename = fullfile(strcat(dir,'cT.fig'));
@@ -240,7 +284,6 @@ for i = 1:n
     figure(fig_cnt); clf(fig_cnt); hold on;
     title(strcat(ES_method, '-ESC | Gradient Estimate-', num2str(i)))
     plot(0:dt:T, cT_grad(i, :), 'b-', 'Linewidth', 2)
-    plot(0:dt:T, movmean(cT_grad(i, :), 10), 'r--', 'Linewidth', 1.3)
     xlabel('t (s)'), ylabel('$\hat{\zeta}$', 'Interpreter', 'Latex')
     if save == 1
         filename = fullfile(strcat(dir,'cT_grad_', num2str(i),'.fig'));
@@ -297,13 +340,14 @@ if strcmp(ES_method, 'GB')
     data_str = sprintf(['Params:\n'...
                         'AWA: %f\n'...
                         'cT Filtering: %s\n'...
+                        'cT Filtering param: %f\n'...
                         'HPF: fc = %f\n'...
                         'LPF: fc = %f\n'...
                         'Dithers: A = %s, f = %s\n'...  
                         'Integrator gain (diag): K = %s\n'...
                         'MSE SA: %f\n' ...
                         'MSE cT: %f\n'...
-                        'Accumulated cT: %f\n'], rad2deg(ship.yaw), cT_filter, fc_hp, fc_lp, ...
+                        'Accumulated cT: %f\n'], rad2deg(ship.yaw), cT_filter, cT_filter_param, fc_hp, fc_lp, ...
                                         num2str(A'), num2str(f_dither'), num2str(diag(K)'), MSE_sheet_angle, ...
                                         MSE_cT, cT_accum);
 
@@ -311,6 +355,7 @@ elseif strcmp(ES_method, 'NB')
    data_str = sprintf(['Params:\n'...
                         'AWA: %f\n'...
                         'cT Filtering: %s\n'...
+                        'cT Filtering param: %f\n'...
                         'HPF: fc = %f\n'...
                         'LPF: fc = %f\n'...
                         'Dithers: A = %s, f = %s\n'...
@@ -319,7 +364,7 @@ elseif strcmp(ES_method, 'NB')
                         'Integrator gain (diag): K = %s\n'...
                         'MSE SA: %f\n' ...
                         'MSE cT: %f\n'...
-                        'Accumulated cT: %f\n'], rad2deg(ship.yaw), cT_filter, fc_hp, fc_lp, ...
+                        'Accumulated cT: %f\n'], rad2deg(ship.yaw), cT_filter, cT_filter_param, fc_hp, fc_lp, ...
                                          num2str(A'), num2str(f_dither'), wric, num2str(diag(ric_0)'), ...
                                          num2str(diag(K)'), MSE_sheet_angle, MSE_cT, cT_accum);
 end
