@@ -30,7 +30,7 @@ function cT = interp_criterion(X, V, x, interp_type, f, ship)
             case 2 % AWA + 1 Wing
                 cT = interpn(X{1}, X{2}, V, x(1), x(2), interp_type);
             case 3 % AWA + 2 Wings
-                cT = interpn(X{1}, X{2}, x{3}, V, x(1), x(2), x(3), interp_type);
+                cT = interpn(X{1}, X{2}, X{3}, V, x(1), x(2), x(3), interp_type);
             case 5 % AWA + 4 Wings
                 cT = interpn(X{1}, X{2}, X{3}, X{4}, X{5}, V, x(1), x(2), x(3), x(4), x(5), interp_type);
             otherwise
