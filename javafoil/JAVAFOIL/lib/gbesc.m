@@ -153,7 +153,7 @@ function [u, y, dy, y_hat] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, AW
         u_hat(:, i+1) = u_hat(:, i) + dt * K * dy(:, i); % single integrator
         
         % Add dither
-        u(:, i+1)     = FF(i) + u_hat(:, i+1) + A .* sin(2*pi*f*t);
+        u(:, i+1)     = FF(:, i) + u_hat(:, i+1) + A .* sin(2*pi*f*t);
         
         % Error condition
         if any(u(i+1) > pi) || any(u(i+1) < -pi) 

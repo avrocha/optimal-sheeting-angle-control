@@ -28,7 +28,7 @@ function [u, y, dy, ddy, ddy_inv, y_hat] = nbesc(ship, J, dt, N, f, A, fc_hp, fc
         fprintf('Dimensions do not match\n.')
         return       
     end    
-  
+        
     % Data structures
     n              = length(f);
     u_hat          = zeros(n, N+1);
@@ -213,7 +213,7 @@ function [u, y, dy, ddy, ddy_inv, y_hat] = nbesc(ship, J, dt, N, f, A, fc_hp, fc
         u_hat(:, i+1) = u_hat(:, i) - dt * K * ddy_inv(:, :, i+1) * dy(:, i); 
         
         % Add dither
-        u(:, i+1) = FF(i) + u_hat(:, i+1) + A .* sin(2*pi*f*t);
+        u(:, i+1) = FF(:, i) + u_hat(:, i+1) + A .* sin(2*pi*f*t);
         
         % Error condition
         if any(u(:, i+1) > pi) || any(u(:, i+1) < -pi) 
