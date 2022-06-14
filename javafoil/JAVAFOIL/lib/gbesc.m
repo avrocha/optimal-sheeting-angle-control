@@ -1,4 +1,4 @@
-function [u, y, dy, y_hat] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, AWA, lp_bool, cT_filter, cT_filter_param)
+function [u, y, dy, y_hat] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, AWA, lp_bool, cT_filter, cT_filter_param, FF)
     % Inputs:
     % - J        : optimization criterion [function handle]
     % - dt       : simulation step [s]
@@ -9,11 +9,12 @@ function [u, y, dy, y_hat] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, AW
     % - fc_lp    : LPPF cut-off frequency [Hz]
     % - K        : integrator gain
     % - u0       : initial sheeting angle [rad]
-    % - AWA      : time variant AWA
+    % - AWA      : [1 x N] time variant AWA
     % - lp_bool  : use LPF [boolean]
     % - cT_filter: cT filter type {'RAW', 'EMA', 'LPF'}
     % - cT_filter_param : Parameter for cT filter (0, alpha, cut-off frequency, respectively)
-
+    % - FF       : [1 x N] time variant FF
+    
     % Outputs:
     % - u : control variable
     % - y : criterion output
@@ -26,7 +27,7 @@ function [u, y, dy, y_hat] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, AW
     
     % Data structures
     n     = length(f);
-    u_hat = [u0, zeros(n, N)];
+    u_hat = zeros(n, N+1);
     u     = [u0, zeros(n, N)];
     y     = zeros(1, N);
     y_hat = zeros(1, N);
@@ -86,10 +87,6 @@ function [u, y, dy, y_hat] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, AW
         ship.yaw = AWA(i);
         
         y(i) = J(u(:, i), ship);
-        % Avoid numerical singularities
-        if i > 1 && (y(i) > 1.5*y(i-1) || y(i) < 0.5*y(i-1))
-                y(i) = y(i-1);
-        end
         
         % cT smoothing
         switch cT_filter
@@ -156,7 +153,7 @@ function [u, y, dy, y_hat] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, AW
         u_hat(:, i+1) = u_hat(:, i) + dt * K * dy(:, i); % single integrator
         
         % Add dither
-        u(:, i+1)     = u_hat(:, i+1) + A .* sin(2*pi*f*t);
+        u(:, i+1)     = FF(i) + u_hat(:, i+1) + A .* sin(2*pi*f*t);
         
         % Error condition
         if any(u(i+1) > pi) || any(u(i+1) < -pi) 

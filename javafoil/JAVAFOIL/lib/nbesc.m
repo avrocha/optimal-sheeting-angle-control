@@ -1,4 +1,4 @@
-function [u, y, dy, ddy, ddy_inv, y_hat] = nbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, wric, ddy0, AWA, lp_bool, cT_filter, cT_filter_param)
+function [u, y, dy, ddy, ddy_inv, y_hat] = nbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, wric, ddy0, AWA, lp_bool, cT_filter, cT_filter_param, FF)
     % Inputs:
     % - J         : optimization criterion [function handle]
     % - dt        : simulation step [s]
@@ -15,6 +15,7 @@ function [u, y, dy, ddy, ddy_inv, y_hat] = nbesc(ship, J, dt, N, f, A, fc_hp, fc
     % - lp_bool   : use LPF [boolean]
     % - cT_filter : cT filter type {'RAW', 'EMA', 'LPF'}
     % - cT_filter_param : Parameter for cT filter (0, alpha, cut-off frequency, respectively)
+    % - FF       : [1 x N] time variant FF
      
     % Outputs:
     % - u      : control variable
@@ -30,10 +31,10 @@ function [u, y, dy, ddy, ddy_inv, y_hat] = nbesc(ship, J, dt, N, f, A, fc_hp, fc
   
     % Data structures
     n              = length(f);
-    u_hat          = [u0, zeros(n, N)];
+    u_hat          = zeros(n, N+1);
     u              = [u0, zeros(n, N)];
     y              = zeros(1, N);
-    y_hat = zeros(1, N);
+    y_hat          = zeros(1, N);
     dy             = zeros(n, N);
     hpf            = zeros(1, N);
     zeta           = zeros(n, N);
@@ -93,6 +94,7 @@ function [u, y, dy, ddy, ddy_inv, y_hat] = nbesc(ship, J, dt, N, f, A, fc_hp, fc
 
     tic
     for i = 1:N
+        
         if rem(i, 10) == 0
             fprintf("Iteration %d\n", i);
         end
@@ -101,10 +103,6 @@ function [u, y, dy, ddy, ddy_inv, y_hat] = nbesc(ship, J, dt, N, f, A, fc_hp, fc
         ship.yaw = AWA(i);
         
         y(i) = J(u(:, i), ship);
-        % Avoid numerical singularities
-        if i > 1 && (y(i) > 1.5*y(i-1) || y(i) < 0.5*y(i-1))
-                y(i) = y(i-1);
-        end
         
         % cT smoothing
         switch cT_filter
@@ -205,7 +203,7 @@ function [u, y, dy, ddy, ddy_inv, y_hat] = nbesc(ship, J, dt, N, f, A, fc_hp, fc
                     ddy(j,k,i) = hpf(i) * Nhess{j,k}(t); % \hat{H} = N(t)y_hp
                 end
             end            
-        end
+        end       
         
         % Euler discretization of Ricatti equation    
         ddy_inv(:, :, i+1) = ddy_inv(:, :, i) + dt * (wric * ddy_inv(:, :, i) - ...
@@ -215,7 +213,7 @@ function [u, y, dy, ddy, ddy_inv, y_hat] = nbesc(ship, J, dt, N, f, A, fc_hp, fc
         u_hat(:, i+1) = u_hat(:, i) - dt * K * ddy_inv(:, :, i+1) * dy(:, i); 
         
         % Add dither
-        u(:, i+1) = u_hat(:, i+1) + A .* sin(2*pi*f*t);
+        u(:, i+1) = FF(i) + u_hat(:, i+1) + A .* sin(2*pi*f*t);
         
         % Error condition
         if any(u(:, i+1) > pi) || any(u(:, i+1) < -pi) 
