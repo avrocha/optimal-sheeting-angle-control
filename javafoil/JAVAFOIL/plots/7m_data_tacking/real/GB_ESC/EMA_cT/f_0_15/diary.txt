@@ -1,0 +1,11 @@
+----14-Jun-2022 09:31:29----
+Params:
+AWA: -62.000004
+cT Filtering: EMA
+HPF: fc = 0.020000
+LPF: fc = 0.150000
+Dithers: A = 0.034907, f = 0.15
+Integrator gain (diag): K = 0.0504
+MSE SA: 0.036399
+MSE cT: 0.159047
+Accumulated cT: 20904.799559
