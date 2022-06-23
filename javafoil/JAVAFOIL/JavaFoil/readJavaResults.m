@@ -20,7 +20,15 @@ function [alfa, cl, cd, cm, cp] = readJavaResults(process_id)
     alfa = deg2rad(data(:,1)); 
     cl   = data(:,2);
     cd   = data(:,3);
-    cm   = data(:,4);
-    cp   = data(:,11);
 
+    % Outlier detector
+    if size(data, 2) < 4
+        cm = 1e3;
+        cp = 1e3;
+        disp('readJavaResults: cm and cp error\.n')
+    else
+        cm   = data(:,4);
+        cp   = data(:,11);
+    end
+    
 end
