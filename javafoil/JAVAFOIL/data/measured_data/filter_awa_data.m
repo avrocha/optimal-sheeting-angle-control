@@ -2,7 +2,7 @@ clear; clc; close all;
 fig_cnt = 1;
 
 % Select data source
-data_source = 'awa_100';
+data_source = 'tacking';
 
 switch data_source
     case 'tacking'
@@ -54,7 +54,7 @@ fig_cnt = fig_cnt + 1;
 
 % LPF - IIR design
 bworder  = 5;
-fc       = 0.1;
+fc       = 0.01;
 dt       = 1 / fs_data;
 [b, a]   = butter(bworder, fc*dt, 'low');
 M = bworder + 1; % filter length
@@ -77,7 +77,7 @@ end
 
 % EMA filter
 y_ema  = [awa(1), zeros(1, n-1)];
-alpha  = 0.05; 
+alpha  = 0.005; 
 
 for i = 2:n
     y_ema(i) = (1-alpha)*y_ema(i-1) + alpha*x(i);

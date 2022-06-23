@@ -8,15 +8,16 @@ cT = data.cT;
 sheeting_angle_1 = data.sheeting_angle_1;
 sheeting_angle_2 = data.sheeting_angle_2;
 
-AWA = deg2rad(0);
+AWA = deg2rad(45);
 
 [~, idx_awa] = min(abs(AWA - data.AWA));
 cT = cT(idx_awa, :, :);
-cT(cT < -2 | cT > 2) = nan;
+% cT(cT < -2 | cT > 2) = nan;
 [X, Y] = meshgrid(rad2deg(sheeting_angle_1), rad2deg(sheeting_angle_2));
 
 figure;
-surf(X', Y', squeeze(cT));
+% surf(X', Y', squeeze(cT));
+surf(X', Y', medfilt2(squeeze(cT)));
 c = colorbar;
 c.Label.String = 'cT';
 xlabel('$\delta_1$', 'Interpreter', 'Latex')
