@@ -1,0 +1,95 @@
+Unrecognized function or
+variable 'k'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('lookup_table_4D', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\lookup_table_4D.m', 74)" style="font-weight:bold">lookup_table_4D</a>
+(<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\lookup_table_4D.m',74,0)">line 74</a>)
+    localShip.yaw = AWA(k);
+
+opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\lookup_table_4D.m',74,0)
+-------------------------------------------------------------
+Scale = 169.000 
+Unrecognized function or
+variable 'k'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('lookup_table_4D', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\lookup_table_4D.m', 75)" style="font-weight:bold">lookup_table_4D</a>
+(<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\lookup_table_4D.m',75,0)">line 75</a>)
+    fprintf("Iteration k =
+    %d | AWA = %dº\n", k,
+    rad2deg(localShip.yaw))
+
+opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\lookup_table_4D.m',75,0)
+-------------------------------------------------------------
+Scale = 169.000 
+Iteration k = 1 | AWA = 45º
+Starting parallel pool (parpool) using the 'local' profile ...
+Connected to the parallel pool (number of workers: 4).
+Elapsed time is 38.504379 seconds.
+Iteration k = 1 | AWA = 45º
+Dot
+indexing is
+not
+supported
+for
+variables
+of this
+type.
+
+Error in
+<a href="matlab:matlab.internal.language.introspective.errorDocCallback('lookup_table_4D', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\lookup_table_4D.m', 82)" style="font-weight:bold">lookup_table_4D</a>
+(<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\lookup_table_4D.m',82,0)">line 82</a>)
+                    cT(i,
+j, k, l, m)
+=
+fun(delta(1,
+j),
+delta(2,
+k),
+delta(3,
+l),
+delta(4,
+m),
+localShip,
+getCurrentTask().ID);
+
+clc
+-------------------------------------------------------------
+Scale = 169.000 
+Iteration k = 1 | AWA = 45º
+Dot indexing is not supported for variables of this type.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('lookup_table_4D', 'C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\lookup_table_4D.m', 82)" style="font-weight:bold">lookup_table_4D</a> (<a href="matlab: opentoline('C:\Users\ASUS\Desktop\ALEX\chalmers\research_project\optimal-sheeting-angle-control\javafoil\JAVAFOIL\lookup_table_4D.m',82,0)">line 82</a>)
+                    cT(i, j, k, l, m) = fun(delta(1, j), delta(2, k),
+                    delta(3, l), delta(4, m), localShip,
+                    getCurrentTask().ID);
+
+-------------------------------------------------------------
+Scale = 169.000 
+Starting parallel pool (parpool) using the 'local' profile ...
+Connected to the parallel pool (number of workers: 4).
+Iteration k = 1 | AWA = 45º
+Elapsed time is 40.984138 seconds.
+Iteration k = 1 | AWA = 45º
+Elapsed time is 221.759124 seconds.
+Iteration k = 1 | AWA = 45º
+Elapsed time is 133.941610 seconds.
+Iteration k = 1 | AWA = 85º
+Iteration k = 2 | AWA = 8.710526e+01º
+Iteration k = 3 | AWA = 8.921053e+01º
+Iteration k = 4 | AWA = 9.131579e+01º
+Iteration k = 5 | AWA = 9.342105e+01º
+Iteration k = 6 | AWA = 9.552632e+01º
+Iteration k = 7 | AWA = 9.763158e+01º
+Iteration k = 8 | AWA = 9.973684e+01º
+Iteration k = 9 | AWA = 1.018421e+02º
+Iteration k = 10 | AWA = 1.039474e+02º
+Iteration k = 11 | AWA = 1.060526e+02º
+Iteration k = 12 | AWA = 1.081579e+02º
+Iteration k = 13 | AWA = 1.102632e+02º
+Iteration k = 14 | AWA = 1.123684e+02º
+Iteration k = 15 | AWA = 1.144737e+02º
+Iteration k = 16 | AWA = 1.165789e+02º
+Iteration k = 17 | AWA = 1.186842e+02º
+Iteration k = 18 | AWA = 1.207895e+02º
+Iteration k = 19 | AWA = 1.228947e+02º
+Iteration k = 20 | AWA = 1.250000e+02º
+Elapsed time is 265718.008080 seconds.
