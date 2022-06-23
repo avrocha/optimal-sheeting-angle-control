@@ -27,7 +27,7 @@ function [obj,cl,CT,cd] = calc_objective(X)
     %fprintf('Objective function %0.4f \n',obj);
     
     % Uncomment line below to plot the flow field
-    plot_flowField(ship.yaw,ship.scale,cl,cd,cp, process_id); 
+%     plot_flowField(ship.yaw,ship.scale,cl,cd,cp, process_id); 
     
     hold on;zoom on
 %     plot([cp cp],[-0.5 0.5],'k');%text(cp-0.02, .52,'cp','fontsize',16);
