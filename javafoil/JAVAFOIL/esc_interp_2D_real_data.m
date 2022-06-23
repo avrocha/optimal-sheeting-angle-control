@@ -159,22 +159,21 @@ switch cT_filter
             case 'tacking'
                 cT_filter_param = 0.2;   
             case 'awa_100'
-                cT_filter_param = 0.1;
+                cT_filter_param = 0.2;
         end
 
     case 'LPF' % Param = cut-off frequency for LPF
         cT_filter_param = 0.5; 
 end
 
-
 if strcmp(ES_method, 'GB')
     fprintf("Gradient-based ESC selected.\n")
     
-    % 1D set of parameters
+    % 2D set of parameters
     f             = 0.01; % tuning param: constant coeff
     delta         = 0.1;  % tuning param: constant coeff
 
-    f_dither      = [10*f; 20*f]; % dither freq (foremost = last array element)
+    f_dither      = [20*f; 10*f]; % dither freq (foremost = last array element)
     A             = deg2rad(2)*ones(2, 1); % dither amplitude
     fc_hp         = 2*f; % HPF cutoff freq
     fc_lp         = 5*f; % LPF cutoff freq
@@ -183,10 +182,13 @@ if strcmp(ES_method, 'GB')
     % Data-specific tuning
     switch data_source
         case 'tacking'
-            K = -f * delta * 0.7 * (-72) * eye(2); % gain (>0 since extremum is maximum)
+            ric_0 = [-120.6921    6.6318; 6.6318  -96.90739];
         case 'awa_100'
-            K = -f * delta * 0.7 * (-45) * eye(2); % gain (>0 since extremum is maximum)
+            ric_0 = [-71.4676  -11.5850; -11.5850 -113.5910];
     end
+    
+    K = f * delta * 0.7 * (-ric_0); % gain (>0 since extremum is maximum)
+
 
     % Criterion
     Jgb = @(sheeting_angle, ship) (getfield(calc_objective_mod(sheeting_angle, ship), 'cT'));
@@ -202,11 +204,11 @@ end
 if strcmp(ES_method, 'NB')
     fprintf("Newton-based ESC selected.\n")
 
-    % 1D set of parameters
+    % 2D set of parameters
     f             = 0.01; % tuning param: constant coeff
     delta         = 0.1;  % tuning param: constant coeff
 
-    f_dither      = [20*f; 10*f]; % dither freq
+    f_dither      = [20*f; 15*f]; % dither freq
     A             = deg2rad(2) * ones(2, 1); % dither amplitude
     fc_hp         = 2*f; % HPF cutoff freq
     fc_lp         = 15*f; % LPF cutoff freq
@@ -216,14 +218,14 @@ if strcmp(ES_method, 'NB')
     % Data-specific tuning
     switch data_source
         case 'tacking'
-            wric  = 2 * pi * (0.2 * f * delta); % ricatti filter parameter
-            ric_0 = -72 * eye(2);    
+            wric  = 2 * pi * (0.03 * f * delta); % ricatti filter parameter
+            ric_0 = [-120.6921     6.6318; 6.6318  -96.90739];
         case 'awa_100'
-            wric  = 2 * pi * (0.1 * f * delta); % ricatti filter parameter 
-            ric_0 = -45 * eye(2);
+            wric  = 2 * pi * (0.1* f * delta); % ricatti filter parameter 
+            ric_0 = [-71.4676  -11.5850; -11.5850 -113.5910];
     end
 
-    % Criterion
+    % Criterion 
     Jnb = @(sheeting_angle, ship)(getfield(calc_objective_mod(sheeting_angle, ship, 2), 'cT'));    
     % Interpolated criterion - high resolution -> linear interpolation
     Jnb_interp = @(sheeting_angle, ship) interp_criterion(X, V, [ship.yaw, sheeting_angle'], 'linear', Jnb, ship);
@@ -235,7 +237,7 @@ if strcmp(ES_method, 'NB')
 end
 
 %% Plots 
-dir = ['plots\7m_data_tacking\real\', ES_method,'_ESC\', cT_filter,'_cT\f_0_20\'];
+dir = ['plots\7m_data_', data_source, '\2D\', ES_method,'_ESC\'];
 
 % Check directory
 if ~exist(dir, 'dir')
@@ -250,10 +252,10 @@ sa_ref = zeros(2, length(data.AWA));
 cT_ref = zeros(1, length(data.AWA));
 
 for i = 1:length(data.AWA)
-    [cT_ref(i), I]        = max(squeeze(V(i, :, :)), [], 'all');    
-    [row, col]            = ind2sub(size(V, [2, 3]), I);
-    sa_ref(1, i) = data.sheeting_angle_1(row);
-    sa_ref(2, i) = data.sheeting_angle_2(col);
+    [cT_ref(i), I] = max(squeeze(V(i, :, :)), [], 'all');    
+    [row, col]     = ind2sub(size(V, [2, 3]), I);
+    sa_ref(1, i)   = data.sheeting_angle_1(row);
+    sa_ref(2, i)   = data.sheeting_angle_2(col);
 end
 
 % Interpolate references
@@ -305,9 +307,43 @@ for i = 1:n
 end
 
 if strcmp(ES_method, 'NB')
+    % Hessian reference [WIP]
+    % Operating point
+%     hess     = zeros(2, 2, N);
+%     inv_hess = zeros(2, 2, N);
+%     dsa1     = data.sheeting_angle_1(2) - data.sheeting_angle_1(1);
+%     dsa2     = data.sheeting_angle_2(2) - data.sheeting_angle_2(1);
+% 
+%     for k = 1:N
+%         sheet_angle_0 = sheet_angle(:, k)';
+%         
+%         % Get interpolation axes
+%         % Axes
+%         sa1 = max((sheet_angle_0(1) - dsa1), data.sheeting_angle_1(1)):dsa1:min((sheet_angle_0(1) + dsa1), data.sheeting_angle_1(end));
+%         sa2 = max((sheet_angle_0(2) - dsa2), data.sheeting_angle_2(1)):dsa2:min((sheet_angle_0(2) + dsa2), data.sheeting_angle_2(end));
+%         
+%         % Interpolate
+%         cT_interp = squeeze(interpn(data.AWA, data.sheeting_angle_1, data.sheeting_angle_2, data.cT, ...
+%                                 AWA(k), sa1, sa2));
+%         
+%         % Local (numerical) hessian
+%         [gx, gy] = gradient(cT_interp);
+%         [gxx, gxy] = gradient(gx);
+%         [~, gyy] = gradient(gy);
+%         
+%         % Results
+%         hess(:, :, k) = [gxx(2, 2), gxy(2, 2);
+%                          gxy(2, 2), gyy(2, 2)];
+%         
+%         inv_hess(:, :, k) = inv(hess(:, :, k));
+%     end
+
+
     figure(fig_cnt); clf(fig_cnt); hold on;
     title('NB-ESC | Hessian Estimate')
     plot(0:dt:T, reshape(cT_hessian, [n^2, N]), 'Linewidth', 1.5)
+    % Uncomment line below to plot reference
+%     plot(0:dt:T, reshape(hess, [n^2, N]), '--', 'Linewidth', 1.5)
     xlabel('t (s)'), ylabel('$\hat{H}$', 'Interpreter', 'Latex')
     if save == 1
         filename = fullfile(strcat(dir,'cT_hessian.fig'));
@@ -318,6 +354,8 @@ if strcmp(ES_method, 'NB')
     figure(fig_cnt); clf(fig_cnt); hold on;
     title('NB-ESC | Hessian Inverse Estimate')
     plot(0:dt:T, reshape(cT_hessian_inv(:, :, 2:end), [n^2, N]), 'Linewidth', 1.5)
+    % Uncomment line below to plot reference
+%     plot(0:dt:T, reshape(inv_hess, [n^2, N]), '--', 'Linewidth', 1.5)
     xlabel('t (s)'), ylabel('$\hat{H}^{-1}$', 'Interpreter', 'Latex')
     if save == 1
         filename = fullfile(strcat(dir,'cT_hessian_inv.fig'));
@@ -339,6 +377,7 @@ end
 MSE_sheet_angle = mean((sheet_angle(:, 2:end) - sheet_angle_ref).^2, 2);
 MSE_cT          = mean((cT - cT_ref).^2);
 cT_accum        = sum(cT, 2);
+cT_accum_opt    = sum(cT_ref, 2);
 
 if save == 1
     fileID = fopen(strcat(dir,'diary.txt'),'w');
@@ -359,9 +398,9 @@ if strcmp(ES_method, 'GB')
                         'Integrator gain (diag): K = %s\n'...
                         'MSE SA: %s\n' ...
                         'MSE cT: %f\n'...
-                        'Accumulated cT: %f\n'], rad2deg(ship.yaw), cT_filter, cT_filter_param, fc_hp, fc_lp, ...
+                        'Accumulated cT: %f (optimal = %f)\n'], rad2deg(ship.yaw), cT_filter, cT_filter_param, fc_hp, fc_lp, ...
                                         num2str(A'), num2str(f_dither'), num2str(diag(K)'), num2str(MSE_sheet_angle'), ...
-                                        MSE_cT, cT_accum);
+                                        MSE_cT, cT_accum, cT_accum_opt);
 
 elseif strcmp(ES_method, 'NB')
    data_str = sprintf(['Params:\n'...
@@ -376,9 +415,9 @@ elseif strcmp(ES_method, 'NB')
                         'Integrator gain (diag): K = %s\n'...
                         'MSE SA: %s\n' ...
                         'MSE cT: %f\n'...
-                        'Accumulated cT: %f\n'], rad2deg(ship.yaw), cT_filter, cT_filter_param, fc_hp, fc_lp, ...
+                        'Accumulated cT: %f (optimal = %f)\n'], rad2deg(ship.yaw), cT_filter, cT_filter_param, fc_hp, fc_lp, ...
                                          num2str(A'), num2str(f_dither'), wric, num2str(diag(ric_0)'), ...
-                                         num2str(diag(K)'), num2str(MSE_sheet_angle'), MSE_cT, cT_accum);
+                                         num2str(diag(K)'), num2str(MSE_sheet_angle'), MSE_cT, cT_accum, cT_accum_opt);
 end
 
 % Print / Save params
