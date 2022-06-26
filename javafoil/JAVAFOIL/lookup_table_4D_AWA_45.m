@@ -43,6 +43,10 @@ fun = @(delta_1, delta_2, delta_3, delta_4, localShip, task_id) getfield(calc_ob
 % ------------------------------------------------------------------------
 if isfile(data_dir)
     load(data_dir);
+    L_awa = size(data.AWA, 2);
+    L_sa           = size(data.sheeting_angle, 2);
+    AWA = data.AWA;
+    sheeting_angle = data.sheeting_angle;
 end
 
 if ~isfile(data_dir) || data.last_idxs.i == 0 
