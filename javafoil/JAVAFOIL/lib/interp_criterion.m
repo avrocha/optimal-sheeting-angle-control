@@ -1,4 +1,6 @@
 function cT = interp_criterion(X, V, x, interp_type, f, ship)
+    % Interpolate regular grid
+    % --- 
     % Inputs:
     % X           : [n x 1] Cell array of data grids
     % V           : cT data
@@ -38,7 +40,8 @@ function cT = interp_criterion(X, V, x, interp_type, f, ship)
                 return
         end
     else
-        cT = f(x(2:end), ship);
+%         cT = f(x(2:end), ship);
+        cT = 0;
     end
 
 end
