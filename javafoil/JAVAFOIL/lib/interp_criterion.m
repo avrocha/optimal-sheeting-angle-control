@@ -40,8 +40,7 @@ function cT = interp_criterion(X, V, x, interp_type, f, ship)
                 return
         end
     else
-%         cT = f(x(2:end), ship);
-        cT = 0;
+        cT = f(x(2:end), ship);
     end
 
 end

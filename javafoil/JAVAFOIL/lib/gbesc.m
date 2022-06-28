@@ -125,7 +125,7 @@ function [u, y, dy, y_hat] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, AW
         end
         
         if lp_bool
-            zeta(:, i) = hpf(i) * sin(2*pi*f*t);
+            zeta(:, i) = hpf(i) .* ((2./A) .* sin(2*pi*f*t));
             
             % LPF
             if i >= M              
@@ -145,7 +145,7 @@ function [u, y, dy, y_hat] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, AW
             dy(:, i) = lpf(:, i);
         
         else
-            dy(:, i) = hpf(i) * sin(2*pi*f*t);
+            dy(:, i) = hpf(i) * ((2./A) .* sin(2*pi*f*t));
 
         end
         

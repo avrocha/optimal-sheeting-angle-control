@@ -1,4 +1,4 @@
-function [u, y, dy, ddy, ddy_inv, y_hat] = nbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, wric, ddy0, AWA, lp_bool, cT_filter, cT_filter_param, FF)
+function [u, u_hat, y, dy, ddy, ddy_inv, y_hat] = nbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, wric, ddy0, AWA, lp_bool, cT_filter, cT_filter_param, FF)
     % Inputs:
     % - J         : optimization criterion [function handle]
     % - dt        : simulation step [s]
@@ -85,9 +85,9 @@ function [u, y, dy, ddy, ddy_inv, y_hat] = nbesc(ship, J, dt, N, f, A, fc_hp, fc
     for i = 1:n
         for j = 1:n
             if i == j
-                Nhess{i,j} = @(t) 16 / (rad2deg(A(i))^2) * (sin(2*pi*f(i)*t)^2 - 0.5);
+                Nhess{i,j} = @(t) 16 / (A(i)^2) * (sin(2*pi*f(i)*t)^2 - 0.5);                
             else
-                Nhess{i,j} = @(t) 4 / (rad2deg(A(i)) * rad2deg(A(j))) * sin(2*pi*f(i)*t) * sin(2*pi*f(j)*t);
+                Nhess{i,j} = @(t) 4 / (A(i) * A(j)) * sin(2*pi*f(i)*t) * sin(2*pi*f(j)*t);
             end
         end
     end
@@ -142,7 +142,7 @@ function [u, y, dy, ddy, ddy_inv, y_hat] = nbesc(ship, J, dt, N, f, A, fc_hp, fc
         
         if lp_bool
             % Gradient
-            zeta(:, i) = hpf(i) .* sin(2*pi*f*t);
+            zeta(:, i) = hpf(i) .* ((2./A) .* sin(2*pi*f*t));
             
             % LPF - Gradient
             if i >= M
@@ -195,7 +195,7 @@ function [u, y, dy, ddy, ddy_inv, y_hat] = nbesc(ship, J, dt, N, f, A, fc_hp, fc
         
         else
             % Gradient
-            dy(:, i) = hpf(i) * sin(2*pi*f*t);
+            dy(:, i) = hpf(i) * ((2./A) .* sin(2*pi*f*t));
             
             % Hessian
             for j = 1:n
