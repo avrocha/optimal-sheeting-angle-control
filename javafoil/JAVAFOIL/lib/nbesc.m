@@ -1,4 +1,4 @@
-function [u, u_hat, y, dy, ddy, ddy_inv, y_hat] = nbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, wric, ddy0, AWA, lp_bool, cT_filter, cT_filter_param, FF)
+function [u, u_hat, y, dy, ddy, ddy_inv, y_hat, hpf] = nbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, wric, ddy0, AWA, lp_bool, cT_filter, cT_filter_param, FF)
     % Inputs:
     % - J         : optimization criterion [function handle]
     % - dt        : simulation step [s]
@@ -137,7 +137,7 @@ function [u, u_hat, y, dy, ddy, ddy_inv, y_hat] = nbesc(ship, J, dt, N, f, A, fc
                 hpf(i) = hpf(i) - ah(end-j+1)*hpf(i-j+1);
             end
             
-            hpf(i) = 1/ah(end) * hpf(i);
+            hpf(i) = 1/ah(end) * hpf(i);            
         end
         
         if lp_bool
@@ -202,12 +202,18 @@ function [u, u_hat, y, dy, ddy, ddy_inv, y_hat] = nbesc(ship, J, dt, N, f, A, fc
                 for k = 1:n
                     ddy(j,k,i) = hpf(i) * Nhess{j,k}(t); % \hat{H} = N(t)y_hp
                 end
-            end            
-        end       
+            end
+        end
+
+        % Delay Hessian estimate to avoid transient unstable response
+        % Butterworth filter 5th orther (100s)
+        if i*dt < 100
+            ddy(:, :, i) = inv(ddy0);
+        end
         
         % Euler discretization of Ricatti equation    
         ddy_inv(:, :, i+1) = ddy_inv(:, :, i) + dt * (wric * ddy_inv(:, :, i) - ...
-            wric * ddy_inv(:, :, i) * ddy(:, :, i) * ddy_inv(:, :, i)); 
+            wric * ddy_inv(:, :, i) * ddy(:,:,i) * ddy_inv(:, :, i)); 
 
         % Parameter estimate - Single Integrator
         u_hat(:, i+1) = u_hat(:, i) - dt * K * ddy_inv(:, :, i+1) * dy(:, i); 
