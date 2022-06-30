@@ -16,7 +16,7 @@ fig_cnt = 1;
 
 % Menus
 % Select data source
-data_source = 'tacking';
+data_source = 'awa_100';
 
 switch data_source
     case 'tacking'
@@ -89,9 +89,9 @@ scale    = calc_scale();
 
 % Method
 % 'GB' for Gradient based | 'NB' for Newton based
-ES_method = 'GB';
+ES_method = 'NB';
 % 1 to save figures and diary or 0 to plot figures and print diary
-save = 1;
+save = 0;
 
 % Simulation
 fs = 10; 
@@ -168,17 +168,19 @@ if strcmp(ES_method, 'GB')
 
     f_dither      = 20*f; % dither freq
     A             = deg2rad(2); % dither amplitude
-    fc_hp         = 2*f; % HPF cutoff freq
+    fc_hp         = 3*f; % HPF cutoff freq
     fc_lp         = 5*f; % LPF cutoff freq
     lp_bool       = false; % Use LPF
     
     % Data-specific tuning
     switch data_source
         case 'tacking'
-            K = -f * delta * 0.7 * (-72); % gain (>0 since extremum is maximum)
+            ric_0 = -0.040598;
         case 'awa_100'
-            K = -f * delta * 0.7 * (-45); % gain (>0 since extremum is maximum)
+            ric_0 = -0.014203;
     end
+    
+    K = f * delta * 50 * (-ric_0); % gain (>0 since extremum is maximum)
 
     % Criterion
     Jgb = @(sheeting_angle, ship) (getfield(calc_objective_mod(sheeting_angle, ship), 'cT'));
@@ -200,19 +202,19 @@ if strcmp(ES_method, 'NB')
 
     f_dither      = 20*f; % dither freq
     A             = deg2rad(2); % dither amplitude
-    fc_hp         = 2*f; % HPF cutoff freq
-    fc_lp         = 15*f; % LPF cutoff freq
+    fc_hp         = 3*f; % HPF cutoff freq
+    fc_lp         = 5*f; % LPF cutoff freq
     lp_bool       = false; % Use LPF
-    K             = f * delta * 0.7; % gain (>0 since extremum is maximum)
+    K             = f * delta * 50; % gain (>0 since extremum is maximum)
     
     % Data-specific tuning
     switch data_source
         case 'tacking'
-            wric  = 2 * pi * (0.5 * f * delta); % ricatti filter parameter
-            ric_0 = -72;    
+            ric_0 = -0.040598;
+            wric  = 2 * pi * (0.01 * f * delta); % ricatti filter parameter
         case 'awa_100'
+            ric_0 = -0.014203;
             wric  = 2 * pi * (0.1 * f * delta); % ricatti filter parameter 
-            ric_0 = -45;
     end
 
     % Criterion
@@ -221,7 +223,7 @@ if strcmp(ES_method, 'NB')
     Jnb_interp = @(sheeting_angle, ship) interp_criterion(X, V, [ship.yaw, sheeting_angle'], 'linear', Jnb, ship);
 
     localShip = ship;
-    [sheet_angle, cT, cT_grad, cT_hessian, cT_hessian_inv, cT_hat] = nbesc(localShip, Jnb_interp, dt, N, f_dither, A, ...
+    [sheet_angle, sheet_angle_hat, cT, cT_grad, cT_hessian, cT_hessian_inv, cT_hat, hpf] = nbesc(localShip, Jnb_interp, dt, N, f_dither, A, ...
         fc_hp, fc_lp, K, sheet_angle_0, wric, ric_0, AWA, lp_bool, cT_filter, cT_filter_param, FF);    
     
 end
@@ -294,6 +296,23 @@ end
 
 if strcmp(ES_method, 'NB')
     figure(fig_cnt); clf(fig_cnt); hold on;
+    title('NB-ESC | HPF output')
+    plot(0:dt:T, hpf, 'Linewidth', 1.5)
+    
+    yhpf = zeros(size(hpf));
+    for ihpf = 1:N
+        yhpf(ihpf) = sum(hpf(1:ihpf)) / ihpf;
+    end
+    plot(0:dt:T, yhpf, '--')
+    
+    xlabel('t (s)')
+    if save == 1
+        filename = fullfile(strcat(dir,'hpf.fig'));
+        saveas(figure(fig_cnt), filename);
+    end
+    fig_cnt = fig_cnt + 1; 
+
+    figure(fig_cnt); clf(fig_cnt); hold on;
     title('NB-ESC | Hessian Estimate')
     plot(0:dt:T, reshape(cT_hessian, [n^2, N]), 'Linewidth', 1.5)
     xlabel('t (s)'), ylabel('$\hat{H}$', 'Interpreter', 'Latex')
@@ -312,6 +331,85 @@ if strcmp(ES_method, 'NB')
         saveas(figure(fig_cnt), filename);
     end
     fig_cnt = fig_cnt + 1;
+
+    % Hessian reference 
+    % Operating point
+    hess     = zeros(1, N);
+    inv_hess = zeros(1, N);
+    dsa      = data.sheeting_angle(2) - data.sheeting_angle(1);
+
+    for k = 1:N
+        sa = sheet_angle(:, k+1)';
+        
+        % Get interpolation axes
+        % Axes
+        sax = max((sa(1) - dsa), data.sheeting_angle(1)):dsa:min((sa(1) + dsa), data.sheeting_angle(end));
+
+        % Interpolate
+        cT_interp = squeeze(interpn(data.AWA, data.sheeting_angle, V, AWA(k), sax));
+        
+        % Local (numerical) hessian
+        h = gradient(gradient(cT_interp, sax), sax);
+        hess(k) = h(2);
+        inv_hess(k) = inv(hess(k));
+    end
+
+    figure(fig_cnt); clf(fig_cnt); hold on;
+    title('NB-ESC | Hessian Estimate [Averaged]')   
+    npoints  = ceil(fs / f_dither);  
+    plot(0:dt:T, movmean(squeeze(cT_hessian), npoints))
+    % Uncomment line below to plot reference
+    plot(0:dt:T, hess, 'r--')
+    xlabel('t (s)'), ylabel('$\hat{H}$', 'Interpreter', 'Latex')   
+    
+    if save == 1
+        filename = fullfile(strcat(dir,'cT_hessian_avg.fig'));
+        saveas(figure(fig_cnt), filename);
+    end
+    fig_cnt = fig_cnt + 1;
+   
+    figure(fig_cnt); clf(fig_cnt); hold on;
+    sgtitle('NB-ESC | Hessian Inverse Estimate [Averaged]')
+    plot(0:dt:T, movmean(squeeze(cT_hessian_inv(2:end)), npoints))
+    % Uncomment line below to plot reference
+    plot(0:dt:T, squeeze(inv_hess(1, 1, :)), 'r--')
+    xlabel('t (s)'), ylabel('$\Gamma$', 'Interpreter', 'Latex')
+    
+    if save == 1
+        filename = fullfile(strcat(dir,'cT_hessian_inv_avg.fig'));
+        saveas(figure(fig_cnt), filename);
+    end
+    fig_cnt = fig_cnt + 1;
+
+    % Inverse of estimated Hessian
+    cancel_factor = zeros(size(cT_hessian));
+    for k = 1:N
+        cancel_factor(k) = cT_hessian_inv(k+1) * cT_hessian(k);
+    end
+
+    figure(fig_cnt); clf(fig_cnt); hold on;
+    title('NB-ESC | Hessian Cancellation Factor [Averaged]')
+    plot(0:dt:T, movmean(squeeze(cancel_factor), npoints))
+    plot(0:dt:T, ones(1, N), 'r--', 'Linewidth', 0.8)
+    xlabel('t (s)'), ylabel('$(\Gamma H)$', 'Interpreter', 'Latex')
+    
+    if save == 1
+        filename = fullfile(strcat(dir,'cancel_factor_avg.fig'));
+        saveas(figure(fig_cnt), filename);
+    end
+    fig_cnt = fig_cnt + 1;
+
+    figure(fig_cnt); clf(fig_cnt); hold on;
+    title('NB-ESC | Hessian Cancellation Factor ')
+    plot(0:dt:T, squeeze(cancel_factor))
+    plot(0:dt:T, ones(1, N), 'r--', 'Linewidth', 0.8)
+    xlabel('t (s)'), ylabel('$(\Gamma H)_{1, 1}$', 'Interpreter', 'Latex')
+    
+    if save == 1
+        filename = fullfile(strcat(dir,'cancel_factor.fig'));
+        saveas(figure(fig_cnt), filename);
+    end
+    fig_cnt = fig_cnt + 1;
 end
 
 figure(fig_cnt); clf(fig_cnt); 
@@ -324,16 +422,26 @@ if save == 1
 end
 
 %% Stats
-MSE_sheet_angle = mean((sheet_angle(2:end) - sheet_angle_ref).^2);
-MSE_cT          = mean((cT - cT_ref).^2);
+% Error
+MSE_sheet_angle   = mean((sheet_angle(:, 2:end) - sheet_angle_ref).^2, 2);
+MSE_cT            = mean((cT - cT_ref).^2);
+
+if strcmp(ES_method, 'NB')
+    MSE_cancel_factor    = zeros(1, 3);
+    MSE_cancel_factor(1) = mean((movmean(squeeze(cT_hessian_inv(1,1, 2:end)), npoints)' - 1).^2, 2);
+    MSE_cancel_factor(2) = mean((movmean(squeeze(cT_hessian_inv(2,2, 2:end)), npoints)' - 1).^2, 2);
+    MSE_cancel_factor(3) = mean((movmean(squeeze(cT_hessian_inv(2,1, 2:end)), npoints)' - 1).^2, 2);
+end
+
+% Criterion
 cT_accum        = sum(cT, 2);
+cT_accum_opt    = sum(cT_ref, 2);
 
 if save == 1
     fileID = fopen(strcat(dir,'diary.txt'),'w');
 elseif save == 0
     fileID = 1;
 end
-
 
 % Data string
 if strcmp(ES_method, 'GB')
@@ -345,11 +453,11 @@ if strcmp(ES_method, 'GB')
                         'LPF: fc = %f\n'...
                         'Dithers: A = %s, f = %s\n'...  
                         'Integrator gain (diag): K = %s\n'...
-                        'MSE SA: %f\n' ...
+                        'MSE SA: %s\n' ...
                         'MSE cT: %f\n'...
-                        'Accumulated cT: %f\n'], rad2deg(ship.yaw), cT_filter, cT_filter_param, fc_hp, fc_lp, ...
-                                        num2str(A'), num2str(f_dither'), num2str(diag(K)'), MSE_sheet_angle, ...
-                                        MSE_cT, cT_accum);
+                        'Accumulated cT: %f (optimal = %f)\n'], rad2deg(ship.yaw), cT_filter, cT_filter_param, fc_hp, fc_lp, ...
+                                        num2str(A'), num2str(f_dither'), num2str(diag(K)'), num2str(MSE_sheet_angle'), ...
+                                        MSE_cT, cT_accum, cT_accum_opt);
 
 elseif strcmp(ES_method, 'NB')
    data_str = sprintf(['Params:\n'...
@@ -362,17 +470,19 @@ elseif strcmp(ES_method, 'NB')
                         'Ricatti Filter: wric = %f\n'...
                         'Initial Hessian inverse value: %s\n'...
                         'Integrator gain (diag): K = %s\n'...
-                        'MSE SA: %f\n' ...
+                        'MSE SA: %s\n' ...
+                        'MSE Cancellation Factor : %s\n' ...
                         'MSE cT: %f\n'...
-                        'Accumulated cT: %f\n'], rad2deg(ship.yaw), cT_filter, cT_filter_param, fc_hp, fc_lp, ...
+                        'Accumulated cT: %f (optimal = %f)\n'], rad2deg(ship.yaw), cT_filter, cT_filter_param, fc_hp, fc_lp, ...
                                          num2str(A'), num2str(f_dither'), wric, num2str(diag(ric_0)'), ...
-                                         num2str(diag(K)'), MSE_sheet_angle, MSE_cT, cT_accum);
+                                         num2str(diag(K)'), num2str(MSE_sheet_angle'), num2str(MSE_cancel_factor), ...
+                                         MSE_cT, cT_accum, cT_accum_opt);
 end
 
 % Print / Save params
 fprintf(fileID, "----%s----\n", datetime('now','TimeZone','local','Format','d-MMM-y HH:mm:ss'));
 fprintf(fileID, data_str);
-if fileID ~= 0
+if fileID ~= 1
     fprintf(data_str)
 end
 if save == 1
