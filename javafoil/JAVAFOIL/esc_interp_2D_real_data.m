@@ -94,7 +94,7 @@ scale    = calc_scale();
 % 'GB' for Gradient based | 'NB' for Newton based
 ES_method = 'GB';
 % 1 to save figures and diary or 0 to plot figures and print diary
-save = 1;
+save = 0;
 
 % Simulation
 fs = 10; 
@@ -111,7 +111,6 @@ for i = 1:N
     if t_sim(i) >= time(j+1); j = j + 1; end
     AWA(i) = awa(j);
 end
-
 
 % Feedforward (Piecewise constant)
 switch data_source
@@ -184,6 +183,8 @@ fmult = [13.33, 20;
          5, 20;
          20, 5];
 
+fmult = [20, 16];
+
 for fidx = 1:size(fmult, 1)
 
     if strcmp(ES_method, 'GB')
@@ -208,7 +209,7 @@ for fidx = 1:size(fmult, 1)
                 ric_0 = [-0.2582    0.1297; 0.1297   -0.4521];
         end
         
-        K = f * delta * 3 * (-ric_0); % gain (>0 since extremum is maximum)
+        K = f * delta * 10 * (-ric_0); % gain (>0 since extremum is maximum)
     
         % Criterion
         Jgb = @(sheeting_angle, ship) (getfield(calc_objective_mod(sheeting_angle, ship), 'cT'));
@@ -234,7 +235,7 @@ for fidx = 1:size(fmult, 1)
         fc_hp         = 3*f; % HPF cutoff freq
         fc_lp         = 10*f; % LPF cutoff freq
         lp_bool       = false; % Use LPF
-        K             = f * delta * 3 * eye(2); % gain (>0 since extremum is maximum)
+        K             = f * delta * 10 * eye(2); % gain (>0 since extremum is maximum)
         
         % Data-specific tuning
         switch data_source
@@ -391,16 +392,21 @@ for fidx = 1:size(fmult, 1)
             cT_interp = squeeze(interpn(data.AWA, data.sheeting_angle_1, data.sheeting_angle_2, V, ...
                                     AWA(k), sa1, sa2));
             
-            % Local (numerical) hessian
-            [gx, gy] = gradient(cT_interp, sa1, sa1);
-            [gxx, gxy] = gradient(gx, sa1, sa1);
-            [~, gyy] = gradient(gy, sa1, sa1);
-            
-            % Results
-            hess(:, :, k) = [gxx(2, 2), gxy(2, 2);
-                             gxy(2, 2), gyy(2, 2)];
-            
-            inv_hess(:, :, k) = inv(hess(:, :, k));
+            % Local (numerical) hessian (w/ error condition)        
+            if any(size(cT_interp) < 3)
+                hess(:, :, k)     = NaN(2);
+                inv_hess(:, :, k) = NaN(2);
+            else                
+                [gx, gy] = gradient(cT_interp, sa1, sa1); 
+                [gxx, gxy] = gradient(gx, sa1, sa1);
+                [~, gyy] = gradient(gy, sa1, sa1);
+                
+                % Results
+                hess(:, :, k) = [gxx(2, 2), gxy(2, 2);
+                                 gxy(2, 2), gyy(2, 2)];
+                
+                inv_hess(:, :, k) = inv(hess(:, :, k));
+            end
         end
     
         figure(fig_cnt); clf(fig_cnt); hold on;

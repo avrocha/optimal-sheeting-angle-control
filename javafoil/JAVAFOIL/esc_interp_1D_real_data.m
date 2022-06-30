@@ -348,10 +348,15 @@ if strcmp(ES_method, 'NB')
         % Interpolate
         cT_interp = squeeze(interpn(data.AWA, data.sheeting_angle, V, AWA(k), sax));
         
-        % Local (numerical) hessian
-        h = gradient(gradient(cT_interp, sax), sax);
-        hess(k) = h(2);
-        inv_hess(k) = inv(hess(k));
+        % Local (numerical) hessian (w/ error condition)        
+        if length(cT_interp) < 3
+            hess(k)     = nan;
+            inv_hess(k) = nan;
+        else                
+            h = gradient(gradient(cT_interp, sax), sax);
+            hess(k) = h(2);
+            inv_hess(k) = inv(hess(k));
+        end
     end
 
     figure(fig_cnt); clf(fig_cnt); hold on;
