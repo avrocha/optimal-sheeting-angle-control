@@ -12,40 +12,48 @@ sheet_angle_0 = deg2rad(-85);
 [~, i] = min(abs(AWA - data.AWA));
 [~, j] = min(abs(sheet_angle_0 - data.sheeting_angle));
 
-HESS = gradient(gradient(data.cT));
-fprintf("Hessian inverse estimate = %f\n", 1/HESS(i,j));
+HESS = gradient(gradient(data.cT(i, :), data.sheeting_angle), data.sheeting_angle);
+fprintf("Hessian inverse estimate = %f\n", 1/HESS(j));
 
 %% 2D - Get Interpolated Hessian
 clear
 
 % Load struct
-% load('data\measured_data\awa_100\cT_2D.mat');
-load('data\measured_data\awa_pm_45\cT_2D.mat');
+load('data\measured_data\awa_100\cT_2D.mat');
+% load('data\measured_data\awa_pm_45\cT_2D.mat');
 
-% Operating point
-AWA           = deg2rad(45);
-sheet_angle_0 = [deg2rad(-25), deg2rad(-25)];
+% % Operating point
+% AWA           = deg2rad(45);
+% sheet_angle_0 = [deg2rad(-25), deg2rad(-25)];
+AWA           = deg2rad(100);
+sheet_angle_0 = [deg2rad(-85), deg2rad(-85)];
 
 % Get interpolation axes
 % Grid spacing
 dsa1 = abs(data.sheeting_angle_1(2) - data.sheeting_angle_1(1));
 dsa2 = abs(data.sheeting_angle_2(2) - data.sheeting_angle_2(1));
+dawa = abs(data.AWA(2) - data.AWA(1));
 % Axes
 sa1 = max((sheet_angle_0(1) - dsa1), data.sheeting_angle_1(1)):dsa1:min((sheet_angle_0(1) + dsa1), data.sheeting_angle_1(end));
 sa2 = max((sheet_angle_0(2) - dsa2), data.sheeting_angle_2(1)):dsa2:min((sheet_angle_0(2) + dsa2), data.sheeting_angle_2(end));
 
+cT = zeros(size(data.cT));
+for i = 1:size(data.cT,1)
+    cT(i, :, :) = medfilt2(squeeze(data.cT(i, :, :)));
+end
+
 % Interpolate
-cT_interp = squeeze(interpn(data.AWA, data.sheeting_angle_1, data.sheeting_angle_2, data.cT, ...
+cT_interp = squeeze(interpn(data.AWA, data.sheeting_angle_1, data.sheeting_angle_2, cT, ...
                         AWA, sa1, sa2));
 
 % Local (numerical) hessian
-[gx, gy] = gradient(cT_interp);
-[gxx, gxy] = gradient(gx);
-[~, gyy] = gradient(gy);
+[gx, gy] = gradient(cT_interp, sa1, sa1);
+[gxx, gxy] = gradient(gx, sa1, sa1);
+[~, gyy] = gradient(gy, sa1, sa1);
 
 % Results
 hess = [gxx(2, 2), gxy(2, 2);
-        gxy(2, 2), gyy(2, 2)];
+        gxy(2, 2), gyy(2, 2)]
 
 inv(hess)
 
