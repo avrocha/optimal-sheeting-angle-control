@@ -18,15 +18,21 @@ fprintf("Hessian inverse estimate = %f\n", 1/HESS(j));
 %% 2D - Get Interpolated Hessian
 clear
 
-% Load struct
-load('data\measured_data\awa_100\cT_2D.mat');
-% load('data\measured_data\awa_pm_45\cT_2D.mat');
+data_source = 'tacking';
 
-% % Operating point
-% AWA           = deg2rad(45);
-% sheet_angle_0 = [deg2rad(-25), deg2rad(-25)];
-AWA           = deg2rad(100);
-sheet_angle_0 = [deg2rad(-85), deg2rad(-85)];
+switch data_source
+    case 'tacking'
+        load('data\measured_data\awa_pm_45\cT_2D.mat');
+        AWA           = deg2rad(45);
+        sheet_angle_0 = [deg2rad(-25), deg2rad(-25)];
+        
+    case 'awa_100'
+        load('data\measured_data\awa_100\cT_2D.mat');
+        AWA           = deg2rad(100);
+        sheet_angle_0 = [deg2rad(-85), deg2rad(-85)];
+    otherwise
+        disp('Error.')
+end
 
 % Get interpolation axes
 % Grid spacing
@@ -55,60 +61,93 @@ cT_interp = squeeze(interpn(data.AWA, data.sheeting_angle_1, data.sheeting_angle
 hess = [gxx(2, 2), gxy(2, 2);
         gxy(2, 2), gyy(2, 2)]
 
-inv(hess)
+inv_hess = inv(hess)
 
-%% 4D - Get Interpolated Hessian (USE SHIP STRUCTURES - [WIP])
+%% 4D - Get Interpolated Hessian 
 clear
-addpath lib
-% Load struct
-load('data\measured_data\awa_100\cT_4D.mat');
-% load('data\measured_data\awa_pm_45\cT_4D.mat');
 
-% Operating point
-AWA           = deg2rad(90);
-sheet_angle_0 = [deg2rad(-65.7094), deg2rad(-68.8178), deg2rad(-71.3521), deg2rad(-74.8501)]';
+data_source = 'tacking';
 
-% Get AWA neighbors
+switch data_source
+    case 'tacking'
+        load('data\measured_data\awa_pm_45\cT_4D.mat');
+%         AWA           = deg2rad(45);
+%         sheet_angle_0 = [deg2rad(-15), deg2rad(-25), deg2rad(-30), deg2rad(-35)];
+        AWA           = deg2rad(75);
+        sheet_angle_0 = [deg2rad(-49), deg2rad(-53), deg2rad(-57), deg2rad(-60)];
+        
+    case 'awa_100'
+        load('data\measured_data\awa_100\cT_4D.mat');
+        AWA           = deg2rad(100);
+        sheet_angle_0 = [deg2rad(-77), deg2rad(-78), deg2rad(-79), deg2rad(-81)];
 
-% for each neighbor
-% get interpolated axes
-% interpolate cT neighborhood
-% if cT neighborhood is < size(3,3) -> error
-% get hessian matrix for each central element
-
-% Get sheeting angle spacing
-dsa           = data.sheeting_angle(1, 2, 1) - data.sheeting_angle(1, 1, 1);
-sa_axes       = zeros(4, 3);
-sa_axes(1, :) = sheet_angle_0(1)-dsa:dsa:sheet_angle_0(1)+dsa;
-sa_axes(2, :) = sheet_angle_0(2)-dsa:dsa:sheet_angle_0(2)+dsa;
-sa_axes(3, :) = sheet_angle_0(3)-dsa:dsa:sheet_angle_0(3)+dsa;
-sa_axes(4, :) = sheet_angle_0(4)-dsa:dsa:sheet_angle_0(4)+dsa;
-
-% Get cT neighborhood
-cT_neigh = zeros(length(sa_axes(1, :)), length(sa_axes(3, :)), length(sa_axes(3, :)), length(sa_axes(4, :)));
-
-%% [WIP]
-% Criterion
-J = @(sheeting_angle, ship)(getfield(calc_objective_mod(sheeting_angle, ship, 2), 'cT'));    
-    
-for i = 1:length(sa_axes(1, :))
-    for j = length(sa_axes(2, :))
-        for k = length(sa_axes(3, :))
-            for l = length(sa_axes(4, :))
-                cT_neigh(i, j, k, l) = interp_criterion_irregular();            
-            end
-        end
-    end
+    otherwise
+        disp('Error.')
 end
 
-% [WIP]
-% Local (numerical) hessian
-[gx, gy] = gradient(cT_interp);
-[gxx, gxy] = gradient(gx);
-[~, gyy] = gradient(gy);
+addpath lib
 
-% Results
-hess = [gxx(2, 2), gxy(2, 2);
-        gxy(2, 2), gyy(2, 2)];
+% Get AWA neighbors
+[~, idx_neigh] = min(abs(data.AWA - AWA));
+if data.AWA(idx_neigh) > AWA
+    neighbors = [idx_neigh - 1, idx_neigh];
+elseif data.AWA(idx_neigh) < AWA
+    neighbors = [idx_neigh, idx_neigh + 1];
+else
+    neighbors = idx_neigh;
+end
 
-inv(hess);
+% Interpolate cT neighborhood in SA
+cT_interp = zeros(length(neighbors), 3, 3, 3, 3);
+sa_axes   = zeros(4, 3);
+dsa       = data.sheeting_angle(1, 2, 1) - data.sheeting_angle(1, 1, 1); % Common resolution to the 4 axes
+i = 1;
+for idx = neighbors
+    sa_axes(1, :) = max(sheet_angle_0(1)-dsa, data.sheeting_angle(1, 1, idx)):dsa:min(sheet_angle_0(1)+dsa, data.sheeting_angle(1, end, idx));
+    sa_axes(2, :) = max(sheet_angle_0(2)-dsa, data.sheeting_angle(2, 1, idx)):dsa:min(sheet_angle_0(2)+dsa, data.sheeting_angle(2, end, idx));
+    sa_axes(3, :) = max(sheet_angle_0(3)-dsa, data.sheeting_angle(3, 1, idx)):dsa:min(sheet_angle_0(3)+dsa, data.sheeting_angle(3, end, idx));
+    sa_axes(4, :) = max(sheet_angle_0(4)-dsa, data.sheeting_angle(4, 1, idx)):dsa:min(sheet_angle_0(4)+dsa, data.sheeting_angle(4, end, idx));
+    
+    [X1, X2, X3, X4]     = ndgrid(squeeze(data.sheeting_angle(1, :, idx)), squeeze(data.sheeting_angle(2, :, idx)), ...
+                            squeeze(data.sheeting_angle(3, :, idx)), squeeze(data.sheeting_angle(4, :, idx)));
+    [Xq1, Xq2, Xq3, Xq4] = ndgrid(sa_axes(1, :), sa_axes(2, :), sa_axes(3, :), sa_axes(4, :));
+
+    interp_res = squeeze(interpn(X1, X2, X3, X4, squeeze(data.cT(idx, :, :, :, :)), ...
+                            Xq1, Xq2, Xq3, Xq4)); 
+        
+    if any(size(interp_res) < 3)
+        disp('Boundary problems in interpolation')
+        cT_interp(i, :, :, :, :) = NaN(3, 3, 3, 3);
+    else
+        cT_interp(i, :, :, :, :) = interp_res;
+    end
+
+    i = i + 1;
+
+end
+
+% Interpolate neighborhood in AWA
+cT_interp2 = zeros(3, 3, 3, 3);
+if size(cT_interp, 1) > 1
+    cT_1 = squeeze(cT_interp(1, :, :, :, :));
+    cT_2 = squeeze(cT_interp(2, :, :, :, :));
+    for i = 1:3^4
+        cT_interp2(i) = interp1(data.AWA(neighbors), [cT_1(i), cT_2(i)], AWA);
+    end
+else
+    cT_interp2 = cT_interp;
+end
+
+% Get Hessian
+[g1, g2, g3, g4]     = gradient(cT_interp2, sa_axes(1, :), sa_axes(2, :), sa_axes(3, :), sa_axes(4, :));
+[g11, g12, g13, g14] = gradient(g1, sa_axes(1, :), sa_axes(2, :), sa_axes(3, :), sa_axes(4, :));
+[g21, g22, g23, g24] = gradient(g2, sa_axes(1, :), sa_axes(2, :), sa_axes(3, :), sa_axes(4, :));
+[g31, g32, g33, g34] = gradient(g3, sa_axes(1, :), sa_axes(2, :), sa_axes(3, :), sa_axes(4, :));
+[g41, g42, g43, g44] = gradient(g4, sa_axes(1, :), sa_axes(2, :), sa_axes(3, :), sa_axes(4, :));
+
+hess = [g11(2), g12(2), g13(2), g14(2);
+        g21(2), g22(2), g23(2), g24(2);
+        g31(2), g32(2), g33(2), g34(2);
+        g41(2), g42(2), g43(2), g44(2)]
+
+inv_hess = inv(hess)
