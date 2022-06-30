@@ -27,8 +27,8 @@ ship.addRig(R3);
 ship.addRig(R4);
 calc_scale();
 
-data_dir  = 'data\measured_data\awa_pm_45\cT_4D.mat';
-diary 'data\measured_data\awa_pm_45\cT_4D_diary.txt'
+data_dir  = 'data\measured_data\awa_pm_45\cT_4D_test.mat';
+diary 'data\measured_data\awa_pm_45\cT_4D_diary_test.txt'
 
 % 4-Core multiprocessing
 p = gcp('nocreate'); % If no pool, do not create new one.
@@ -43,9 +43,10 @@ fun = @(delta_1, delta_2, delta_3, delta_4, localShip, task_id) getfield(calc_ob
 % ------------------------------------------------------------------------
 if isfile(data_dir)
     load(data_dir);
-    L_awa = size(data.AWA, 2);
+    cT             = data.cT;
+    L_awa          = size(data.AWA, 2);
     L_sa           = size(data.sheeting_angle, 2);
-    AWA = data.AWA;
+    AWA            = data.AWA;
     sheeting_angle = data.sheeting_angle;
 end
 
@@ -56,10 +57,10 @@ if ~isfile(data_dir) || data.last_idxs.i == 0
     % Constrain search space to the optima neighborhood
     optima_data = load('data\optima_calc\4D_optima.mat');
     
-    AWA = linspace(deg2rad(15), deg2rad(80), 30); % (approx) res=2º (30)
+    AWA = linspace(deg2rad(15), deg2rad(80), 3);%30); % (approx) res=2º (30)
     L_awa = size(AWA, 2);
     
-    sheeting_angle = zeros(4, 10, L_awa); % res=2º (10)
+    sheeting_angle = zeros(4, 2, L_awa); %10, L_awa); % res=2º (10)
     L_sa           = size(sheeting_angle, 2);
     
     for i = 1:length(AWA)
@@ -111,7 +112,7 @@ for i = data.last_idxs.i+1:L_awa
     data.last_idxs.i = i;
     save(data_dir, 'data');
     
-    if any(data.last_idxs.i == [10, 20])
+    if any(data.last_idxs.i == 2) %[10, 20])
         break;
     end
 end
