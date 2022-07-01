@@ -1,6 +1,6 @@
 %---
 % Real-data implementation of ESC controller.
-% [Interpolated criterion - Fast computations for 1D scenario]
+% [Interpolated criterion - Fast computations for 4D scenario]
 % Gradient- and Newton-based extremum seeking controller for time-variant AWA
 % J(\theta) = cT(sheeting_angle)
 %---
@@ -98,7 +98,7 @@ scale    = calc_scale();
 
 % Method
 % 'GB' for Gradient based | 'NB' for Newton based
-ES_method = 'GB';
+ES_method = 'NB';
 % 1 to save figures and diary or 0 to plot figures and print diary
 save = 0;
 
@@ -152,8 +152,19 @@ switch data_source
         disp('Error: Select valid data source.\n')
 end
 
-% [WIP] Develop 4D Median Filter?
 V = data.cT;
+
+for i = 1:length(data.AWA)
+    % Run median filter on data
+    Vi      = squeeze(V(i, :, :, :, :));
+    Vi_med  = medfilt4(squeeze(V(idx, :, :, :, :)));
+    Vi_diff = abs(cT_med - cT);
+    
+    Vi(cT_diff > 0.05) = cT_med(cT_diff > 0.05);
+    
+    V(i, :, :, :) = Vi;
+end
+
 
 % Filtering cT - {'RAW', 'EMA', 'LPF'}
 cT_filter = 'EMA';
@@ -193,7 +204,7 @@ if strcmp(ES_method, 'GB')
                      -0.0523   -0.0148   -0.0890   -0.2352];
     end
     
-    K = f * delta * 5 * (-ric_0); % gain (>0 since extremum is maximum)    
+    K = f * delta * 2 * (-ric_0); % gain (>0 since extremum is maximum)    
     
     % Criterion
     Jgb = @(sheeting_angle, ship) (getfield(calc_objective_mod(sheeting_angle, ship), 'cT'));
@@ -212,19 +223,19 @@ if strcmp(ES_method, 'NB')
     f             = 0.01; % tuning param: constant coeff
     delta         = 0.1;  % tuning param: constant coeff
 
-    f_dither      = [11*f; 13.333*f; 16*f; 20*f]; % dither freq (foremost = last array element)
+    f_dither      = [5.45*f; 12.72*f; 16.36*f; 20*f]; % dither freq (foremost = last array element)
     A             = deg2rad(2) * ones(4, 1); % dither amplitude
     fc_hp         = 3*f; % HPF cutoff freq
     fc_lp         = 5*f; % LPF cutoff freq
     lp_bool       = false; % Use LPF
-    K             = f * delta * 5 * eye(4); % gain (>0 since extremum is maximum)
+    K             = f * delta * 2 * eye(4); % gain (>0 since extremum is maximum)
 
     switch data_source
         case 'tacking'
             wric  = 2 * pi * (0.1 * f * delta); % ricatti filter parameter
             ric_0 = eye(-72); % TBD
         case 'awa_100'
-            wric  = 2 * pi * (0.1 * f * delta); % ricatti filter parameter 
+            wric  = 2 * pi * (0.01 * f * delta); % ricatti filter parameter 
             ric_0 = [-0.4615   -0.1038   -0.0934   -0.0523;
                      -0.1038   -0.6161   -0.0336   -0.0148;
                      -0.0934   -0.0336   -0.3987   -0.0890;
@@ -406,7 +417,7 @@ if strcmp(ES_method, 'NB')
             cT_1 = squeeze(cT_interp(1, :, :, :, :));
             cT_2 = squeeze(cT_interp(2, :, :, :, :));
             for i = 1:3^4
-                cT_interp2(i) = interp1(data.AWA(neighbors), [cT_1(i), cT_2(i)], AWA);
+                cT_interp2(i) = interp1(data.AWA(neighbors), [cT_1(i), cT_2(i)], AWA(k));
             end
         else
             cT_interp2 = cT_interp;
@@ -424,7 +435,7 @@ if strcmp(ES_method, 'NB')
                                 g31(2), g32(2), g33(2), g34(2);
                                 g41(2), g42(2), g43(2), g44(2)];
                     
-        inv_hess(:, :, k) = inv(hess);
+        inv_hess(:, :, k) = inv(hess(:, :, k));
     end
 
     %%%%
@@ -513,31 +524,30 @@ if strcmp(ES_method, 'NB')
     end
     fig_cnt = fig_cnt + 1;
    
-
     % Hessian Inverse estimate
     figure(fig_cnt); clf(fig_cnt); hold on;
     sgtitle('NB-ESC | Hessian Inverse Estimate [Averaged] (Diag)')
     
     subplot(4, 1, 1); hold on;
-    plot(0:dt:T, movmean(squeeze(cT_hessian_inv(1,1,:)), npoints))
+    plot(0:dt:T, movmean(squeeze(cT_hessian_inv(1, 1, 2:end)), npoints))
     % Uncomment line below to plot reference
     plot(0:dt:T, squeeze(hess(1,1,:)), 'r--')
     xlabel('t (s)'), ylabel('$\Gamma_{1, 1}$', 'Interpreter', 'Latex')
     
     subplot(4, 1, 2); hold on;
-    plot(0:dt:T, movmean(squeeze(cT_hessian_inv(2, 2,:)), npoints))
+    plot(0:dt:T, movmean(squeeze(cT_hessian_inv(2, 2, 2:end)), npoints))
     % Uncomment line below to plot reference
     plot(0:dt:T, squeeze(inv_hess(2, 2,:)), 'r--')
     xlabel('t (s)'), ylabel('$\Gamma_{2, 2}$', 'Interpreter', 'Latex')
     
     subplot(4, 1, 3); hold on;
-    plot(0:dt:T, movmean(squeeze(cT_hessian_inv(3, 3,:)), npoints))
+    plot(0:dt:T, movmean(squeeze(cT_hessian_inv(3, 3, 2:end)), npoints))
     % Uncomment line below to plot reference
     plot(0:dt:T, squeeze(inv_hess(3, 3, :)), 'r--')
     xlabel('t (s)'), ylabel('$\Gamma_{3, 3}$', 'Interpreter', 'Latex')
 
     subplot(4, 1, 4); hold on;
-    plot(0:dt:T, movmean(squeeze(cT_hessian_inv(4, 4,:)), npoints))
+    plot(0:dt:T, movmean(squeeze(cT_hessian_inv(4, 4, 2:end)), npoints))
     % Uncomment line below to plot reference
     plot(0:dt:T, squeeze(inv_hess(4, 4, :)), 'r--')
     xlabel('t (s)'), ylabel('$\Gamma{H}_{4, 4}$', 'Interpreter', 'Latex')
@@ -552,37 +562,37 @@ if strcmp(ES_method, 'NB')
     sgtitle('NB-ESC | Hessian Inverse Estimate [Averaged] (Cross)')
     
     subplot(3, 2, 1); hold on;
-    plot(0:dt:T, movmean(squeeze(cT_hessian_inv(2, 1,:)), npoints))
+    plot(0:dt:T, movmean(squeeze(cT_hessian_inv(2, 1, 2:end)), npoints))
     % Uncomment line below to plot reference
     plot(0:dt:T, squeeze(inv_hess(2, 1, :)), 'r--')
     xlabel('t (s)'), ylabel('$\Gamma_{2, 1}$', 'Interpreter', 'Latex')
     
     subplot(3, 2, 2); hold on;
-    plot(0:dt:T, movmean(squeeze(cT_hessian_inv(3, 1,:)), npoints))
+    plot(0:dt:T, movmean(squeeze(cT_hessian_inv(3, 1, 2:end)), npoints))
     % Uncomment line below to plot reference
     plot(0:dt:T, squeeze(inv_hess(3, 1,:)), 'r--')
     xlabel('t (s)'), ylabel('$\Gamma_{3, 1}$', 'Interpreter', 'Latex')
     
     subplot(3, 2, 3); hold on;
-    plot(0:dt:T, movmean(squeeze(cT_hessian_inv(3, 2, :)), npoints))
+    plot(0:dt:T, movmean(squeeze(cT_hessian_inv(3, 2, 2:end)), npoints))
     % Uncomment line below to plot reference
     plot(0:dt:T, squeeze(inv_hess(3, 2, :)), 'r--')
     xlabel('t (s)'), ylabel('$\Gamma_{3, 2}$', 'Interpreter', 'Latex')
     
     subplot(3, 2, 4); hold on;
-    plot(0:dt:T, movmean(squeeze(cT_hessian_inv(4, 1, :)), npoints))
+    plot(0:dt:T, movmean(squeeze(cT_hessian_inv(4, 1, 2:end)), npoints))
     % Uncomment line below to plot reference
     plot(0:dt:T, squeeze(inv_hess(4, 1, :)), 'r--')
     xlabel('t (s)'), ylabel('$\Gamma_{4, 1}$', 'Interpreter', 'Latex')
     
     subplot(3, 2, 5); hold on;
-    plot(0:dt:T, movmean(squeeze(cT_hessian_inv(4, 2, :)), npoints))
+    plot(0:dt:T, movmean(squeeze(cT_hessian_inv(4, 2, 2:end)), npoints))
     % Uncomment line below to plot reference
     plot(0:dt:T, squeeze(inv_hess(4, 2, :)), 'r--')
     xlabel('t (s)'), ylabel('$\Gamma_{4, 2}$', 'Interpreter', 'Latex')
     
     subplot(3, 2, 6); hold on;
-    plot(0:dt:T, movmean(squeeze(cT_hessian_inv(4, 3, :)), npoints))
+    plot(0:dt:T, movmean(squeeze(cT_hessian_inv(4, 3, 2:end)), npoints))
     % Uncomment line below to plot reference
     plot(0:dt:T, squeeze(inv_hess(4, 3, :)), 'r--')
     xlabel('t (s)'), ylabel('$\Gamma_{4, 3}$', 'Interpreter', 'Latex')
