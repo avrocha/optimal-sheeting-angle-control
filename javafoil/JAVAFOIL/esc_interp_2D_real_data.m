@@ -1,6 +1,6 @@
 %---
 % Real-data implementation of ESC controller.
-% [Interpolated criterion - Fast computations for 1D scenario]
+% [Interpolated criterion - Fast computations for 2D scenario]
 % Gradient- and Newton-based extremum seeking controller for time-variant AWA
 % J(\theta) = cT(sheeting_angle)
 %---
