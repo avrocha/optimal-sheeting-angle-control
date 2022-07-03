@@ -153,3 +153,78 @@ A = [A1; A2; A3; A4; A5];
 b = [b1; b2; b3; b4; b5];
 
 x = intlinprog(f, intcon, A, b, [], [], lb, ub)
+
+%% NB-ESC - Loop for detection of constraint violation
+clear
+
+max_f = 0.2;
+min_T = 1./max_f;
+
+alpha = [7, 3, 2, 1];
+f = 1./alpha * max_f;
+lcm(alpha(1), lcm(alpha(2), lcm(alpha(3), alpha(4))))
+T_common = min_T * lcm(alpha(1), lcm(alpha(2), lcm(alpha(3), alpha(4))));
+
+% Constraint detection - Choose constraint according to AWA configuration
+% (1) w1 < w2 < w3 < w4
+if f(1) >= f(2) || f(2) >= f(3) || f(3) >= f(4)
+    disp('Constraint 1 violated')
+    return
+end
+
+% % (1) f1 > f2 > f3 > f4
+% if f1(1) <= f(2) || f(2) <= f(3) || f(4) <= f(3)
+%     disp('Constraint 1 violated')
+% end
+
+% (2) fi + fj ~= fk, forall i j k
+for i = 1:4
+    for j = 1:4
+        for k = 1:4
+            if f(i) + f(j) == f(k)
+                disp('Constraint 2 violated')
+                return
+            end
+        end
+    end
+end
+   
+% (3) 2fi ~= fj + fk, forall i j k
+for i = 1:4
+    for j = 1:4
+        for k = 1:4
+            if 2 * f(i) == f(j) + f(k)
+                disp('Constraint 3 violated')
+                return
+            end
+        end
+    end
+end
+
+
+% (4) 2fi + fj ~= fk, forall i j k
+for i = 1:4
+    for j = 1:4
+        for k = 1:4
+            if 2 * f(i) + f(j) == f(k)
+                disp('Constraint 4 violated')
+                return
+            end
+        end
+    end
+end
+
+% (5) fi ~= fj + fk +- fl, forall i j k
+for i = 1:4
+    for j = 1:4
+        for k = 1:4
+            if f(i) == f(j) + f(k) + f(j) || f(i) == f(j) + f(k) - f(j)
+                disp('Constraint 4 violated')
+                return
+            end
+        end
+    end
+end
+
+
+
