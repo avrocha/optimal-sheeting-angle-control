@@ -157,12 +157,12 @@ V = data.cT;
 for i = 1:length(data.AWA)
     % Run median filter on data
     Vi      = squeeze(V(i, :, :, :, :));
-    Vi_med  = medfilt4(squeeze(V(idx, :, :, :, :)));
-    Vi_diff = abs(cT_med - cT);
+    Vi_med  = medfilt4(squeeze(V(i, :, :, :, :)));
+    Vi_diff = abs(Vi_med - Vi);
     
-    Vi(cT_diff > 0.05) = cT_med(cT_diff > 0.05);
+    Vi(Vi_diff > 0.05) = Vi_med(Vi_diff > 0.05);
     
-    V(i, :, :, :) = Vi;
+    V(i, :, :, :, :) = Vi;
 end
 
 
@@ -222,8 +222,7 @@ if strcmp(ES_method, 'NB')
     % 4D set of parameters
     f             = 0.01; % tuning param: constant coeff
     delta         = 0.1;  % tuning param: constant coeff
-
-    f_dither      = [5.45*f; 12.72*f; 16.36*f; 20*f]; % dither freq (foremost = last array element)
+    f_dither      = [8*f; 14*f; 18*f; 20*f]; % dither freq (foremost = last array element)
     A             = deg2rad(2) * ones(4, 1); % dither amplitude
     fc_hp         = 3*f; % HPF cutoff freq
     fc_lp         = 5*f; % LPF cutoff freq
@@ -235,7 +234,7 @@ if strcmp(ES_method, 'NB')
             wric  = 2 * pi * (0.1 * f * delta); % ricatti filter parameter
             ric_0 = eye(-72); % TBD
         case 'awa_100'
-            wric  = 2 * pi * (0.01 * f * delta); % ricatti filter parameter 
+            wric  = 2 * pi * (0.1 * f * delta); % ricatti filter parameter 
             ric_0 = [-0.4615   -0.1038   -0.0934   -0.0523;
                      -0.1038   -0.6161   -0.0336   -0.0148;
                      -0.0934   -0.0336   -0.3987   -0.0890;
