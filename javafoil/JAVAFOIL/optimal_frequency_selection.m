@@ -46,6 +46,7 @@ A2 = [A2, -M*eye(nc);
 b2 = [-tol * ones(nc,1);
       (-tol + M) * ones(nc,1)];
 
+% Total inequality constraints matrix
 A = [A1; A2];
 b = [b1; b2];
 
@@ -134,7 +135,7 @@ A4 = [A4, zeros(n4, n2+n3), -M*eye(n4), zeros(n4, nc-n2-n3-n4);
 b4 = [-tol * ones(n4, 1);
       (-tol + M) * ones(n4, 1)];
   
-% % xi ~= xj + xk +- xl, forall i,j,k distinct
+% xi ~= xj + xk +- xl, forall i,j,k distinct
 A5 = [-1 -1 -1 1;
       1 -1 1 -1;
       1 -1 -1 1];
@@ -147,7 +148,7 @@ A5 = [A5, zeros(n5, n2+n3+n4), -M*eye(n5);
 b5 = [-tol * ones(n5, 1);
       (-tol + M) * ones(n5, 1)];
 
-% As in paper, constraint 2 is relaxed since they have the same phase
+% Total inequality constraints matrix
 A = [A1; A2; A3; A4; A5];
 b = [b1; b2; b3; b4; b5];
 
