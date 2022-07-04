@@ -89,25 +89,28 @@ scale    = calc_scale();
 
 % Method
 % 'GB' for Gradient based | 'NB' for Newton based
-ES_method = 'NB';
+ES_method = 'GB';
 % 1 to save figures and diary or 0 to plot figures and print diary
-save = 0;
+save = 1;
 
 % Simulation
 fs = 10; 
 dt = 1/fs;
-T  = ceil(time(end));
+% T  = ceil(time(end));
+T  = 600;
 N  = length(0:dt:T);
 
 % Upsample AWA with consecutive equal samples - for loop to avoid non-int
 % upsampling factors
-AWA = zeros(1, N);
-t_sim = (0:dt:T)';
-j = 0;
-for i = 1:N
-    if t_sim(i) >= time(j+1); j = j + 1; end
-    AWA(i) = awa(j);
-end
+% AWA = zeros(1, N);
+% t_sim = (0:dt:T)';
+% j = 0;
+% for i = 1:N
+%     if t_sim(i) >= time(j+1); j = j + 1; end
+%     AWA(i) = awa(j);
+% end
+
+AWA = deg2rad(100) * ones(1, N);
 
 % Feedforward (Piecewise constant)
 switch data_source
@@ -144,7 +147,7 @@ X            = cell(2, 1);
 V            = data.cT;
 
 % Filtering cT - {'RAW', 'EMA', 'LPF'}
-cT_filter = 'EMA';
+cT_filter = 'RAW';
 switch cT_filter
     case 'EMA' % Param = EMA 'speed'
         switch data_source
@@ -156,6 +159,9 @@ switch cT_filter
 
     case 'LPF' % Param = cut-off frequency for LPF
         cT_filter_param = 0.5; 
+    
+    case 'RAW'
+        cT_filter_param = 1;
 end
 
 
@@ -180,7 +186,7 @@ if strcmp(ES_method, 'GB')
             ric_0 = -0.014203;
     end
     
-    K = f * delta * 50 * (-ric_0); % gain (>0 since extremum is maximum)
+    K = f * delta * 10 * (-ric_0); % gain (>0 since extremum is maximum)
 
     % Criterion
     Jgb = @(sheeting_angle, ship) (getfield(calc_objective_mod(sheeting_angle, ship), 'cT'));
@@ -205,7 +211,7 @@ if strcmp(ES_method, 'NB')
     fc_hp         = 3*f; % HPF cutoff freq
     fc_lp         = 5*f; % LPF cutoff freq
     lp_bool       = false; % Use LPF
-    K             = f * delta * 50; % gain (>0 since extremum is maximum)
+    K             = f * delta * 10; % gain (>0 since extremum is maximum)
     
     % Data-specific tuning
     switch data_source
@@ -214,7 +220,7 @@ if strcmp(ES_method, 'NB')
             wric  = 2 * pi * (0.01 * f * delta); % ricatti filter parameter
         case 'awa_100'
             ric_0 = -0.014203;
-            wric  = 2 * pi * (0.1 * f * delta); % ricatti filter parameter 
+            wric  = 2 * pi * (10 * f * delta); % ricatti filter parameter 
     end
 
     % Criterion
@@ -229,7 +235,8 @@ if strcmp(ES_method, 'NB')
 end
 
 %% Plots 
-dir = ['plots\7m_data_tacking\real\', ES_method,'_ESC\', cT_filter,'_cT\f_0_20\'];
+% dir = ['plots\7m_data_tacking\real\', ES_method,'_ESC\', cT_filter,'_cT\f_0_20\'];
+dir = ['plots\final\AWA_100_sim\1D\', ES_method,'_ESC\'];
 
 % Check directory
 if ~exist(dir, 'dir')
@@ -272,7 +279,8 @@ end
 figure(fig_cnt); clf(fig_cnt); hold on;
 title(strcat(ES_method, '-ESC | Thrust Coeff'))
 plot(0:dt:T, cT, '-', 'Color', [0 0.3 0.9], 'Linewidth', 1.5)
-plot(0:dt:T, cT_hat, '--', 'Color', [0.1 0.8 0.8], 'Linewidth', 1.5)
+% Uncomment line below to plot filtered cT
+% plot(0:dt:T, cT_hat, '--', 'Color', [0.1 0.8 0.8], 'Linewidth', 1.5)
 % Uncomment line below to include reference lines
 plot(0:dt:T, cT_ref, '--', 'Color', [0.9 0.1 0], 'Linewidth', 1)
 xlabel('t (s)'), ylabel('$cT$', 'Interpreter', 'Latex')
@@ -374,7 +382,7 @@ if strcmp(ES_method, 'NB')
     fig_cnt = fig_cnt + 1;
    
     figure(fig_cnt); clf(fig_cnt); hold on;
-    sgtitle('NB-ESC | Hessian Inverse Estimate [Averaged]')
+    title('NB-ESC | Hessian Inverse Estimate [Averaged]')
     plot(0:dt:T, movmean(squeeze(cT_hessian_inv(2:end)), npoints))
     % Uncomment line below to plot reference
     plot(0:dt:T, squeeze(inv_hess(1, 1, :)), 'r--')
@@ -432,10 +440,7 @@ MSE_sheet_angle   = mean((sheet_angle(:, 2:end) - sheet_angle_ref).^2, 2);
 MSE_cT            = mean((cT - cT_ref).^2);
 
 if strcmp(ES_method, 'NB')
-    MSE_cancel_factor    = zeros(1, 3);
-    MSE_cancel_factor(1) = mean((movmean(squeeze(cT_hessian_inv(1,1, 2:end)), npoints)' - 1).^2, 2);
-    MSE_cancel_factor(2) = mean((movmean(squeeze(cT_hessian_inv(2,2, 2:end)), npoints)' - 1).^2, 2);
-    MSE_cancel_factor(3) = mean((movmean(squeeze(cT_hessian_inv(2,1, 2:end)), npoints)' - 1).^2, 2);
+    MSE_cancel_factor = mean((movmean(squeeze(cT_hessian_inv(1, 1, 2:end)), npoints)' - 1).^2, 2);
 end
 
 % Criterion

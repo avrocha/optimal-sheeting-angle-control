@@ -100,27 +100,23 @@ scale    = calc_scale();
 % 'GB' for Gradient based | 'NB' for Newton based
 ES_method = 'NB';
 % 1 to save figures and diary or 0 to plot figures and print diary
-save = 0;
+save = 1;
 
 % Simulation
 fs = 10; 
 dt = 1/fs;
-% T  = ceil(time(end));
-T  = 5000;
+T  = ceil(time(end));
 N  = length(0:dt:T);
 
 % Upsample AWA with consecutive equal samples - for loop to avoid non-int
 % upsampling factors
-% AWA = zeros(1, N);
-% t_sim = (0:dt:T)';
-% j = 0;
-% for i = 1:N
-%     if t_sim(i) >= time(j+1); j = j + 1; end
-%     AWA(i) = awa(j);
-% end
-
-% TEMP / TEST
-AWA = deg2rad(100) * ones(1, N);
+AWA = zeros(1, N);
+t_sim = (0:dt:T)';
+j = 0;
+for i = 1:N
+    if t_sim(i) >= time(j+1); j = j + 1; end
+    AWA(i) = awa(j);
+end
 
 % Feedforward (Piecewise constant)
 switch data_source
@@ -136,7 +132,7 @@ switch data_source
         FF(:, idx_3:end)   = deg2rad(25);     
 
     case 'awa_100'
-        FF = deg2rad(-80) * ones(4, N);
+        FF = deg2rad(-85) * ones(4, N);
 end
 
 sheet_angle_0 = FF(:, 1);
@@ -165,20 +161,24 @@ for i = 1:length(data.AWA)
     V(i, :, :, :, :) = Vi;
 end
 
-
 % Filtering cT - {'RAW', 'EMA', 'LPF'}
 cT_filter = 'EMA';
 switch cT_filter
     case 'EMA' % Param = EMA 'speed'
         switch data_source
             case 'tacking'
-                cT_filter_param = 0.2;   
+                cT_filter_param = 0.1;   
             case 'awa_100'
                 cT_filter_param = 0.1;
+                
+            fprintf("cT filter EMA cut-off frequency = %f Hz\n", -log(1-cT_filter_param)*fs)
         end
 
     case 'LPF' % Param = cut-off frequency for LPF
         cT_filter_param = 0.5; 
+    
+    case 'RAW'
+        cT_filter_param = 1;
 end
 
 if strcmp(ES_method, 'GB')
@@ -188,7 +188,7 @@ if strcmp(ES_method, 'GB')
     f             = 0.01; % tuning param: constant coeff
     delta         = 0.1;  % tuning param: constant coeff
 
-    f_dither      = [11*f; 13.333*f; 16*f; 20*f]; % dither freq (foremost = last array element)
+    f_dither      = [8*f; 14*f; 18*f; 20*f]; % dither freq (foremost = last array element)
     A             = deg2rad(2)*ones(4, 1); % dither amplitude
     fc_hp         = 3*f; % HPF cutoff freq
     fc_lp         = 5*f; % LPF cutoff freq
@@ -234,13 +234,13 @@ if strcmp(ES_method, 'NB')
             wric  = 2 * pi * (0.1 * f * delta); % ricatti filter parameter
             ric_0 = eye(-72); % TBD
         case 'awa_100'
-            wric  = 2 * pi * (0.1 * f * delta); % ricatti filter parameter 
+            wric  = 2 * pi * (0.01 * f * delta); % ricatti filter parameter 
             ric_0 = [-0.4615   -0.1038   -0.0934   -0.0523;
                      -0.1038   -0.6161   -0.0336   -0.0148;
                      -0.0934   -0.0336   -0.3987   -0.0890;
                      -0.0523   -0.0148   -0.0890   -0.2352];
     end
-
+        
     % Criterion 
     Jnb = @(sheeting_angle, ship)(getfield(calc_objective_mod(sheeting_angle, ship, 2), 'cT'));    
     % Interpolated criterion - high resolution -> linear interpolation
@@ -253,7 +253,9 @@ if strcmp(ES_method, 'NB')
 end
 
 %% Plots 
-dir = ['plots\7m_data_', data_source, '\4D\', ES_method,'_ESC\'];
+% dir = ['plots\7m_data_', data_source, '\4D\', ES_method,'_ESC\'];
+dir = ['plots\final\AWA_100\4D\', ES_method,'_ESC\'];
+% dir = ['plots\final\AWA_100_sim\4D\', ES_method,'_ESC\'];
 
 % Check directory
 if ~exist(dir, 'dir')
@@ -268,7 +270,7 @@ sa_ref = zeros(4, length(data.AWA));
 cT_ref = zeros(1, length(data.AWA));
 
 for i = 1:length(data.AWA)
-    [cT_ref(i), I] = max(squeeze(V(i, :, :, :, :)), [], 'all');    
+    [cT_ref(i), I] = max(squeeze(V(i, :, :, :, :)), [], 'all', 'linear');    
     idxs           = find(squeeze(V(i, :, :, :, :)) == cT_ref(i));
 
     [idx1, idx2, idx3, idx4] = ind2sub(size(V, 2:5), I);
@@ -369,80 +371,78 @@ if strcmp(ES_method, 'NB')
     % Hessian reference 
     hess     = zeros(4, 4, N);
     inv_hess = zeros(4, 4, N);
-    %%%%
-    for k = 1:N
-        % Get AWA neighbors
-        [~, idx_neigh] = min(abs(data.AWA - AWA(k)));
-        if data.AWA(idx_neigh) > AWA(k)
-            neighbors = [idx_neigh - 1, idx_neigh];
-        elseif data.AWA(idx_neigh) < AWA(k)
-            neighbors = [idx_neigh, idx_neigh + 1];
-        else
-            neighbors = idx_neigh;
-        end
-        
-        % Interpolate cT neighborhood in SA
-        cT_interp = zeros(length(neighbors), 3, 3, 3, 3);
-        sa_axes   = zeros(4, 3);
-        dsa       = data.sheeting_angle(1, 2, 1) - data.sheeting_angle(1, 1, 1); % Common resolution to the 4 axes
-        i = 1;
-        for idx = neighbors
-            sa_axes(1, :) = max(sheet_angle_0(1)-dsa, data.sheeting_angle(1, 1, idx)):dsa:min(sheet_angle_0(1)+dsa, data.sheeting_angle(1, end, idx));
-            sa_axes(2, :) = max(sheet_angle_0(2)-dsa, data.sheeting_angle(2, 1, idx)):dsa:min(sheet_angle_0(2)+dsa, data.sheeting_angle(2, end, idx));
-            sa_axes(3, :) = max(sheet_angle_0(3)-dsa, data.sheeting_angle(3, 1, idx)):dsa:min(sheet_angle_0(3)+dsa, data.sheeting_angle(3, end, idx));
-            sa_axes(4, :) = max(sheet_angle_0(4)-dsa, data.sheeting_angle(4, 1, idx)):dsa:min(sheet_angle_0(4)+dsa, data.sheeting_angle(4, end, idx));
-            
-            [X1, X2, X3, X4]     = ndgrid(squeeze(data.sheeting_angle(1, :, idx)), squeeze(data.sheeting_angle(2, :, idx)), ...
-                                    squeeze(data.sheeting_angle(3, :, idx)), squeeze(data.sheeting_angle(4, :, idx)));
-            [Xq1, Xq2, Xq3, Xq4] = ndgrid(sa_axes(1, :), sa_axes(2, :), sa_axes(3, :), sa_axes(4, :));
-        
-            interp_res = squeeze(interpn(X1, X2, X3, X4, squeeze(data.cT(idx, :, :, :, :)), ...
-                                    Xq1, Xq2, Xq3, Xq4)); 
-                
-            if any(size(interp_res) < 3)
-                disp('Hess Ref: Boundary problems in interpolation.')
-                cT_interp(i, :, :, :, :) = NaN(3, 3, 3, 3);
-            else
-                cT_interp(i, :, :, :, :) = interp_res;
-            end
-        
-            i = i + 1;
-        
-        end
-        
-        % Interpolate neighborhood in AWA
-        cT_interp2 = zeros(3, 3, 3, 3);
-        if size(cT_interp, 1) > 1
-            cT_1 = squeeze(cT_interp(1, :, :, :, :));
-            cT_2 = squeeze(cT_interp(2, :, :, :, :));
-            for i = 1:3^4
-                cT_interp2(i) = interp1(data.AWA(neighbors), [cT_1(i), cT_2(i)], AWA(k));
-            end
-        else
-            cT_interp2 = cT_interp;
-        end
-        
-        % Get Hessian
-        [g1, g2, g3, g4]     = gradient(cT_interp2, sa_axes(1, :), sa_axes(2, :), sa_axes(3, :), sa_axes(4, :));
-        [g11, g12, g13, g14] = gradient(g1, sa_axes(1, :), sa_axes(2, :), sa_axes(3, :), sa_axes(4, :));
-        [g21, g22, g23, g24] = gradient(g2, sa_axes(1, :), sa_axes(2, :), sa_axes(3, :), sa_axes(4, :));
-        [g31, g32, g33, g34] = gradient(g3, sa_axes(1, :), sa_axes(2, :), sa_axes(3, :), sa_axes(4, :));
-        [g41, g42, g43, g44] = gradient(g4, sa_axes(1, :), sa_axes(2, :), sa_axes(3, :), sa_axes(4, :));
-        
-        hess(:, :, k)     = [g11(2), g12(2), g13(2), g14(2);
-                                g21(2), g22(2), g23(2), g24(2);
-                                g31(2), g32(2), g33(2), g34(2);
-                                g41(2), g42(2), g43(2), g44(2)];
-                    
-        inv_hess(:, :, k) = inv(hess(:, :, k));
-    end
+%     %%%%
+%     for k = 1:N
+%         % Get AWA neighbors
+%         [~, idx_neigh] = min(abs(data.AWA - AWA(k)));
+%         if data.AWA(idx_neigh) > AWA(k)
+%             neighbors = [idx_neigh - 1, idx_neigh];
+%         elseif data.AWA(idx_neigh) < AWA(k)
+%             neighbors = [idx_neigh, idx_neigh + 1];
+%         else
+%             neighbors = idx_neigh;
+%         end
+%         
+%         % Interpolate cT neighborhood in SA
+%         cT_interp = zeros(length(neighbors), 3, 3, 3, 3);
+%         sa_axes   = zeros(4, 3);
+%         dsa       = data.sheeting_angle(1, 2, 1) - data.sheeting_angle(1, 1, 1); % Common resolution to the 4 axes
+%         i = 1;
+%         for idx = neighbors
+%             sa_axes(1, :) = max(sheet_angle_0(1)-dsa, data.sheeting_angle(1, 1, idx)):dsa:min(sheet_angle_0(1)+dsa, data.sheeting_angle(1, end, idx));
+%             sa_axes(2, :) = max(sheet_angle_0(2)-dsa, data.sheeting_angle(2, 1, idx)):dsa:min(sheet_angle_0(2)+dsa, data.sheeting_angle(2, end, idx));
+%             sa_axes(3, :) = max(sheet_angle_0(3)-dsa, data.sheeting_angle(3, 1, idx)):dsa:min(sheet_angle_0(3)+dsa, data.sheeting_angle(3, end, idx));
+%             sa_axes(4, :) = max(sheet_angle_0(4)-dsa, data.sheeting_angle(4, 1, idx)):dsa:min(sheet_angle_0(4)+dsa, data.sheeting_angle(4, end, idx));
+%             
+%             [X1, X2, X3, X4]     = ndgrid(squeeze(data.sheeting_angle(1, :, idx)), squeeze(data.sheeting_angle(2, :, idx)), ...
+%                                     squeeze(data.sheeting_angle(3, :, idx)), squeeze(data.sheeting_angle(4, :, idx)));
+%             [Xq1, Xq2, Xq3, Xq4] = ndgrid(sa_axes(1, :), sa_axes(2, :), sa_axes(3, :), sa_axes(4, :));
+%         
+%             interp_res = squeeze(interpn(X1, X2, X3, X4, squeeze(data.cT(idx, :, :, :, :)), ...
+%                                     Xq1, Xq2, Xq3, Xq4)); 
+%                 
+%             if any(size(interp_res) < 3)
+%                 disp('Hess Ref: Boundary problems in interpolation.')
+%                 cT_interp(i, :, :, :, :) = NaN(3, 3, 3, 3);
+%             else
+%                 cT_interp(i, :, :, :, :) = interp_res;
+%             end
+%         
+%             i = i + 1;
+%         
+%         end
+%         
+%         % Interpolate neighborhood in AWA
+%         cT_interp2 = zeros(3, 3, 3, 3);
+%         if size(cT_interp, 1) > 1
+%             cT_1 = squeeze(cT_interp(1, :, :, :, :));
+%             cT_2 = squeeze(cT_interp(2, :, :, :, :));
+%             for i = 1:3^4
+%                 cT_interp2(i) = interp1(data.AWA(neighbors), [cT_1(i), cT_2(i)], AWA(k));
+%             end
+%         else
+%             cT_interp2 = cT_interp;
+%         end
+%         
+%         % Get Hessian
+%         [g1, g2, g3, g4]     = gradient(cT_interp2, sa_axes(1, :), sa_axes(2, :), sa_axes(3, :), sa_axes(4, :));
+%         [g11, g12, g13, g14] = gradient(g1, sa_axes(1, :), sa_axes(2, :), sa_axes(3, :), sa_axes(4, :));
+%         [g21, g22, g23, g24] = gradient(g2, sa_axes(1, :), sa_axes(2, :), sa_axes(3, :), sa_axes(4, :));
+%         [g31, g32, g33, g34] = gradient(g3, sa_axes(1, :), sa_axes(2, :), sa_axes(3, :), sa_axes(4, :));
+%         [g41, g42, g43, g44] = gradient(g4, sa_axes(1, :), sa_axes(2, :), sa_axes(3, :), sa_axes(4, :));
+%         
+%         hess(:, :, k)     = [g11(2), g12(2), g13(2), g14(2);
+%                                 g21(2), g22(2), g23(2), g24(2);
+%                                 g31(2), g32(2), g33(2), g34(2);
+%                                 g41(2), g42(2), g43(2), g44(2)];
+%                     
+%         inv_hess(:, :, k) = inv(hess(:, :, k));
+%     end
 
-    %%%%
-
-    % Period = LCM(1/f); Nº of points = Period * Fs
-    p_dither = int32(1./f_dither * 100);
-    P        = lcm(p_dither(1), lcm(p_dither(2), lcm(p_dither(3), p_dither(4))))/100;
-    npoints  = P * fs;
+    coeffs_f = int16(f_dither ./ f);    
+    F_common = gcd(coeffs_f(1), gcd(coeffs_f(2), gcd(coeffs_f(3), coeffs_f(4))));
+    T_common = 1 / (double(F_common)*f);
+    npoints  = T_common * fs;
     
     % Hessian Estimate
     figure(fig_cnt); clf(fig_cnt); hold on;
@@ -451,25 +451,25 @@ if strcmp(ES_method, 'NB')
     subplot(4, 1, 1); hold on;
     plot(0:dt:T, movmean(squeeze(cT_hessian(1,1,:)), npoints))
     % Uncomment line below to plot reference
-    plot(0:dt:T, squeeze(hess(1,1,:)), 'r--')
+%     plot(0:dt:T, squeeze(hess(1,1,:)), 'r--')
     xlabel('t (s)'), ylabel('$\hat{H}_{1, 1}$', 'Interpreter', 'Latex')
     
     subplot(4, 1, 2); hold on;
     plot(0:dt:T, movmean(squeeze(cT_hessian(2, 2,:)), npoints))
     % Uncomment line below to plot reference
-    plot(0:dt:T, squeeze(hess(2, 2,:)), 'r--')
+%     plot(0:dt:T, squeeze(hess(2, 2,:)), 'r--')
     xlabel('t (s)'), ylabel('$\hat{H}_{2, 2}$', 'Interpreter', 'Latex')
     
     subplot(4, 1, 3); hold on;
     plot(0:dt:T, movmean(squeeze(cT_hessian(3, 3,:)), npoints))
     % Uncomment line below to plot reference
-    plot(0:dt:T, squeeze(hess(3, 3, :)), 'r--')
+%     plot(0:dt:T, squeeze(hess(3, 3, :)), 'r--')
     xlabel('t (s)'), ylabel('$\hat{H}_{3, 3}$', 'Interpreter', 'Latex')
 
     subplot(4, 1, 4); hold on;
     plot(0:dt:T, movmean(squeeze(cT_hessian(4, 4,:)), npoints))
     % Uncomment line below to plot reference
-    plot(0:dt:T, squeeze(hess(4, 4, :)), 'r--')
+%     plot(0:dt:T, squeeze(hess(4, 4, :)), 'r--')
     xlabel('t (s)'), ylabel('$\hat{H}_{4, 4}$', 'Interpreter', 'Latex')
     
     if save == 1
@@ -484,37 +484,37 @@ if strcmp(ES_method, 'NB')
     subplot(3, 2, 1); hold on;
     plot(0:dt:T, movmean(squeeze(cT_hessian(2, 1,:)), npoints))
     % Uncomment line below to plot reference
-    plot(0:dt:T, squeeze(hess(2, 1, :)), 'r--')
+%     plot(0:dt:T, squeeze(hess(2, 1, :)), 'r--')
     xlabel('t (s)'), ylabel('$\hat{H}_{2, 1}$', 'Interpreter', 'Latex')
     
     subplot(3, 2, 2); hold on;
     plot(0:dt:T, movmean(squeeze(cT_hessian(3, 1,:)), npoints))
     % Uncomment line below to plot reference
-    plot(0:dt:T, squeeze(hess(3, 1,:)), 'r--')
+%     plot(0:dt:T, squeeze(hess(3, 1,:)), 'r--')
     xlabel('t (s)'), ylabel('$\hat{H}_{3, 1}$', 'Interpreter', 'Latex')
     
     subplot(3, 2, 3); hold on;
     plot(0:dt:T, movmean(squeeze(cT_hessian(3, 2, :)), npoints))
     % Uncomment line below to plot reference
-    plot(0:dt:T, squeeze(hess(3, 2, :)), 'r--')
+%     plot(0:dt:T, squeeze(hess(3, 2, :)), 'r--')
     xlabel('t (s)'), ylabel('$\hat{H}_{3, 2}$', 'Interpreter', 'Latex')
     
     subplot(3, 2, 4); hold on;
     plot(0:dt:T, movmean(squeeze(cT_hessian(4, 1, :)), npoints))
     % Uncomment line below to plot reference
-    plot(0:dt:T, squeeze(hess(4, 1, :)), 'r--')
+%     plot(0:dt:T, squeeze(hess(4, 1, :)), 'r--')
     xlabel('t (s)'), ylabel('$\hat{H}_{4, 1}$', 'Interpreter', 'Latex')
     
     subplot(3, 2, 5); hold on;
     plot(0:dt:T, movmean(squeeze(cT_hessian(4, 2, :)), npoints))
     % Uncomment line below to plot reference
-    plot(0:dt:T, squeeze(hess(4, 2, :)), 'r--')
+%     plot(0:dt:T, squeeze(hess(4, 2, :)), 'r--')
     xlabel('t (s)'), ylabel('$\hat{H}_{4, 2}$', 'Interpreter', 'Latex')
     
     subplot(3, 2, 6); hold on;
     plot(0:dt:T, movmean(squeeze(cT_hessian(4, 3, :)), npoints))
     % Uncomment line below to plot reference
-    plot(0:dt:T, squeeze(hess(4, 3, :)), 'r--')
+%     plot(0:dt:T, squeeze(hess(4, 3, :)), 'r--')
     xlabel('t (s)'), ylabel('$\hat{H}_{4, 3}$', 'Interpreter', 'Latex')
     
     if save == 1
@@ -530,25 +530,25 @@ if strcmp(ES_method, 'NB')
     subplot(4, 1, 1); hold on;
     plot(0:dt:T, movmean(squeeze(cT_hessian_inv(1, 1, 2:end)), npoints))
     % Uncomment line below to plot reference
-    plot(0:dt:T, squeeze(hess(1,1,:)), 'r--')
+%     plot(0:dt:T, squeeze(inv_hess(1,1,:)), 'r--')
     xlabel('t (s)'), ylabel('$\Gamma_{1, 1}$', 'Interpreter', 'Latex')
     
     subplot(4, 1, 2); hold on;
     plot(0:dt:T, movmean(squeeze(cT_hessian_inv(2, 2, 2:end)), npoints))
     % Uncomment line below to plot reference
-    plot(0:dt:T, squeeze(inv_hess(2, 2,:)), 'r--')
+%     plot(0:dt:T, squeeze(inv_hess(2, 2,:)), 'r--')
     xlabel('t (s)'), ylabel('$\Gamma_{2, 2}$', 'Interpreter', 'Latex')
     
     subplot(4, 1, 3); hold on;
     plot(0:dt:T, movmean(squeeze(cT_hessian_inv(3, 3, 2:end)), npoints))
     % Uncomment line below to plot reference
-    plot(0:dt:T, squeeze(inv_hess(3, 3, :)), 'r--')
+%     plot(0:dt:T, squeeze(inv_hess(3, 3, :)), 'r--')
     xlabel('t (s)'), ylabel('$\Gamma_{3, 3}$', 'Interpreter', 'Latex')
 
     subplot(4, 1, 4); hold on;
     plot(0:dt:T, movmean(squeeze(cT_hessian_inv(4, 4, 2:end)), npoints))
     % Uncomment line below to plot reference
-    plot(0:dt:T, squeeze(inv_hess(4, 4, :)), 'r--')
+%     plot(0:dt:T, squeeze(inv_hess(4, 4, :)), 'r--')
     xlabel('t (s)'), ylabel('$\Gamma{H}_{4, 4}$', 'Interpreter', 'Latex')
     
     if save == 1
@@ -563,37 +563,37 @@ if strcmp(ES_method, 'NB')
     subplot(3, 2, 1); hold on;
     plot(0:dt:T, movmean(squeeze(cT_hessian_inv(2, 1, 2:end)), npoints))
     % Uncomment line below to plot reference
-    plot(0:dt:T, squeeze(inv_hess(2, 1, :)), 'r--')
+%     plot(0:dt:T, squeeze(inv_hess(2, 1, :)), 'r--')
     xlabel('t (s)'), ylabel('$\Gamma_{2, 1}$', 'Interpreter', 'Latex')
     
     subplot(3, 2, 2); hold on;
     plot(0:dt:T, movmean(squeeze(cT_hessian_inv(3, 1, 2:end)), npoints))
     % Uncomment line below to plot reference
-    plot(0:dt:T, squeeze(inv_hess(3, 1,:)), 'r--')
+%     plot(0:dt:T, squeeze(inv_hess(3, 1,:)), 'r--')
     xlabel('t (s)'), ylabel('$\Gamma_{3, 1}$', 'Interpreter', 'Latex')
     
     subplot(3, 2, 3); hold on;
     plot(0:dt:T, movmean(squeeze(cT_hessian_inv(3, 2, 2:end)), npoints))
     % Uncomment line below to plot reference
-    plot(0:dt:T, squeeze(inv_hess(3, 2, :)), 'r--')
+%     plot(0:dt:T, squeeze(inv_hess(3, 2, :)), 'r--')
     xlabel('t (s)'), ylabel('$\Gamma_{3, 2}$', 'Interpreter', 'Latex')
     
     subplot(3, 2, 4); hold on;
     plot(0:dt:T, movmean(squeeze(cT_hessian_inv(4, 1, 2:end)), npoints))
     % Uncomment line below to plot reference
-    plot(0:dt:T, squeeze(inv_hess(4, 1, :)), 'r--')
+%     plot(0:dt:T, squeeze(inv_hess(4, 1, :)), 'r--')
     xlabel('t (s)'), ylabel('$\Gamma_{4, 1}$', 'Interpreter', 'Latex')
     
     subplot(3, 2, 5); hold on;
     plot(0:dt:T, movmean(squeeze(cT_hessian_inv(4, 2, 2:end)), npoints))
     % Uncomment line below to plot reference
-    plot(0:dt:T, squeeze(inv_hess(4, 2, :)), 'r--')
+%     plot(0:dt:T, squeeze(inv_hess(4, 2, :)), 'r--')
     xlabel('t (s)'), ylabel('$\Gamma_{4, 2}$', 'Interpreter', 'Latex')
     
     subplot(3, 2, 6); hold on;
     plot(0:dt:T, movmean(squeeze(cT_hessian_inv(4, 3, 2:end)), npoints))
     % Uncomment line below to plot reference
-    plot(0:dt:T, squeeze(inv_hess(4, 3, :)), 'r--')
+%     plot(0:dt:T, squeeze(inv_hess(4, 3, :)), 'r--')
     xlabel('t (s)'), ylabel('$\Gamma_{4, 3}$', 'Interpreter', 'Latex')
     
     if save == 1
@@ -768,7 +768,6 @@ if save == 1
 elseif save == 0
     fileID = 1;
 end
-
 
 % Data string
 if strcmp(ES_method, 'GB')
