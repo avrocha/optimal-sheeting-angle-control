@@ -1,0 +1,15 @@
+----4-Jul-2022 11:16:49----
+Params:
+AWA: 100.000000
+cT Filtering: RAW
+cT Filtering param: 1.000000
+HPF: fc = 0.030000
+LPF: fc = 0.050000
+Dithers: A = 0.034907, f = 0.2
+Ricatti Filter: wric = 0.062832
+Initial Hessian inverse value: -0.014203
+Integrator gain (diag): K = 0.01
+MSE SA: 0.0014296
+MSE Cancellation Factor : 1.0554
+MSE cT: 0.003121
+Accumulated cT: 10446.659180 (optimal = 10628.882667)
