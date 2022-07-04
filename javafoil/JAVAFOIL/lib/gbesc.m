@@ -112,16 +112,11 @@ function [u, y, dy, y_hat] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, AW
         %HPF
         if i >= M
             hpf(i) = 1/ah(end) * (-ah(1:end-1) * hpf(i-M+1:i-1)' + bh * y_hat(i-M+1:i)');
+        
         else
-            for j = 1:i
-                hpf(i) = hpf(i) + bh(end-j+1)*y_hat(i-j+1);
-            end
-    
-            for j = 2:i
-                hpf(i) = hpf(i) - ah(end-j+1)*hpf(i-j+1);
-            end
-            
-            hpf(i) = 1/ah(end) * hpf(i);
+            y_init   = [y_hat(1) * ones(1, M-i), y_hat(1:i)];
+            hpf_init = [zeros(1, M-i), hpf(1:i-1)];
+            hpf(i) = 1/ah(end) * (-ah(1:end-1) * hpf_init' + bh * y_init');
         end
         
         if lp_bool

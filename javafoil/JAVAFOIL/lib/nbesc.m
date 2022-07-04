@@ -128,16 +128,12 @@ function [u, u_hat, y, dy, ddy, ddy_inv, y_hat, hpf] = nbesc(ship, J, dt, N, f, 
         % HPF
         if i >= bworder+1
             hpf(i) = 1/ah(end) * (-ah(1:end-1) * hpf(i-M+1:i-1)' + bh * y_hat(i-M+1:i)');
+        
         else
-            for j = 1:i
-                hpf(i) = hpf(i) + bh(end-j+1)*y_hat(i-j+1);
-            end
-    
-            for j = 2:i
-                hpf(i) = hpf(i) - ah(end-j+1)*hpf(i-j+1);
-            end
+            y_init   = [y_hat(1) * ones(1, M-i), y_hat(1:i)];
+            hpf_init = [zeros(1, M-i), hpf(1:i-1)];            
+            hpf(i) = 1/ah(end) * (-ah(1:end-1) * hpf_init' + bh * y_init');
             
-            hpf(i) = 1/ah(end) * hpf(i);            
         end
         
         if lp_bool
@@ -207,7 +203,7 @@ function [u, u_hat, y, dy, ddy, ddy_inv, y_hat, hpf] = nbesc(ship, J, dt, N, f, 
 
         % Delay Hessian estimate to avoid transient unstable response
         % Butterworth filter 5th orther (100s)
-        if i*dt < 100
+        if i*dt < 50
             ddy(:, :, i) = inv(ddy0);
         end
         

@@ -21,7 +21,7 @@ function cT = interp_criterion_irregular(xAWA, xSA, V, x, interp_type, f, ship)
         disp('Criterion is not developed for configurations different 4 wingsails.\n')
     end
     
-    fprintf("Inputs: AWA = %f, SA = %s\n", rad2deg(x(1)), num2str(rad2deg(x(2:end))));
+%     fprintf("Inputs: AWA = %f, SA = %s\n", rad2deg(x(1)), num2str(rad2deg(x(2:end))));
 
     % Get AWA neighbor levels 
     [~, iAWA] = min(abs(x(1) - xAWA));
@@ -32,7 +32,7 @@ function cT = interp_criterion_irregular(xAWA, xSA, V, x, interp_type, f, ship)
         iiAWA = max(1, iAWA-1):min(length(xAWA), iAWA);
     end
 
-    fprintf("AWA neighbors: %f | %f\n", rad2deg(xAWA(iiAWA(1))), rad2deg(xAWA(iiAWA(2))))
+%     fprintf("AWA neighbors: %f | %f\n", rad2deg(xAWA(iiAWA(1))), rad2deg(xAWA(iiAWA(2))))
 
     out_of_bounds = 0;
     for i = 1:n
@@ -76,11 +76,11 @@ function cT = interp_criterion_irregular(xAWA, xSA, V, x, interp_type, f, ship)
         
         cT = interp1(xAWA(iiAWA), [cT_inf, cT_sup], x(1));
 
-        fprintf("cT_inf = %f | cT_sup = %f | cT_interp = %f\n--\n", cT_inf, cT_sup, cT);
+%         fprintf("cT_inf = %f | cT_sup = %f | cT_interp = %f\n--\n", cT_inf, cT_sup, cT);
 
     else
         cT = f(x(2:end), ship);
-        fprintf("cT %f\n--\n", cT);
+%         fprintf("cT %f\n--\n", cT);
 
     end
 
