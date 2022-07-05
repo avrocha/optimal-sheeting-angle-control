@@ -396,10 +396,10 @@ if strcmp(ES_method, 'NB')
     figure(fig_cnt); clf(fig_cnt); hold on;
     sgtitle('NB-ESC | Hessian Estimate [Averaged]')
     
-    % Period = LCM(1/f); Nº of points = Period * Fs
-    p_dither = int32(1./f_dither * 100);
-    P        = lcm(p_dither(1), p_dither(2))/100;
-    npoints  = P * fs;
+    coeffs_f = int16(f_dither ./ f);    
+    F_common = gcd(coeffs_f(1), coeffs_f(2));
+    T_common = 1 / (double(F_common)*f);
+    npoints  = T_common * fs;
     
     subplot(3, 1, 1); hold on;
     plot(0:dt:T, movmean(squeeze(cT_hessian(1,1,:)), npoints))
