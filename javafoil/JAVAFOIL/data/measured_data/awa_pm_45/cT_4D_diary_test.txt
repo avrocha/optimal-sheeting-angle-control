@@ -1,0 +1,59 @@
+Starting parallel pool (parpool) using the 'local' profile ...
+Connected to the parallel pool (number of workers: 4).
+[Warning] Axes and cT structure init.
+ITERATION IS STARTING AT INDEX: *1*
+
+[2º Confirmation] ITERATION IS STARTING AT INDEX: *1*
+
+Iteration k = 1 | AWA = 1.500000e+01º
+Iteration k = 2 | AWA = 1.724138e+01º
+Elapsed time is 18559.751259 seconds.
+Starting parallel pool (parpool) using the 'local' profile ...
+Connected to the parallel pool (number of workers: 4).
+ITERATION IS STARTING AT INDEX: *3*
+
+[2º Confirmation] ITERATION IS STARTING AT INDEX: *3*
+
+Iteration k = 3 | AWA = 1.948276e+01º
+Iteration k = 4 | AWA = 2.172414e+01º
+Iteration k = 5 | AWA = 2.396552e+01º
+Iteration k = 6 | AWA = 2.620690e+01º
+Iteration k = 7 | AWA = 2.844828e+01º
+Iteration k = 8 | AWA = 3.068966e+01º
+Iteration k = 9 | AWA = 3.293103e+01º
+Iteration k = 10 | AWA = 3.517241e+01º
+Elapsed time is 74184.889654 seconds.
+Starting parallel pool (parpool) using the 'local' profile ...
+Connected to the parallel pool (number of workers: 4).
+ITERATION IS STARTING AT INDEX: *11*
+
+[2º Confirmation] ITERATION IS STARTING AT INDEX: *11*
+
+Iteration k = 11 | AWA = 3.741379e+01º
+Iteration k = 12 | AWA = 3.965517e+01º
+Iteration k = 13 | AWA = 4.189655e+01º
+Iteration k = 14 | AWA = 4.413793e+01º
+Iteration k = 15 | AWA = 4.637931e+01º
+Iteration k = 16 | AWA = 4.862069e+01º
+Iteration k = 17 | AWA = 5.086207e+01º
+Iteration k = 18 | AWA = 5.310345e+01º
+Iteration k = 19 | AWA = 5.534483e+01º
+Iteration k = 20 | AWA = 5.758621e+01º
+Elapsed time is 93482.802086 seconds.
+Starting parallel pool (parpool) using the 'local' profile ...
+Connected to the parallel pool (number of workers: 4).
+ITERATION IS STARTING AT INDEX: *21*
+
+[2º Confirmation] ITERATION IS STARTING AT INDEX: *21*
+
+Iteration k = 21 | AWA = 5.982759e+01º
+Iteration k = 22 | AWA = 6.206897e+01º
+Iteration k = 23 | AWA = 6.431034e+01º
+Iteration k = 24 | AWA = 6.655172e+01º
+Iteration k = 25 | AWA = 6.879310e+01º
+Iteration k = 26 | AWA = 7.103448e+01º
+Iteration k = 27 | AWA = 7.327586e+01º
+Iteration k = 28 | AWA = 7.551724e+01º
+Iteration k = 29 | AWA = 7.775862e+01º
+Iteration k = 30 | AWA = 80º
+Elapsed time is 126533.292442 seconds.
