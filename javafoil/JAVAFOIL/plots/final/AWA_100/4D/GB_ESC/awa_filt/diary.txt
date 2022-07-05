@@ -1,0 +1,12 @@
+----5-Jul-2022 13:23:05----
+Params:
+AWA: 105.736085
+cT Filtering: RAW
+cT Filtering param: 1.000000
+HPF: fc = 0.030000
+LPF: fc = 0.050000
+Dithers: A = 0.034907    0.034907    0.034907    0.034907, f = 0.08        0.14        0.18         0.2
+Integrator gain (diag): K = 0.00923    0.012322    0.007974    0.004704
+MSE SA: 0.0025784   0.0014614   0.0012306   0.0015269
+MSE cT: 0.000379
+Accumulated cT: 1704.454303 (optimal = 1735.558633)

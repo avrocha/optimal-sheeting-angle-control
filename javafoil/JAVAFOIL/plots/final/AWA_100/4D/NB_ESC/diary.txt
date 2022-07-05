@@ -1,14 +1,12 @@
-----4-Jul-2022 17:39:13----
+----5-Jul-2022 14:55:34----
 Params:
-AWA: 106.167669
-cT Filtering: EMA
-cT Filtering param: 0.100000
+AWA: 0.000000
+cT Filtering: LPF
+cT Filtering param: 1.000000
 HPF: fc = 0.030000
 LPF: fc = 0.050000
 Dithers: A = 0.034907    0.034907    0.034907    0.034907, f = 0.08        0.14        0.18         0.2
-Ricatti Filter: wric = 0.000314
-Initial Hessian inverse value: -0.4615     -0.6161     -0.3987     -0.2352
-Integrator gain (diag): K = 0.002       0.002       0.002       0.002
-MSE SA: 0.040786    0.018497    0.014435     0.01312
-MSE cT: 0.017427
-Accumulated cT: 1586.382919 (optimal = 1732.303181)
+Integrator gain (diag): K = 0.005       0.005       0.005       0.005
+MSE SA: 0.014152      0.0146    0.010116   0.0062899
+MSE cT: 0.018253
+Accumulated cT: 1567.905621 (optimal = 1732.303181)

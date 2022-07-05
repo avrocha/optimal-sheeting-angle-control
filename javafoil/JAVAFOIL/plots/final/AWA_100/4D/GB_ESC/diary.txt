@@ -1,12 +1,12 @@
-----4-Jul-2022 15:51:51----
+----5-Jul-2022 14:55:53----
 Params:
-AWA: 105.157300
-cT Filtering: EMA
-cT Filtering param: 0.100000
+AWA: 0.000000
+cT Filtering: LPF
+cT Filtering param: 1.000000
 HPF: fc = 0.030000
 LPF: fc = 0.050000
 Dithers: A = 0.034907    0.034907    0.034907    0.034907, f = 0.08        0.14        0.18         0.2
-Integrator gain (diag): K = 0.000923   0.0012322   0.0007974   0.0004704
-MSE SA: 0.015775    0.009296   0.0079799   0.0061461
-MSE cT: 0.015033
-Accumulated cT: 1593.696202 (optimal = 1732.303181)
+Integrator gain (diag): K = 0.005       0.005       0.005       0.005
+MSE SA: 0.014152      0.0146    0.010116   0.0062899
+MSE cT: 0.018253
+Accumulated cT: 1567.905621 (optimal = 1732.303181)
