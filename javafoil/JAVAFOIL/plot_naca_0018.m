@@ -34,5 +34,11 @@ coords = [1.0000     0.00189;
 0.9500     -0.01210;
 1.0000     -0.00189];
 
-figure(1); clf(1);
-plot(coords(:, 1), coords(:, 2));
+figure(1); clf(1); hold on;
+plot(coords(:, 1), coords(:, 2), 'k-', 'Linewidth', 2.3);
+plot(0:1, zeros(length(0:1)), 'k--', 'Linewidth', 0.5)
+set(gca,'visible','off')
+ylim([-0.3, 0.3])
+xlim([0, 1])
+
+saveas(gcf, 'naca0018.eps')
