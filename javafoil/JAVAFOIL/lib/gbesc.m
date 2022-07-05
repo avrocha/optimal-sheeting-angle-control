@@ -1,4 +1,4 @@
-function [u, y, dy, y_hat] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, AWA, lp_bool, cT_filter, cT_filter_param, FF)
+function [u, y, dy, y_hat, hpf] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, AWA, lp_bool, cT_filter, cT_filter_param, FF)
     % Inputs:
     % - J        : optimization criterion [function handle]
     % - dt       : simulation step [s]
@@ -126,15 +126,9 @@ function [u, y, dy, y_hat] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, AW
             if i >= M              
                 lpf(:, i) = 1/al(end) * (-al(1:end-1) * lpf(:, i-M+1:i-1)' + bl * zeta(:, i-M+1:i)');
             else
-                for j = 1:i
-                    lpf(:, i) = lpf(:, i) + bl(end-j+1) .* zeta(:, i-j+1);
-                end
-        
-                for j = 2:i
-                    lpf(:, i) = lpf(:, i) - al(end-j+1) .* lpf(:, i-j+1);
-                end
-                
-                lpf(:, i) = 1/al(end) .* lpf(:, i);
+                zeta_init = [zeta(:, 1) * ones(1, M-i), zeta(:, 1:i)];
+                lpf_init  = [zeta(:, 1) * ones(1, M-i), lpf(:, 1:i-1)];
+                lpf(:, i) = 1/al(end) * (-al(1:end-1) * lpf_init' + bl * zeta_init');
             end
     
             dy(:, i) = lpf(:, i);

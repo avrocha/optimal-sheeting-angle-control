@@ -143,16 +143,10 @@ function [u, u_hat, y, dy, ddy, ddy_inv, y_hat, hpf] = nbesc(ship, J, dt, N, f, 
             % LPF - Gradient
             if i >= M
                 lpf_grad(:, i) = 1/al(end) * (-al(1:end-1) * lpf_grad(:, i-M+1:i-1)' + bl * zeta(:, i-M+1:i)');           
-            else
-                for j = 1:i
-                    lpf_grad(:, i) = lpf_grad(:, i) + bl(end-j+1) .* zeta(:, i-j+1);
-                end
-        
-                for j = 2:i
-                    lpf_grad(:, i) = lpf_grad(:, i) - al(end-j+1) .* lpf_grad(:, i-j+1);
-                end
-                
-                lpf_grad(:, i) = 1/al(end) .* lpf_grad(:, i);
+            else                
+                zeta_init = [zeta(:, 1) * ones(1, M-i), zeta(:, 1:i)];
+                lpf_init  = [zeta(:, 1) * ones(1, M-i), lpf_grad(:, 1:i-1)];
+                lpf_grad(:, i) = 1/al(end) * (-al(1:end-1) * lpf_init' + bl * zeta_init');
             end
             
             dy(:, i) = lpf_grad(:, i);
@@ -175,16 +169,32 @@ function [u, u_hat, y, dy, ddy, ddy_inv, y_hat, hpf] = nbesc(ship, J, dt, N, f, 
                 end
                 
                 lpf_hessian(:, :, i) = 1/al(end) * lpf_hessian(:, :, i);
-            else
-                for j = 1:i
-                    lpf_hessian(:, :, i) = lpf_hessian(:, :, i) + bl(end-j+1).*sigma(:, :, i-j+1);
+            else                                
+                sigma_init = zeros(n, n, M);
+                for j = 1:M-i
+                    sigma_init(:, :, j) = sigma(:, :, 1);
                 end
-        
-                for j = 2:i
-                    lpf_hessian(:, :, i) = lpf_hessian(:, :, i) - al(end-j+1)*lpf_hessian(:, :, i-j+1);
+                for j = 1:i
+                    sigma_init(:, :, M - i + j) = sigma(:, :, j);
                 end
                 
-                lpf_hessian(:, :, i) = 1/al(end) .* lpf_hessian(:, :, i);
+                lpf_init = zeros(n, n, M);
+                for j = 1:M-i
+                    lpf_init(:, :, j) = sigma(:, :, 1);
+                end
+                for j = 1:i
+                    lpf_init(:, :, M - i + j) = lpf_hessian(:, :, j);
+                end
+                               
+                for j = 1:M
+                    lpf_hessian(:, :, i) = lpf_hessian(:, :, i) + bl(end-j+1).*sigma_init(:, :, M-j+1);
+                end
+        
+                for j = 2:M
+                    lpf_hessian(:, :, i) = lpf_hessian(:, :, i) - al(end-j+1).*lpf_init(:, :, M-j+1);
+                end
+                
+                lpf_hessian(:, :, i) = 1/al(end) * lpf_hessian(:, :, i);
             end
     
             ddy(:, :, i) = lpf_hessian(:, :, i);
@@ -203,9 +213,9 @@ function [u, u_hat, y, dy, ddy, ddy_inv, y_hat, hpf] = nbesc(ship, J, dt, N, f, 
 
         % Delay Hessian estimate to avoid transient unstable response
         % Butterworth filter 5th orther (100s)
-        if i*dt < 50
-            ddy(:, :, i) = inv(ddy0);
-        end
+%         if i*dt < 50
+%             ddy(:, :, i) = inv(ddy0);
+%         end
         
         % Euler discretization of Ricatti equation    
         ddy_inv(:, :, i+1) = ddy_inv(:, :, i) + dt * (wric * ddy_inv(:, :, i) - ...
