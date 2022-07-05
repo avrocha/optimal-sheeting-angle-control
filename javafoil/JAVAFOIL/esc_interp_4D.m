@@ -51,23 +51,56 @@ time    = (0:1/fs_data:(1/fs_data)*(n-1))';
 fx        = (0:n-1)*(fs_data/n);
 y         = fft(awa);
 y_hat     = fft(awa_hat);
-y_abs     = abs(y).^2/n;
-y_hat_abs = abs(y_hat).^2/n;
+y_abs     = abs(y/n);
+y_hat_abs = abs(y_hat/n);
 
 % Uncomment lines below to plot frequency content of AWA data
 figure(fig_cnt); clf(fig_cnt);
 subplot(2, 1, 1); hold on;
-plot(fx, y_abs);
+plot(fx, rad2deg(y_abs));
 title('Frequency spectrum of AWA raw data')
 xlabel('f [Hz]')
 ylabel('|awa(jw)|')
 
 subplot(2, 1, 2); hold on;
-plot(fx, y_hat_abs);
+plot(fx, rad2deg(y_hat_abs));
 title('Frequency spectrum of AWA filtered data')
 xlabel('f [Hz]')
 ylabel('|awa(jw)|')
 fig_cnt = fig_cnt + 1;
+
+% % EMA
+% gamma = 0.1;
+% 
+% awa_ema = [AWA(1), zeros(1, N - 1)];
+% for i = 2:N
+%     awa_ema(i) = AWA(i) * gamma + (1 - gamma) * awa_ema(i-1);
+% end
+% 
+% % LPF
+% [b, a] = butter(5, 0.02/fs_data, 'low');
+% b = fliplr(b);
+% a = fliplr(a);
+% awa_filt = zeros(1, N);
+% for i = 1:N
+%     if i > 5
+%         awa_filt(i) = 1/a(end) * (-a(1:end-1) * awa_filt(i-6+1:i-1)' + b * AWA(i-6+1:i)');    
+%     else 
+%         
+%         y_init   = [AWA(1) * ones(1, 6-i), AWA(1:i)];
+%         awa_filt_init = [AWA(1) * ones(1, 6-i), awa_filt(1:i-1)];            
+%         awa_filt(i) = 1/a(end) * (-a(1:end-1) * awa_filt_init' + b * y_init');
+%     end
+% end
+% 
+% % awa = awa_filt;
+% figure(fig_cnt); clf(fig_cnt); hold on;
+% plot(1:N, AWA)
+% plot(1:N, awa_ema)
+% plot(1:N, awa_filt)
+% legend('AWA', 'EMA', 'LPF')
+% xlabel('t (s)')
+% fig_cnt = fig_cnt + 1;
 
 %% Init controller
 addpath JavaFoil;  addpath Foils; addpath lib;
@@ -100,7 +133,7 @@ scale    = calc_scale();
 % 'GB' for Gradient based | 'NB' for Newton based
 ES_method = 'NB';
 % 1 to save figures and diary or 0 to plot figures and print diary
-save = 1;
+save = 0;
 
 % Simulation
 fs = 10; 
@@ -132,7 +165,7 @@ switch data_source
         FF(:, idx_3:end)   = deg2rad(25);     
 
     case 'awa_100'
-        FF = deg2rad(-85) * ones(4, N);
+        FF = deg2rad(-83) * ones(4, N);
 end
 
 sheet_angle_0 = FF(:, 1);
@@ -162,7 +195,7 @@ for i = 1:length(data.AWA)
 end
 
 % Filtering cT - {'RAW', 'EMA', 'LPF'}
-cT_filter = 'EMA';
+cT_filter = 'LPF';
 switch cT_filter
     case 'EMA' % Param = EMA 'speed'
         switch data_source
@@ -171,12 +204,13 @@ switch cT_filter
             case 'awa_100'
                 cT_filter_param = 0.1;
                 
-            fprintf("cT filter EMA cut-off frequency = %f Hz\n", -log(1-cT_filter_param)*fs)
+            fprintf("cT filter EMA time constant = %f Hz\n", 1/(log(1-cT_filter_param)*fs))
         end
 
     case 'LPF' % Param = cut-off frequency for LPF
-        cT_filter_param = 0.5; 
-    
+        cT_filter_param = 0.1;
+        fprintf("cT filter LPF cut off frequency = %f Hz\n", cT_filter_param)
+
     case 'RAW'
         cT_filter_param = 1;
 end
@@ -192,7 +226,7 @@ if strcmp(ES_method, 'GB')
     A             = deg2rad(2)*ones(4, 1); % dither amplitude
     fc_hp         = 3*f; % HPF cutoff freq
     fc_lp         = 5*f; % LPF cutoff freq
-    lp_bool       = false; % Use LPF
+    lp_bool       = true; % Use LPF
     
     switch data_source
         case 'tacking'
@@ -204,14 +238,14 @@ if strcmp(ES_method, 'GB')
                      -0.0523   -0.0148   -0.0890   -0.2352];
     end
     
-    K = f * delta * 2 * (-ric_0); % gain (>0 since extremum is maximum)    
+    K = f * delta * 20 * (-ric_0); % gain (>0 since extremum is maximum)    
     
     % Criterion
     Jgb = @(sheeting_angle, ship) (getfield(calc_objective_mod(sheeting_angle, ship), 'cT'));
     % Interpolated criterion
     Jgb_interp = @(sheeting_angle, ship) interp_criterion_irregular(data.AWA, data.sheeting_angle, V, [ship.yaw, sheeting_angle'], 'linear', Jgb, ship);
     localShip = ship;
-    [sheet_angle, cT, cT_grad, cT_hat] = gbesc(localShip, Jgb_interp, dt, N, f_dither, A, fc_hp, ...
+    [sheet_angle, cT, cT_grad, cT_hat, hpf] = gbesc(localShip, Jgb_interp, dt, N, f_dither, A, fc_hp, ...
                             fc_lp, K, sheet_angle_0, AWA, lp_bool, cT_filter, cT_filter_param, FF);   
 
 end
@@ -226,15 +260,15 @@ if strcmp(ES_method, 'NB')
     A             = deg2rad(2) * ones(4, 1); % dither amplitude
     fc_hp         = 3*f; % HPF cutoff freq
     fc_lp         = 5*f; % LPF cutoff freq
-    lp_bool       = false; % Use LPF
-    K             = f * delta * 2 * eye(4); % gain (>0 since extremum is maximum)
+    lp_bool       = true; % Use LPF
+    K             = f * delta * 20 * eye(4); % gain (>0 since extremum is maximum)
 
     switch data_source
         case 'tacking'
             wric  = 2 * pi * (0.1 * f * delta); % ricatti filter parameter
             ric_0 = eye(-72); % TBD
         case 'awa_100'
-            wric  = 2 * pi * (0.01 * f * delta); % ricatti filter parameter 
+            wric  = 2 * pi * (0.02 * f * delta); % ricatti filter parameter 
             ric_0 = [-0.4615   -0.1038   -0.0934   -0.0523;
                      -0.1038   -0.6161   -0.0336   -0.0148;
                      -0.0934   -0.0336   -0.3987   -0.0890;
@@ -254,8 +288,10 @@ end
 
 %% Plots 
 % dir = ['plots\7m_data_', data_source, '\4D\', ES_method,'_ESC\'];
-dir = ['plots\final\AWA_100\4D\', ES_method,'_ESC\'];
+% dir = ['plots\final\AWA_100\4D\', ES_method,'_ESC\'];
+dir = ['plots\final\AWA_100\4D\', ES_method,'_ESC\awa_filt\'];
 % dir = ['plots\final\AWA_100_sim\4D\', ES_method,'_ESC\'];
+% dir = ['plots\final\AWA_100_sim\4D\', ES_method,'_ESC\ric_delay\'];
 
 % Check directory
 if ~exist(dir, 'dir')
@@ -330,24 +366,24 @@ for i = 1:n
     fig_cnt = fig_cnt + 1;
 end
 
-if strcmp(ES_method, 'NB')
-    figure(fig_cnt); clf(fig_cnt); hold on;
-    title('NB-ESC | HPF output')
-    plot(0:dt:T, hpf, 'Linewidth', 1.5)
+figure(fig_cnt); clf(fig_cnt); hold on;
+title(strcat(ES_method, '-ESC | HPF'))
+plot(0:dt:T, hpf, 'Linewidth', 1.5)
+
+yhpf = zeros(size(hpf));
+for ihpf = 1:N
+    yhpf(ihpf) = sum(hpf(1:ihpf)) / ihpf;
+end
+plot(0:dt:T, yhpf, '--')
+
+xlabel('t (s)')
+if save == 1
+    filename = fullfile(strcat(dir,'hpf.fig'));
+    saveas(figure(fig_cnt), filename);
+end
+fig_cnt = fig_cnt + 1;  
     
-    yhpf = zeros(size(hpf));
-    for ihpf = 1:N
-        yhpf(ihpf) = sum(hpf(1:ihpf)) / ihpf;
-    end
-    plot(0:dt:T, yhpf, '--')
-    
-    xlabel('t (s)')
-    if save == 1
-        filename = fullfile(strcat(dir,'hpf.fig'));
-        saveas(figure(fig_cnt), filename);
-    end
-    fig_cnt = fig_cnt + 1;  
-    
+if strcmp(ES_method, 'NB')    
     figure(fig_cnt); clf(fig_cnt); hold on;
     title('NB-ESC | Hessian Estimate')
     plot(0:dt:T, reshape(cT_hessian, [n^2, N]), 'Linewidth', 1.5)
