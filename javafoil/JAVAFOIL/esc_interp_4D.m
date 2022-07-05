@@ -69,39 +69,6 @@ xlabel('f [Hz]')
 ylabel('|awa(jw)|')
 fig_cnt = fig_cnt + 1;
 
-% % EMA
-% gamma = 0.1;
-% 
-% awa_ema = [AWA(1), zeros(1, N - 1)];
-% for i = 2:N
-%     awa_ema(i) = AWA(i) * gamma + (1 - gamma) * awa_ema(i-1);
-% end
-% 
-% % LPF
-% [b, a] = butter(5, 0.02/fs_data, 'low');
-% b = fliplr(b);
-% a = fliplr(a);
-% awa_filt = zeros(1, N);
-% for i = 1:N
-%     if i > 5
-%         awa_filt(i) = 1/a(end) * (-a(1:end-1) * awa_filt(i-6+1:i-1)' + b * AWA(i-6+1:i)');    
-%     else 
-%         
-%         y_init   = [AWA(1) * ones(1, 6-i), AWA(1:i)];
-%         awa_filt_init = [AWA(1) * ones(1, 6-i), awa_filt(1:i-1)];            
-%         awa_filt(i) = 1/a(end) * (-a(1:end-1) * awa_filt_init' + b * y_init');
-%     end
-% end
-% 
-% % awa = awa_filt;
-% figure(fig_cnt); clf(fig_cnt); hold on;
-% plot(1:N, AWA)
-% plot(1:N, awa_ema)
-% plot(1:N, awa_filt)
-% legend('AWA', 'EMA', 'LPF')
-% xlabel('t (s)')
-% fig_cnt = fig_cnt + 1;
-
 %% Init controller
 addpath JavaFoil;  addpath Foils; addpath lib;
 global ship;
@@ -133,12 +100,13 @@ scale    = calc_scale();
 % 'GB' for Gradient based | 'NB' for Newton based
 ES_method = 'NB';
 % 1 to save figures and diary or 0 to plot figures and print diary
-save = 0;
+save = 1;
 
 % Simulation
 fs = 10; 
 dt = 1/fs;
 T  = ceil(time(end));
+% T = 1800;
 N  = length(0:dt:T);
 
 % Upsample AWA with consecutive equal samples - for loop to avoid non-int
@@ -150,6 +118,36 @@ for i = 1:N
     if t_sim(i) >= time(j+1); j = j + 1; end
     AWA(i) = awa(j);
 end
+
+
+% Uncomment lines below for LPF AWA
+% Filter AWA - LPF
+[b, a] = butter(5, 0.02/fs_data, 'low');
+b = fliplr(b);
+a = fliplr(a);
+awa_filt = zeros(1, N);
+for i = 1:N
+    if i > 5
+        awa_filt(i) = 1/a(end) * (-a(1:end-1) * awa_filt(i-6+1:i-1)' + b * AWA(i-6+1:i)');    
+    else 
+        
+        y_init   = [AWA(1) * ones(1, 6-i), AWA(1:i)];
+        awa_filt_init = [AWA(1) * ones(1, 6-i), awa_filt(1:i-1)];            
+        awa_filt(i) = 1/a(end) * (-a(1:end-1) * awa_filt_init' + b * y_init');
+    end
+end
+
+AWA = awa_filt; % filtered awa
+
+figure(fig_cnt); clf(fig_cnt); hold on;
+plot(1:N, AWA)
+plot(1:N, awa_filt)
+legend('AWA', 'LPF')
+xlabel('t (s)')
+fig_cnt = fig_cnt + 1;
+
+% Uncomment line below for constant AWA
+% AWA = ones(1, N) * deg2rad(100);
 
 % Feedforward (Piecewise constant)
 switch data_source
@@ -165,7 +163,7 @@ switch data_source
         FF(:, idx_3:end)   = deg2rad(25);     
 
     case 'awa_100'
-        FF = deg2rad(-83) * ones(4, N);
+        FF = deg2rad(-85) * ones(4, N);
 end
 
 sheet_angle_0 = FF(:, 1);
@@ -195,7 +193,7 @@ for i = 1:length(data.AWA)
 end
 
 % Filtering cT - {'RAW', 'EMA', 'LPF'}
-cT_filter = 'LPF';
+cT_filter = 'RAW';
 switch cT_filter
     case 'EMA' % Param = EMA 'speed'
         switch data_source
@@ -235,10 +233,17 @@ if strcmp(ES_method, 'GB')
             ric_0 = [-0.4615   -0.1038   -0.0934   -0.0523;
                      -0.1038   -0.6161   -0.0336   -0.0148;
                      -0.0934   -0.0336   -0.3987   -0.0890;
-                     -0.0523   -0.0148   -0.0890   -0.2352];
+                     -0.0523   -0.0148   -0.0890   -0.2352]; % Interpolated
+            
+           ric_0 = [ -0.4972   -0.0389   -0.0152    0.0514;
+                     -0.0389   -0.2209   -0.0129   -0.0033;
+                     -0.0152   -0.0129   -0.1744   -0.0022;
+                     0.0514   -0.0033   -0.0022   -0.1013]; % Obtained with simulated AWA
+            
+%            ric_0 = eye(4) * -0.05; % For simulated AWA
     end
     
-    K = f * delta * 20 * (-ric_0); % gain (>0 since extremum is maximum)    
+    K = f * delta * 40 * (-ric_0); % gain (>0 since extremum is maximum)    
     
     % Criterion
     Jgb = @(sheeting_angle, ship) (getfield(calc_objective_mod(sheeting_angle, ship), 'cT'));
@@ -261,18 +266,25 @@ if strcmp(ES_method, 'NB')
     fc_hp         = 3*f; % HPF cutoff freq
     fc_lp         = 5*f; % LPF cutoff freq
     lp_bool       = true; % Use LPF
-    K             = f * delta * 20 * eye(4); % gain (>0 since extremum is maximum)
+    K             = f * delta * 40 * eye(4); % gain (>0 since extremum is maximum)
 
     switch data_source
         case 'tacking'
             wric  = 2 * pi * (0.1 * f * delta); % ricatti filter parameter
             ric_0 = eye(-72); % TBD
         case 'awa_100'
-            wric  = 2 * pi * (0.02 * f * delta); % ricatti filter parameter 
+            wric  = 2 * pi * (0.01 * f * delta); % ricatti filter parameter 
             ric_0 = [-0.4615   -0.1038   -0.0934   -0.0523;
                      -0.1038   -0.6161   -0.0336   -0.0148;
                      -0.0934   -0.0336   -0.3987   -0.0890;
-                     -0.0523   -0.0148   -0.0890   -0.2352];
+                     -0.0523   -0.0148   -0.0890   -0.2352]; % Interpolated
+            
+           ric_0 = [ -0.4972   -0.0389   -0.0152    0.0514;
+                     -0.0389   -0.2209   -0.0129   -0.0033;
+                     -0.0152   -0.0129   -0.1744   -0.0022;
+                     0.0514   -0.0033   -0.0022   -0.1013]; % Obtained with simulated AWA
+            
+%            ric_0 = eye(4) * -0.05; % For simulated AWA
     end
         
     % Criterion 
@@ -397,7 +409,7 @@ if strcmp(ES_method, 'NB')
     figure(fig_cnt); clf(fig_cnt); hold on;
     title('NB-ESC | Hessian Inverse Estimate')
     plot(0:dt:T, reshape(cT_hessian_inv(:, :, 2:end), [n^2, N]), 'Linewidth', 1.5)
-    xlabel('t (s)'), ylabel('$\hat{H}^{-1}$', 'Interpreter', 'Latex')
+    xlabel('t (s)'), ylabel('$\Gamma$', 'Interpreter', 'Latex')
     if save == 1
         filename = fullfile(strcat(dir,'cT_hessian_inv.fig'));
         saveas(figure(fig_cnt), filename);
@@ -585,7 +597,7 @@ if strcmp(ES_method, 'NB')
     plot(0:dt:T, movmean(squeeze(cT_hessian_inv(4, 4, 2:end)), npoints))
     % Uncomment line below to plot reference
 %     plot(0:dt:T, squeeze(inv_hess(4, 4, :)), 'r--')
-    xlabel('t (s)'), ylabel('$\Gamma{H}_{4, 4}$', 'Interpreter', 'Latex')
+    xlabel('t (s)'), ylabel('$\Gamma_{4, 4}$', 'Interpreter', 'Latex')
     
     if save == 1
         filename = fullfile(strcat(dir,'cT_hessian_inv_diag_avg.fig'));
