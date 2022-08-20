@@ -89,28 +89,47 @@ scale    = calc_scale();
 
 % Method
 % 'GB' for Gradient based | 'NB' for Newton based
-ES_method = 'GB';
+ES_method = 'NB';
 % 1 to save figures and diary or 0 to plot figures and print diary
-save = 1;
+save = 0;
 
 % Simulation
-fs = 10; 
+fs = 30; 
 dt = 1/fs;
-% T  = ceil(time(end));
-T  = 600;
+T  = ceil(time(end));
 N  = length(0:dt:T);
 
 % Upsample AWA with consecutive equal samples - for loop to avoid non-int
 % upsampling factors
-% AWA = zeros(1, N);
-% t_sim = (0:dt:T)';
-% j = 0;
-% for i = 1:N
-%     if t_sim(i) >= time(j+1); j = j + 1; end
-%     AWA(i) = awa(j);
-% end
+AWA = zeros(1, N);
+t_sim = (0:dt:T)';
+j = 0;
+for i = 1:N
+    if t_sim(i) >= time(j+1); j = j + 1; end
+    AWA(i) = awa(j);
+end
 
-AWA = deg2rad(100) * ones(1, N);
+% % Uncomment lines below for LPF AWA
+% % Filter AWA - LPF
+% [b, a] = butter(5, 0.02/fs, 'low');
+% b = fliplr(b);
+% a = fliplr(a);
+% awa_filt = zeros(1, N);
+% for i = 1:N
+%     if i > 5
+%         awa_filt(i) = 1/a(end) * (-a(1:end-1) * awa_filt(i-6+1:i-1)' + b * AWA(i-6+1:i)');    
+%     else 
+%         
+%         y_init   = [AWA(1) * ones(1, 6-i), AWA(1:i)];
+%         awa_filt_init = [AWA(1) * ones(1, 6-i), awa_filt(1:i-1)];            
+%         awa_filt(i) = 1/a(end) * (-a(1:end-1) * awa_filt_init' + b * y_init');
+%     end
+% end
+% 
+% AWA = awa_filt;
+
+% % Uncomment lines below for constant AWA
+% AWA = deg2rad(100) * ones(1, N);
 
 % Feedforward (Piecewise constant)
 switch data_source
@@ -174,7 +193,7 @@ if strcmp(ES_method, 'GB')
 
     f_dither      = 20*f; % dither freq
     A             = deg2rad(2); % dither amplitude
-    fc_hp         = 3*f; % HPF cutoff freq
+    fc_hp         = 2*f; % HPF cutoff freq
     fc_lp         = 5*f; % LPF cutoff freq
     lp_bool       = false; % Use LPF
     
@@ -194,7 +213,7 @@ if strcmp(ES_method, 'GB')
     Jgb_interp = @(sheeting_angle, ship) interp_criterion(X, V, [ship.yaw, sheeting_angle'], 'linear', Jgb, ship);
     
     localShip = ship;
-    [sheet_angle, cT, cT_grad, cT_hat] = gbesc(localShip, Jgb_interp, dt, N, f_dither, A, fc_hp, ...
+    [sheet_angle, cT, cT_hat, cT_grad] = gbesc(localShip, Jgb_interp, dt, N, f_dither, A, fc_hp, ...
                             fc_lp, K, sheet_angle_0, AWA, lp_bool, cT_filter, cT_filter_param, FF);   
 
 end
@@ -220,7 +239,7 @@ if strcmp(ES_method, 'NB')
             wric  = 2 * pi * (0.01 * f * delta); % ricatti filter parameter
         case 'awa_100'
             ric_0 = -0.014203;
-            wric  = 2 * pi * (10 * f * delta); % ricatti filter parameter 
+            wric  = 2 * pi * (0.1 * f * delta); % ricatti filter parameter 
     end
 
     % Criterion
@@ -229,21 +248,21 @@ if strcmp(ES_method, 'NB')
     Jnb_interp = @(sheeting_angle, ship) interp_criterion(X, V, [ship.yaw, sheeting_angle'], 'linear', Jnb, ship);
 
     localShip = ship;
-    [sheet_angle, sheet_angle_hat, cT, cT_grad, cT_hessian, cT_hessian_inv, cT_hat, hpf] = nbesc(localShip, Jnb_interp, dt, N, f_dither, A, ...
+    [sheet_angle, cT, cT_hat, cT_grad, cT_hessian, cT_hessian_inv, hpf] = nbesc(localShip, Jnb_interp, dt, N, f_dither, A, ...
         fc_hp, fc_lp, K, sheet_angle_0, wric, ric_0, AWA, lp_bool, cT_filter, cT_filter_param, FF);    
     
 end
 
 %% Plots 
-% dir = ['plots\7m_data_tacking\real\', ES_method,'_ESC\', cT_filter,'_cT\f_0_20\'];
+n = length(f_dither);
+
+% Directory to save pictures in
 dir = ['plots\final\AWA_100_sim\1D\', ES_method,'_ESC\'];
 
 % Check directory
 if ~exist(dir, 'dir')
     mkdir(dir)
 end
-
-n = length(f_dither);
 
 % References
 % Get reference in original grid
@@ -416,7 +435,7 @@ if strcmp(ES_method, 'NB')
     title('NB-ESC | Hessian Cancellation Factor ')
     plot(0:dt:T, squeeze(cancel_factor))
     plot(0:dt:T, ones(1, N), 'r--', 'Linewidth', 0.8)
-    xlabel('t (s)'), ylabel('$(\Gamma H)_{1, 1}$', 'Interpreter', 'Latex')
+    xlabel('t (s)'), ylabel('$(\Gamma H)$', 'Interpreter', 'Latex')
     
     if save == 1
         filename = fullfile(strcat(dir,'cancel_factor.fig'));
