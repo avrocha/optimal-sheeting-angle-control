@@ -22,34 +22,49 @@ function cT = interp_criterion_irregular(xAWA, xSA, V, x, interp_type, f, ship)
     end
     
 %     fprintf("Inputs: AWA = %f, SA = %s\n", rad2deg(x(1)), num2str(rad2deg(x(2:end))));
-
-    % Get AWA neighbor levels 
-    [~, iAWA] = min(abs(x(1) - xAWA));
     
-    if x(1) >= xAWA(iAWA) % x(1) near left neighbour
-        iiAWA = max(1, iAWA):min(length(xAWA), iAWA+1);
-    else % x(1) near right neighbour
-        iiAWA = max(1, iAWA-1):min(length(xAWA), iAWA);
-    end
+    out_of_bounds = 0; % bool to boundary conditions
+    sym = 0; % bool to detect symmetry
 
-%     fprintf("AWA neighbors: %f | %f\n", rad2deg(xAWA(iiAWA(1))), rad2deg(xAWA(iiAWA(2))))
+    % Check if AWA is within boundaries
+    if abs(x(1)) < xAWA(1)  || abs(x(1)) > xAWA(end)
+        out_of_bounds = 1;
+        fprintf("AWA: %f OUT\n", rad2deg(x(1)))
 
-    out_of_bounds = 0;
-    for i = 1:n
-        % Check boundary conditions on AWA neighbors
-
-        % Max min of each neighbor
-        lb = max([min(xSA(i, :, iiAWA(1)), [],'all'), min(xSA(i, :, iiAWA(2)), [],'all')]);
-        % Min max of each neighbor
-        ub = min([max(xSA(i, :, iiAWA(1)), [],'all'), max(xSA(i, :, iiAWA(2)), [],'all')]);
+    else
+        % Deal with simmetry
+        if x(1) < 0
+            sym = 1;
+            x = -x;
+        end
         
-        out_of_bounds = out_of_bounds | (x(i+1) < lb) | (x(i+1) > ub);
+        % Get AWA neighbor levels 
+        [~, iAWA] = min(abs(x(1) - xAWA));
         
-        if out_of_bounds
-            fprintf("x(%d) %f | lb = %f | ub = %f\n", i, rad2deg(x(i+1)), rad2deg(lb), rad2deg(ub));
-            fprintf("OUT = %d\n", out_of_bounds)
-            disp('\tInterpolated criterion is out of bounds\n.')
-            break; 
+        if x(1) >= xAWA(iAWA) % x(1) near left neighbour
+            iiAWA = max(1, iAWA):min(length(xAWA), iAWA+1);
+        else % x(1) near right neighbour
+            iiAWA = max(1, iAWA-1):min(length(xAWA), iAWA);
+        end
+    
+%         fprintf("AWA neighbors: %f | %f\n", rad2deg(xAWA(iiAWA(1))), rad2deg(xAWA(iiAWA(2))))
+    
+        for i = 1:n
+            % Check boundary conditions on AWA neighbors
+    
+            % Max min of each neighbor
+            lb = max([min(xSA(i, :, iiAWA(1)), [],'all'), min(xSA(i, :, iiAWA(2)), [],'all')]);
+            % Min max of each neighbor
+            ub = min([max(xSA(i, :, iiAWA(1)), [],'all'), max(xSA(i, :, iiAWA(2)), [],'all')]);
+            
+            out_of_bounds = out_of_bounds | (x(i+1) < lb) | (x(i+1) > ub);
+            
+            if out_of_bounds
+                fprintf("x(%d) %f | lb = %f | ub = %f\n", i, rad2deg(x(i+1)), rad2deg(lb), rad2deg(ub));
+                fprintf("OUT = %d\n", out_of_bounds)
+                disp('\tInterpolated criterion is out of bounds\n.')
+                break; 
+            end
         end
     end
 
@@ -79,6 +94,12 @@ function cT = interp_criterion_irregular(xAWA, xSA, V, x, interp_type, f, ship)
 %         fprintf("cT_inf = %f | cT_sup = %f | cT_interp = %f\n--\n", cT_inf, cT_sup, cT);
 
     else
+        if sym
+            x = -x; % Reverse symmetry
+        end
+%         task_id = getCurrentTask().ID;
+%         cT = f(x(2:end), ship, task_id);
+
         cT = f(x(2:end), ship);
 %         fprintf("cT %f\n--\n", cT);
 
