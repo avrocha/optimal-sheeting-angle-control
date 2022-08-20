@@ -1,0 +1,17 @@
+----10-Jul-2022 13:40:51----
+Params	HPF: fc = 0.030000
+	LPF (0): fc = 0.050000
+	Dithers: A = 0.017453    0.017453, f = 0.17         0.2
+	Ricatti Filter: wric = 0.031416
+	Initial Hessian inverse value: -0.06       -0.06
+	Integrator gain (diag): K = 0.1         0.1
+GB
+	MAE SA: 0.016081    0.014624
+	MAE cT: 0.008656
+	Accumulated cT: 2023.644221
+NB
+	MAE SA: 0.014426     0.01389
+	MAE cT: 0.008177
+	Accumulated cT: 2024.507824
+Optimum
+Accumulated cT: 2039.233712
