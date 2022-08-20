@@ -2,12 +2,12 @@
 clear
 
 % Load struct
-load('data\measured_data\awa_100\cT_1D.mat');
-% load('data\measured_data\awa_pm_45\cT_1D.mat');
+% load('data\measured_data\awa_100\cT_1D.mat');
+load('data\measured_data\awa_pm_45\cT_1D.mat');
 
 % Select operating point
-AWA           = deg2rad(100);
-sheet_angle_0 = deg2rad(-85);
+AWA           = deg2rad(45);
+sheet_angle_0 = deg2rad(-35);
 
 [~, i] = min(abs(AWA - data.AWA));
 [~, j] = min(abs(sheet_angle_0 - data.sheeting_angle));
@@ -66,15 +66,13 @@ inv_hess = inv(hess)
 %% 4D - Get Interpolated Hessian
 clear
     
-data_source = 'awa_100';
+data_source = 'tacking';
     
 switch data_source
     case 'tacking'
-        load('data\measured_data\awa_pm_45\cT_4D.mat');
-%         AWA           = deg2rad(45);
-%         sheet_angle_0 = [deg2rad(-15), deg2rad(-25), deg2rad(-30), deg2rad(-35)];
-            AWA           = deg2rad(75);
-            sheet_angle_0 = [deg2rad(-49), deg2rad(-53), deg2rad(-57), deg2rad(-60)];
+        load('data\measured_data\awa_pm_45\cT_4D_test.mat');
+        AWA           = deg2rad(45);
+        sheet_angle_0 = [deg2rad(-15), deg2rad(-25), deg2rad(-30), deg2rad(-35)];        
         
     case 'awa_100'
         load('data\measured_data\awa_100\cT_4D.mat');
