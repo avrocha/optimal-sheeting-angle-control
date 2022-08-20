@@ -35,7 +35,7 @@ R4     = Rig( 170,0); % pivot x,y,
 R4.addFoil(Foil('NACA0018',0,0,6.25,Cw)); % foilFile,x,y,dx,chord
 % R4.addFoil(Foil('NACA0009',-5,0,0,Cf)); % foilFile,x,y,dx,chord
 
-ship.addRig(R1);  ship.addRig(R2);  ship.addRig(R3);  ship.addRig(R4);
+ship.addRig(R1);  ship.addRig(R2);  %ship.addRig(R3);  ship.addRig(R4);
 
 scale = calc_scale();
 
@@ -67,9 +67,10 @@ for yaw = deg2rad([45 60 90 135])
     [X,fval,exitflag,output] = fmincon(@(X)calc_objective(X),X,[],[],[],[],lb,ub,[],options);
     %   saveas(gca,sprintf('pix/final_geometry_awa%d',rad2deg(yaw)),'png');
     fprintf('AWA=%0.1f  Xopt=[%.1f %.1f %.1f %.1f ]\n',rad2deg(yaw), -rad2deg(X(1)),-rad2deg(X(2)),-rad2deg(X(3)),-rad2deg(X(4)));
-    
+%     fprintf('AWA=%0.1f  Xopt=[%.1f %.1f ]\n',rad2deg(yaw), -rad2deg(X(1)),-rad2deg(X(2)));%,-rad2deg(X(3)),-rad2deg(X(4)));
+
     fid     = fopen([pwd,'/4_simple_wings_cl2.txt'], 'a');
-    fprintf(fid,'%0.1f %.1f %.1f %.1f %.1f \n',rad2deg(yaw), rad2deg(-X(1)),rad2deg(-X(2)),rad2deg(-X(3)),rad2deg(-X(4)));
+    fprintf(fid,'%0.1f %.1f %.1f \n',rad2deg(yaw), rad2deg(-X(1)),rad2deg(-X(2)));%,rad2deg(-X(3)),rad2deg(-X(4)));
     fclose(fid);
     disp(toc);
 end
