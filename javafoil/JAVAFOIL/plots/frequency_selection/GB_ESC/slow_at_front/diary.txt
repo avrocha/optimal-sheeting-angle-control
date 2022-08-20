@@ -1,7 +1,0 @@
-----7-Jun-2022 18:24:38----
-Params:
-AWA: 45.000000
-HPF: fc = 0.090000
-LPF: fc = 0.090000
-Dithers: A = 0.034907    0.034907, f = 0.2         0.1
-Integrator gain (diag): K = 0.075       0.075

@@ -1,8 +1,0 @@
-----14-Apr-2022 14:10:58----
-Params:
-AWA limits: [13.246504, 77.315845]
-HPF: fc = 0.050000
-Main dither: A = 0.034907, f = 1.000000e-01
-Integrator gain: K = 0.075000
-Initial input value: 0.000000
-
