@@ -1,4 +1,4 @@
-function [u, y, dy, y_hat, hpf] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, AWA, lp_bool, cT_filter, cT_filter_param, FF)
+function [u, y, y_hat, dy, hpf] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, AWA, lp_bool, cT_filter, cT_filter_param, FF)
     % Inputs:
     % - J        : optimization criterion [function handle]
     % - dt       : simulation step [s]
@@ -145,7 +145,7 @@ function [u, y, dy, y_hat, hpf] = gbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u
         u(:, i+1)     = FF(:, i) + u_hat(:, i+1) + A .* sin(2*pi*f*t);
         
         % Error condition
-        if any(u(i+1) > pi) || any(u(i+1) < -pi) 
+        if any(u(:, i+1) > pi) || any(u(:, i+1) < -pi) 
             break
         end
     end

@@ -1,4 +1,4 @@
-function [u, u_hat, y, dy, ddy, ddy_inv, y_hat, hpf] = nbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, wric, ddy0, AWA, lp_bool, cT_filter, cT_filter_param, FF)
+function [u, y, y_hat, dy, ddy, ddy_inv, hpf] = nbesc(ship, J, dt, N, f, A, fc_hp, fc_lp, K, u0, wric, ddy0, AWA, lp_bool, cT_filter, cT_filter_param, FF)
     % Inputs:
     % - J         : optimization criterion [function handle]
     % - dt        : simulation step [s]
