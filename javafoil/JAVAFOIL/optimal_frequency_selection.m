@@ -6,7 +6,7 @@ n  = 4; % Number of dither signals
 nc = 9; % Number of control variables
 
 % Maximum frequency
-max_f = 0.2; % T = 5s
+max_f = 0.5; % T = 5s
 
 % Criterion | x = [f_dither(1), f_dither(2), f_dither(3), f_dither(4), y]
 f      = -ones(n+nc, 1);
@@ -15,9 +15,10 @@ intcon = (n+1):(n+nc);
 % Lower/Upper bounds
 lb = zeros(n+nc, 1);
 ub = [0.7*max_f; 0.8*max_f; 0.9*max_f; max_f; ones(nc,1)]; % choose order according to direction of AWA
-
+% ub = [0.11; 0.14; 0.17; 0.2; ones(nc,1)];
 % Inequality constraints
 tol = 0.1 * max_f; % numerical tolerance to avoid implementation-induced coupling
+% tol = 0.02;
 M   = 10 * max_f; % large constant for integer-programming
 
 % x1 < x2 < x3 < x4
@@ -60,7 +61,7 @@ n  = 4; % Number of dither signals
 nc = 22; % Number of control variables
 
 % Maximum frequency
-max_f = 0.2; % T = 5s
+max_f = 0.5; % T = 5s
 
 % Criterion | x = [f_dither(1), f_dither(2), f_dither(3), f_dither(4), y]
 f      = -ones(n+nc, 1);
@@ -69,9 +70,10 @@ intcon = (n+1):(n+nc);
 % Lower/Upper bounds
 lb = zeros(n+nc, 1);
 ub = [0.7*max_f; 0.8*max_f; 0.9*max_f; max_f; ones(nc,1)]; % choose order according to direction of AWA
-
+% ub = [0.11; 0.14; 0.17; 0.2; ones(nc,1)];
 % Inequality constraints
-tol = 0.05 * max_f; % numerical tolerance to avoid implementation-induced coupling
+tol = 0.1 * max_f; % numerical tolerance to avoid implementation-induced coupling
+% tol = 0.02;
 M   = 10 * max_f; % large constant for integer-programming
 
 % x1 < x2 < x3 < x4
@@ -226,5 +228,46 @@ for i = 1:4
     end
 end
 
+%% GB/NB-ESC 2D
+clear
 
+% State dimensions
+n  = 2; % Number of dither signals
+nc = 1; % Number of control variables
 
+% Maximum frequency
+max_f = 0.2; % T = 5s
+
+% Criterion | x = [f_dither(1), f_dither(2), f_dither(3), f_dither(4), y]
+f      = -ones(n+nc, 1);
+intcon = (n+1):(n+nc);
+
+% Lower/Upper bounds
+lb = zeros(n+nc, 1);
+ub = [0.17; 0.2; ones(nc,1)]; % choose order according to direction of AWA
+
+% Inequality constraints
+tol = 0.1 * max_f; % numerical tolerance to avoid implementation-induced coupling
+M   = 10 * max_f; % large constant for integer-programming
+
+% x1 < x2 < x3 < x4
+A1 = [1 -1];
+  
+A1 = [A1, zeros(1, nc)];
+
+b1 = -tol*ones(1, 1);
+
+% xi + xj ~= xk, forall i,j,k
+A2 = [2 -1];
+
+A2 = [A2, -M*eye(nc);
+      -A2, M*eye(nc)];
+
+b2 = [-tol * ones(nc,1);
+      (-tol + M) * ones(nc,1)];
+
+% Total inequality constraints matrix
+A = [A1; A2];
+b = [b1; b2];
+
+x = intlinprog(f, intcon, A, b, [], [], lb, ub)
